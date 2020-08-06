@@ -45,10 +45,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -121,10 +129,65 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Category.cs">
+      <DependentUpon>PalkiaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer.cs">
+      <DependentUpon>PalkiaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Employee.cs">
+      <DependentUpon>PalkiaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Exportation.cs">
+      <DependentUpon>PalkiaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Feedback.cs">
+      <DependentUpon>PalkiaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Importation.cs">
+      <DependentUpon>PalkiaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>PalkiaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderDetail.cs">
+      <DependentUpon>PalkiaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PalkiaData.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PalkiaData.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PalkiaData.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PalkiaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PalkiaData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PalkiaData.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Payment.cs">
+      <DependentUpon>PalkiaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Product.cs">
+      <DependentUpon>PalkiaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductImage.cs">
+      <DependentUpon>PalkiaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Sale.cs">
+      <DependentUpon>PalkiaData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Supplier.cs">
+      <DependentUpon>PalkiaData.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -137,6 +200,29 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\PalkiaData.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PalkiaData.Context.cs</LastGenOutput>
+      <DependentUpon>PalkiaData.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\PalkiaData.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PalkiaData.edmx</DependentUpon>
+      <LastGenOutput>PalkiaData.cs</LastGenOutput>
+    </Content>
+    <Content Include="public\icons\icons8-cash-register-euro-30.png" />
+    <Content Include="public\icons\icons8-commodity-30.png" />
+    <Content Include="public\icons\icons8-customer-30.png" />
+    <Content Include="public\icons\icons8-dashboard-30.png" />
+    <Content Include="public\icons\icons8-feedback-30.png" />
+    <Content Include="public\icons\icons8-gift-30.png" />
+    <Content Include="public\icons\icons8-add-30.png" />
+    <Content Include="public\icons\icons8-management-30.png" />
+    <Content Include="public\icons\icons8-profile-30.png" />
+    <Content Include="public\icons\icons8-sale-30.png" />
+    <Content Include="public\icons\icons8-sell-stock-30.png" />
+    <Content Include="public\icons\icons8-supplier-30.png" />
+    <Content Include="public\icons\icons8-visa-30.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
@@ -155,9 +241,20 @@
     <Content Include="Scripts\dist\css\alt\adminlte.pages.min.css.map" />
     <Content Include="Scripts\dist\css\alt\adminlte.plugins.css.map" />
     <Content Include="Scripts\dist\css\alt\adminlte.plugins.min.css.map" />
+    <Content Include="Scripts\dist\img\avttam.jpg" />
     <Content Include="Scripts\dist\js\.eslintrc.json" />
     <Content Include="Scripts\dist\js\adminlte.js.map" />
     <Content Include="Scripts\dist\js\adminlte.min.js.map" />
+    <Content Include="Areas\Admin\Views\Categories\Index.cshtml" />
+    <EntityDeploy Include="Models\PalkiaData.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PalkiaData.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\PalkiaData.edmx.diagram">
+      <DependentUpon>PalkiaData.edmx</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Views\Categories\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Update.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\dist\css\adminlte.css" />
     <Content Include="Scripts\dist\css\adminlte.min.css" />
@@ -2128,7 +2225,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -2142,6 +2238,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
