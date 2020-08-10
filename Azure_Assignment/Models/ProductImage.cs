@@ -18,6 +18,6 @@ namespace Azure_Assignment.Models
         public string ImgFileName { get; set; }
         public Nullable<int> ProductID { get; set; }
     
-        public virtual Product Product { get; set; }
+        public virtual Products Products { get; set; }
     }
 }

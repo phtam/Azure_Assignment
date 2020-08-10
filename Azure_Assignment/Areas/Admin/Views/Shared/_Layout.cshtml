@@ -13,6 +13,8 @@
     <link href="~/Scripts/plugins/overlayScrollbars/css/OverlayScrollbars.min.css" rel="stylesheet" />
     <!-- Theme style -->
     <link href="~/Scripts/dist/css/adminlte.min.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" rel="stylesheet" />
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
@@ -178,166 +180,14 @@
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon class
-                             with font-awesome or any other icon font library -->
+                        <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
                         <li class="nav-item menu-open">
-                            <a href="#" class="nav-link active">
+                            <a href="~/Admin/Home" class="nav-link active">
                                 <img src="~/public/icons/icons8-dashboard-30.png" />
                                 <p>Dashboard</p>
                             </a>
                         </li>
-                        
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <img src="~/public/icons/icons8-commodity-30.png" />
-                                <p>
-                                    Manage Categories
-                                    <i class="fas fa-angle-left right"></i>
-                                    <span class="badge badge-info right">6</span>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="pages/layout/top-nav.html" class="nav-link">
-                                        <img src="~/public/icons/icons8-add-30.png" />
-                                        <p>Create Category</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Edit Category</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/layout/boxed.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Delete Category</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
 
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <img src="~/public/icons/icons8-supplier-30.png" />
-                                <p>
-                                    Manage Suppliers
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="pages/charts/chartjs.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Create Supplier</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/charts/flot.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Edit Supplier</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/charts/inline.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Delete Supplier</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <img src="~/public/icons/icons8-sale-30.png" />
-                                <p>
-                                    Manage Sale
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="pages/UI/general.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Create Sale</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/UI/icons.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Edit Sale</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/UI/buttons.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Delete Sale</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <img src="~/public/icons/icons8-customer-30.png" />
-                                <p>
-                                    Manage Customers
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="pages/forms/general.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Create Customer</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/forms/advanced.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Edit Customer</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/forms/editors.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Delete Customer</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <img src="~/public/icons/icons8-management-30.png" />
-                                <p>
-                                    Manage Employees
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="pages/tables/simple.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Create Employee</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/tables/data.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Edit Employee</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/tables/jsgrid.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Delete Employee</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                      
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <img src="~/public/icons/icons8-sell-stock-30.png" />
@@ -349,131 +199,117 @@
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="pages/mailbox/mailbox.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Create Product</p>
+                                        <img src="~/public/icons/icons8-product-30.png" />
+                                        <p>Products</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="pages/mailbox/mailbox.html" class="nav-link">
+                                        <img src="~/public/icons/icons8-feedback-30.png" />
+                                        <p>Feedbacks</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="pages/mailbox/read-mail.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Add Image</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/mailbox/read-mail.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <img src="~/public/icons/icons8-database-import-30.png" />
                                         <p>Import To Stock</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="pages/mailbox/read-mail.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <img src="~/public/icons/icons8-database-export-30.png" />
                                         <p>Export Out Of Stock</p>
                                     </a>
                                 </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="~/Admin/Customers/" class="nav-link">
+                                <img src="~/public/icons/icons8-customer-30.png" />
+                                <p>Manage Customers</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="~/Admin/Employees/" class="nav-link">
+                                <img src="~/public/icons/icons8-management-30.png" />
+                                <p>Manage Employees</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="~/Admin/Orders/" class="nav-link">
+                                <img src="~/public/icons/icons8-cash-register-euro-30.png" />
+                                <p>Manage Orders</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="~/Admin/Blogs" class="nav-link">
+                                <img src="~/public/icons/icons8-blog-30.png" />
+                                <p>
+                                    Manage Blogs
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="pages/mailbox/compose.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Edit Product</p>
+                                    <a href="~/Admin/BlogCategories" class="nav-link">
+                                        <img src="~/public/icons/icons8-book-shelf-30.png" />
+                                        <p>Blog Categories</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="pages/mailbox/mailbox.html" class="nav-link">
+                                        <img src="~/public/icons/icons8-comments-30.png" />
+                                        <p>Blog Comments</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="pages/mailbox/read-mail.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Delete Product</p>
+                                        <img src="~/public/icons/icons8-book-30.png" />
+                                        <p>Blogs</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
+
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <img src="~/public/icons/icons8-cash-register-euro-30.png" />
-                                <p>
-                                    Manage Orders
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
+                            <a href="~/Admin/Categories/" class="nav-link">
+                                <img src="~/public/icons/icons8-commodity-30.png" />
+                                <p>Manage Categories</p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="pages/examples/invoice.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Create Order</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/examples/profile.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Edit Order</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/examples/e-commerce.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Delete Order</p>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
+
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="~/Admin/Suppliers/" class="nav-link">
+                                <img src="~/public/icons/icons8-supplier-30.png" />
+                                <p>Manage Suppliers</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="~/Admin/Sales/" class="nav-link">
+                                <img src="~/public/icons/icons8-sale-30.png" />
+                                <p>Manage Sales</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="~/Admin/Payments/" class="nav-link">
                                 <img src="~/public/icons/icons8-visa-30.png" />
-                                <p>
-                                    Manage Payments
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
+                                <p>Manage Payments</p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="pages/examples/login.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Create Payment</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/examples/register.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Edit Payment</p>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
-                        
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <img src="~/public/icons/icons8-feedback-30.png" />
-                                <p>
-                                    Manage Feedbacks
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Create Feedback</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Edit Feedback</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Delete Feedback</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <img src="~/public/icons/icons8-profile-30.png" />
                                 <p>Profile</p>
                             </a>
                         </li>
-                        
+
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -482,7 +318,7 @@
         </aside>
 
         @RenderBody()
-        
+
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
@@ -520,5 +356,26 @@
     <script src="~/Scripts/dist/js/demo.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="~/Scripts/dist/js/pages/dashboard2.js"></script>
+    <script src="~/Scripts/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Scripts/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/Scripts/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true,
+                "autoWidth": false,
+            });
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
 </body>
 </html>

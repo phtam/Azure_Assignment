@@ -12,26 +12,19 @@ namespace Azure_Assignment.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Order
+    public partial class Payments
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Order()
+        public Payments()
         {
-            this.OrderDetails = new HashSet<OrderDetail>();
+            this.Orders = new HashSet<Orders>();
         }
     
-        public int OrderID { get; set; }
-        public string Username { get; set; }
-        public Nullable<int> PaymentID { get; set; }
-        public Nullable<System.DateTime> CreationDate { get; set; }
-        public Nullable<System.DateTime> ShippedDate { get; set; }
-        public string ShippedAddress { get; set; }
-        public string Note { get; set; }
-        public Nullable<bool> Status { get; set; }
+        public int PaymentID { get; set; }
+        public string PaymentName { get; set; }
+        public string Picture { get; set; }
     
-        public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
-        public virtual Payment Payment { get; set; }
+        public virtual ICollection<Orders> Orders { get; set; }
     }
 }

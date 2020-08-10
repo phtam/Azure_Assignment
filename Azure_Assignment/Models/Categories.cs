@@ -12,21 +12,18 @@ namespace Azure_Assignment.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Sale
+    public partial class Categories
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Sale()
+        public Categories()
         {
             this.Products = new HashSet<Products>();
         }
     
-        public int SaleID { get; set; }
-        public string SaleName { get; set; }
-        public string Content { get; set; }
-        public Nullable<System.DateTime> StartDate { get; set; }
-        public Nullable<System.DateTime> EndDate { get; set; }
+        public int CategoryID { get; set; }
+        public string CategoryName { get; set; }
+        public string Description { get; set; }
         public string Picture { get; set; }
-        public Nullable<decimal> Discount { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Products> Products { get; set; }

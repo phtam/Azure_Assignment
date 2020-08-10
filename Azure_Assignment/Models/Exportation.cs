@@ -21,7 +21,7 @@ namespace Azure_Assignment.Models
         public Nullable<decimal> UnitPrice { get; set; }
         public Nullable<int> Quantity { get; set; }
     
-        public virtual Employee Employee { get; set; }
-        public virtual Product Product { get; set; }
+        public virtual Employees Employees { get; set; }
+        public virtual Products Products { get; set; }
     }
 }

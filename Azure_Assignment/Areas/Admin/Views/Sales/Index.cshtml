@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Azure_Assignment.Models.Categories>
+﻿@model IEnumerable<Azure_Assignment.Models.Sale>
 
 @{
     ViewBag.Title = "Index";
@@ -25,13 +25,9 @@
         <div class="container-fluid">
 
             <p>
-                <a class="btn btn-success btn-sm" href="~/Admin/Categories/Create">
-                <i class="fas fa-plus">
-                </i>
-                 Create New
-                </a>
+                @Html.ActionLink("Create New", "Create")
             </p>
-
+           
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">DataTable with default features</h3>
@@ -42,13 +38,22 @@
                         <thead>
                             <tr>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.CategoryName)
+                                    @Html.DisplayNameFor(model => model.SaleName)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Description)
+                                    @Html.DisplayNameFor(model => model.Content)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.StartDate)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.EndDate)
                                 </th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.Picture)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Discount)
                                 </th>
                                 <th></th>
                             </tr>
@@ -58,42 +63,38 @@
                             {
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.CategoryName)
+                                        @Html.DisplayFor(modelItem => item.SaleName)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Description)
+                                        @Html.DisplayFor(modelItem => item.Content)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.StartDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EndDate)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Picture)
                                     </td>
-                                    <td class="project-actions text-right">
-                                        <a class="btn btn-primary btn-sm" href="~/Admin/Categories/Edit/@item.CategoryID">
-                                            <i class="fas fa-folder">
-                                            </i>
-                                            View
-                                        </a>
-                                        <a class="btn btn-info btn-sm" href="~/Admin/Categories/Details/@item.CategoryID">
-                                            <i class="fas fa-pencil-alt">
-                                            </i>
-                                            Edit
-                                        </a>
-                                        <a class="btn btn-danger btn-sm" href="~/Admin/Categories/Delete/@item.CategoryID">
-                                            <i class="fas fa-trash">
-                                            </i>
-                                            Delete
-                                        </a>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Discount)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.SaleID }) |
+                                        @Html.ActionLink("Details", "Details", new { id = item.SaleID }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.SaleID })
                                     </td>
                                 </tr>
                             }
 
                         </tbody>
-
+                        
                     </table>
                 </div>
                 <!-- /.card-body -->
             </div>
             <!-- /.card -->
-
         </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->

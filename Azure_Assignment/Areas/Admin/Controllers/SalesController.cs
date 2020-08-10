@@ -10,107 +10,107 @@ using Azure_Assignment.Models;
 
 namespace Azure_Assignment.Areas.Admin.Controllers
 {
-    public class CategoriesController : Controller
+    public class SalesController : Controller
     {
         private DataContext db = new DataContext();
 
-        // GET: Admin/Categories
+        // GET: Admin/Sales
         public ActionResult Index()
         {
-            return View(db.Categories.ToList());
+            return View(db.Sale.ToList());
         }
 
-        // GET: Admin/Categories/Details/5
+        // GET: Admin/Sales/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Categories categories = db.Categories.Find(id);
-            if (categories == null)
+            Sale sale = db.Sale.Find(id);
+            if (sale == null)
             {
                 return HttpNotFound();
             }
-            return View(categories);
+            return View(sale);
         }
 
-        // GET: Admin/Categories/Create
+        // GET: Admin/Sales/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/Categories/Create
+        // POST: Admin/Sales/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CategoryID,CategoryName,Description,Picture")] Categories categories)
+        public ActionResult Create([Bind(Include = "SaleID,SaleName,Content,StartDate,EndDate,Picture,Discount")] Sale sale)
         {
             if (ModelState.IsValid)
             {
-                db.Categories.Add(categories);
+                db.Sale.Add(sale);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(categories);
+            return View(sale);
         }
 
-        // GET: Admin/Categories/Edit/5
+        // GET: Admin/Sales/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Categories categories = db.Categories.Find(id);
-            if (categories == null)
+            Sale sale = db.Sale.Find(id);
+            if (sale == null)
             {
                 return HttpNotFound();
             }
-            return View(categories);
+            return View(sale);
         }
 
-        // POST: Admin/Categories/Edit/5
+        // POST: Admin/Sales/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CategoryID,CategoryName,Description,Picture")] Categories categories)
+        public ActionResult Edit([Bind(Include = "SaleID,SaleName,Content,StartDate,EndDate,Picture,Discount")] Sale sale)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(categories).State = EntityState.Modified;
+                db.Entry(sale).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(categories);
+            return View(sale);
         }
 
-        // GET: Admin/Categories/Delete/5
+        // GET: Admin/Sales/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Categories categories = db.Categories.Find(id);
-            if (categories == null)
+            Sale sale = db.Sale.Find(id);
+            if (sale == null)
             {
                 return HttpNotFound();
             }
-            return View(categories);
+            return View(sale);
         }
 
-        // POST: Admin/Categories/Delete/5
+        // POST: Admin/Sales/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Categories categories = db.Categories.Find(id);
-            db.Categories.Remove(categories);
+            Sale sale = db.Sale.Find(id);
+            db.Sale.Remove(sale);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

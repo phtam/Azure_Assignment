@@ -12,14 +12,16 @@ namespace Azure_Assignment.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class OrderDetail
+    public partial class BlogComments
     {
-        public int OrderID { get; set; }
-        public int ProductID { get; set; }
-        public Nullable<decimal> UnitPrice { get; set; }
-        public Nullable<int> Quantity { get; set; }
+        public int BlogCommentID { get; set; }
+        public string FullName { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public string Comment { get; set; }
+        public Nullable<System.DateTime> CommentingDate { get; set; }
+        public Nullable<int> BlogID { get; set; }
     
-        public virtual Order Order { get; set; }
-        public virtual Product Product { get; set; }
+        public virtual Blogs Blogs { get; set; }
     }
 }

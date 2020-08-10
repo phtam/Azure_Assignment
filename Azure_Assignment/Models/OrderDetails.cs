@@ -12,15 +12,14 @@ namespace Azure_Assignment.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Feedback
+    public partial class OrderDetails
     {
-        public int FeedbackID { get; set; }
-        public string FeedbackName { get; set; }
-        public string Email { get; set; }
-        public string Content { get; set; }
-        public Nullable<System.DateTime> FeedBackDate { get; set; }
-        public Nullable<int> ProductID { get; set; }
+        public int OrderID { get; set; }
+        public int ProductID { get; set; }
+        public Nullable<decimal> UnitPrice { get; set; }
+        public Nullable<int> Quantity { get; set; }
     
-        public virtual Product Product { get; set; }
+        public virtual Orders Orders { get; set; }
+        public virtual Products Products { get; set; }
     }
 }

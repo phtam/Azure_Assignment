@@ -12,12 +12,14 @@ namespace Azure_Assignment.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Customer
+    public partial class Employees
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Customer()
+        public Employees()
         {
-            this.Orders = new HashSet<Order>();
+            this.Blogs = new HashSet<Blogs>();
+            this.Exportation = new HashSet<Exportation>();
+            this.Importation = new HashSet<Importation>();
         }
     
         public string Username { get; set; }
@@ -29,9 +31,14 @@ namespace Azure_Assignment.Models
         public string Phone { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }
+        public Nullable<bool> Role { get; set; }
         public Nullable<bool> Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Blogs> Blogs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Exportation> Exportation { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Importation> Importation { get; set; }
     }
 }

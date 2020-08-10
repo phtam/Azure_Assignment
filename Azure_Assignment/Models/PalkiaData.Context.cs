@@ -25,18 +25,21 @@ namespace Azure_Assignment.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<Exportation> Exportations { get; set; }
-        public virtual DbSet<Feedback> Feedbacks { get; set; }
-        public virtual DbSet<Importation> Importations { get; set; }
-        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
-        public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<Payment> Payments { get; set; }
-        public virtual DbSet<ProductImage> ProductImages { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<Sale> Sales { get; set; }
-        public virtual DbSet<Supplier> Suppliers { get; set; }
+        public virtual DbSet<BlogCategories> BlogCategories { get; set; }
+        public virtual DbSet<BlogComments> BlogComments { get; set; }
+        public virtual DbSet<Blogs> Blogs { get; set; }
+        public virtual DbSet<Categories> Categories { get; set; }
+        public virtual DbSet<Customers> Customers { get; set; }
+        public virtual DbSet<Employees> Employees { get; set; }
+        public virtual DbSet<Exportation> Exportation { get; set; }
+        public virtual DbSet<Feedbacks> Feedbacks { get; set; }
+        public virtual DbSet<Importation> Importation { get; set; }
+        public virtual DbSet<OrderDetails> OrderDetails { get; set; }
+        public virtual DbSet<Orders> Orders { get; set; }
+        public virtual DbSet<Payments> Payments { get; set; }
+        public virtual DbSet<ProductImage> ProductImage { get; set; }
+        public virtual DbSet<Products> Products { get; set; }
+        public virtual DbSet<Sale> Sale { get; set; }
+        public virtual DbSet<Suppliers> Suppliers { get; set; }
     }
 }

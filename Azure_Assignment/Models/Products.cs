@@ -12,16 +12,16 @@ namespace Azure_Assignment.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Product
+    public partial class Products
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Product()
+        public Products()
         {
-            this.Exportations = new HashSet<Exportation>();
-            this.Feedbacks = new HashSet<Feedback>();
-            this.Importations = new HashSet<Importation>();
-            this.OrderDetails = new HashSet<OrderDetail>();
-            this.ProductImages = new HashSet<ProductImage>();
+            this.Exportation = new HashSet<Exportation>();
+            this.Feedbacks = new HashSet<Feedbacks>();
+            this.Importation = new HashSet<Importation>();
+            this.OrderDetails = new HashSet<OrderDetails>();
+            this.ProductImage = new HashSet<ProductImage>();
         }
     
         public int ProductID { get; set; }
@@ -38,18 +38,18 @@ namespace Azure_Assignment.Models
         public Nullable<int> SaleID { get; set; }
         public Nullable<bool> Discontinued { get; set; }
     
-        public virtual Category Category { get; set; }
+        public virtual Categories Categories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Exportation> Exportations { get; set; }
+        public virtual ICollection<Exportation> Exportation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Feedback> Feedbacks { get; set; }
+        public virtual ICollection<Feedbacks> Feedbacks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Importation> Importations { get; set; }
+        public virtual ICollection<Importation> Importation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<OrderDetails> OrderDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductImage> ProductImages { get; set; }
+        public virtual ICollection<ProductImage> ProductImage { get; set; }
         public virtual Sale Sale { get; set; }
-        public virtual Supplier Supplier { get; set; }
+        public virtual Suppliers Suppliers { get; set; }
     }
 }

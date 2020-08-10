@@ -12,19 +12,24 @@ namespace Azure_Assignment.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Payment
+    public partial class Blogs
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Payment()
+        public Blogs()
         {
-            this.Orders = new HashSet<Order>();
+            this.BlogComments = new HashSet<BlogComments>();
         }
     
-        public int PaymentID { get; set; }
-        public string PaymentName { get; set; }
-        public string Picture { get; set; }
+        public int BlogID { get; set; }
+        public string BlogName { get; set; }
+        public string Username { get; set; }
+        public string Content { get; set; }
+        public Nullable<int> BlogCategoryID { get; set; }
+        public Nullable<System.DateTime> WritingDate { get; set; }
     
+        public virtual BlogCategories BlogCategories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<BlogComments> BlogComments { get; set; }
+        public virtual Employees Employees { get; set; }
     }
 }

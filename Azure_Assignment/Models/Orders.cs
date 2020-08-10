@@ -12,30 +12,26 @@ namespace Azure_Assignment.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Employee
+    public partial class Orders
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Employee()
+        public Orders()
         {
-            this.Exportations = new HashSet<Exportation>();
-            this.Importations = new HashSet<Importation>();
+            this.OrderDetails = new HashSet<OrderDetails>();
         }
     
+        public int OrderID { get; set; }
         public string Username { get; set; }
-        public string FirtName { get; set; }
-        public string LastName { get; set; }
-        public string Password { get; set; }
-        public Nullable<bool> Gender { get; set; }
-        public Nullable<System.DateTime> Birthday { get; set; }
-        public string Phone { get; set; }
-        public string Email { get; set; }
-        public string Address { get; set; }
-        public Nullable<bool> Role { get; set; }
+        public Nullable<int> PaymentID { get; set; }
+        public Nullable<System.DateTime> CreationDate { get; set; }
+        public Nullable<System.DateTime> ShippedDate { get; set; }
+        public string ShippedAddress { get; set; }
+        public string Note { get; set; }
         public Nullable<bool> Status { get; set; }
     
+        public virtual Customers Customers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Exportation> Exportations { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Importation> Importations { get; set; }
+        public virtual ICollection<OrderDetails> OrderDetails { get; set; }
+        public virtual Payments Payments { get; set; }
     }
 }

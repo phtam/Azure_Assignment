@@ -12,21 +12,20 @@ namespace Azure_Assignment.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Sale
+    public partial class Suppliers
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Sale()
+        public Suppliers()
         {
             this.Products = new HashSet<Products>();
         }
     
-        public int SaleID { get; set; }
-        public string SaleName { get; set; }
-        public string Content { get; set; }
-        public Nullable<System.DateTime> StartDate { get; set; }
-        public Nullable<System.DateTime> EndDate { get; set; }
-        public string Picture { get; set; }
-        public Nullable<decimal> Discount { get; set; }
+        public int SupplierID { get; set; }
+        public string CompanyName { get; set; }
+        public string ContactName { get; set; }
+        public string Address { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Products> Products { get; set; }
