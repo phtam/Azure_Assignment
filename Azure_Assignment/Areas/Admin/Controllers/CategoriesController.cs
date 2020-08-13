@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.WebPages;
 using Azure_Assignment.Models;
+using Microsoft.Ajax.Utilities;
 
 namespace Azure_Assignment.Areas.Admin.Controllers
 {
@@ -17,6 +20,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         // GET: Admin/Categories
         public ActionResult Index()
         {
+            
             return View(db.Categories.ToList());
         }
 
@@ -46,13 +50,44 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CategoryID,CategoryName,Description,Picture")] Categories categories)
+        public ActionResult Create([Bind(Include = "CategoryID,CategoryName,Description,Picture,ImageFile")] Categories categories)
         {
             if (ModelState.IsValid)
             {
+                string fileName = Path.GetFileNameWithoutExtension(categories.ImageFile.FileName);
+                string extension = Path.GetExtension(categories.ImageFile.FileName);
+                if((extension == ".png" || extension == ".jpg" || extension == ".jpeg") == false)
+                {
+                    ViewBag.Error = String.Format("The File, which extension is {0}, hasn't accepted. Please try again!", extension);
+                    return View("Create");
+                }
+
+                long fileSize = ((categories.ImageFile.ContentLength) / 1024);
+                if (fileSize > 5120)
+                {
+                    ViewBag.Error = "The File, which size greater than 5MB, hasn't accepted. Please try again!";
+                    return View("Create");
+                }
+
+                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                categories.Picture = "~/public/uploadedFiles/categoryPictures/" + fileName;
+                string uploadFolderPath = Server.MapPath("~/public/uploadedFiles/categoryPictures/");
+
+                if (Directory.Exists(uploadFolderPath) == false) 
+                {
+                    Directory.CreateDirectory(uploadFolderPath);
+                }
+
+                fileName = Path.Combine(uploadFolderPath, fileName);
+
+                categories.ImageFile.SaveAs(fileName);
+    
+                
                 db.Categories.Add(categories);
                 db.SaveChanges();
+                ModelState.Clear();
                 return RedirectToAction("Index");
+                
             }
 
             return View(categories);
@@ -70,6 +105,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            Session["OldImage"] = categories.Picture;
             return View(categories);
         }
 
@@ -78,13 +114,56 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CategoryID,CategoryName,Description,Picture")] Categories categories)
+        public ActionResult Edit([Bind(Include = "CategoryID,CategoryName,Description,Picture,ImageFile")] Categories categories, String imageOldFile)
         {
             if (ModelState.IsValid)
             {
+                string uploadFolderPath = Server.MapPath("~/public/uploadedFiles/categoryPictures/");
+                if (categories.ImageFile == null)
+                {
+                    categories.Picture = imageOldFile;
+                }
+                else
+                {
+                    if (!imageOldFile.IsEmpty())
+                    {
+                        System.IO.File.Delete(Server.MapPath(imageOldFile));
+                    }
+
+                    string fileName = Path.GetFileNameWithoutExtension(categories.ImageFile.FileName);
+
+                    string extension = Path.GetExtension(categories.ImageFile.FileName);
+                    if ((extension == ".png" || extension == ".jpg" || extension == ".jpeg") == false)
+                    {
+                        ViewBag.Error = String.Format("The File, which extension is {0}, hasn't accepted. Please try again!", extension);
+                        return View("Create");
+                    }
+
+                    long fileSize = ((categories.ImageFile.ContentLength) / 1024);
+                    if (fileSize > 5120)
+                    {
+                        ViewBag.Error = "The File, which size greater than 5MB, hasn't accepted. Please try again!";
+                        return View("Create");
+                    }
+
+                    fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    categories.Picture = "~/public/uploadedFiles/categoryPictures/" + fileName;
+
+
+                    if (Directory.Exists(uploadFolderPath) == false)
+                    {
+                        Directory.CreateDirectory(uploadFolderPath);
+                    }
+
+                    fileName = Path.Combine(uploadFolderPath, fileName);
+
+                    categories.ImageFile.SaveAs(fileName);
+                }
                 db.Entry(categories).State = EntityState.Modified;
                 db.SaveChanges();
+                Session.Remove("OldImage");
                 return RedirectToAction("Index");
+                
             }
             return View(categories);
         }

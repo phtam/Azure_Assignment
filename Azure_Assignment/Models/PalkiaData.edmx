@@ -42,7 +42,7 @@
           <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CategoryName" Type="nvarchar" MaxLength="50" />
           <Property Name="Description" Type="nvarchar" MaxLength="250" />
-          <Property Name="Picture" Type="varchar" MaxLength="100" />
+          <Property Name="Picture" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Customers">
           <Key>
@@ -58,6 +58,7 @@
           <Property Name="Email" Type="varchar" MaxLength="30" />
           <Property Name="Address" Type="nvarchar" MaxLength="100" />
           <Property Name="Status" Type="bit" />
+          <Property Name="Image" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Employees">
           <Key>
@@ -74,6 +75,7 @@
           <Property Name="Address" Type="varchar" MaxLength="100" />
           <Property Name="Role" Type="bit" />
           <Property Name="Status" Type="bit" />
+          <Property Name="Image" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Exportation">
           <Key>
@@ -144,7 +146,7 @@
             <PropertyRef Name="ImgID" />
           </Key>
           <Property Name="ImgID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ImgFileName" Type="varchar" MaxLength="100" />
+          <Property Name="ImgFileName" Type="nvarchar" MaxLength="500" />
           <Property Name="ProductID" Type="int" />
         </EntityType>
         <EntityType Name="Products">
@@ -174,7 +176,7 @@
           <Property Name="Content" Type="nvarchar" MaxLength="250" />
           <Property Name="StartDate" Type="datetime" />
           <Property Name="EndDate" Type="datetime" />
-          <Property Name="Picture" Type="varchar" MaxLength="100" />
+          <Property Name="Picture" Type="nvarchar" MaxLength="500" />
           <Property Name="Discount" Type="decimal" Precision="12" Scale="2" />
         </EntityType>
         <EntityType Name="Suppliers">
@@ -590,7 +592,7 @@
           <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Picture" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Picture" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Products" Relationship="AzureAssignmentDBModel.FK__Products__Catego__5070F446" FromRole="Categories" ToRole="Products" />
         </EntityType>
         <EntityType Name="Customers">
@@ -607,6 +609,7 @@
           <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Boolean" />
+          <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Orders" Relationship="AzureAssignmentDBModel.FK__Orders__Username__5AEE82B9" FromRole="Customers" ToRole="Orders" />
         </EntityType>
         <EntityType Name="Employees">
@@ -624,6 +627,7 @@
           <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Role" Type="Boolean" />
           <Property Name="Status" Type="Boolean" />
+          <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Blogs" Relationship="AzureAssignmentDBModel.FK__Blogs__Username__778AC167" FromRole="Employees" ToRole="Blogs" />
           <NavigationProperty Name="Exportation" Relationship="AzureAssignmentDBModel.FK__Exportati__Usern__6FE99F9F" FromRole="Employees" ToRole="Exportation" />
           <NavigationProperty Name="Importation" Relationship="AzureAssignmentDBModel.FK__Importati__Usern__6C190EBB" FromRole="Employees" ToRole="Importation" />
@@ -708,7 +712,7 @@
             <PropertyRef Name="ImgID" />
           </Key>
           <Property Name="ImgID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ImgFileName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ImgFileName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="ProductID" Type="Int32" />
           <NavigationProperty Name="Products" Relationship="AzureAssignmentDBModel.FK__ProductIm__Produ__6383C8BA" FromRole="ProductImage" ToRole="Products" />
         </EntityType>
@@ -747,7 +751,7 @@
           <Property Name="Content" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="StartDate" Type="DateTime" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Precision="3" />
-          <Property Name="Picture" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Picture" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Discount" Type="Decimal" Precision="12" Scale="2" />
           <NavigationProperty Name="Products" Relationship="AzureAssignmentDBModel.FK__Products__SaleID__5165187F" FromRole="Sale" ToRole="Products" />
         </EntityType>
@@ -1007,6 +1011,7 @@
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="AzureAssignmentDBModel.Customers">
               <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -1023,6 +1028,7 @@
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="AzureAssignmentDBModel.Employees">
               <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Role" ColumnName="Role" />
                 <ScalarProperty Name="Address" ColumnName="Address" />

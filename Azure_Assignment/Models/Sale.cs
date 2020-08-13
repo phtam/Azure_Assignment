@@ -11,7 +11,8 @@ namespace Azure_Assignment.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web;
+
     public partial class Sale
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -27,6 +28,8 @@ namespace Azure_Assignment.Models
         public Nullable<System.DateTime> EndDate { get; set; }
         public string Picture { get; set; }
         public Nullable<decimal> Discount { get; set; }
+
+        public HttpPostedFileBase ImageFile { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Products> Products { get; set; }

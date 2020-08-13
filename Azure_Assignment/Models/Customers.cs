@@ -30,6 +30,7 @@ namespace Azure_Assignment.Models
         public string Email { get; set; }
         public string Address { get; set; }
         public Nullable<bool> Status { get; set; }
+        public string Image { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Orders> Orders { get; set; }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -46,10 +47,38 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SaleID,SaleName,Content,StartDate,EndDate,Picture,Discount")] Sale sale)
+        public ActionResult Create([Bind(Include = "SaleID,SaleName,Content,StartDate,EndDate,Picture,Discount,ImageFile")] Sale sale)
         {
             if (ModelState.IsValid)
             {
+                string fileName = Path.GetFileNameWithoutExtension(sale.ImageFile.FileName);
+                string extension = Path.GetExtension(sale.ImageFile.FileName);
+                if ((extension == ".png" || extension == ".jpg" || extension == ".jpeg") == false)
+                {
+                    ViewBag.Error = String.Format("The File, which extension is {0}, hasn't accepted. Please try again!", extension);
+                    return View("Create");
+                }
+
+                long fileSize = ((sale.ImageFile.ContentLength) / 1024);
+                if (fileSize > 5120)
+                {
+                    ViewBag.Error = "The File, which size greater than 5MB, hasn't accepted. Please try again!";
+                    return View("Create");
+                }
+
+                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                sale.Picture = "~/public/uploadedFiles/salePictures/" + fileName;
+                string uploadFolderPath = Server.MapPath("~/public/uploadedFiles/salePictures/");
+
+                if (Directory.Exists(uploadFolderPath) == false)
+                {
+                    Directory.CreateDirectory(uploadFolderPath);
+                }
+
+                fileName = Path.Combine(uploadFolderPath, fileName);
+
+                sale.ImageFile.SaveAs(fileName);
+
                 db.Sale.Add(sale);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -78,7 +107,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SaleID,SaleName,Content,StartDate,EndDate,Picture,Discount")] Sale sale)
+        public ActionResult Edit([Bind(Include = "SaleID,SaleName,Content,StartDate,EndDate,Picture,Discount,ImageFile")] Sale sale)
         {
             if (ModelState.IsValid)
             {
