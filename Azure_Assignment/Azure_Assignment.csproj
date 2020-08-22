@@ -133,93 +133,97 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\SalesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="EF\BlogCategories.cs">
+      <DependentUpon>PalkiaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\BlogComments.cs">
+      <DependentUpon>PalkiaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Blogs.cs">
+      <DependentUpon>PalkiaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Categories.cs">
+      <DependentUpon>PalkiaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Customers.cs">
+      <DependentUpon>PalkiaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Employees.cs">
+      <DependentUpon>PalkiaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Exportation.cs">
+      <DependentUpon>PalkiaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Feedbacks.cs">
+      <DependentUpon>PalkiaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Importation.cs">
+      <DependentUpon>PalkiaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\OrderDetails.cs">
+      <DependentUpon>PalkiaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Orders.cs">
+      <DependentUpon>PalkiaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\PalkiaModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PalkiaModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\PalkiaModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PalkiaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\PalkiaModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PalkiaModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Payments.cs">
+      <DependentUpon>PalkiaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\ProductImage.cs">
+      <DependentUpon>PalkiaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Products.cs">
+      <DependentUpon>PalkiaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Sale.cs">
+      <DependentUpon>PalkiaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Suppliers.cs">
+      <DependentUpon>PalkiaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Models\BlogCategories.cs">
-      <DependentUpon>PalkiaData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\BlogComments.cs">
-      <DependentUpon>PalkiaData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Blogs.cs">
-      <DependentUpon>PalkiaData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Categories.cs">
-      <DependentUpon>PalkiaData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Customers.cs">
-      <DependentUpon>PalkiaData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Employees.cs">
-      <DependentUpon>PalkiaData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Exportation.cs">
-      <DependentUpon>PalkiaData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Feedbacks.cs">
-      <DependentUpon>PalkiaData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Importation.cs">
-      <DependentUpon>PalkiaData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\OrderDetails.cs">
-      <DependentUpon>PalkiaData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Orders.cs">
-      <DependentUpon>PalkiaData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PalkiaData.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PalkiaData.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PalkiaData.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PalkiaData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PalkiaData.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PalkiaData.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Payments.cs">
-      <DependentUpon>PalkiaData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ProductImage.cs">
-      <DependentUpon>PalkiaData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Products.cs">
-      <DependentUpon>PalkiaData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Sale.cs">
-      <DependentUpon>PalkiaData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Suppliers.cs">
-      <DependentUpon>PalkiaData.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\PalkiaDB.mdf" />
+    <Content Include="App_Data\PalkiaDB_log.ldf">
+      <DependentUpon>PalkiaDB.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="EF\PalkiaModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PalkiaModel.edmx</DependentUpon>
+      <LastGenOutput>PalkiaModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EF\PalkiaModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PalkiaModel.edmx</DependentUpon>
+      <LastGenOutput>PalkiaModel.cs</LastGenOutput>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\PalkiaData.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>PalkiaData.Context.cs</LastGenOutput>
-      <DependentUpon>PalkiaData.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\PalkiaData.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PalkiaData.edmx</DependentUpon>
-      <LastGenOutput>PalkiaData.cs</LastGenOutput>
-    </Content>
     <Content Include="public\icons\icons8-blog-30.png" />
     <Content Include="public\icons\icons8-book-30.png" />
     <Content Include="public\icons\icons8-book-shelf-30.png" />
@@ -264,13 +268,6 @@
     <Content Include="Scripts\dist\js\.eslintrc.json" />
     <Content Include="Scripts\dist\js\adminlte.js.map" />
     <Content Include="Scripts\dist\js\adminlte.min.js.map" />
-    <EntityDeploy Include="Models\PalkiaData.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PalkiaData.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\PalkiaData.edmx.diagram">
-      <DependentUpon>PalkiaData.edmx</DependentUpon>
-    </Content>
     <Content Include="Areas\Admin\Views\Sales\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Sales\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Sales\Details.cshtml" />
@@ -281,6 +278,13 @@
     <Content Include="Areas\Admin\Views\Categories\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Index.cshtml" />
+    <EntityDeploy Include="EF\PalkiaModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PalkiaModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="EF\PalkiaModel.edmx.diagram">
+      <DependentUpon>PalkiaModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\dist\css\adminlte.css" />
     <Content Include="Scripts\dist\css\adminlte.min.css" />
@@ -2249,8 +2253,8 @@
     <Content Include="Scripts\plugins\toastr\toastr.js.map" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Models\" />
     <Folder Include="public\uploadedFiles\categoryPictures\" />
   </ItemGroup>
   <ItemGroup>

@@ -7,31 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Azure_Assignment.Models
+namespace Azure_Assignment.EF
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Orders
+    public partial class Payments
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Orders()
+        public Payments()
         {
-            this.OrderDetails = new HashSet<OrderDetails>();
+            this.Orders = new HashSet<Orders>();
         }
     
-        public int OrderID { get; set; }
-        public string Username { get; set; }
-        public Nullable<int> PaymentID { get; set; }
-        public Nullable<System.DateTime> CreationDate { get; set; }
-        public Nullable<System.DateTime> ShippedDate { get; set; }
-        public string ShippedAddress { get; set; }
-        public string Note { get; set; }
-        public Nullable<bool> Status { get; set; }
+        public int PaymentID { get; set; }
+        public string PaymentName { get; set; }
+        public string Picture { get; set; }
     
-        public virtual Customers Customers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetails> OrderDetails { get; set; }
-        public virtual Payments Payments { get; set; }
+        public virtual ICollection<Orders> Orders { get; set; }
     }
 }

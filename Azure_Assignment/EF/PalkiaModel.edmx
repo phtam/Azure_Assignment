@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="AzureAssignmentDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="PalkiaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BlogCategories">
           <Key>
             <PropertyRef Name="BlogCategoryID" />
@@ -42,7 +42,7 @@
           <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CategoryName" Type="nvarchar" MaxLength="50" />
           <Property Name="Description" Type="nvarchar" MaxLength="250" />
-          <Property Name="Picture" Type="nvarchar" MaxLength="500" />
+          <Property Name="Picture" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Customers">
           <Key>
@@ -57,8 +57,8 @@
           <Property Name="Phone" Type="varchar" MaxLength="15" />
           <Property Name="Email" Type="varchar" MaxLength="30" />
           <Property Name="Address" Type="nvarchar" MaxLength="100" />
+          <Property Name="Picture" Type="varchar" MaxLength="500" />
           <Property Name="Status" Type="bit" />
-          <Property Name="Image" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Employees">
           <Key>
@@ -73,9 +73,9 @@
           <Property Name="Phone" Type="varchar" MaxLength="15" />
           <Property Name="Email" Type="varchar" MaxLength="30" />
           <Property Name="Address" Type="varchar" MaxLength="100" />
+          <Property Name="Picture" Type="varchar" MaxLength="500" />
           <Property Name="Role" Type="bit" />
           <Property Name="Status" Type="bit" />
-          <Property Name="Image" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Exportation">
           <Key>
@@ -139,14 +139,14 @@
           </Key>
           <Property Name="PaymentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PaymentName" Type="nvarchar" MaxLength="50" />
-          <Property Name="Picture" Type="varchar" MaxLength="100" />
+          <Property Name="Picture" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="ProductImage">
           <Key>
             <PropertyRef Name="ImgID" />
           </Key>
           <Property Name="ImgID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ImgFileName" Type="nvarchar" MaxLength="500" />
+          <Property Name="ImgFileName" Type="varchar" MaxLength="500" />
           <Property Name="ProductID" Type="int" />
         </EntityType>
         <EntityType Name="Products">
@@ -176,7 +176,7 @@
           <Property Name="Content" Type="nvarchar" MaxLength="250" />
           <Property Name="StartDate" Type="datetime" />
           <Property Name="EndDate" Type="datetime" />
-          <Property Name="Picture" Type="nvarchar" MaxLength="500" />
+          <Property Name="Picture" Type="varchar" MaxLength="500" />
           <Property Name="Discount" Type="decimal" Precision="12" Scale="2" />
         </EntityType>
         <EntityType Name="Suppliers">
@@ -190,7 +190,7 @@
           <Property Name="Phone" Type="varchar" MaxLength="15" />
           <Property Name="Email" Type="varchar" MaxLength="30" />
         </EntityType>
-        <Association Name="FK__BlogComme__BlogI__7B5B524B">
+        <Association Name="FK__BlogComme__BlogI__5535A963">
           <End Role="Blogs" Type="Self.Blogs" Multiplicity="0..1" />
           <End Role="BlogComments" Type="Self.BlogComments" Multiplicity="*" />
           <ReferentialConstraint>
@@ -202,7 +202,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Blogs__BlogCateg__787EE5A0">
+        <Association Name="FK__Blogs__BlogCateg__52593CB8">
           <End Role="BlogCategories" Type="Self.BlogCategories" Multiplicity="0..1" />
           <End Role="Blogs" Type="Self.Blogs" Multiplicity="*" />
           <ReferentialConstraint>
@@ -214,7 +214,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Blogs__Username__778AC167">
+        <Association Name="FK__Blogs__Username__5165187F">
           <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
           <End Role="Blogs" Type="Self.Blogs" Multiplicity="*" />
           <ReferentialConstraint>
@@ -226,7 +226,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Exportati__Produ__6EF57B66">
+        <Association Name="FK__Exportati__Produ__48CFD27E">
           <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
           <End Role="Exportation" Type="Self.Exportation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -238,7 +238,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Exportati__Usern__6FE99F9F">
+        <Association Name="FK__Exportati__Usern__49C3F6B7">
           <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
           <End Role="Exportation" Type="Self.Exportation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -250,7 +250,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Feedbacks__Produ__72C60C4A">
+        <Association Name="FK__Feedbacks__Produ__4CA06362">
           <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
           <End Role="Feedbacks" Type="Self.Feedbacks" Multiplicity="*" />
           <ReferentialConstraint>
@@ -262,7 +262,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Importati__Produ__6B24EA82">
+        <Association Name="FK__Importati__Produ__44FF419A">
           <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
           <End Role="Importation" Type="Self.Importation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -274,7 +274,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Importati__Usern__6C190EBB">
+        <Association Name="FK__Importati__Usern__45F365D3">
           <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
           <End Role="Importation" Type="Self.Importation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -286,7 +286,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderDeta__Order__5FB337D6">
+        <Association Name="FK__OrderDeta__Order__398D8EEE">
           <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
           <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
           <ReferentialConstraint>
@@ -298,7 +298,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderDeta__Produ__60A75C0F">
+        <Association Name="FK__OrderDeta__Produ__3A81B327">
           <End Role="Products" Type="Self.Products" Multiplicity="1" />
           <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
           <ReferentialConstraint>
@@ -310,7 +310,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Orders__PaymentI__5BE2A6F2">
+        <Association Name="FK__Orders__PaymentI__35BCFE0A">
           <End Role="Payments" Type="Self.Payments" Multiplicity="0..1" />
           <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
@@ -322,7 +322,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Orders__Username__5AEE82B9">
+        <Association Name="FK__Orders__Username__34C8D9D1">
           <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
           <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
@@ -334,7 +334,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ProductIm__Produ__6383C8BA">
+        <Association Name="FK__ProductIm__Produ__3D5E1FD2">
           <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
           <End Role="ProductImage" Type="Self.ProductImage" Multiplicity="*" />
           <ReferentialConstraint>
@@ -346,7 +346,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Products__Catego__5070F446">
+        <Association Name="FK__Products__Catego__2A4B4B5E">
           <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
           <End Role="Products" Type="Self.Products" Multiplicity="*" />
           <ReferentialConstraint>
@@ -358,7 +358,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Products__SaleID__5165187F">
+        <Association Name="FK__Products__SaleID__2B3F6F97">
           <End Role="Sale" Type="Self.Sale" Multiplicity="0..1" />
           <End Role="Products" Type="Self.Products" Multiplicity="*" />
           <ReferentialConstraint>
@@ -370,7 +370,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Products__Suppli__4F7CD00D">
+        <Association Name="FK__Products__Suppli__29572725">
           <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
           <End Role="Products" Type="Self.Products" Multiplicity="*" />
           <ReferentialConstraint>
@@ -382,7 +382,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="AzureAssignmentDBModelStoreContainer">
+        <EntityContainer Name="PalkiaDBModelStoreContainer">
           <EntitySet Name="BlogCategories" EntityType="Self.BlogCategories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BlogComments" EntityType="Self.BlogComments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Blogs" EntityType="Self.Blogs" Schema="dbo" store:Type="Tables" />
@@ -399,164 +399,83 @@
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sale" EntityType="Self.Sale" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Suppliers" EntityType="Self.Suppliers" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__BlogComme__BlogI__7B5B524B" Association="Self.FK__BlogComme__BlogI__7B5B524B">
+          <AssociationSet Name="FK__BlogComme__BlogI__5535A963" Association="Self.FK__BlogComme__BlogI__5535A963">
             <End Role="Blogs" EntitySet="Blogs" />
             <End Role="BlogComments" EntitySet="BlogComments" />
           </AssociationSet>
-          <AssociationSet Name="FK__Blogs__BlogCateg__787EE5A0" Association="Self.FK__Blogs__BlogCateg__787EE5A0">
+          <AssociationSet Name="FK__Blogs__BlogCateg__52593CB8" Association="Self.FK__Blogs__BlogCateg__52593CB8">
             <End Role="BlogCategories" EntitySet="BlogCategories" />
             <End Role="Blogs" EntitySet="Blogs" />
           </AssociationSet>
-          <AssociationSet Name="FK__Blogs__Username__778AC167" Association="Self.FK__Blogs__Username__778AC167">
+          <AssociationSet Name="FK__Blogs__Username__5165187F" Association="Self.FK__Blogs__Username__5165187F">
             <End Role="Employees" EntitySet="Employees" />
             <End Role="Blogs" EntitySet="Blogs" />
           </AssociationSet>
-          <AssociationSet Name="FK__Exportati__Produ__6EF57B66" Association="Self.FK__Exportati__Produ__6EF57B66">
+          <AssociationSet Name="FK__Exportati__Produ__48CFD27E" Association="Self.FK__Exportati__Produ__48CFD27E">
             <End Role="Products" EntitySet="Products" />
             <End Role="Exportation" EntitySet="Exportation" />
           </AssociationSet>
-          <AssociationSet Name="FK__Exportati__Usern__6FE99F9F" Association="Self.FK__Exportati__Usern__6FE99F9F">
+          <AssociationSet Name="FK__Exportati__Usern__49C3F6B7" Association="Self.FK__Exportati__Usern__49C3F6B7">
             <End Role="Employees" EntitySet="Employees" />
             <End Role="Exportation" EntitySet="Exportation" />
           </AssociationSet>
-          <AssociationSet Name="FK__Feedbacks__Produ__72C60C4A" Association="Self.FK__Feedbacks__Produ__72C60C4A">
+          <AssociationSet Name="FK__Feedbacks__Produ__4CA06362" Association="Self.FK__Feedbacks__Produ__4CA06362">
             <End Role="Products" EntitySet="Products" />
             <End Role="Feedbacks" EntitySet="Feedbacks" />
           </AssociationSet>
-          <AssociationSet Name="FK__Importati__Produ__6B24EA82" Association="Self.FK__Importati__Produ__6B24EA82">
+          <AssociationSet Name="FK__Importati__Produ__44FF419A" Association="Self.FK__Importati__Produ__44FF419A">
             <End Role="Products" EntitySet="Products" />
             <End Role="Importation" EntitySet="Importation" />
           </AssociationSet>
-          <AssociationSet Name="FK__Importati__Usern__6C190EBB" Association="Self.FK__Importati__Usern__6C190EBB">
+          <AssociationSet Name="FK__Importati__Usern__45F365D3" Association="Self.FK__Importati__Usern__45F365D3">
             <End Role="Employees" EntitySet="Employees" />
             <End Role="Importation" EntitySet="Importation" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderDeta__Order__5FB337D6" Association="Self.FK__OrderDeta__Order__5FB337D6">
+          <AssociationSet Name="FK__OrderDeta__Order__398D8EEE" Association="Self.FK__OrderDeta__Order__398D8EEE">
             <End Role="Orders" EntitySet="Orders" />
             <End Role="OrderDetails" EntitySet="OrderDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderDeta__Produ__60A75C0F" Association="Self.FK__OrderDeta__Produ__60A75C0F">
+          <AssociationSet Name="FK__OrderDeta__Produ__3A81B327" Association="Self.FK__OrderDeta__Produ__3A81B327">
             <End Role="Products" EntitySet="Products" />
             <End Role="OrderDetails" EntitySet="OrderDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK__Orders__PaymentI__5BE2A6F2" Association="Self.FK__Orders__PaymentI__5BE2A6F2">
+          <AssociationSet Name="FK__Orders__PaymentI__35BCFE0A" Association="Self.FK__Orders__PaymentI__35BCFE0A">
             <End Role="Payments" EntitySet="Payments" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
-          <AssociationSet Name="FK__Orders__Username__5AEE82B9" Association="Self.FK__Orders__Username__5AEE82B9">
+          <AssociationSet Name="FK__Orders__Username__34C8D9D1" Association="Self.FK__Orders__Username__34C8D9D1">
             <End Role="Customers" EntitySet="Customers" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
-          <AssociationSet Name="FK__ProductIm__Produ__6383C8BA" Association="Self.FK__ProductIm__Produ__6383C8BA">
+          <AssociationSet Name="FK__ProductIm__Produ__3D5E1FD2" Association="Self.FK__ProductIm__Produ__3D5E1FD2">
             <End Role="Products" EntitySet="Products" />
             <End Role="ProductImage" EntitySet="ProductImage" />
           </AssociationSet>
-          <AssociationSet Name="FK__Products__Catego__5070F446" Association="Self.FK__Products__Catego__5070F446">
+          <AssociationSet Name="FK__Products__Catego__2A4B4B5E" Association="Self.FK__Products__Catego__2A4B4B5E">
             <End Role="Categories" EntitySet="Categories" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="FK__Products__SaleID__5165187F" Association="Self.FK__Products__SaleID__5165187F">
+          <AssociationSet Name="FK__Products__SaleID__2B3F6F97" Association="Self.FK__Products__SaleID__2B3F6F97">
             <End Role="Sale" EntitySet="Sale" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="FK__Products__Suppli__4F7CD00D" Association="Self.FK__Products__Suppli__4F7CD00D">
+          <AssociationSet Name="FK__Products__Suppli__29572725" Association="Self.FK__Products__Suppli__29572725">
             <End Role="Suppliers" EntitySet="Suppliers" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="AzureAssignmentDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="DataContext" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="BlogCategories" EntityType="AzureAssignmentDBModel.BlogCategories" />
-          <EntitySet Name="BlogComments" EntityType="AzureAssignmentDBModel.BlogComments" />
-          <EntitySet Name="Blogs" EntityType="AzureAssignmentDBModel.Blogs" />
-          <EntitySet Name="Categories" EntityType="AzureAssignmentDBModel.Categories" />
-          <EntitySet Name="Customers" EntityType="AzureAssignmentDBModel.Customers" />
-          <EntitySet Name="Employees" EntityType="AzureAssignmentDBModel.Employees" />
-          <EntitySet Name="Exportation" EntityType="AzureAssignmentDBModel.Exportation" />
-          <EntitySet Name="Feedbacks" EntityType="AzureAssignmentDBModel.Feedbacks" />
-          <EntitySet Name="Importation" EntityType="AzureAssignmentDBModel.Importation" />
-          <EntitySet Name="OrderDetails" EntityType="AzureAssignmentDBModel.OrderDetails" />
-          <EntitySet Name="Orders" EntityType="AzureAssignmentDBModel.Orders" />
-          <EntitySet Name="Payments" EntityType="AzureAssignmentDBModel.Payments" />
-          <EntitySet Name="ProductImage" EntityType="AzureAssignmentDBModel.ProductImage" />
-          <EntitySet Name="Products" EntityType="AzureAssignmentDBModel.Products" />
-          <EntitySet Name="Sale" EntityType="AzureAssignmentDBModel.Sale" />
-          <EntitySet Name="Suppliers" EntityType="AzureAssignmentDBModel.Suppliers" />
-          <AssociationSet Name="FK__Blogs__BlogCateg__787EE5A0" Association="AzureAssignmentDBModel.FK__Blogs__BlogCateg__787EE5A0">
-            <End Role="BlogCategories" EntitySet="BlogCategories" />
-            <End Role="Blogs" EntitySet="Blogs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__BlogComme__BlogI__7B5B524B" Association="AzureAssignmentDBModel.FK__BlogComme__BlogI__7B5B524B">
-            <End Role="Blogs" EntitySet="Blogs" />
-            <End Role="BlogComments" EntitySet="BlogComments" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Blogs__Username__778AC167" Association="AzureAssignmentDBModel.FK__Blogs__Username__778AC167">
-            <End Role="Employees" EntitySet="Employees" />
-            <End Role="Blogs" EntitySet="Blogs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Products__Catego__5070F446" Association="AzureAssignmentDBModel.FK__Products__Catego__5070F446">
-            <End Role="Categories" EntitySet="Categories" />
-            <End Role="Products" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Orders__Username__5AEE82B9" Association="AzureAssignmentDBModel.FK__Orders__Username__5AEE82B9">
-            <End Role="Customers" EntitySet="Customers" />
-            <End Role="Orders" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Exportati__Usern__6FE99F9F" Association="AzureAssignmentDBModel.FK__Exportati__Usern__6FE99F9F">
-            <End Role="Employees" EntitySet="Employees" />
-            <End Role="Exportation" EntitySet="Exportation" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Importati__Usern__6C190EBB" Association="AzureAssignmentDBModel.FK__Importati__Usern__6C190EBB">
-            <End Role="Employees" EntitySet="Employees" />
-            <End Role="Importation" EntitySet="Importation" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Exportati__Produ__6EF57B66" Association="AzureAssignmentDBModel.FK__Exportati__Produ__6EF57B66">
-            <End Role="Products" EntitySet="Products" />
-            <End Role="Exportation" EntitySet="Exportation" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Feedbacks__Produ__72C60C4A" Association="AzureAssignmentDBModel.FK__Feedbacks__Produ__72C60C4A">
-            <End Role="Products" EntitySet="Products" />
-            <End Role="Feedbacks" EntitySet="Feedbacks" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Importati__Produ__6B24EA82" Association="AzureAssignmentDBModel.FK__Importati__Produ__6B24EA82">
-            <End Role="Products" EntitySet="Products" />
-            <End Role="Importation" EntitySet="Importation" />
-          </AssociationSet>
-          <AssociationSet Name="FK__OrderDeta__Order__5FB337D6" Association="AzureAssignmentDBModel.FK__OrderDeta__Order__5FB337D6">
-            <End Role="Orders" EntitySet="Orders" />
-            <End Role="OrderDetails" EntitySet="OrderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK__OrderDeta__Produ__60A75C0F" Association="AzureAssignmentDBModel.FK__OrderDeta__Produ__60A75C0F">
-            <End Role="Products" EntitySet="Products" />
-            <End Role="OrderDetails" EntitySet="OrderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Orders__PaymentI__5BE2A6F2" Association="AzureAssignmentDBModel.FK__Orders__PaymentI__5BE2A6F2">
-            <End Role="Payments" EntitySet="Payments" />
-            <End Role="Orders" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ProductIm__Produ__6383C8BA" Association="AzureAssignmentDBModel.FK__ProductIm__Produ__6383C8BA">
-            <End Role="Products" EntitySet="Products" />
-            <End Role="ProductImage" EntitySet="ProductImage" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Products__SaleID__5165187F" Association="AzureAssignmentDBModel.FK__Products__SaleID__5165187F">
-            <End Role="Sale" EntitySet="Sale" />
-            <End Role="Products" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Products__Suppli__4F7CD00D" Association="AzureAssignmentDBModel.FK__Products__Suppli__4F7CD00D">
-            <End Role="Suppliers" EntitySet="Suppliers" />
-            <End Role="Products" EntitySet="Products" />
-          </AssociationSet>
-        </EntityContainer>
+      <Schema Namespace="PalkiaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="BlogCategories">
           <Key>
             <PropertyRef Name="BlogCategoryID" />
           </Key>
           <Property Name="BlogCategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BlogCategoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Blogs" Relationship="AzureAssignmentDBModel.FK__Blogs__BlogCateg__787EE5A0" FromRole="BlogCategories" ToRole="Blogs" />
+          <NavigationProperty Name="Blogs" Relationship="Self.FK__Blogs__BlogCateg__52593CB8" FromRole="BlogCategories" ToRole="Blogs" />
         </EntityType>
         <EntityType Name="BlogComments">
           <Key>
@@ -569,7 +488,7 @@
           <Property Name="Comment" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="CommentingDate" Type="DateTime" Precision="3" />
           <Property Name="BlogID" Type="Int32" />
-          <NavigationProperty Name="Blogs" Relationship="AzureAssignmentDBModel.FK__BlogComme__BlogI__7B5B524B" FromRole="BlogComments" ToRole="Blogs" />
+          <NavigationProperty Name="Blogs" Relationship="Self.FK__BlogComme__BlogI__5535A963" FromRole="BlogComments" ToRole="Blogs" />
         </EntityType>
         <EntityType Name="Blogs">
           <Key>
@@ -581,9 +500,9 @@
           <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="BlogCategoryID" Type="Int32" />
           <Property Name="WritingDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="BlogCategories" Relationship="AzureAssignmentDBModel.FK__Blogs__BlogCateg__787EE5A0" FromRole="Blogs" ToRole="BlogCategories" />
-          <NavigationProperty Name="BlogComments" Relationship="AzureAssignmentDBModel.FK__BlogComme__BlogI__7B5B524B" FromRole="Blogs" ToRole="BlogComments" />
-          <NavigationProperty Name="Employees" Relationship="AzureAssignmentDBModel.FK__Blogs__Username__778AC167" FromRole="Blogs" ToRole="Employees" />
+          <NavigationProperty Name="BlogCategories" Relationship="Self.FK__Blogs__BlogCateg__52593CB8" FromRole="Blogs" ToRole="BlogCategories" />
+          <NavigationProperty Name="BlogComments" Relationship="Self.FK__BlogComme__BlogI__5535A963" FromRole="Blogs" ToRole="BlogComments" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__Blogs__Username__5165187F" FromRole="Blogs" ToRole="Employees" />
         </EntityType>
         <EntityType Name="Categories">
           <Key>
@@ -592,14 +511,14 @@
           <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Picture" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Products" Relationship="AzureAssignmentDBModel.FK__Products__Catego__5070F446" FromRole="Categories" ToRole="Products" />
+          <Property Name="Picture" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Products__Catego__2A4B4B5E" FromRole="Categories" ToRole="Products" />
         </EntityType>
         <EntityType Name="Customers">
           <Key>
             <PropertyRef Name="Username" />
           </Key>
-          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="FirtName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -608,15 +527,15 @@
           <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Picture" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="Boolean" />
-          <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Orders" Relationship="AzureAssignmentDBModel.FK__Orders__Username__5AEE82B9" FromRole="Customers" ToRole="Orders" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__Username__34C8D9D1" FromRole="Customers" ToRole="Orders" />
         </EntityType>
         <EntityType Name="Employees">
           <Key>
             <PropertyRef Name="Username" />
           </Key>
-          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="FirtName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -625,12 +544,12 @@
           <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Picture" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Role" Type="Boolean" />
           <Property Name="Status" Type="Boolean" />
-          <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Blogs" Relationship="AzureAssignmentDBModel.FK__Blogs__Username__778AC167" FromRole="Employees" ToRole="Blogs" />
-          <NavigationProperty Name="Exportation" Relationship="AzureAssignmentDBModel.FK__Exportati__Usern__6FE99F9F" FromRole="Employees" ToRole="Exportation" />
-          <NavigationProperty Name="Importation" Relationship="AzureAssignmentDBModel.FK__Importati__Usern__6C190EBB" FromRole="Employees" ToRole="Importation" />
+          <NavigationProperty Name="Blogs" Relationship="Self.FK__Blogs__Username__5165187F" FromRole="Employees" ToRole="Blogs" />
+          <NavigationProperty Name="Exportation" Relationship="Self.FK__Exportati__Usern__49C3F6B7" FromRole="Employees" ToRole="Exportation" />
+          <NavigationProperty Name="Importation" Relationship="Self.FK__Importati__Usern__45F365D3" FromRole="Employees" ToRole="Importation" />
         </EntityType>
         <EntityType Name="Exportation">
           <Key>
@@ -642,8 +561,8 @@
           <Property Name="ExportDate" Type="DateTime" Precision="3" />
           <Property Name="UnitPrice" Type="Decimal" Precision="12" Scale="2" />
           <Property Name="Quantity" Type="Int32" />
-          <NavigationProperty Name="Employees" Relationship="AzureAssignmentDBModel.FK__Exportati__Usern__6FE99F9F" FromRole="Exportation" ToRole="Employees" />
-          <NavigationProperty Name="Products" Relationship="AzureAssignmentDBModel.FK__Exportati__Produ__6EF57B66" FromRole="Exportation" ToRole="Products" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__Exportati__Usern__49C3F6B7" FromRole="Exportation" ToRole="Employees" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Exportati__Produ__48CFD27E" FromRole="Exportation" ToRole="Products" />
         </EntityType>
         <EntityType Name="Feedbacks">
           <Key>
@@ -655,7 +574,7 @@
           <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FeedBackDate" Type="DateTime" Precision="3" />
           <Property Name="ProductID" Type="Int32" />
-          <NavigationProperty Name="Products" Relationship="AzureAssignmentDBModel.FK__Feedbacks__Produ__72C60C4A" FromRole="Feedbacks" ToRole="Products" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Feedbacks__Produ__4CA06362" FromRole="Feedbacks" ToRole="Products" />
         </EntityType>
         <EntityType Name="Importation">
           <Key>
@@ -667,8 +586,8 @@
           <Property Name="ImportDate" Type="DateTime" Precision="3" />
           <Property Name="UnitPrice" Type="Decimal" Precision="12" Scale="2" />
           <Property Name="Quantity" Type="Int32" />
-          <NavigationProperty Name="Employees" Relationship="AzureAssignmentDBModel.FK__Importati__Usern__6C190EBB" FromRole="Importation" ToRole="Employees" />
-          <NavigationProperty Name="Products" Relationship="AzureAssignmentDBModel.FK__Importati__Produ__6B24EA82" FromRole="Importation" ToRole="Products" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__Importati__Usern__45F365D3" FromRole="Importation" ToRole="Employees" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Importati__Produ__44FF419A" FromRole="Importation" ToRole="Products" />
         </EntityType>
         <EntityType Name="OrderDetails">
           <Key>
@@ -679,8 +598,8 @@
           <Property Name="ProductID" Type="Int32" Nullable="false" />
           <Property Name="UnitPrice" Type="Decimal" Precision="12" Scale="2" />
           <Property Name="Quantity" Type="Int32" />
-          <NavigationProperty Name="Orders" Relationship="AzureAssignmentDBModel.FK__OrderDeta__Order__5FB337D6" FromRole="OrderDetails" ToRole="Orders" />
-          <NavigationProperty Name="Products" Relationship="AzureAssignmentDBModel.FK__OrderDeta__Produ__60A75C0F" FromRole="OrderDetails" ToRole="Products" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__OrderDeta__Order__398D8EEE" FromRole="OrderDetails" ToRole="Orders" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__OrderDeta__Produ__3A81B327" FromRole="OrderDetails" ToRole="Products" />
         </EntityType>
         <EntityType Name="Orders">
           <Key>
@@ -694,9 +613,9 @@
           <Property Name="ShippedAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Note" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="Boolean" />
-          <NavigationProperty Name="Customers" Relationship="AzureAssignmentDBModel.FK__Orders__Username__5AEE82B9" FromRole="Orders" ToRole="Customers" />
-          <NavigationProperty Name="OrderDetails" Relationship="AzureAssignmentDBModel.FK__OrderDeta__Order__5FB337D6" FromRole="Orders" ToRole="OrderDetails" />
-          <NavigationProperty Name="Payments" Relationship="AzureAssignmentDBModel.FK__Orders__PaymentI__5BE2A6F2" FromRole="Orders" ToRole="Payments" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK__Orders__Username__34C8D9D1" FromRole="Orders" ToRole="Customers" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Order__398D8EEE" FromRole="Orders" ToRole="OrderDetails" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK__Orders__PaymentI__35BCFE0A" FromRole="Orders" ToRole="Payments" />
         </EntityType>
         <EntityType Name="Payments">
           <Key>
@@ -704,17 +623,17 @@
           </Key>
           <Property Name="PaymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PaymentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Picture" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Orders" Relationship="AzureAssignmentDBModel.FK__Orders__PaymentI__5BE2A6F2" FromRole="Payments" ToRole="Orders" />
+          <Property Name="Picture" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__PaymentI__35BCFE0A" FromRole="Payments" ToRole="Orders" />
         </EntityType>
         <EntityType Name="ProductImage">
           <Key>
             <PropertyRef Name="ImgID" />
           </Key>
           <Property Name="ImgID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ImgFileName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ImgFileName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="ProductID" Type="Int32" />
-          <NavigationProperty Name="Products" Relationship="AzureAssignmentDBModel.FK__ProductIm__Produ__6383C8BA" FromRole="ProductImage" ToRole="Products" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__ProductIm__Produ__3D5E1FD2" FromRole="ProductImage" ToRole="Products" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
@@ -733,14 +652,14 @@
           <Property Name="CategoryID" Type="Int32" />
           <Property Name="SaleID" Type="Int32" />
           <Property Name="Discontinued" Type="Boolean" />
-          <NavigationProperty Name="Categories" Relationship="AzureAssignmentDBModel.FK__Products__Catego__5070F446" FromRole="Products" ToRole="Categories" />
-          <NavigationProperty Name="Exportation" Relationship="AzureAssignmentDBModel.FK__Exportati__Produ__6EF57B66" FromRole="Products" ToRole="Exportation" />
-          <NavigationProperty Name="Feedbacks" Relationship="AzureAssignmentDBModel.FK__Feedbacks__Produ__72C60C4A" FromRole="Products" ToRole="Feedbacks" />
-          <NavigationProperty Name="Importation" Relationship="AzureAssignmentDBModel.FK__Importati__Produ__6B24EA82" FromRole="Products" ToRole="Importation" />
-          <NavigationProperty Name="OrderDetails" Relationship="AzureAssignmentDBModel.FK__OrderDeta__Produ__60A75C0F" FromRole="Products" ToRole="OrderDetails" />
-          <NavigationProperty Name="ProductImage" Relationship="AzureAssignmentDBModel.FK__ProductIm__Produ__6383C8BA" FromRole="Products" ToRole="ProductImage" />
-          <NavigationProperty Name="Sale" Relationship="AzureAssignmentDBModel.FK__Products__SaleID__5165187F" FromRole="Products" ToRole="Sale" />
-          <NavigationProperty Name="Suppliers" Relationship="AzureAssignmentDBModel.FK__Products__Suppli__4F7CD00D" FromRole="Products" ToRole="Suppliers" />
+          <NavigationProperty Name="Categories" Relationship="Self.FK__Products__Catego__2A4B4B5E" FromRole="Products" ToRole="Categories" />
+          <NavigationProperty Name="Exportation" Relationship="Self.FK__Exportati__Produ__48CFD27E" FromRole="Products" ToRole="Exportation" />
+          <NavigationProperty Name="Feedbacks" Relationship="Self.FK__Feedbacks__Produ__4CA06362" FromRole="Products" ToRole="Feedbacks" />
+          <NavigationProperty Name="Importation" Relationship="Self.FK__Importati__Produ__44FF419A" FromRole="Products" ToRole="Importation" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Produ__3A81B327" FromRole="Products" ToRole="OrderDetails" />
+          <NavigationProperty Name="ProductImage" Relationship="Self.FK__ProductIm__Produ__3D5E1FD2" FromRole="Products" ToRole="ProductImage" />
+          <NavigationProperty Name="Sale" Relationship="Self.FK__Products__SaleID__2B3F6F97" FromRole="Products" ToRole="Sale" />
+          <NavigationProperty Name="Suppliers" Relationship="Self.FK__Products__Suppli__29572725" FromRole="Products" ToRole="Suppliers" />
         </EntityType>
         <EntityType Name="Sale">
           <Key>
@@ -751,9 +670,9 @@
           <Property Name="Content" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="StartDate" Type="DateTime" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Precision="3" />
-          <Property Name="Picture" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Picture" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Discount" Type="Decimal" Precision="12" Scale="2" />
-          <NavigationProperty Name="Products" Relationship="AzureAssignmentDBModel.FK__Products__SaleID__5165187F" FromRole="Sale" ToRole="Products" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Products__SaleID__2B3F6F97" FromRole="Sale" ToRole="Products" />
         </EntityType>
         <EntityType Name="Suppliers">
           <Key>
@@ -765,11 +684,11 @@
           <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Products" Relationship="AzureAssignmentDBModel.FK__Products__Suppli__4F7CD00D" FromRole="Suppliers" ToRole="Products" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Products__Suppli__29572725" FromRole="Suppliers" ToRole="Products" />
         </EntityType>
-        <Association Name="FK__Blogs__BlogCateg__787EE5A0">
-          <End Type="AzureAssignmentDBModel.BlogCategories" Role="BlogCategories" Multiplicity="0..1" />
-          <End Type="AzureAssignmentDBModel.Blogs" Role="Blogs" Multiplicity="*" />
+        <Association Name="FK__Blogs__BlogCateg__52593CB8">
+          <End Role="BlogCategories" Type="Self.BlogCategories" Multiplicity="0..1" />
+          <End Role="Blogs" Type="Self.Blogs" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BlogCategories">
               <PropertyRef Name="BlogCategoryID" />
@@ -779,9 +698,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BlogComme__BlogI__7B5B524B">
-          <End Type="AzureAssignmentDBModel.Blogs" Role="Blogs" Multiplicity="0..1" />
-          <End Type="AzureAssignmentDBModel.BlogComments" Role="BlogComments" Multiplicity="*" />
+        <Association Name="FK__BlogComme__BlogI__5535A963">
+          <End Role="Blogs" Type="Self.Blogs" Multiplicity="0..1" />
+          <End Role="BlogComments" Type="Self.BlogComments" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Blogs">
               <PropertyRef Name="BlogID" />
@@ -791,9 +710,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Blogs__Username__778AC167">
-          <End Type="AzureAssignmentDBModel.Employees" Role="Employees" Multiplicity="0..1" />
-          <End Type="AzureAssignmentDBModel.Blogs" Role="Blogs" Multiplicity="*" />
+        <Association Name="FK__Blogs__Username__5165187F">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="Blogs" Type="Self.Blogs" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employees">
               <PropertyRef Name="Username" />
@@ -803,9 +722,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Products__Catego__5070F446">
-          <End Type="AzureAssignmentDBModel.Categories" Role="Categories" Multiplicity="0..1" />
-          <End Type="AzureAssignmentDBModel.Products" Role="Products" Multiplicity="*" />
+        <Association Name="FK__Products__Catego__2A4B4B5E">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Categories">
               <PropertyRef Name="CategoryID" />
@@ -815,9 +734,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Orders__Username__5AEE82B9">
-          <End Type="AzureAssignmentDBModel.Customers" Role="Customers" Multiplicity="0..1" />
-          <End Type="AzureAssignmentDBModel.Orders" Role="Orders" Multiplicity="*" />
+        <Association Name="FK__Orders__Username__34C8D9D1">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customers">
               <PropertyRef Name="Username" />
@@ -827,9 +746,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Exportati__Usern__6FE99F9F">
-          <End Type="AzureAssignmentDBModel.Employees" Role="Employees" Multiplicity="0..1" />
-          <End Type="AzureAssignmentDBModel.Exportation" Role="Exportation" Multiplicity="*" />
+        <Association Name="FK__Exportati__Usern__49C3F6B7">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="Exportation" Type="Self.Exportation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employees">
               <PropertyRef Name="Username" />
@@ -839,9 +758,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Importati__Usern__6C190EBB">
-          <End Type="AzureAssignmentDBModel.Employees" Role="Employees" Multiplicity="0..1" />
-          <End Type="AzureAssignmentDBModel.Importation" Role="Importation" Multiplicity="*" />
+        <Association Name="FK__Importati__Usern__45F365D3">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="Importation" Type="Self.Importation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employees">
               <PropertyRef Name="Username" />
@@ -851,9 +770,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Exportati__Produ__6EF57B66">
-          <End Type="AzureAssignmentDBModel.Products" Role="Products" Multiplicity="0..1" />
-          <End Type="AzureAssignmentDBModel.Exportation" Role="Exportation" Multiplicity="*" />
+        <Association Name="FK__Exportati__Produ__48CFD27E">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Exportation" Type="Self.Exportation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Products">
               <PropertyRef Name="ProductID" />
@@ -863,9 +782,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Feedbacks__Produ__72C60C4A">
-          <End Type="AzureAssignmentDBModel.Products" Role="Products" Multiplicity="0..1" />
-          <End Type="AzureAssignmentDBModel.Feedbacks" Role="Feedbacks" Multiplicity="*" />
+        <Association Name="FK__Feedbacks__Produ__4CA06362">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Feedbacks" Type="Self.Feedbacks" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Products">
               <PropertyRef Name="ProductID" />
@@ -875,9 +794,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Importati__Produ__6B24EA82">
-          <End Type="AzureAssignmentDBModel.Products" Role="Products" Multiplicity="0..1" />
-          <End Type="AzureAssignmentDBModel.Importation" Role="Importation" Multiplicity="*" />
+        <Association Name="FK__Importati__Produ__44FF419A">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Importation" Type="Self.Importation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Products">
               <PropertyRef Name="ProductID" />
@@ -887,9 +806,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderDeta__Order__5FB337D6">
-          <End Type="AzureAssignmentDBModel.Orders" Role="Orders" Multiplicity="1" />
-          <End Type="AzureAssignmentDBModel.OrderDetails" Role="OrderDetails" Multiplicity="*" />
+        <Association Name="FK__OrderDeta__Order__398D8EEE">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Orders">
               <PropertyRef Name="OrderID" />
@@ -899,9 +818,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderDeta__Produ__60A75C0F">
-          <End Type="AzureAssignmentDBModel.Products" Role="Products" Multiplicity="1" />
-          <End Type="AzureAssignmentDBModel.OrderDetails" Role="OrderDetails" Multiplicity="*" />
+        <Association Name="FK__OrderDeta__Produ__3A81B327">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Products">
               <PropertyRef Name="ProductID" />
@@ -911,9 +830,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Orders__PaymentI__5BE2A6F2">
-          <End Type="AzureAssignmentDBModel.Payments" Role="Payments" Multiplicity="0..1" />
-          <End Type="AzureAssignmentDBModel.Orders" Role="Orders" Multiplicity="*" />
+        <Association Name="FK__Orders__PaymentI__35BCFE0A">
+          <End Role="Payments" Type="Self.Payments" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Payments">
               <PropertyRef Name="PaymentID" />
@@ -923,9 +842,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ProductIm__Produ__6383C8BA">
-          <End Type="AzureAssignmentDBModel.Products" Role="Products" Multiplicity="0..1" />
-          <End Type="AzureAssignmentDBModel.ProductImage" Role="ProductImage" Multiplicity="*" />
+        <Association Name="FK__ProductIm__Produ__3D5E1FD2">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="ProductImage" Type="Self.ProductImage" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Products">
               <PropertyRef Name="ProductID" />
@@ -935,9 +854,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Products__SaleID__5165187F">
-          <End Type="AzureAssignmentDBModel.Sale" Role="Sale" Multiplicity="0..1" />
-          <End Type="AzureAssignmentDBModel.Products" Role="Products" Multiplicity="*" />
+        <Association Name="FK__Products__SaleID__2B3F6F97">
+          <End Role="Sale" Type="Self.Sale" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sale">
               <PropertyRef Name="SaleID" />
@@ -947,9 +866,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Products__Suppli__4F7CD00D">
-          <End Type="AzureAssignmentDBModel.Suppliers" Role="Suppliers" Multiplicity="0..1" />
-          <End Type="AzureAssignmentDBModel.Products" Role="Products" Multiplicity="*" />
+        <Association Name="FK__Products__Suppli__29572725">
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Suppliers">
               <PropertyRef Name="SupplierID" />
@@ -959,209 +878,291 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        </Schema>
+        <EntityContainer Name="PalkiaDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BlogCategories" EntityType="Self.BlogCategories" />
+          <EntitySet Name="BlogComments" EntityType="Self.BlogComments" />
+          <EntitySet Name="Blogs" EntityType="Self.Blogs" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" />
+          <EntitySet Name="Exportation" EntityType="Self.Exportation" />
+          <EntitySet Name="Feedbacks" EntityType="Self.Feedbacks" />
+          <EntitySet Name="Importation" EntityType="Self.Importation" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" />
+          <EntitySet Name="Payments" EntityType="Self.Payments" />
+          <EntitySet Name="ProductImage" EntityType="Self.ProductImage" />
+          <EntitySet Name="Products" EntityType="Self.Products" />
+          <EntitySet Name="Sale" EntityType="Self.Sale" />
+          <EntitySet Name="Suppliers" EntityType="Self.Suppliers" />
+          <AssociationSet Name="FK__Blogs__BlogCateg__52593CB8" Association="Self.FK__Blogs__BlogCateg__52593CB8">
+            <End Role="BlogCategories" EntitySet="BlogCategories" />
+            <End Role="Blogs" EntitySet="Blogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BlogComme__BlogI__5535A963" Association="Self.FK__BlogComme__BlogI__5535A963">
+            <End Role="Blogs" EntitySet="Blogs" />
+            <End Role="BlogComments" EntitySet="BlogComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Blogs__Username__5165187F" Association="Self.FK__Blogs__Username__5165187F">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Blogs" EntitySet="Blogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Products__Catego__2A4B4B5E" Association="Self.FK__Products__Catego__2A4B4B5E">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__Username__34C8D9D1" Association="Self.FK__Orders__Username__34C8D9D1">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Exportati__Usern__49C3F6B7" Association="Self.FK__Exportati__Usern__49C3F6B7">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Exportation" EntitySet="Exportation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Importati__Usern__45F365D3" Association="Self.FK__Importati__Usern__45F365D3">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Importation" EntitySet="Importation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Exportati__Produ__48CFD27E" Association="Self.FK__Exportati__Produ__48CFD27E">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Exportation" EntitySet="Exportation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Feedbacks__Produ__4CA06362" Association="Self.FK__Feedbacks__Produ__4CA06362">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Feedbacks" EntitySet="Feedbacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Importati__Produ__44FF419A" Association="Self.FK__Importati__Produ__44FF419A">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Importation" EntitySet="Importation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__Order__398D8EEE" Association="Self.FK__OrderDeta__Order__398D8EEE">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__Produ__3A81B327" Association="Self.FK__OrderDeta__Produ__3A81B327">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__PaymentI__35BCFE0A" Association="Self.FK__Orders__PaymentI__35BCFE0A">
+            <End Role="Payments" EntitySet="Payments" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductIm__Produ__3D5E1FD2" Association="Self.FK__ProductIm__Produ__3D5E1FD2">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductImage" EntitySet="ProductImage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Products__SaleID__2B3F6F97" Association="Self.FK__Products__SaleID__2B3F6F97">
+            <End Role="Sale" EntitySet="Sale" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Products__Suppli__29572725" Association="Self.FK__Products__Suppli__29572725">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="AzureAssignmentDBModelStoreContainer" CdmEntityContainer="DataContext">
+        <EntityContainerMapping StorageEntityContainer="PalkiaDBModelStoreContainer" CdmEntityContainer="PalkiaDBEntities">
           <EntitySetMapping Name="BlogCategories">
-            <EntityTypeMapping TypeName="AzureAssignmentDBModel.BlogCategories">
+            <EntityTypeMapping TypeName="PalkiaDBModel.BlogCategories">
               <MappingFragment StoreEntitySet="BlogCategories">
-                <ScalarProperty Name="BlogCategoryName" ColumnName="BlogCategoryName" />
                 <ScalarProperty Name="BlogCategoryID" ColumnName="BlogCategoryID" />
+                <ScalarProperty Name="BlogCategoryName" ColumnName="BlogCategoryName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BlogComments">
-            <EntityTypeMapping TypeName="AzureAssignmentDBModel.BlogComments">
+            <EntityTypeMapping TypeName="PalkiaDBModel.BlogComments">
               <MappingFragment StoreEntitySet="BlogComments">
-                <ScalarProperty Name="BlogID" ColumnName="BlogID" />
-                <ScalarProperty Name="CommentingDate" ColumnName="CommentingDate" />
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="BlogCommentID" ColumnName="BlogCommentID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="CommentingDate" ColumnName="CommentingDate" />
+                <ScalarProperty Name="BlogID" ColumnName="BlogID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Blogs">
-            <EntityTypeMapping TypeName="AzureAssignmentDBModel.Blogs">
+            <EntityTypeMapping TypeName="PalkiaDBModel.Blogs">
               <MappingFragment StoreEntitySet="Blogs">
-                <ScalarProperty Name="WritingDate" ColumnName="WritingDate" />
-                <ScalarProperty Name="BlogCategoryID" ColumnName="BlogCategoryID" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="BlogName" ColumnName="BlogName" />
                 <ScalarProperty Name="BlogID" ColumnName="BlogID" />
+                <ScalarProperty Name="BlogName" ColumnName="BlogName" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="BlogCategoryID" ColumnName="BlogCategoryID" />
+                <ScalarProperty Name="WritingDate" ColumnName="WritingDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="AzureAssignmentDBModel.Categories">
+            <EntityTypeMapping TypeName="PalkiaDBModel.Categories">
               <MappingFragment StoreEntitySet="Categories">
-                <ScalarProperty Name="Picture" ColumnName="Picture" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="AzureAssignmentDBModel.Customers">
+            <EntityTypeMapping TypeName="PalkiaDBModel.Customers">
               <MappingFragment StoreEntitySet="Customers">
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirtName" ColumnName="FirtName" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="FirtName" ColumnName="FirtName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Employees">
-            <EntityTypeMapping TypeName="AzureAssignmentDBModel.Employees">
+            <EntityTypeMapping TypeName="PalkiaDBModel.Employees">
               <MappingFragment StoreEntitySet="Employees">
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Role" ColumnName="Role" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirtName" ColumnName="FirtName" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="FirtName" ColumnName="FirtName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Exportation">
-            <EntityTypeMapping TypeName="AzureAssignmentDBModel.Exportation">
+            <EntityTypeMapping TypeName="PalkiaDBModel.Exportation">
               <MappingFragment StoreEntitySet="Exportation">
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-                <ScalarProperty Name="ExportDate" ColumnName="ExportDate" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="ExportationID" ColumnName="ExportationID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="ExportDate" ColumnName="ExportDate" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Feedbacks">
-            <EntityTypeMapping TypeName="AzureAssignmentDBModel.Feedbacks">
+            <EntityTypeMapping TypeName="PalkiaDBModel.Feedbacks">
               <MappingFragment StoreEntitySet="Feedbacks">
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="FeedBackDate" ColumnName="FeedBackDate" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="FeedbackName" ColumnName="FeedbackName" />
                 <ScalarProperty Name="FeedbackID" ColumnName="FeedbackID" />
+                <ScalarProperty Name="FeedbackName" ColumnName="FeedbackName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="FeedBackDate" ColumnName="FeedBackDate" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Importation">
-            <EntityTypeMapping TypeName="AzureAssignmentDBModel.Importation">
+            <EntityTypeMapping TypeName="PalkiaDBModel.Importation">
               <MappingFragment StoreEntitySet="Importation">
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-                <ScalarProperty Name="ImportDate" ColumnName="ImportDate" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="ImportationID" ColumnName="ImportationID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="ImportDate" ColumnName="ImportDate" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OrderDetails">
-            <EntityTypeMapping TypeName="AzureAssignmentDBModel.OrderDetails">
+            <EntityTypeMapping TypeName="PalkiaDBModel.OrderDetails">
               <MappingFragment StoreEntitySet="OrderDetails">
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="AzureAssignmentDBModel.Orders">
+            <EntityTypeMapping TypeName="PalkiaDBModel.Orders">
               <MappingFragment StoreEntitySet="Orders">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Note" ColumnName="Note" />
-                <ScalarProperty Name="ShippedAddress" ColumnName="ShippedAddress" />
-                <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
-                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
-                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
+                <ScalarProperty Name="ShippedAddress" ColumnName="ShippedAddress" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Payments">
-            <EntityTypeMapping TypeName="AzureAssignmentDBModel.Payments">
+            <EntityTypeMapping TypeName="PalkiaDBModel.Payments">
               <MappingFragment StoreEntitySet="Payments">
-                <ScalarProperty Name="Picture" ColumnName="Picture" />
-                <ScalarProperty Name="PaymentName" ColumnName="PaymentName" />
                 <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+                <ScalarProperty Name="PaymentName" ColumnName="PaymentName" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ProductImage">
-            <EntityTypeMapping TypeName="AzureAssignmentDBModel.ProductImage">
+            <EntityTypeMapping TypeName="PalkiaDBModel.ProductImage">
               <MappingFragment StoreEntitySet="ProductImage">
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="ImgFileName" ColumnName="ImgFileName" />
                 <ScalarProperty Name="ImgID" ColumnName="ImgID" />
+                <ScalarProperty Name="ImgFileName" ColumnName="ImgFileName" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="AzureAssignmentDBModel.Products">
+            <EntityTypeMapping TypeName="PalkiaDBModel.Products">
               <MappingFragment StoreEntitySet="Products">
-                <ScalarProperty Name="Discontinued" ColumnName="Discontinued" />
-                <ScalarProperty Name="SaleID" ColumnName="SaleID" />
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
-                <ScalarProperty Name="UnitsOnOrder" ColumnName="UnitsOnOrder" />
-                <ScalarProperty Name="UnitsInStock" ColumnName="UnitsInStock" />
-                <ScalarProperty Name="Specification" ColumnName="Specification" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
-                <ScalarProperty Name="OldUnitPrice" ColumnName="OldUnitPrice" />
-                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="OldUnitPrice" ColumnName="OldUnitPrice" />
+                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Specification" ColumnName="Specification" />
+                <ScalarProperty Name="UnitsInStock" ColumnName="UnitsInStock" />
+                <ScalarProperty Name="UnitsOnOrder" ColumnName="UnitsOnOrder" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="SaleID" ColumnName="SaleID" />
+                <ScalarProperty Name="Discontinued" ColumnName="Discontinued" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Sale">
-            <EntityTypeMapping TypeName="AzureAssignmentDBModel.Sale">
+            <EntityTypeMapping TypeName="PalkiaDBModel.Sale">
               <MappingFragment StoreEntitySet="Sale">
-                <ScalarProperty Name="Discount" ColumnName="Discount" />
-                <ScalarProperty Name="Picture" ColumnName="Picture" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="SaleName" ColumnName="SaleName" />
                 <ScalarProperty Name="SaleID" ColumnName="SaleID" />
+                <ScalarProperty Name="SaleName" ColumnName="SaleName" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Suppliers">
-            <EntityTypeMapping TypeName="AzureAssignmentDBModel.Suppliers">
+            <EntityTypeMapping TypeName="PalkiaDBModel.Suppliers">
               <MappingFragment StoreEntitySet="Suppliers">
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
                 <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1179,7 +1180,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

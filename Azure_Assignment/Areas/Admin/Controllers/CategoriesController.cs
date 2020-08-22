@@ -8,14 +8,14 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
-using Azure_Assignment.Models;
+using Azure_Assignment.EF;
 using Microsoft.Ajax.Utilities;
 
 namespace Azure_Assignment.Areas.Admin.Controllers
 {
     public class CategoriesController : Controller
     {
-        private DataContext db = new DataContext();
+        private PalkiaDBEntities db = new PalkiaDBEntities();
 
         // GET: Admin/Categories
         public ActionResult Index()

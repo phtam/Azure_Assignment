@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Azure_Assignment.Models
+namespace Azure_Assignment.EF
 {
     using System;
     using System.Collections.Generic;

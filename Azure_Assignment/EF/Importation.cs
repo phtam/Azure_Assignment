@@ -7,19 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Azure_Assignment.Models
+namespace Azure_Assignment.EF
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class OrderDetails
+    public partial class Importation
     {
-        public int OrderID { get; set; }
-        public int ProductID { get; set; }
+        public int ImportationID { get; set; }
+        public Nullable<int> ProductID { get; set; }
+        public string Username { get; set; }
+        public Nullable<System.DateTime> ImportDate { get; set; }
         public Nullable<decimal> UnitPrice { get; set; }
         public Nullable<int> Quantity { get; set; }
     
-        public virtual Orders Orders { get; set; }
+        public virtual Employees Employees { get; set; }
         public virtual Products Products { get; set; }
     }
 }

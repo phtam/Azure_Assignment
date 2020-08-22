@@ -7,13 +7,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Azure_Assignment.Models;
+using Azure_Assignment.EF;
 
 namespace Azure_Assignment.Areas.Admin.Controllers
 {
     public class SalesController : Controller
     {
-        private DataContext db = new DataContext();
+        private PalkiaDBEntities db = new PalkiaDBEntities();
 
         // GET: Admin/Sales
         public ActionResult Index()

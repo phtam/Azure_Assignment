@@ -7,24 +7,31 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Azure_Assignment.Models
+namespace Azure_Assignment.EF
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Payments
+    using System.Web;
+
+    public partial class Sale
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Payments()
+        public Sale()
         {
-            this.Orders = new HashSet<Orders>();
+            this.Products = new HashSet<Products>();
         }
     
-        public int PaymentID { get; set; }
-        public string PaymentName { get; set; }
+        public int SaleID { get; set; }
+        public string SaleName { get; set; }
+        public string Content { get; set; }
+        public Nullable<System.DateTime> StartDate { get; set; }
+        public Nullable<System.DateTime> EndDate { get; set; }
         public string Picture { get; set; }
-    
+        public Nullable<decimal> Discount { get; set; }
+
+        public HttpPostedFileBase ImageFile { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Orders> Orders { get; set; }
+        public virtual ICollection<Products> Products { get; set; }
     }
 }

@@ -7,21 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Azure_Assignment.Models
+namespace Azure_Assignment.EF
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Exportation
+    public partial class ProductImage
     {
-        public int ExportationID { get; set; }
+        public int ImgID { get; set; }
+        public string ImgFileName { get; set; }
         public Nullable<int> ProductID { get; set; }
-        public string Username { get; set; }
-        public Nullable<System.DateTime> ExportDate { get; set; }
-        public Nullable<decimal> UnitPrice { get; set; }
-        public Nullable<int> Quantity { get; set; }
     
-        public virtual Employees Employees { get; set; }
         public virtual Products Products { get; set; }
     }
 }

@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Azure_Assignment.Models
+namespace Azure_Assignment.EF
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DataContext : DbContext
+    public partial class PalkiaDBEntities : DbContext
     {
-        public DataContext()
-            : base("name=DataContext")
+        public PalkiaDBEntities()
+            : base("name=PalkiaDBEntities")
         {
         }
     

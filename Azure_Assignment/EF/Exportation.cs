@@ -7,17 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Azure_Assignment.Models
+namespace Azure_Assignment.EF
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Importation
+    public partial class Exportation
     {
-        public int ImportationID { get; set; }
+        public int ExportationID { get; set; }
         public Nullable<int> ProductID { get; set; }
         public string Username { get; set; }
-        public Nullable<System.DateTime> ImportDate { get; set; }
+        public Nullable<System.DateTime> ExportDate { get; set; }
         public Nullable<decimal> UnitPrice { get; set; }
         public Nullable<int> Quantity { get; set; }
     

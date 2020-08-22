@@ -7,21 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Azure_Assignment.Models
+namespace Azure_Assignment.EF
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class BlogComments
+    public partial class OrderDetails
     {
-        public int BlogCommentID { get; set; }
-        public string FullName { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
-        public string Comment { get; set; }
-        public Nullable<System.DateTime> CommentingDate { get; set; }
-        public Nullable<int> BlogID { get; set; }
+        public int OrderID { get; set; }
+        public int ProductID { get; set; }
+        public Nullable<decimal> UnitPrice { get; set; }
+        public Nullable<int> Quantity { get; set; }
     
-        public virtual Blogs Blogs { get; set; }
+        public virtual Orders Orders { get; set; }
+        public virtual Products Products { get; set; }
     }
 }
