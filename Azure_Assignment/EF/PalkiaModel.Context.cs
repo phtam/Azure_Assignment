@@ -13,10 +13,10 @@ namespace Azure_Assignment.EF
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class PalkiaDBEntities : DbContext
+    public partial class DataPalkia : DbContext
     {
-        public PalkiaDBEntities()
-            : base("name=PalkiaDBEntities")
+        public DataPalkia()
+            : base("name=DataPalkia")
         {
         }
     

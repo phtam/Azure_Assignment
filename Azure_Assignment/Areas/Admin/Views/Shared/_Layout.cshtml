@@ -367,10 +367,31 @@
     <script src="~/Scripts/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
     <script>
         $(function () {
-            $("#example1").DataTable({
+            $("#tbl_Categories").DataTable({
                 "responsive": true,
                 "autoWidth": false,
+                "aoColumns": [
+                    { sWidth: '180px' },
+                    { sWidth: '220px' },
+                    { sWidth: '100px' },
+                    { sWidth: '100px' }
+                ]
             });
+            $("#tbl_Sales").DataTable({
+                "responsive": true,
+                "autoWidth": false,
+                "aoColumns": [
+                    { sWidth: '180px' },
+                    { sWidth: '220px' },
+                    { sWidth: '100px' },
+                    { sWidth: '100px' },
+                    { sWidth: '180px' },
+                    { sWidth: '220px' },
+                    { sWidth: '100px' },
+                    { sWidth: '100px' }
+                ]
+            });
+            
             $('#example2').DataTable({
                 "paging": true,
                 "lengthChange": false,

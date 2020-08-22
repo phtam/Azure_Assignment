@@ -27,6 +27,7 @@ namespace Azure_Assignment.EF
         public Nullable<System.DateTime> StartDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
         public string Picture { get; set; }
+        public string Code { get; set; }
         public Nullable<decimal> Discount { get; set; }
 
         public HttpPostedFileBase ImageFile { get; set; }

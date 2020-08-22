@@ -4,10 +4,10 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="038cb17acbcd45dcab9e42c0173b1552" Name="Diagram1">
-        <EntityTypeShape EntityType="PalkiaDBModel.BlogCategories" Width="1.5" PointX="4" PointY="22.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PalkiaDBModel.BlogComments" Width="1.5" PointX="8.5" PointY="16" IsExpanded="true" />
-        <EntityTypeShape EntityType="PalkiaDBModel.Blogs" Width="1.5" PointX="6.25" PointY="16" IsExpanded="true" />
+      <Diagram DiagramId="cdaaaaee1a3746aaabfb50ac90bc070d" Name="Diagram1">
+        <EntityTypeShape EntityType="PalkiaDBModel.BlogCategories" Width="1.5" PointX="3" PointY="22.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PalkiaDBModel.BlogComments" Width="1.5" PointX="7.5" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="PalkiaDBModel.Blogs" Width="1.5" PointX="5.25" PointY="16" IsExpanded="true" />
         <EntityTypeShape EntityType="PalkiaDBModel.Categories" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
         <EntityTypeShape EntityType="PalkiaDBModel.Customers" Width="1.5" PointX="3.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="PalkiaDBModel.Employees" Width="1.5" PointX="3" PointY="16.375" IsExpanded="true" />
@@ -19,24 +19,24 @@
         <EntityTypeShape EntityType="PalkiaDBModel.Payments" Width="1.5" PointX="3.75" PointY="13.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PalkiaDBModel.ProductImage" Width="1.5" PointX="5.25" PointY="19.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PalkiaDBModel.Products" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PalkiaDBModel.Sale" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PalkiaDBModel.Suppliers" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
-        <AssociationConnector Association="PalkiaDBModel.FK__Blogs__BlogCateg__52593CB8" ManuallyRouted="false" />
-        <AssociationConnector Association="PalkiaDBModel.FK__BlogComme__BlogI__5535A963" ManuallyRouted="false" />
-        <AssociationConnector Association="PalkiaDBModel.FK__Blogs__Username__5165187F" ManuallyRouted="false" />
-        <AssociationConnector Association="PalkiaDBModel.FK__Products__Catego__2A4B4B5E" ManuallyRouted="false" />
-        <AssociationConnector Association="PalkiaDBModel.FK__Orders__Username__34C8D9D1" ManuallyRouted="false" />
-        <AssociationConnector Association="PalkiaDBModel.FK__Exportati__Usern__49C3F6B7" ManuallyRouted="false" />
-        <AssociationConnector Association="PalkiaDBModel.FK__Importati__Usern__45F365D3" ManuallyRouted="false" />
-        <AssociationConnector Association="PalkiaDBModel.FK__Exportati__Produ__48CFD27E" ManuallyRouted="false" />
-        <AssociationConnector Association="PalkiaDBModel.FK__Feedbacks__Produ__4CA06362" ManuallyRouted="false" />
-        <AssociationConnector Association="PalkiaDBModel.FK__Importati__Produ__44FF419A" ManuallyRouted="false" />
-        <AssociationConnector Association="PalkiaDBModel.FK__OrderDeta__Order__398D8EEE" ManuallyRouted="false" />
-        <AssociationConnector Association="PalkiaDBModel.FK__OrderDeta__Produ__3A81B327" ManuallyRouted="false" />
-        <AssociationConnector Association="PalkiaDBModel.FK__Orders__PaymentI__35BCFE0A" ManuallyRouted="false" />
-        <AssociationConnector Association="PalkiaDBModel.FK__ProductIm__Produ__3D5E1FD2" ManuallyRouted="false" />
-        <AssociationConnector Association="PalkiaDBModel.FK__Products__SaleID__2B3F6F97" ManuallyRouted="false" />
-        <AssociationConnector Association="PalkiaDBModel.FK__Products__Suppli__29572725" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PalkiaDBModel.Sale" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PalkiaDBModel.Suppliers" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
+        <AssociationConnector Association="PalkiaDBModel.FK__Blogs__BlogCateg__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="PalkiaDBModel.FK__BlogComme__BlogI__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="PalkiaDBModel.FK__Blogs__Username__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="PalkiaDBModel.FK__Products__Catego__2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="PalkiaDBModel.FK__Orders__Username__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="PalkiaDBModel.FK__Exportati__Usern__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="PalkiaDBModel.FK__Importati__Usern__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="PalkiaDBModel.FK__Exportati__Produ__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="PalkiaDBModel.FK__Feedbacks__Produ__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="PalkiaDBModel.FK__Importati__Produ__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="PalkiaDBModel.FK__OrderDeta__Order__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="PalkiaDBModel.FK__OrderDeta__Produ__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="PalkiaDBModel.FK__Orders__PaymentI__36B12243" ManuallyRouted="false" />
+        <AssociationConnector Association="PalkiaDBModel.FK__ProductIm__Produ__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="PalkiaDBModel.FK__Products__SaleID__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="PalkiaDBModel.FK__Products__Suppli__2A4B4B5E" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

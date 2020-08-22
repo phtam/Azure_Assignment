@@ -13,7 +13,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
 {
     public class SalesController : Controller
     {
-        private PalkiaDBEntities db = new PalkiaDBEntities();
+        private DataPalkia db = new DataPalkia();
 
         // GET: Admin/Sales
         public ActionResult Index()

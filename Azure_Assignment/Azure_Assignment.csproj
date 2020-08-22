@@ -202,10 +202,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\PalkiaDB.mdf" />
-    <Content Include="App_Data\PalkiaDB_log.ldf">
-      <DependentUpon>PalkiaDB.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -2253,6 +2249,7 @@
     <Content Include="Scripts\plugins\toastr\toastr.js.map" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Models\" />
     <Folder Include="public\uploadedFiles\categoryPictures\" />

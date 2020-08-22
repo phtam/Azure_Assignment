@@ -35,7 +35,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <table id="example1" class="table table-bordered table-striped">
+                    <table id="tbl_Categories" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>
@@ -61,12 +61,12 @@
                                         @Html.DisplayFor(modelItem => item.Description)
                                     </td>
                                     <td>
-                                        @if(!item.Picture.IsEmpty())
-                                        { 
-                                            <img src="@Url.Content(item.Picture)" width="200" height="100" /> 
+                                        @if (!item.Picture.IsEmpty())
+                                        {
+                                            <img src="@Url.Content(item.Picture)" width="200" height="100" />
                                         }
-                                        else 
-                                        { 
+                                        else
+                                        {
                                             <p>No Image</p>
                                         }
                                     </td>

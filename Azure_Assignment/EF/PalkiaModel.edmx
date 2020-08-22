@@ -139,7 +139,6 @@
           </Key>
           <Property Name="PaymentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PaymentName" Type="nvarchar" MaxLength="50" />
-          <Property Name="Picture" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="ProductImage">
           <Key>
@@ -177,6 +176,7 @@
           <Property Name="StartDate" Type="datetime" />
           <Property Name="EndDate" Type="datetime" />
           <Property Name="Picture" Type="varchar" MaxLength="500" />
+          <Property Name="Code" Type="nvarchar" MaxLength="20" />
           <Property Name="Discount" Type="decimal" Precision="12" Scale="2" />
         </EntityType>
         <EntityType Name="Suppliers">
@@ -190,7 +190,7 @@
           <Property Name="Phone" Type="varchar" MaxLength="15" />
           <Property Name="Email" Type="varchar" MaxLength="30" />
         </EntityType>
-        <Association Name="FK__BlogComme__BlogI__5535A963">
+        <Association Name="FK__BlogComme__BlogI__5629CD9C">
           <End Role="Blogs" Type="Self.Blogs" Multiplicity="0..1" />
           <End Role="BlogComments" Type="Self.BlogComments" Multiplicity="*" />
           <ReferentialConstraint>
@@ -202,7 +202,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Blogs__BlogCateg__52593CB8">
+        <Association Name="FK__Blogs__BlogCateg__534D60F1">
           <End Role="BlogCategories" Type="Self.BlogCategories" Multiplicity="0..1" />
           <End Role="Blogs" Type="Self.Blogs" Multiplicity="*" />
           <ReferentialConstraint>
@@ -214,7 +214,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Blogs__Username__5165187F">
+        <Association Name="FK__Blogs__Username__52593CB8">
           <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
           <End Role="Blogs" Type="Self.Blogs" Multiplicity="*" />
           <ReferentialConstraint>
@@ -226,7 +226,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Exportati__Produ__48CFD27E">
+        <Association Name="FK__Exportati__Produ__49C3F6B7">
           <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
           <End Role="Exportation" Type="Self.Exportation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -238,7 +238,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Exportati__Usern__49C3F6B7">
+        <Association Name="FK__Exportati__Usern__4AB81AF0">
           <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
           <End Role="Exportation" Type="Self.Exportation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -250,7 +250,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Feedbacks__Produ__4CA06362">
+        <Association Name="FK__Feedbacks__Produ__4D94879B">
           <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
           <End Role="Feedbacks" Type="Self.Feedbacks" Multiplicity="*" />
           <ReferentialConstraint>
@@ -262,7 +262,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Importati__Produ__44FF419A">
+        <Association Name="FK__Importati__Produ__45F365D3">
           <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
           <End Role="Importation" Type="Self.Importation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -274,7 +274,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Importati__Usern__45F365D3">
+        <Association Name="FK__Importati__Usern__46E78A0C">
           <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
           <End Role="Importation" Type="Self.Importation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -286,7 +286,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderDeta__Order__398D8EEE">
+        <Association Name="FK__OrderDeta__Order__3A81B327">
           <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
           <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
           <ReferentialConstraint>
@@ -298,7 +298,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderDeta__Produ__3A81B327">
+        <Association Name="FK__OrderDeta__Produ__3B75D760">
           <End Role="Products" Type="Self.Products" Multiplicity="1" />
           <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
           <ReferentialConstraint>
@@ -310,7 +310,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Orders__PaymentI__35BCFE0A">
+        <Association Name="FK__Orders__PaymentI__36B12243">
           <End Role="Payments" Type="Self.Payments" Multiplicity="0..1" />
           <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
@@ -322,7 +322,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Orders__Username__34C8D9D1">
+        <Association Name="FK__Orders__Username__35BCFE0A">
           <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
           <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
@@ -334,7 +334,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ProductIm__Produ__3D5E1FD2">
+        <Association Name="FK__ProductIm__Produ__3E52440B">
           <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
           <End Role="ProductImage" Type="Self.ProductImage" Multiplicity="*" />
           <ReferentialConstraint>
@@ -346,7 +346,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Products__Catego__2A4B4B5E">
+        <Association Name="FK__Products__Catego__2B3F6F97">
           <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
           <End Role="Products" Type="Self.Products" Multiplicity="*" />
           <ReferentialConstraint>
@@ -358,7 +358,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Products__SaleID__2B3F6F97">
+        <Association Name="FK__Products__SaleID__2C3393D0">
           <End Role="Sale" Type="Self.Sale" Multiplicity="0..1" />
           <End Role="Products" Type="Self.Products" Multiplicity="*" />
           <ReferentialConstraint>
@@ -370,7 +370,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Products__Suppli__29572725">
+        <Association Name="FK__Products__Suppli__2A4B4B5E">
           <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
           <End Role="Products" Type="Self.Products" Multiplicity="*" />
           <ReferentialConstraint>
@@ -399,67 +399,67 @@
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sale" EntityType="Self.Sale" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Suppliers" EntityType="Self.Suppliers" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__BlogComme__BlogI__5535A963" Association="Self.FK__BlogComme__BlogI__5535A963">
+          <AssociationSet Name="FK__BlogComme__BlogI__5629CD9C" Association="Self.FK__BlogComme__BlogI__5629CD9C">
             <End Role="Blogs" EntitySet="Blogs" />
             <End Role="BlogComments" EntitySet="BlogComments" />
           </AssociationSet>
-          <AssociationSet Name="FK__Blogs__BlogCateg__52593CB8" Association="Self.FK__Blogs__BlogCateg__52593CB8">
+          <AssociationSet Name="FK__Blogs__BlogCateg__534D60F1" Association="Self.FK__Blogs__BlogCateg__534D60F1">
             <End Role="BlogCategories" EntitySet="BlogCategories" />
             <End Role="Blogs" EntitySet="Blogs" />
           </AssociationSet>
-          <AssociationSet Name="FK__Blogs__Username__5165187F" Association="Self.FK__Blogs__Username__5165187F">
+          <AssociationSet Name="FK__Blogs__Username__52593CB8" Association="Self.FK__Blogs__Username__52593CB8">
             <End Role="Employees" EntitySet="Employees" />
             <End Role="Blogs" EntitySet="Blogs" />
           </AssociationSet>
-          <AssociationSet Name="FK__Exportati__Produ__48CFD27E" Association="Self.FK__Exportati__Produ__48CFD27E">
+          <AssociationSet Name="FK__Exportati__Produ__49C3F6B7" Association="Self.FK__Exportati__Produ__49C3F6B7">
             <End Role="Products" EntitySet="Products" />
             <End Role="Exportation" EntitySet="Exportation" />
           </AssociationSet>
-          <AssociationSet Name="FK__Exportati__Usern__49C3F6B7" Association="Self.FK__Exportati__Usern__49C3F6B7">
+          <AssociationSet Name="FK__Exportati__Usern__4AB81AF0" Association="Self.FK__Exportati__Usern__4AB81AF0">
             <End Role="Employees" EntitySet="Employees" />
             <End Role="Exportation" EntitySet="Exportation" />
           </AssociationSet>
-          <AssociationSet Name="FK__Feedbacks__Produ__4CA06362" Association="Self.FK__Feedbacks__Produ__4CA06362">
+          <AssociationSet Name="FK__Feedbacks__Produ__4D94879B" Association="Self.FK__Feedbacks__Produ__4D94879B">
             <End Role="Products" EntitySet="Products" />
             <End Role="Feedbacks" EntitySet="Feedbacks" />
           </AssociationSet>
-          <AssociationSet Name="FK__Importati__Produ__44FF419A" Association="Self.FK__Importati__Produ__44FF419A">
+          <AssociationSet Name="FK__Importati__Produ__45F365D3" Association="Self.FK__Importati__Produ__45F365D3">
             <End Role="Products" EntitySet="Products" />
             <End Role="Importation" EntitySet="Importation" />
           </AssociationSet>
-          <AssociationSet Name="FK__Importati__Usern__45F365D3" Association="Self.FK__Importati__Usern__45F365D3">
+          <AssociationSet Name="FK__Importati__Usern__46E78A0C" Association="Self.FK__Importati__Usern__46E78A0C">
             <End Role="Employees" EntitySet="Employees" />
             <End Role="Importation" EntitySet="Importation" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderDeta__Order__398D8EEE" Association="Self.FK__OrderDeta__Order__398D8EEE">
+          <AssociationSet Name="FK__OrderDeta__Order__3A81B327" Association="Self.FK__OrderDeta__Order__3A81B327">
             <End Role="Orders" EntitySet="Orders" />
             <End Role="OrderDetails" EntitySet="OrderDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderDeta__Produ__3A81B327" Association="Self.FK__OrderDeta__Produ__3A81B327">
+          <AssociationSet Name="FK__OrderDeta__Produ__3B75D760" Association="Self.FK__OrderDeta__Produ__3B75D760">
             <End Role="Products" EntitySet="Products" />
             <End Role="OrderDetails" EntitySet="OrderDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK__Orders__PaymentI__35BCFE0A" Association="Self.FK__Orders__PaymentI__35BCFE0A">
+          <AssociationSet Name="FK__Orders__PaymentI__36B12243" Association="Self.FK__Orders__PaymentI__36B12243">
             <End Role="Payments" EntitySet="Payments" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
-          <AssociationSet Name="FK__Orders__Username__34C8D9D1" Association="Self.FK__Orders__Username__34C8D9D1">
+          <AssociationSet Name="FK__Orders__Username__35BCFE0A" Association="Self.FK__Orders__Username__35BCFE0A">
             <End Role="Customers" EntitySet="Customers" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
-          <AssociationSet Name="FK__ProductIm__Produ__3D5E1FD2" Association="Self.FK__ProductIm__Produ__3D5E1FD2">
+          <AssociationSet Name="FK__ProductIm__Produ__3E52440B" Association="Self.FK__ProductIm__Produ__3E52440B">
             <End Role="Products" EntitySet="Products" />
             <End Role="ProductImage" EntitySet="ProductImage" />
           </AssociationSet>
-          <AssociationSet Name="FK__Products__Catego__2A4B4B5E" Association="Self.FK__Products__Catego__2A4B4B5E">
+          <AssociationSet Name="FK__Products__Catego__2B3F6F97" Association="Self.FK__Products__Catego__2B3F6F97">
             <End Role="Categories" EntitySet="Categories" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="FK__Products__SaleID__2B3F6F97" Association="Self.FK__Products__SaleID__2B3F6F97">
+          <AssociationSet Name="FK__Products__SaleID__2C3393D0" Association="Self.FK__Products__SaleID__2C3393D0">
             <End Role="Sale" EntitySet="Sale" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="FK__Products__Suppli__29572725" Association="Self.FK__Products__Suppli__29572725">
+          <AssociationSet Name="FK__Products__Suppli__2A4B4B5E" Association="Self.FK__Products__Suppli__2A4B4B5E">
             <End Role="Suppliers" EntitySet="Suppliers" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
@@ -475,7 +475,7 @@
           </Key>
           <Property Name="BlogCategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BlogCategoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Blogs" Relationship="Self.FK__Blogs__BlogCateg__52593CB8" FromRole="BlogCategories" ToRole="Blogs" />
+          <NavigationProperty Name="Blogs" Relationship="Self.FK__Blogs__BlogCateg__534D60F1" FromRole="BlogCategories" ToRole="Blogs" />
         </EntityType>
         <EntityType Name="BlogComments">
           <Key>
@@ -488,7 +488,7 @@
           <Property Name="Comment" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="CommentingDate" Type="DateTime" Precision="3" />
           <Property Name="BlogID" Type="Int32" />
-          <NavigationProperty Name="Blogs" Relationship="Self.FK__BlogComme__BlogI__5535A963" FromRole="BlogComments" ToRole="Blogs" />
+          <NavigationProperty Name="Blogs" Relationship="Self.FK__BlogComme__BlogI__5629CD9C" FromRole="BlogComments" ToRole="Blogs" />
         </EntityType>
         <EntityType Name="Blogs">
           <Key>
@@ -500,9 +500,9 @@
           <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="BlogCategoryID" Type="Int32" />
           <Property Name="WritingDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="BlogCategories" Relationship="Self.FK__Blogs__BlogCateg__52593CB8" FromRole="Blogs" ToRole="BlogCategories" />
-          <NavigationProperty Name="BlogComments" Relationship="Self.FK__BlogComme__BlogI__5535A963" FromRole="Blogs" ToRole="BlogComments" />
-          <NavigationProperty Name="Employees" Relationship="Self.FK__Blogs__Username__5165187F" FromRole="Blogs" ToRole="Employees" />
+          <NavigationProperty Name="BlogCategories" Relationship="Self.FK__Blogs__BlogCateg__534D60F1" FromRole="Blogs" ToRole="BlogCategories" />
+          <NavigationProperty Name="BlogComments" Relationship="Self.FK__BlogComme__BlogI__5629CD9C" FromRole="Blogs" ToRole="BlogComments" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__Blogs__Username__52593CB8" FromRole="Blogs" ToRole="Employees" />
         </EntityType>
         <EntityType Name="Categories">
           <Key>
@@ -512,7 +512,7 @@
           <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Picture" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Products" Relationship="Self.FK__Products__Catego__2A4B4B5E" FromRole="Categories" ToRole="Products" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Products__Catego__2B3F6F97" FromRole="Categories" ToRole="Products" />
         </EntityType>
         <EntityType Name="Customers">
           <Key>
@@ -529,7 +529,7 @@
           <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Picture" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="Boolean" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__Username__34C8D9D1" FromRole="Customers" ToRole="Orders" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__Username__35BCFE0A" FromRole="Customers" ToRole="Orders" />
         </EntityType>
         <EntityType Name="Employees">
           <Key>
@@ -547,9 +547,9 @@
           <Property Name="Picture" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Role" Type="Boolean" />
           <Property Name="Status" Type="Boolean" />
-          <NavigationProperty Name="Blogs" Relationship="Self.FK__Blogs__Username__5165187F" FromRole="Employees" ToRole="Blogs" />
-          <NavigationProperty Name="Exportation" Relationship="Self.FK__Exportati__Usern__49C3F6B7" FromRole="Employees" ToRole="Exportation" />
-          <NavigationProperty Name="Importation" Relationship="Self.FK__Importati__Usern__45F365D3" FromRole="Employees" ToRole="Importation" />
+          <NavigationProperty Name="Blogs" Relationship="Self.FK__Blogs__Username__52593CB8" FromRole="Employees" ToRole="Blogs" />
+          <NavigationProperty Name="Exportation" Relationship="Self.FK__Exportati__Usern__4AB81AF0" FromRole="Employees" ToRole="Exportation" />
+          <NavigationProperty Name="Importation" Relationship="Self.FK__Importati__Usern__46E78A0C" FromRole="Employees" ToRole="Importation" />
         </EntityType>
         <EntityType Name="Exportation">
           <Key>
@@ -561,8 +561,8 @@
           <Property Name="ExportDate" Type="DateTime" Precision="3" />
           <Property Name="UnitPrice" Type="Decimal" Precision="12" Scale="2" />
           <Property Name="Quantity" Type="Int32" />
-          <NavigationProperty Name="Employees" Relationship="Self.FK__Exportati__Usern__49C3F6B7" FromRole="Exportation" ToRole="Employees" />
-          <NavigationProperty Name="Products" Relationship="Self.FK__Exportati__Produ__48CFD27E" FromRole="Exportation" ToRole="Products" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__Exportati__Usern__4AB81AF0" FromRole="Exportation" ToRole="Employees" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Exportati__Produ__49C3F6B7" FromRole="Exportation" ToRole="Products" />
         </EntityType>
         <EntityType Name="Feedbacks">
           <Key>
@@ -574,7 +574,7 @@
           <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FeedBackDate" Type="DateTime" Precision="3" />
           <Property Name="ProductID" Type="Int32" />
-          <NavigationProperty Name="Products" Relationship="Self.FK__Feedbacks__Produ__4CA06362" FromRole="Feedbacks" ToRole="Products" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Feedbacks__Produ__4D94879B" FromRole="Feedbacks" ToRole="Products" />
         </EntityType>
         <EntityType Name="Importation">
           <Key>
@@ -586,8 +586,8 @@
           <Property Name="ImportDate" Type="DateTime" Precision="3" />
           <Property Name="UnitPrice" Type="Decimal" Precision="12" Scale="2" />
           <Property Name="Quantity" Type="Int32" />
-          <NavigationProperty Name="Employees" Relationship="Self.FK__Importati__Usern__45F365D3" FromRole="Importation" ToRole="Employees" />
-          <NavigationProperty Name="Products" Relationship="Self.FK__Importati__Produ__44FF419A" FromRole="Importation" ToRole="Products" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__Importati__Usern__46E78A0C" FromRole="Importation" ToRole="Employees" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Importati__Produ__45F365D3" FromRole="Importation" ToRole="Products" />
         </EntityType>
         <EntityType Name="OrderDetails">
           <Key>
@@ -598,8 +598,8 @@
           <Property Name="ProductID" Type="Int32" Nullable="false" />
           <Property Name="UnitPrice" Type="Decimal" Precision="12" Scale="2" />
           <Property Name="Quantity" Type="Int32" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK__OrderDeta__Order__398D8EEE" FromRole="OrderDetails" ToRole="Orders" />
-          <NavigationProperty Name="Products" Relationship="Self.FK__OrderDeta__Produ__3A81B327" FromRole="OrderDetails" ToRole="Products" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__OrderDeta__Order__3A81B327" FromRole="OrderDetails" ToRole="Orders" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__OrderDeta__Produ__3B75D760" FromRole="OrderDetails" ToRole="Products" />
         </EntityType>
         <EntityType Name="Orders">
           <Key>
@@ -613,9 +613,9 @@
           <Property Name="ShippedAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Note" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="Boolean" />
-          <NavigationProperty Name="Customers" Relationship="Self.FK__Orders__Username__34C8D9D1" FromRole="Orders" ToRole="Customers" />
-          <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Order__398D8EEE" FromRole="Orders" ToRole="OrderDetails" />
-          <NavigationProperty Name="Payments" Relationship="Self.FK__Orders__PaymentI__35BCFE0A" FromRole="Orders" ToRole="Payments" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK__Orders__Username__35BCFE0A" FromRole="Orders" ToRole="Customers" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Order__3A81B327" FromRole="Orders" ToRole="OrderDetails" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK__Orders__PaymentI__36B12243" FromRole="Orders" ToRole="Payments" />
         </EntityType>
         <EntityType Name="Payments">
           <Key>
@@ -623,8 +623,7 @@
           </Key>
           <Property Name="PaymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PaymentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Picture" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__PaymentI__35BCFE0A" FromRole="Payments" ToRole="Orders" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__PaymentI__36B12243" FromRole="Payments" ToRole="Orders" />
         </EntityType>
         <EntityType Name="ProductImage">
           <Key>
@@ -633,7 +632,7 @@
           <Property Name="ImgID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ImgFileName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="ProductID" Type="Int32" />
-          <NavigationProperty Name="Products" Relationship="Self.FK__ProductIm__Produ__3D5E1FD2" FromRole="ProductImage" ToRole="Products" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__ProductIm__Produ__3E52440B" FromRole="ProductImage" ToRole="Products" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
@@ -652,14 +651,14 @@
           <Property Name="CategoryID" Type="Int32" />
           <Property Name="SaleID" Type="Int32" />
           <Property Name="Discontinued" Type="Boolean" />
-          <NavigationProperty Name="Categories" Relationship="Self.FK__Products__Catego__2A4B4B5E" FromRole="Products" ToRole="Categories" />
-          <NavigationProperty Name="Exportation" Relationship="Self.FK__Exportati__Produ__48CFD27E" FromRole="Products" ToRole="Exportation" />
-          <NavigationProperty Name="Feedbacks" Relationship="Self.FK__Feedbacks__Produ__4CA06362" FromRole="Products" ToRole="Feedbacks" />
-          <NavigationProperty Name="Importation" Relationship="Self.FK__Importati__Produ__44FF419A" FromRole="Products" ToRole="Importation" />
-          <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Produ__3A81B327" FromRole="Products" ToRole="OrderDetails" />
-          <NavigationProperty Name="ProductImage" Relationship="Self.FK__ProductIm__Produ__3D5E1FD2" FromRole="Products" ToRole="ProductImage" />
-          <NavigationProperty Name="Sale" Relationship="Self.FK__Products__SaleID__2B3F6F97" FromRole="Products" ToRole="Sale" />
-          <NavigationProperty Name="Suppliers" Relationship="Self.FK__Products__Suppli__29572725" FromRole="Products" ToRole="Suppliers" />
+          <NavigationProperty Name="Categories" Relationship="Self.FK__Products__Catego__2B3F6F97" FromRole="Products" ToRole="Categories" />
+          <NavigationProperty Name="Exportation" Relationship="Self.FK__Exportati__Produ__49C3F6B7" FromRole="Products" ToRole="Exportation" />
+          <NavigationProperty Name="Feedbacks" Relationship="Self.FK__Feedbacks__Produ__4D94879B" FromRole="Products" ToRole="Feedbacks" />
+          <NavigationProperty Name="Importation" Relationship="Self.FK__Importati__Produ__45F365D3" FromRole="Products" ToRole="Importation" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Produ__3B75D760" FromRole="Products" ToRole="OrderDetails" />
+          <NavigationProperty Name="ProductImage" Relationship="Self.FK__ProductIm__Produ__3E52440B" FromRole="Products" ToRole="ProductImage" />
+          <NavigationProperty Name="Sale" Relationship="Self.FK__Products__SaleID__2C3393D0" FromRole="Products" ToRole="Sale" />
+          <NavigationProperty Name="Suppliers" Relationship="Self.FK__Products__Suppli__2A4B4B5E" FromRole="Products" ToRole="Suppliers" />
         </EntityType>
         <EntityType Name="Sale">
           <Key>
@@ -671,8 +670,9 @@
           <Property Name="StartDate" Type="DateTime" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Precision="3" />
           <Property Name="Picture" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Discount" Type="Decimal" Precision="12" Scale="2" />
-          <NavigationProperty Name="Products" Relationship="Self.FK__Products__SaleID__2B3F6F97" FromRole="Sale" ToRole="Products" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Products__SaleID__2C3393D0" FromRole="Sale" ToRole="Products" />
         </EntityType>
         <EntityType Name="Suppliers">
           <Key>
@@ -684,9 +684,9 @@
           <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Products" Relationship="Self.FK__Products__Suppli__29572725" FromRole="Suppliers" ToRole="Products" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Products__Suppli__2A4B4B5E" FromRole="Suppliers" ToRole="Products" />
         </EntityType>
-        <Association Name="FK__Blogs__BlogCateg__52593CB8">
+        <Association Name="FK__Blogs__BlogCateg__534D60F1">
           <End Role="BlogCategories" Type="Self.BlogCategories" Multiplicity="0..1" />
           <End Role="Blogs" Type="Self.Blogs" Multiplicity="*" />
           <ReferentialConstraint>
@@ -698,7 +698,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BlogComme__BlogI__5535A963">
+        <Association Name="FK__BlogComme__BlogI__5629CD9C">
           <End Role="Blogs" Type="Self.Blogs" Multiplicity="0..1" />
           <End Role="BlogComments" Type="Self.BlogComments" Multiplicity="*" />
           <ReferentialConstraint>
@@ -710,7 +710,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Blogs__Username__5165187F">
+        <Association Name="FK__Blogs__Username__52593CB8">
           <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
           <End Role="Blogs" Type="Self.Blogs" Multiplicity="*" />
           <ReferentialConstraint>
@@ -722,7 +722,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Products__Catego__2A4B4B5E">
+        <Association Name="FK__Products__Catego__2B3F6F97">
           <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
           <End Role="Products" Type="Self.Products" Multiplicity="*" />
           <ReferentialConstraint>
@@ -734,7 +734,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Orders__Username__34C8D9D1">
+        <Association Name="FK__Orders__Username__35BCFE0A">
           <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
           <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
@@ -746,7 +746,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Exportati__Usern__49C3F6B7">
+        <Association Name="FK__Exportati__Usern__4AB81AF0">
           <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
           <End Role="Exportation" Type="Self.Exportation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -758,7 +758,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Importati__Usern__45F365D3">
+        <Association Name="FK__Importati__Usern__46E78A0C">
           <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
           <End Role="Importation" Type="Self.Importation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -770,7 +770,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Exportati__Produ__48CFD27E">
+        <Association Name="FK__Exportati__Produ__49C3F6B7">
           <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
           <End Role="Exportation" Type="Self.Exportation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -782,7 +782,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Feedbacks__Produ__4CA06362">
+        <Association Name="FK__Feedbacks__Produ__4D94879B">
           <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
           <End Role="Feedbacks" Type="Self.Feedbacks" Multiplicity="*" />
           <ReferentialConstraint>
@@ -794,7 +794,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Importati__Produ__44FF419A">
+        <Association Name="FK__Importati__Produ__45F365D3">
           <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
           <End Role="Importation" Type="Self.Importation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -806,7 +806,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderDeta__Order__398D8EEE">
+        <Association Name="FK__OrderDeta__Order__3A81B327">
           <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
           <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
           <ReferentialConstraint>
@@ -818,7 +818,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderDeta__Produ__3A81B327">
+        <Association Name="FK__OrderDeta__Produ__3B75D760">
           <End Role="Products" Type="Self.Products" Multiplicity="1" />
           <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
           <ReferentialConstraint>
@@ -830,7 +830,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Orders__PaymentI__35BCFE0A">
+        <Association Name="FK__Orders__PaymentI__36B12243">
           <End Role="Payments" Type="Self.Payments" Multiplicity="0..1" />
           <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
@@ -842,7 +842,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ProductIm__Produ__3D5E1FD2">
+        <Association Name="FK__ProductIm__Produ__3E52440B">
           <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
           <End Role="ProductImage" Type="Self.ProductImage" Multiplicity="*" />
           <ReferentialConstraint>
@@ -854,7 +854,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Products__SaleID__2B3F6F97">
+        <Association Name="FK__Products__SaleID__2C3393D0">
           <End Role="Sale" Type="Self.Sale" Multiplicity="0..1" />
           <End Role="Products" Type="Self.Products" Multiplicity="*" />
           <ReferentialConstraint>
@@ -866,7 +866,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Products__Suppli__29572725">
+        <Association Name="FK__Products__Suppli__2A4B4B5E">
           <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
           <End Role="Products" Type="Self.Products" Multiplicity="*" />
           <ReferentialConstraint>
@@ -878,7 +878,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="PalkiaDBEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="DataPalkia" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BlogCategories" EntityType="Self.BlogCategories" />
           <EntitySet Name="BlogComments" EntityType="Self.BlogComments" />
           <EntitySet Name="Blogs" EntityType="Self.Blogs" />
@@ -895,67 +895,67 @@
           <EntitySet Name="Products" EntityType="Self.Products" />
           <EntitySet Name="Sale" EntityType="Self.Sale" />
           <EntitySet Name="Suppliers" EntityType="Self.Suppliers" />
-          <AssociationSet Name="FK__Blogs__BlogCateg__52593CB8" Association="Self.FK__Blogs__BlogCateg__52593CB8">
+          <AssociationSet Name="FK__Blogs__BlogCateg__534D60F1" Association="Self.FK__Blogs__BlogCateg__534D60F1">
             <End Role="BlogCategories" EntitySet="BlogCategories" />
             <End Role="Blogs" EntitySet="Blogs" />
           </AssociationSet>
-          <AssociationSet Name="FK__BlogComme__BlogI__5535A963" Association="Self.FK__BlogComme__BlogI__5535A963">
+          <AssociationSet Name="FK__BlogComme__BlogI__5629CD9C" Association="Self.FK__BlogComme__BlogI__5629CD9C">
             <End Role="Blogs" EntitySet="Blogs" />
             <End Role="BlogComments" EntitySet="BlogComments" />
           </AssociationSet>
-          <AssociationSet Name="FK__Blogs__Username__5165187F" Association="Self.FK__Blogs__Username__5165187F">
+          <AssociationSet Name="FK__Blogs__Username__52593CB8" Association="Self.FK__Blogs__Username__52593CB8">
             <End Role="Employees" EntitySet="Employees" />
             <End Role="Blogs" EntitySet="Blogs" />
           </AssociationSet>
-          <AssociationSet Name="FK__Products__Catego__2A4B4B5E" Association="Self.FK__Products__Catego__2A4B4B5E">
+          <AssociationSet Name="FK__Products__Catego__2B3F6F97" Association="Self.FK__Products__Catego__2B3F6F97">
             <End Role="Categories" EntitySet="Categories" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="FK__Orders__Username__34C8D9D1" Association="Self.FK__Orders__Username__34C8D9D1">
+          <AssociationSet Name="FK__Orders__Username__35BCFE0A" Association="Self.FK__Orders__Username__35BCFE0A">
             <End Role="Customers" EntitySet="Customers" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
-          <AssociationSet Name="FK__Exportati__Usern__49C3F6B7" Association="Self.FK__Exportati__Usern__49C3F6B7">
+          <AssociationSet Name="FK__Exportati__Usern__4AB81AF0" Association="Self.FK__Exportati__Usern__4AB81AF0">
             <End Role="Employees" EntitySet="Employees" />
             <End Role="Exportation" EntitySet="Exportation" />
           </AssociationSet>
-          <AssociationSet Name="FK__Importati__Usern__45F365D3" Association="Self.FK__Importati__Usern__45F365D3">
+          <AssociationSet Name="FK__Importati__Usern__46E78A0C" Association="Self.FK__Importati__Usern__46E78A0C">
             <End Role="Employees" EntitySet="Employees" />
             <End Role="Importation" EntitySet="Importation" />
           </AssociationSet>
-          <AssociationSet Name="FK__Exportati__Produ__48CFD27E" Association="Self.FK__Exportati__Produ__48CFD27E">
+          <AssociationSet Name="FK__Exportati__Produ__49C3F6B7" Association="Self.FK__Exportati__Produ__49C3F6B7">
             <End Role="Products" EntitySet="Products" />
             <End Role="Exportation" EntitySet="Exportation" />
           </AssociationSet>
-          <AssociationSet Name="FK__Feedbacks__Produ__4CA06362" Association="Self.FK__Feedbacks__Produ__4CA06362">
+          <AssociationSet Name="FK__Feedbacks__Produ__4D94879B" Association="Self.FK__Feedbacks__Produ__4D94879B">
             <End Role="Products" EntitySet="Products" />
             <End Role="Feedbacks" EntitySet="Feedbacks" />
           </AssociationSet>
-          <AssociationSet Name="FK__Importati__Produ__44FF419A" Association="Self.FK__Importati__Produ__44FF419A">
+          <AssociationSet Name="FK__Importati__Produ__45F365D3" Association="Self.FK__Importati__Produ__45F365D3">
             <End Role="Products" EntitySet="Products" />
             <End Role="Importation" EntitySet="Importation" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderDeta__Order__398D8EEE" Association="Self.FK__OrderDeta__Order__398D8EEE">
+          <AssociationSet Name="FK__OrderDeta__Order__3A81B327" Association="Self.FK__OrderDeta__Order__3A81B327">
             <End Role="Orders" EntitySet="Orders" />
             <End Role="OrderDetails" EntitySet="OrderDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderDeta__Produ__3A81B327" Association="Self.FK__OrderDeta__Produ__3A81B327">
+          <AssociationSet Name="FK__OrderDeta__Produ__3B75D760" Association="Self.FK__OrderDeta__Produ__3B75D760">
             <End Role="Products" EntitySet="Products" />
             <End Role="OrderDetails" EntitySet="OrderDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK__Orders__PaymentI__35BCFE0A" Association="Self.FK__Orders__PaymentI__35BCFE0A">
+          <AssociationSet Name="FK__Orders__PaymentI__36B12243" Association="Self.FK__Orders__PaymentI__36B12243">
             <End Role="Payments" EntitySet="Payments" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
-          <AssociationSet Name="FK__ProductIm__Produ__3D5E1FD2" Association="Self.FK__ProductIm__Produ__3D5E1FD2">
+          <AssociationSet Name="FK__ProductIm__Produ__3E52440B" Association="Self.FK__ProductIm__Produ__3E52440B">
             <End Role="Products" EntitySet="Products" />
             <End Role="ProductImage" EntitySet="ProductImage" />
           </AssociationSet>
-          <AssociationSet Name="FK__Products__SaleID__2B3F6F97" Association="Self.FK__Products__SaleID__2B3F6F97">
+          <AssociationSet Name="FK__Products__SaleID__2C3393D0" Association="Self.FK__Products__SaleID__2C3393D0">
             <End Role="Sale" EntitySet="Sale" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="FK__Products__Suppli__29572725" Association="Self.FK__Products__Suppli__29572725">
+          <AssociationSet Name="FK__Products__Suppli__2A4B4B5E" Association="Self.FK__Products__Suppli__2A4B4B5E">
             <End Role="Suppliers" EntitySet="Suppliers" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
@@ -965,7 +965,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="PalkiaDBModelStoreContainer" CdmEntityContainer="PalkiaDBEntities">
+        <EntityContainerMapping StorageEntityContainer="PalkiaDBModelStoreContainer" CdmEntityContainer="DataPalkia">
           <EntitySetMapping Name="BlogCategories">
             <EntityTypeMapping TypeName="PalkiaDBModel.BlogCategories">
               <MappingFragment StoreEntitySet="BlogCategories">
@@ -1109,7 +1109,6 @@
               <MappingFragment StoreEntitySet="Payments">
                 <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
                 <ScalarProperty Name="PaymentName" ColumnName="PaymentName" />
-                <ScalarProperty Name="Picture" ColumnName="Picture" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1150,6 +1149,7 @@
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
                 <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Discount" ColumnName="Discount" />
               </MappingFragment>
             </EntityTypeMapping>

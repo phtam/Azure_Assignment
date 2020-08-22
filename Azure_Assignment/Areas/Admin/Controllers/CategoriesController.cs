@@ -15,7 +15,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
 {
     public class CategoriesController : Controller
     {
-        private PalkiaDBEntities db = new PalkiaDBEntities();
+        private DataPalkia db = new DataPalkia();
 
         // GET: Admin/Categories
         public ActionResult Index()
@@ -189,6 +189,10 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Categories categories = db.Categories.Find(id);
+            if (!categories.Picture.IsEmpty())
+            {
+                System.IO.File.Delete(Server.MapPath(categories.Picture));
+            }
             db.Categories.Remove(categories);
             db.SaveChanges();
             return RedirectToAction("Index");
