@@ -1,16 +1,16 @@
-﻿@model Azure_Assignment.EF.Categories
+﻿@model Azure_Assignment.EF.Suppliers
 
 <div class="content-wrapper">
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Delete Category</h1>
+                    <h1>Delete Supplier</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="~/Admin/">Admin</a></li>
-                        <li class="breadcrumb-item"><a href="~/Admin/Categories/">Categories</a></li>
+                        <li class="breadcrumb-item"><a href="~/Admin/Suppliers/">Suppliers</a></li>
                         <li class="breadcrumb-item active">Delete</li>
                     </ol>
                 </div>
@@ -51,43 +51,56 @@
                             <div class="col-12">
                                 <div class="post">
                                     <div class="col-sm-2 user-block">
-                                        <strong>@Html.DisplayNameFor(model => model.CategoryID)</strong>:
+                                        <strong>@Html.DisplayNameFor(model => model.SupplierID)</strong>:
                                     </div>
                                     <p class="col-sm-10">
-                                        @Html.DisplayFor(model => model.CategoryID)
+                                        @Html.DisplayFor(model => model.SupplierID)
                                     </p>
                                 </div>
 
                                 <div class="post">
                                     <div class="col-sm-2 user-block">
-                                        <strong>@Html.DisplayNameFor(model => model.CategoryName)</strong>:
+                                        <strong>@Html.DisplayNameFor(model => model.CompanyName)</strong>:
                                     </div>
                                     <p class="col-sm-10">
-                                        @Html.DisplayFor(model => model.CategoryName)
+                                        @Html.DisplayFor(model => model.CompanyName)
                                     </p>
                                 </div>
 
                                 <div class="post">
                                     <div class="col-sm-2 user-block">
-                                        <strong>@Html.DisplayNameFor(model => model.Description)</strong>:
+                                        <strong>@Html.DisplayNameFor(model => model.ContactName)</strong>:
                                     </div>
                                     <p class="col-sm-10">
-                                        @Html.DisplayFor(model => model.Description)
+                                        @Html.DisplayFor(model => model.ContactName)
                                     </p>
                                 </div>
 
                                 <div class="post">
                                     <div class="col-sm-2 user-block">
-                                        <strong>@Html.DisplayNameFor(model => model.Picture)</strong>:
+                                        <strong>@Html.DisplayNameFor(model => model.Address)</strong>:
                                     </div>
-                                    @if (!Model.Picture.IsEmpty())
-                                    {
-                                        <img class="col-sm-10" id="imageDetail" src="@Url.Content(Model.Picture)" />
-                                    }
-                                    else
-                                    {
-                                        <p>No Image</p>
-                                    }
+                                    <p class="col-sm-10">
+                                        @Html.DisplayFor(model => model.Address)
+                                    </p>
+                                </div>
+
+                                <div class="post">
+                                    <div class="col-sm-2 user-block">
+                                        <strong>@Html.DisplayNameFor(model => model.Phone)</strong>:
+                                    </div>
+                                    <p class="col-sm-10">
+                                        @Html.DisplayFor(model => model.Phone)
+                                    </p>
+                                </div>
+
+                                <div class="post">
+                                    <div class="col-sm-2 user-block">
+                                        <strong>@Html.DisplayNameFor(model => model.Email)</strong>:
+                                    </div>
+                                    <p class="col-sm-10">
+                                        @Html.DisplayFor(model => model.Email)
+                                    </p>
                                 </div>
 
                             </div>
@@ -99,15 +112,3 @@
         </div>
     </section>
 </div>
-
-<style>
-    #imageDetail {
-        display: block;
-        width: 100%;
-        height: auto;
-    }
-</style>
-
-
-
-
