@@ -1,16 +1,16 @@
-﻿@model Azure_Assignment.EF.Categories
+﻿@model Azure_Assignment.EF.BlogCategories
 
 <div class="content-wrapper">
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Category Detail</h1>
+                    <h1>Blog Category Detail</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="~/Admin/">Admin</a></li>
-                        <li class="breadcrumb-item"><a href="~/Admin/Categories/">Categories</a></li>
+                        <li class="breadcrumb-item"><a href="~/Admin/BlogCategories/">Blog Categories</a></li>
                         <li class="breadcrumb-item active">Detail</li>
                     </ol>
                 </div>
@@ -21,7 +21,7 @@
     <section class="content">
         <div class="card">
             <div class="card-header">
-                <h1 style="font-weight:bold; font-size:25px;" class="card-title">Detail of Category</h1>
+                <h1 style="font-weight:bold; font-size:25px;" class="card-title">Detail of Blog Category</h1>
 
                 <div class="card-tools">
                     <button class="btn btn-block btn-secondary float-right" onclick="window.location.href = '../'">Back to List</button>
@@ -34,49 +34,26 @@
                             <div class="col-12">
                                 <div class="post">
                                     <div class="col-sm-2 user-block">
-                                        <strong>@Html.DisplayNameFor(model => model.CategoryID)</strong>:
+                                        <strong>@Html.DisplayNameFor(model => model.BlogCategoryID)</strong>:
                                     </div>
                                     <p class="col-sm-10">
-                                        @Html.DisplayFor(model => model.CategoryID)
+                                        @Html.DisplayFor(model => model.BlogCategoryID)
                                     </p>
                                 </div>
 
                                 <div class="post">
                                     <div class="col-sm-2 user-block">
-                                        <strong>@Html.DisplayNameFor(model => model.CategoryName)</strong>:
+                                        <strong>@Html.DisplayNameFor(model => model.BlogCategoryName)</strong>:
                                     </div>
                                     <p class="col-sm-10">
-                                        @Html.DisplayFor(model => model.CategoryName)
+                                        @Html.DisplayFor(model => model.BlogCategoryName)
                                     </p>
-                                </div>
-
-                                <div class="post">
-                                    <div class="col-sm-2 user-block">
-                                        <strong>@Html.DisplayNameFor(model => model.Description)</strong>:
-                                    </div>
-                                    <p class="col-sm-10">
-                                        @Html.DisplayFor(model => model.Description)
-                                    </p>
-                                </div>
-
-                                <div class="post">
-                                    <div class="col-sm-2 user-block">
-                                        <strong>@Html.DisplayNameFor(model => model.Picture)</strong>:
-                                    </div>
-                                    @if (!Model.Picture.IsEmpty())
-                                    {
-                                        <img class="col-sm-10" id="imageDetail" src="@Url.Content(Model.Picture)" />
-                                    }
-                                    else
-                                    {
-                                        <p>No Image</p>
-                                    }
                                 </div>
 
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>

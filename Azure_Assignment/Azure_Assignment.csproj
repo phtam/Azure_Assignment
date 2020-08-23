@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\BlogCategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\PaymentsController.cs" />
@@ -263,6 +264,11 @@
     <Content Include="Scripts\dist\js\.eslintrc.json" />
     <Content Include="Scripts\dist\js\adminlte.js.map" />
     <Content Include="Scripts\dist\js\adminlte.min.js.map" />
+    <Content Include="Areas\Admin\Views\Sales\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Sales\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Sales\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Sales\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Sales\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Details.cshtml" />
@@ -285,11 +291,11 @@
     <Content Include="EF\PalkiaModel.edmx.diagram">
       <DependentUpon>PalkiaModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\Admin\Views\Sales\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Sales\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Sales\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Sales\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Sales\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\BlogCategories\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\BlogCategories\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\BlogCategories\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\BlogCategories\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\BlogCategories\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\dist\css\adminlte.css" />
     <Content Include="Scripts\dist\css\adminlte.min.css" />
