@@ -136,14 +136,14 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                     if ((extension == ".png" || extension == ".jpg" || extension == ".jpeg") == false)
                     {
                         ViewBag.Error = String.Format("The File, which extension is {0}, hasn't accepted. Please try again!", extension);
-                        return View("Create");
+                        return View("Edit");
                     }
 
                     long fileSize = ((categories.ImageFile.ContentLength) / 1024);
                     if (fileSize > 5120)
                     {
                         ViewBag.Error = "The File, which size greater than 5MB, hasn't accepted. Please try again!";
-                        return View("Create");
+                        return View("Edit");
                     }
 
                     fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
