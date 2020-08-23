@@ -230,16 +230,9 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="~/Admin/Customers/" class="nav-link">
-                                <img src="~/public/icons/icons8-customer-30.png" />
-                                <p>Manage Customers</p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="~/Admin/Employees/" class="nav-link">
+                            <a href="~/Admin/Users/" class="nav-link">
                                 <img src="~/public/icons/icons8-management-30.png" />
-                                <p>Manage Employees</p>
+                                <p>Manage Users</p>
                             </a>
                         </li>
 
@@ -412,6 +405,34 @@
                     { sWidth: '180px' }
                 ]
             });
+            $("#tbl_Payments").DataTable({
+                "responsive": true,
+                "autoWidth": false,
+                "aoColumns": [
+
+                    null,
+                    { sWidth: '180px' }
+                ]
+            });
+            $("#tbl_Users").DataTable({
+                "responsive": true,
+                "autoWidth": false,
+                "aoColumns": [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    {sWidth: '180px' }
+                    ]
+                });
+
             
             $('#example2').DataTable({
                 "paging": true,

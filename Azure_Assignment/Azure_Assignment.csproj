@@ -135,6 +135,7 @@
     <Compile Include="Areas\Admin\Controllers\PaymentsController.cs" />
     <Compile Include="Areas\Admin\Controllers\SalesController.cs" />
     <Compile Include="Areas\Admin\Controllers\SuppliersController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="EF\BlogCategories.cs">
       <DependentUpon>PalkiaModel.tt</DependentUpon>
@@ -296,6 +297,11 @@
     <Content Include="Areas\Admin\Views\BlogCategories\Details.cshtml" />
     <Content Include="Areas\Admin\Views\BlogCategories\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\BlogCategories\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\dist\css\adminlte.css" />
     <Content Include="Scripts\dist\css\adminlte.min.css" />
