@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.WebPages;
 using Azure_Assignment.EF;
 
 namespace Azure_Assignment.Areas.Admin.Controllers
@@ -47,7 +48,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SaleID,SaleName,Content,StartDate,EndDate,Picture,Discount,ImageFile")] Sale sale)
+        public ActionResult Create([Bind(Include = "SaleID,SaleName,Content,StartDate,EndDate,Picture,Code,Discount,ImageFile")] Sale sale)
         {
             if (ModelState.IsValid)
             {
@@ -99,6 +100,8 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            Session["OldImage"] = sale.Picture;
+            ViewBag.end = sale.EndDate.Value.ToString();
             return View(sale);
         }
 
@@ -107,16 +110,59 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SaleID,SaleName,Content,StartDate,EndDate,Picture,Discount,ImageFile")] Sale sale)
+        public ActionResult Edit([Bind(Include = "SaleID,SaleName,Content,StartDate,EndDate,Picture,Code,Discount,ImageFile")] Sale sale, String imageOldFile)
         {
             if (ModelState.IsValid)
             {
+                string uploadFolderPath = Server.MapPath("~/public/uploadedFiles/salePictures/");
+                if (sale.ImageFile == null)
+                {
+                    sale.Picture = imageOldFile;
+                }
+                else
+                {
+                    if (!imageOldFile.IsEmpty())
+                    {
+                        System.IO.File.Delete(Server.MapPath(imageOldFile));
+                    }
+
+                    string fileName = Path.GetFileNameWithoutExtension(sale.ImageFile.FileName);
+
+                    string extension = Path.GetExtension(sale.ImageFile.FileName);
+                    if ((extension == ".png" || extension == ".jpg" || extension == ".jpeg") == false)
+                    {
+                        ViewBag.Error = String.Format("The File, which extension is {0}, hasn't accepted. Please try again!", extension);
+                        return View("Edit");
+                    }
+
+                    long fileSize = ((sale.ImageFile.ContentLength) / 1024);
+                    if (fileSize > 5120)
+                    {
+                        ViewBag.Error = "The File, which size greater than 5MB, hasn't accepted. Please try again!";
+                        return View("Edit");
+                    }
+
+                    fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    sale.Picture = "~/public/uploadedFiles/salePictures/" + fileName;
+
+
+                    if (Directory.Exists(uploadFolderPath) == false)
+                    {
+                        Directory.CreateDirectory(uploadFolderPath);
+                    }
+
+                    fileName = Path.Combine(uploadFolderPath, fileName);
+
+                    sale.ImageFile.SaveAs(fileName);
+                }
                 db.Entry(sale).State = EntityState.Modified;
                 db.SaveChanges();
+                Session.Remove("OldImage");
                 return RedirectToAction("Index");
+
             }
             return View(sale);
-        }
+        } 
 
         // GET: Admin/Sales/Delete/5
         public ActionResult Delete(int? id)
@@ -139,6 +185,10 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Sale sale = db.Sale.Find(id);
+            if (!sale.Picture.IsEmpty())
+            {
+                System.IO.File.Delete(Server.MapPath(sale.Picture));
+            }
             db.Sale.Remove(sale);
             db.SaveChanges();
             return RedirectToAction("Index");

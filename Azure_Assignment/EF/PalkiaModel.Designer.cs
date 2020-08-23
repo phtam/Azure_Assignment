@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Hoang Tam\Documents\AZURE - ASSIGNMENT\Azure_Assignment\Azure_Assignment\EF\PalkiaModel.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\Assignment-Azure\Azure_Assignment\EF\PalkiaModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
