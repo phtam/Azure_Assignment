@@ -1,36 +1,5 @@
 ﻿@model IEnumerable<Azure_Assignment.EF.Payments>
 
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PaymentName)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.PaymentName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PaymentID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PaymentID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PaymentID })
-        </td>
-    </tr>
-}
-
-</table>
 
 <div class="content-wrapper">
     <div class="content-header">
@@ -54,7 +23,7 @@
                 <div class="card-header">
                     <h3 class="card-title">Data of Paysments</h3>
                     <p>
-                        <a class="btn btn-success btn-sm float-right" href="~/Admin/Sales/Create">
+                        <a class="btn btn-success btn-sm float-right" href="~/Admin/Payments/Create">
                             <i class="fas fa-plus">
                             </i>
                             Create New
@@ -62,29 +31,11 @@
                     </p>
                 </div>
                 <div class="card-body">
-                    <table id="tbl_Sales" class="table table-bordered table-striped">
+                    <table id="tbl_Payments" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.SaleName)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Content)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.StartDate)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.EndDate)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Picture)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Code)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Discount)
+                                    @Html.DisplayNameFor(model => model.PaymentName)
                                 </th>
                                 <th></th>
                             </tr>
@@ -94,46 +45,21 @@
                             {
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.SaleName)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Content)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.StartDate)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.EndDate)
-                                    </td>
-                                    <td>
-                                        @if (!item.Picture.IsEmpty())
-                                        {
-                                            <img src="@Url.Content(item.Picture)" width="200" height="100" />
-                                        }
-                                        else
-                                        {
-                                            <p>No Image</p>
-                                        }
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Code)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Discount)
+                                        @Html.DisplayFor(modelItem => item.PaymentName)
                                     </td>
 
                                     <td class="project-actions text-right">
-                                        <a class="btn btn-primary btn-sm" href="~/Admin/Sales/Details/@item.SaleID">
+                                        <a class="btn btn-primary btn-sm" href="~/Admin/Payments/Details/@item.PaymentID">
                                             <i class="fas fa-folder">
                                             </i>
                                             View
                                         </a>
-                                        <a class="btn btn-info btn-sm" href="~/Admin/Sales/Edit/@item.SaleID">
+                                        <a class="btn btn-info btn-sm" href="~/Admin/Payments/Edit/@item.PaymentID">
                                             <i class="fas fa-pencil-alt">
                                             </i>
                                             Edit
                                         </a>
-                                        <a class="btn btn-danger btn-sm" href="~/Admin/Sales/Delete/@item.SaleID">
+                                        <a class="btn btn-danger btn-sm" href="~/Admin/Payments/Delete/@item.PaymentID">
                                             <i class="fas fa-trash">
                                             </i>
                                             Delete

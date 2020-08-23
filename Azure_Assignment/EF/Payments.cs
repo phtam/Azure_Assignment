@@ -11,7 +11,9 @@ namespace Azure_Assignment.EF
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Payments
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,8 +21,12 @@ namespace Azure_Assignment.EF
         {
             this.Orders = new HashSet<Orders>();
         }
-    
+
+        [DisplayName("Payment ID")]
         public int PaymentID { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter payment name")]
+        [StringLength(maximumLength: 50, MinimumLength = 5, ErrorMessage = "Payment name must be between 5 to 50")]
+        [DisplayName("Payment name")]
         public string PaymentName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
