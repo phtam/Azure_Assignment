@@ -6,14 +6,14 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Edit Sales</h1>
+                    <h1>Edit Sale</h1>
                     <h5 style="color:red">@ViewBag.Error</h5>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="~/Admin/">Home</a></li>
-                        <li class="breadcrumb-item"><a href="~/Admin/Categories/">Sales</a></li>
-                        <li class="breadcrumb-item active">Edit Sales</li>
+                        <li class="breadcrumb-item"><a href="~/Admin/">Admin</a></li>
+                        <li class="breadcrumb-item"><a href="~/Admin/Sales/">Sales</a></li>
+                        <li class="breadcrumb-item active">Edit Sale</li>
                     </ol>
                 </div>
             </div>
@@ -27,7 +27,7 @@
 
                     <div class="card card-info">
                         <div class="card-header">
-                            <h3 class="card-title">Edit Category</h3>
+                            <h3 class="card-title">Edit Sales</h3>
                         </div>
                         @using (Html.BeginForm("Edit", "Sales", FormMethod.Post, new { enctype = "multipart/form-data" }))
                         {
@@ -39,7 +39,7 @@
                                     <div class="form-group row">
                                         @Html.LabelFor(model => model.SaleName, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
                                         <div class="col-sm-10">
-                                            @Html.EditorFor(model => model.SaleName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter name of product category" } })
+                                            @Html.EditorFor(model => model.SaleName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter sale name" } })
                                             @Html.ValidationMessageFor(model => model.SaleName, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -47,7 +47,7 @@
                                     <div class="form-group row">
                                         @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
                                         <div class="col-sm-10">
-                                            @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter description" } })
+                                            @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter content" } })
                                             @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -55,7 +55,7 @@
                                     <div class="form-group row">
                                         @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-10">
-                                            <input type="date" class="form-control" name="StartDate" value="@Model.StartDate" />
+                                            <input type="datetime-local" class="form-control" value="@Html.DisplayFor(modelItem => modelItem.StartDate)" name="StartDate" />
                                             @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -63,9 +63,7 @@
                                     <div class="form-group row">
                                         @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-10">
-                                            <input type="datetime-local" class="form-control" value="" name="EndDate" />
-                                            <p>@ViewBag.end</p>
-                                           @* @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @type = "datetime-local", @class = "form-control" } })*@
+                                            <input type="datetime-local" class="form-control" value="@Html.DisplayFor(modelItem => modelItem.EndDate)" name="EndDate" /> 
                                             @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -73,7 +71,7 @@
                                         @Html.LabelFor(model => model.Picture, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-10">
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input" name="ImageFile" id="ImageFile"> @*//customFile*@
+                                                <input type="file" class="custom-file-input" name="ImageFile" id="ImageFile">
                                                 <label class="custom-file-label" for="customFile">Choose file</label>
                                             </div>
                                         </div>
@@ -82,7 +80,7 @@
                                     <div class="form-group row">
                                         @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-10">
-                                            @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control", @placeholder = "enter code of sale" } })
                                             @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -90,7 +88,7 @@
                                     <div class="form-group row">
                                         @Html.LabelFor(model => model.Discount, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-10">
-                                            @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter discount" } })
                                             @Html.ValidationMessageFor(model => model.Discount, "", new { @class = "text-danger" })
                                         </div>
                                     </div>

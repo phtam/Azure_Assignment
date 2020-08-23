@@ -24,30 +24,38 @@ namespace Azure_Assignment.EF
         }
         [DisplayName("Sale ID")]
         public int SaleID { get; set; }
+
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter sale name")]
         [StringLength(maximumLength: 50, MinimumLength = 5, ErrorMessage = "Sale name must be between 5 to 50")]
         [DisplayName("Sale name")]
         public string SaleName { get; set; }
+
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter content of sale")]
         [StringLength(maximumLength: 250, MinimumLength = 5, ErrorMessage = "Content must be between 5 to 250")]
         [DisplayName("Content")]
         public string Content { get; set; }
+
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please choose start date")]
-        //[DataType(DataType.Date, ErrorMessage = "Invalid Datetime")]
-        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        [DataType(DataType.DateTime, ErrorMessage = "Start date has been invalid")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-ddTHH:mm:ss}")]
         [DisplayName("Start date")]
         public Nullable<System.DateTime> StartDate { get; set; }
+
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please choose end date")]
-        //[DataType(DataType.Date, ErrorMessage = "Invalid Datetime")]
-        [DisplayFormat(DataFormatString = "{mm/dd/yyyy HH:mm ss}")]
+        [DataType(DataType.DateTime, ErrorMessage = "End date has been invalid")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-ddTHH:mm:ss}")]
         [DisplayName("End date")]
         public Nullable<System.DateTime> EndDate { get; set; }
+
         public string Picture { get; set; }
+
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter code of sale")]
         [StringLength(maximumLength: 20, MinimumLength = 5, ErrorMessage = "Code must be between 5 to 20")]
         public string Code { get; set; }
+
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter discount of sale")]
         public Nullable<decimal> Discount { get; set; }
+
         public HttpPostedFileBase ImageFile { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

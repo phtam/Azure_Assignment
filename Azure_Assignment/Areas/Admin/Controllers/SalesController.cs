@@ -52,6 +52,11 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                if(sale.StartDate > sale.EndDate)
+                {
+                    ViewBag.NotiDate = "The start date must be before the end date.";
+                    return View("Create");
+                }
                 string fileName = Path.GetFileNameWithoutExtension(sale.ImageFile.FileName);
                 string extension = Path.GetExtension(sale.ImageFile.FileName);
                 if ((extension == ".png" || extension == ".jpg" || extension == ".jpeg") == false)
@@ -101,7 +106,6 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 return HttpNotFound();
             }
             Session["OldImage"] = sale.Picture;
-            ViewBag.end = sale.EndDate.Value.ToString();
             return View(sale);
         }
 
