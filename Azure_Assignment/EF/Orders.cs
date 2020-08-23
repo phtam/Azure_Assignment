@@ -29,9 +29,9 @@ namespace Azure_Assignment.EF
         public string Note { get; set; }
         public Nullable<bool> Status { get; set; }
     
-        public virtual Customers Customers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetails> OrderDetails { get; set; }
         public virtual Payments Payments { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

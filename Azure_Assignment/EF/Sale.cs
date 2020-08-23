@@ -11,9 +11,9 @@ namespace Azure_Assignment.EF
 {
     using System;
     using System.Collections.Generic;
+    using System.Web;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
-    using System.Web;
 
     public partial class Sale
     {
@@ -22,6 +22,7 @@ namespace Azure_Assignment.EF
         {
             this.Products = new HashSet<Products>();
         }
+
         [DisplayName("Sale ID")]
         public int SaleID { get; set; }
 

@@ -29,8 +29,6 @@ namespace Azure_Assignment.EF
         public virtual DbSet<BlogComments> BlogComments { get; set; }
         public virtual DbSet<Blogs> Blogs { get; set; }
         public virtual DbSet<Categories> Categories { get; set; }
-        public virtual DbSet<Customers> Customers { get; set; }
-        public virtual DbSet<Employees> Employees { get; set; }
         public virtual DbSet<Exportation> Exportation { get; set; }
         public virtual DbSet<Feedbacks> Feedbacks { get; set; }
         public virtual DbSet<Importation> Importation { get; set; }
@@ -41,5 +39,6 @@ namespace Azure_Assignment.EF
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<Sale> Sale { get; set; }
         public virtual DbSet<Suppliers> Suppliers { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
     }
 }
