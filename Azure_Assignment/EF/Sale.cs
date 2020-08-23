@@ -47,8 +47,6 @@ namespace Azure_Assignment.EF
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-ddTHH:mm:ss}")]
         [DisplayName("End date")]
         public Nullable<System.DateTime> EndDate { get; set; }
-
-        [StringLength(maximumLength: 5, MinimumLength = 5, ErrorMessage = "Code must be between 5 to 20")]
         public string Picture { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter code of sale")]
