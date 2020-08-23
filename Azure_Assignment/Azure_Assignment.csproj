@@ -285,11 +285,11 @@
     <Content Include="EF\PalkiaModel.edmx.diagram">
       <DependentUpon>PalkiaModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\Admin\Views\Sales1\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Sales1\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Sales1\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Sales1\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Sales1\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Sales\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Sales\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Sales\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Sales\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Sales\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\dist\css\adminlte.css" />
     <Content Include="Scripts\dist\css\adminlte.min.css" />
