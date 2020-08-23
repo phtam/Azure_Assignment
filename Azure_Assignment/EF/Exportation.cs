@@ -21,7 +21,7 @@ namespace Azure_Assignment.EF
         public Nullable<decimal> UnitPrice { get; set; }
         public Nullable<int> Quantity { get; set; }
     
-        public virtual Employees Employees { get; set; }
         public virtual Products Products { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

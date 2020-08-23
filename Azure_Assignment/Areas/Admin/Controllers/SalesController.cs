@@ -118,6 +118,11 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (sale.StartDate > sale.EndDate)
+                {
+                    ViewBag.NotiDate = "The start date must be before the end date.";
+                    return View("Edit");
+                }
                 string uploadFolderPath = Server.MapPath("~/public/uploadedFiles/salePictures/");
                 if (sale.ImageFile == null)
                 {

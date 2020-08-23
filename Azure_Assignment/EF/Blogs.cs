@@ -30,6 +30,6 @@ namespace Azure_Assignment.EF
         public virtual BlogCategories BlogCategories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BlogComments> BlogComments { get; set; }
-        public virtual Employees Employees { get; set; }
+        public virtual Users Users { get; set; }
     }
 }
