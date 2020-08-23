@@ -391,7 +391,18 @@
                     null
                 ]
             });
-            
+            $("#tbl_Suppliers").DataTable({
+                "responsive": true,
+                "autoWidth": false,
+                "aoColumns": [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    { sWidth: '180px' }
+                ]
+            });
             $('#example2').DataTable({
                 "paging": true,
                 "lengthChange": false,
