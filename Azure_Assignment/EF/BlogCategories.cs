@@ -11,7 +11,9 @@ namespace Azure_Assignment.EF
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class BlogCategories
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,8 +21,12 @@ namespace Azure_Assignment.EF
         {
             this.Blogs = new HashSet<Blogs>();
         }
-    
+
+        [DisplayName("BlogCategory ID")]
         public int BlogCategoryID { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter blogCategory name")]
+        [StringLength(maximumLength: 50, MinimumLength = 5, ErrorMessage = "BlogCategory name must be between 5 to 50")]
+        [DisplayName("BlogCategory name")]
         public string BlogCategoryName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

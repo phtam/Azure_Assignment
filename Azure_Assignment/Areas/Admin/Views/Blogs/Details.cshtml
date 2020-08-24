@@ -1,0 +1,58 @@
+﻿@model Azure_Assignment.EF.Blogs
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Blogs</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BlogName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BlogName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WritingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WritingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BlogCategories.BlogCategoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BlogCategories.BlogCategoryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Users.FirtName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Users.FirtName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BlogID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
