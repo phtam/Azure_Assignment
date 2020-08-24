@@ -52,7 +52,7 @@
                                     <div class="form-group row">
                                         @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-10">
-                                            <input type="datetime-local" class="form-control" required name="StartDate" />
+                                            @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control oso", @type = "datetime-local" } })
                                             @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
                                             <div style="color:red">@ViewBag.NotiDate</div>
                                         </div>
@@ -61,7 +61,7 @@
                                     <div class="form-group row">
                                         @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-10">
-                                            <input type="datetime-local" class="form-control" required name="EndDate" />
+                                            @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control oso", @type = "datetime-local" } })
                                             @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
                                         </div>
                                     </div>

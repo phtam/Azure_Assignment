@@ -11,6 +11,7 @@ namespace Azure_Assignment.EF
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Web;
 
     public partial class Users
@@ -29,6 +30,8 @@ namespace Azure_Assignment.EF
         public string LastName { get; set; }
         public string Password { get; set; }
         public Nullable<bool> Gender { get; set; }
+        [DataType(DataType.Date, ErrorMessage = "Date only")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> Birthday { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
