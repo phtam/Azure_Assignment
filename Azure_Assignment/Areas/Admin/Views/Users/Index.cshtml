@@ -80,16 +80,23 @@
                                         @Html.DisplayFor(modelItem => item.LastName)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Gender)
+                                        @if(item.Gender == true)
+                                        {
+                                            <div>Male</div>
+                                        }
+                                        else
+                                        {
+                                            <div>Female</div>
+                                        }
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Birthday)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Phone)
+                                        <a href="tel: @item.Phone">@Html.DisplayFor(modelItem => item.Phone)</a>
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Email)
+                                        <a href="mailto: @item.Email">@Html.DisplayFor(modelItem => item.Email)</a>
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Address)
@@ -105,10 +112,28 @@
                                         }
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Role)
+                                        @if (item.Role == 0)
+                                        {
+                                            <div>Admin</div>
+                                        }
+                                        else if (item.Role == 1)
+                                        {
+                                            <div>Employee</div>
+                                        }
+                                        else if (item.Role == 2)
+                                        {
+                                            <div>Customer</div>
+                                        }
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Status)
+                                        @if (item.Status == true)
+                                        {
+                                            <div style="color:green">Active</div>
+                                        }
+                                        else
+                                        {
+                                            <div style="color:red">Disable</div>
+                                        }
                                     </td>
                                     
                                     <td class="project-actions text-right">
