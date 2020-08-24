@@ -1,0 +1,64 @@
+﻿@model Azure_Assignment.EF.Blogs
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Blogs</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BlogName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BlogName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WritingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WritingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BlogCategories.BlogCategoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BlogCategories.BlogCategoryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Users.FirtName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Users.FirtName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
