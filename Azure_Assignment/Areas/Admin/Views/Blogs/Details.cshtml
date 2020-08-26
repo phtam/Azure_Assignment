@@ -4,55 +4,98 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Blogs Detail</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="~/Admin/">Admin</a></li>
+                        <li class="breadcrumb-item"><a href="~/Admin/Blogs/">Blogs</a></li>
+                        <li class="breadcrumb-item active">Detail</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div>
-    <h4>Blogs</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.BlogName)
-        </dt>
+    <section class="content">
+        <div class="card">
+            <div class="card-header">
+                <h1 style="font-weight:bold; font-size:25px;" class="card-title">Detail of Blog</h1>
 
-        <dd>
-            @Html.DisplayFor(model => model.BlogName)
-        </dd>
+                <div class="card-tools">
+                    <button class="btn btn-block btn-secondary float-right" onclick="window.location.href = '../'">Back to List</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-md-12 col-lg-12 order-12 order-md-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="post">
+                                    <div class="col-sm-2 user-block">
+                                        <strong>@Html.DisplayNameFor(model => model.BlogID)</strong>:
+                                    </div>
+                                    <p class="col-sm-10">
+                                        @Html.DisplayFor(model => model.BlogID)
+                                    </p>
+                                </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
+                                <div class="post">
+                                    <div class="col-sm-2 user-block">
+                                        <strong>@Html.DisplayNameFor(model => model.BlogName)</strong>:
+                                    </div>
+                                    <p class="col-sm-10">
+                                        @Html.DisplayFor(model => model.BlogName)
+                                    </p>
+                                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Content)
-        </dd>
+                                <div class="post">
+                                    <div class="col-sm-2 user-block">
+                                        <strong>@Html.DisplayNameFor(model => model.Username)</strong>:
+                                    </div>
+                                    <p class="col-sm-10">
+                                        @Html.DisplayFor(model => model.Username)
+                                    </p>
+                                </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.WritingDate)
-        </dt>
+                                <div class="post">
+                                    <div class="col-sm-2 user-block">
+                                        <strong>@Html.DisplayNameFor(model => model.Content)</strong>:
+                                    </div>
+                                    <p class="col-sm-10">
+                                        @Html.TextAreaFor(model => model.Content, new { @id = "summernote" })
+                                    </p>
+                                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.WritingDate)
-        </dd>
+                                <div class="post">
+                                    <div class="col-sm-2 user-block">
+                                        <strong>@Html.DisplayNameFor(model => model.WritingDate)</strong>:
+                                    </div>
+                                    <p class="col-sm-10">
+                                        @Html.DisplayFor(model => model.WritingDate)
+                                    </p>
+                                </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.BlogCategories.BlogCategoryName)
-        </dt>
+                                <div class="post">
+                                    <div class="col-sm-2 user-block">
+                                        <strong>@Html.DisplayName("Blog category name")</strong>:
+                                    </div>
+                                    <p class="col-sm-10">
+                                        @ViewBag.BlogCategory
+                                    </p>
+                                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.BlogCategories.BlogCategoryName)
-        </dd>
+                            </div>
+                        </div>
+                    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Users.FirtName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Users.FirtName)
-        </dd>
-
-    </dl>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.BlogID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
