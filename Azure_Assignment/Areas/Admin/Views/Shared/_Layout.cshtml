@@ -486,6 +486,59 @@
     <script src="~/Scripts/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
     @*<script src="~/Scripts/plugins/dropzone/min/dropzone.min.js"></script>*@
     <script src="~/Scripts/plugins/summernote/summernote-bs4.min.js"></script>
+    
+    <script type="text/javascript">
 
+        $(document).ready(function () {
+            $("#txtUsername_In_Manage").keyup(function () {
+                $.ajax({
+                    type: "POST",
+                    url: '/Values/CheckUsername', 
+                    data: {
+                        username: $(this).val()
+                    },
+                    cache: false,
+                    datatype: "json",
+                }).done(function (data) {
+                    $("#notice_is_valid_username").empty();
+                    $("#notice_is_valid_username").append(data);
+                });
+            });
+        });
+
+        $(document).ready(function () {
+            $("#txtPassword_In_Manage").keyup(function () {
+                $.ajax({
+                    type: "POST",
+                    url: '/Values/CheckPassword',
+                    data: {
+                        password: $(this).val() 
+                    },
+                    cache: false,
+                    datatype: "json",
+                }).done(function (data) {
+                    $("#notice_is_valid_password").empty();
+                    $("#notice_is_valid_password").append(data);
+                });
+            });
+        });
+        
+        $(document).ready(function () {
+            $("#txtEmail_In_Manage").keyup(function () {
+                $.ajax({
+                    type: "POST",
+                    url: '/Values/CheckEmail',
+                    data: {
+                        emailAddress: $(this).val()
+                    },
+                    cache: false,
+                    datatype: "json",
+                }).done(function (data) {
+                    $("#notice_is_valid_email").empty();
+                    $("#notice_is_valid_email").append(data);
+                });
+            });
+        });
+    </script>
 </body>
 </html>

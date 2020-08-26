@@ -141,6 +141,7 @@
     <Compile Include="Areas\Admin\Controllers\SuppliersController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="EF\BlogCategories.cs">
       <DependentUpon>PalkiaModel.tt</DependentUpon>
     </Compile>
@@ -2281,8 +2282,10 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\Values\" />
     <Folder Include="Models\" />
     <Folder Include="public\uploadedFiles\categoryPictures\" />
+    <Folder Include="Views\Values\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
