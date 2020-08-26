@@ -7,7 +7,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.WebPages;
 using Azure_Assignment.EF;
+using Scrypt;
 
 namespace Azure_Assignment.Areas.Admin.Controllers
 {
@@ -47,42 +49,11 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Username,FirtName,LastName,Password,Gender,Birthday,Phone,Email,Address,Picture,Role,Status,ImageFile")] Users users, String _role, String _status)
+        public ActionResult Create([Bind(Include = "Username,FirtName,LastName,Password,Gender,Birthday,Phone,Email,Address,Picture,Role,Status,ImageFile")] Users users)
         {
             if (ModelState.IsValid)
             {
-                if(_role == "Administrator")
-                {
-                    users.Role = 0;
-                }
-                else if (_role == "Employee")
-                {
-                    users.Role = 1;
-                }
-                else if (_role == "Customer")
-                {
-                    users.Role = 2;
-                }
-                else
-                {
-                    ViewBag.Error = "Invalid role!";
-                    return View("Create");
-                }
-
-                if (_status == "Active")
-                {
-                    users.Status = true;
-                }
-                else if (_status == "Disable")
-                {
-                    users.Status = false;
-                }
-                else
-                {
-                    ViewBag.Error = "Invalid Status!";
-                    return View("Create");
-                }
-
+                
                 string fileName = Path.GetFileNameWithoutExtension(users.ImageFile.FileName);
                 string extension = Path.GetExtension(users.ImageFile.FileName);
                 if ((extension == ".png" || extension == ".jpg" || extension == ".jpeg") == false)
@@ -111,6 +82,9 @@ namespace Azure_Assignment.Areas.Admin.Controllers
 
                 users.ImageFile.SaveAs(fileName);
 
+                ScryptEncoder encoder = new ScryptEncoder();
+                users.Password = encoder.Encode(users.Password);
+
                 db.Users.Add(users);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -131,6 +105,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            Session["OldImage_User"] = users.Picture;
             return View(users);
         }
 
@@ -139,12 +114,60 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Username,FirtName,LastName,Password,Gender,Birthday,Phone,Email,Address,Picture,Role,Status")] Users users)
+        public ActionResult Edit([Bind(Include = "Username,Password,FirtName,LastName,Gender,Birthday,Phone,Email,Address,Picture,Role,Status,ImageFile")] Users users, String imageOldFile_User)
         {
             if (ModelState.IsValid)
             {
+                
+                string uploadFolderPath = Server.MapPath("~/public/uploadedFiles/userPictures/");
+                if (users.ImageFile == null)
+                {
+                    users.Picture = imageOldFile_User;
+                }
+                else
+                {
+                    if (!imageOldFile_User.IsEmpty())
+                    {
+                        System.IO.File.Delete(Server.MapPath(imageOldFile_User));
+                    }
+
+                    string fileName = Path.GetFileNameWithoutExtension(users.ImageFile.FileName);
+
+                    string extension = Path.GetExtension(users.ImageFile.FileName);
+                    if ((extension == ".png" || extension == ".jpg" || extension == ".jpeg") == false)
+                    {
+                        ViewBag.Error = String.Format("The File, which extension is {0}, hasn't accepted. Please try again!", extension);
+                        return View("Edit");
+                    }
+
+                    long fileSize = ((users.ImageFile.ContentLength) / 1024);
+                    if (fileSize > 5120)
+                    {
+                        ViewBag.Error = "The File, which size greater than 5MB, hasn't accepted. Please try again!";
+                        return View("Edit");
+                    }
+
+                    fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    users.Picture = "~/public/uploadedFiles/userPictures/" + fileName;
+
+
+                    if (Directory.Exists(uploadFolderPath) == false)
+                    {
+                        Directory.CreateDirectory(uploadFolderPath);
+                    }
+
+                    fileName = Path.Combine(uploadFolderPath, fileName);
+
+                    users.ImageFile.SaveAs(fileName);
+                }
+
+                //db.Users.Attach(users);
+                
                 db.Entry(users).State = EntityState.Modified;
+                db.Entry(users).Property(x => x.Password).IsModified = false;
+
                 db.SaveChanges();
+                Session.Remove("OldImage_User");
                 return RedirectToAction("Index");
             }
             return View(users);

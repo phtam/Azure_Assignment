@@ -37,8 +37,9 @@
                                     <div class="form-group row">
                                         @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-10">
-                                            @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Username" } })
+                                            @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Username", @id = "txtUsername_In_Manage" } })
                                             @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                                            <div style ="color:red"; id="notice_is_valid_username"></div>
                                         </div>
                                     </div>
 
@@ -61,8 +62,9 @@
                                     <div class="form-group row">
                                         @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-10">
-                                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Password" } })
+                                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @type = "password", @placeholder = "Enter Password", @id = "txtPassword_In_Manage" } })
                                             @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                            <div style ="color:red"; id="notice_is_valid_password"></div>
                                         </div>
                                     </div>
 
@@ -96,8 +98,9 @@
                                     <div class="form-group row">
                                         @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-10">
-                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Email" } })
+                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Email", @id = "txtEmail_In_Manage" } })
                                             @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                            <div style ="color:red"; id="notice_is_valid_email"></div>
                                         </div>
                                     </div>
 
@@ -115,6 +118,7 @@
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input" name="ImageFile" id="ImageFile" required>
                                                 <label class="custom-file-label" for="customFile">Choose file</label>
+                                                @Html.ValidationMessageFor(model => model.ImageFile, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
                                     </div>
@@ -122,8 +126,16 @@
                                     <div class="form-group row">
                                         @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-10">
-                                            @*@Html.EditorFor(model => model.Role, new { htmlAttributes = new { @class = "form-control" } })*@
-                                            @Html.DropDownList("_role", new SelectList( new[] { "Customer", "Employee", "Administrator" }),  htmlAttributes: new { @class = "form-control" })
+                                            @{
+                                                var selectListRole = new SelectList(
+                                                    new List<SelectListItem>
+                                                    {
+                                                            new SelectListItem {Text = "Customer", Value = "2"},
+                                                            new SelectListItem {Text = "Employee", Value = "1"},
+                                                            new SelectListItem {Text = "Administrator", Value = "0"},
+                    }, "Value", "Text");
+                                            }
+                                            @Html.DropDownListFor(model => model.Role, selectListRole, "Select Role", htmlAttributes: new { @class = "form-control" })
                                             @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -132,14 +144,19 @@
                                         @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-10">
                                             <div class="checkbox">
-                                            @*@Html.EditorFor(model => model.Status)*@
-                                            @Html.DropDownList("_status", new SelectList(new[] { "Active", "Disable" }), htmlAttributes: new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                                                @{
+                                                    var selectListStatus = new SelectList(
+                                                        new List<SelectListItem>
+                                                        {
+                                                            new SelectListItem {Text = "Active", Value = "true"},
+                                                            new SelectListItem {Text = "Disable", Value = "false"},
+                    }, "Value", "Text");
+                                                }
+                                                @Html.DropDownListFor(model => model.Status, selectListStatus, htmlAttributes: new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
                                     </div>
-                                    
-
                                 </div>
 
                                 <div class="card-footer">

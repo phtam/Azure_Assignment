@@ -1,106 +1,182 @@
 ﻿@model Azure_Assignment.EF.Users
 
-@{
-    ViewBag.Title = "Details";
-}
 
-<h2>Details</h2>
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>User Detail</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="~/Admin/">Admin</a></li>
+                        <li class="breadcrumb-item"><a href="~/Admin/Users/">Users</a></li>
+                        <li class="breadcrumb-item active">Detail</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div>
-    <h4>Users</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FirtName)
-        </dt>
+    <section class="content">
+        <div class="card">
+            <div class="card-header">
+                <h1 style="font-weight:bold; font-size:25px;" class="card-title">Detail of User</h1>
 
-        <dd>
-            @Html.DisplayFor(model => model.FirtName)
-        </dd>
+                <div class="card-tools">
+                    <button class="btn btn-block btn-secondary float-right" onclick="window.location.href = '../'">Back to List</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-md-12 col-lg-12 order-12 order-md-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="post">
+                                    <div class="col-sm-2 user-block">
+                                        <strong>@Html.DisplayNameFor(model => model.Username)</strong>:
+                                    </div>
+                                    <p class="col-sm-10">
+                                        @Html.DisplayFor(model => model.Username)
+                                    </p>
+                                </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
+                                <div class="post">
+                                    <div class="col-sm-2 user-block">
+                                        <strong>@Html.DisplayNameFor(model => model.FirtName)</strong>:
+                                    </div>
+                                    <p class="col-sm-10">
+                                        @Html.DisplayFor(model => model.FirtName)
+                                    </p>
+                                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
+                                <div class="post">
+                                    <div class="col-sm-2 user-block">
+                                        <strong>@Html.DisplayNameFor(model => model.LastName)</strong>:
+                                    </div>
+                                    <p class="col-sm-10">
+                                        @Html.DisplayFor(model => model.LastName)
+                                    </p>
+                                </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
+                                <div class="post">
+                                    <div class="col-sm-2 user-block">
+                                        <strong>@Html.DisplayNameFor(model => model.LastName)</strong>:
+                                    </div>
+                                    <p class="col-sm-10">
+                                        @if (Model.Gender == true)
+                                        {
+                                            <div>Male</div>
+                                        }
+                                        else
+                                        {
+                                            <div>Female</div>
+                                        }
+                                    </p>
+                                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
+                                <div class="post">
+                                    <div class="col-sm-2 user-block">
+                                        <strong>@Html.DisplayNameFor(model => model.Birthday)</strong>:
+                                    </div>
+                                    <p class="col-sm-10">
+                                        @Html.DisplayFor(model => model.Birthday)
+                                    </p>
+                                </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gender)
-        </dt>
+                                <div class="post">
+                                    <div class="col-sm-2 user-block">
+                                        <strong>@Html.DisplayNameFor(model => model.Phone)</strong>:
+                                    </div>
+                                    <p class="col-sm-10">
+                                        @Html.DisplayFor(model => model.Phone)
+                                    </p>
+                                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gender)
-        </dd>
+                                <div class="post">
+                                    <div class="col-sm-2 user-block">
+                                        <strong>@Html.DisplayNameFor(model => model.Email)</strong>:
+                                    </div>
+                                    <p class="col-sm-10">
+                                        @Html.DisplayFor(model => model.Email)
+                                    </p>
+                                </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Birthday)
-        </dt>
+                                <div class="post">
+                                    <div class="col-sm-2 user-block">
+                                        <strong>@Html.DisplayNameFor(model => model.Address)</strong>:
+                                    </div>
+                                    <p class="col-sm-10">
+                                        @Html.DisplayFor(model => model.Address)
+                                    </p>
+                                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Birthday)
-        </dd>
+                                <div class="post">
+                                    <div class="col-sm-2 user-block">
+                                        <strong>@Html.DisplayNameFor(model => model.Picture)</strong>:
+                                    </div>
+                                    @if (!Model.Picture.IsEmpty())
+                                    {
+                                        <img class="col-sm-10" id="imageDetail" src="@Url.Content(Model.Picture)" />
+                                    }
+                                    else
+                                    {
+                                        <p>No Image</p>
+                                    }
+                                </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
+                                <div class="post">
+                                    <div class="col-sm-2 user-block">
+                                        <strong>@Html.DisplayNameFor(model => model.Role)</strong>:
+                                    </div>
+                                    <p class="col-sm-10">
+                                        @if (Model.Role == 0)
+                                        {
+                                            <div>Admin</div>
+                                        }
+                                        else if (Model.Role == 1)
+                                        {
+                                            <div>Employee</div>
+                                        }
+                                        else if (Model.Role == 2)
+                                        {
+                                            <div>Customer</div>
+                                        }
+                                    </p>
+                                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
+                                <div class="post">
+                                    <div class="col-sm-2 user-block">
+                                        <strong>@Html.DisplayNameFor(model => model.Status)</strong>:
+                                    </div>
+                                    <p class="col-sm-10">
+                                        @if (Model.Status == true)
+                                        {
+                                            <div style="color:green">Active</div>
+                                        }
+                                        else
+                                        {
+                                            <div style="color:red">Disable</div>
+                                        }
+                                    </p>
+                                </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+                            </div>
+                        </div>
+                    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Picture)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Picture)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Role)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Role)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-
-    </dl>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Username }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<style>
+    #imageDetail {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+</style>
