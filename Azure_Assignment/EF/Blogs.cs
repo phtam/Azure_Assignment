@@ -11,7 +11,9 @@ namespace Azure_Assignment.EF
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Blogs
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,12 +21,25 @@ namespace Azure_Assignment.EF
         {
             this.BlogComments = new HashSet<BlogComments>();
         }
-    
+
+        [DisplayName("Blog ID")]
         public int BlogID { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter blog name")]
+        [StringLength(maximumLength: 50, MinimumLength = 5, ErrorMessage = "Blog name must be between 5 to 50")]
+        [DisplayName("Blog name")]
         public string BlogName { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter username")]
+        [StringLength(maximumLength: 50, MinimumLength = 5, ErrorMessage = "Username must be between 5 to 50")]
+        [DisplayName("Username")]
         public string Username { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter content")]
+        [DisplayName("Content")]
         public string Content { get; set; }
         public Nullable<int> BlogCategoryID { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please choose writing date")]
+        [DataType(DataType.DateTime, ErrorMessage = "Writing date has been invalid")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-ddTHH:mm:ss}")]
+        [DisplayName("Writing date")]
         public Nullable<System.DateTime> WritingDate { get; set; }
     
         public virtual BlogCategories BlogCategories { get; set; }

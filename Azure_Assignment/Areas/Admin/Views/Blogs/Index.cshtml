@@ -41,16 +41,13 @@
                                     @Html.DisplayNameFor(model => model.BlogName)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Content)
+                                    @Html.DisplayNameFor(model => model.Username)
                                 </th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.WritingDate)
                                 </th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.BlogCategories.BlogCategoryName)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Users.FirtName)
                                 </th>
                                 <th></th>
                             </tr>
@@ -63,16 +60,13 @@
                                     @Html.DisplayFor(modelItem => item.BlogName)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Content)
+                                    @Html.DisplayFor(modelItem => item.Users.Username)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.WritingDate)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.BlogCategories.BlogCategoryName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Users.FirtName)
                                 </td>
 
                                 <td class="project-actions text-right">

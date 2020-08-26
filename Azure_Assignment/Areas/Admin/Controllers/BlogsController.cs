@@ -29,6 +29,8 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Blogs blogs = db.Blogs.Find(id);
+            BlogCategories blogCategories = db.BlogCategories.Find(blogs.BlogCategoryID);
+            ViewBag.BlogCategory = blogCategories.BlogCategoryName;
             if (blogs == null)
             {
                 return HttpNotFound();
@@ -40,7 +42,6 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         public ActionResult Create()
         {
             ViewBag.BlogCategoryID = new SelectList(db.BlogCategories, "BlogCategoryID", "BlogCategoryName");
-            //ViewBag.Username = new SelectList(db.Users, "Username", "FirtName");
             return View();
         }
 
@@ -54,14 +55,22 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                blogs.WritingDate = DateTime.Now;
-                db.Blogs.Add(blogs);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var check = db.Users.SingleOrDefault(u => u.Username == blogs.Username);
+                if (check == null)
+                {
+                    db.Blogs.Add(blogs);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.NotifyUser = "User does not exist, please try again.";
+                    return View("Create");
+                }
+                
             }
 
             ViewBag.BlogCategoryID = new SelectList(db.BlogCategories, "BlogCategoryID", "BlogCategoryName", blogs.BlogCategoryID);
-            //ViewBag.Username = new SelectList(db.Users, "Username", "FirtName", blogs.Username);
             return View(blogs);
         }
 
@@ -78,7 +87,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 return HttpNotFound();
             }
             ViewBag.BlogCategoryID = new SelectList(db.BlogCategories, "BlogCategoryID", "BlogCategoryName", blogs.BlogCategoryID);
-            ViewBag.Username = new SelectList(db.Users, "Username", "FirtName", blogs.Username);
+            //ViewBag.Username = new SelectList(db.Users, "Username", "FirtName", blogs.Username);
             return View(blogs);
         }
 
@@ -87,6 +96,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Edit([Bind(Include = "BlogID,BlogName,Username,Content,BlogCategoryID,WritingDate")] Blogs blogs)
         {
             if (ModelState.IsValid)
@@ -96,7 +106,6 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.BlogCategoryID = new SelectList(db.BlogCategories, "BlogCategoryID", "BlogCategoryName", blogs.BlogCategoryID);
-            ViewBag.Username = new SelectList(db.Users, "Username", "FirtName", blogs.Username);
             return View(blogs);
         }
 
@@ -108,6 +117,8 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Blogs blogs = db.Blogs.Find(id);
+            BlogCategories blogCategories = db.BlogCategories.Find(blogs.BlogCategoryID);
+            ViewBag.BlogCategory = blogCategories.BlogCategoryName;
             if (blogs == null)
             {
                 return HttpNotFound();
