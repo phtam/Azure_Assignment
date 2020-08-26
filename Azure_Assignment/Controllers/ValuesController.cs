@@ -46,13 +46,22 @@ namespace Azure_Assignment.Controllers
 
         public String CheckEmail(String emailAddress)
         {
-            db.Users.Where(user => user.Email == emailAddress);
+            if (db.Users.Where(user => user.Email == emailAddress) != null)
+            {
+                return "Email already exists";
+            }
             try
             {
                 MailAddress m = new MailAddress(emailAddress);
-                
-                return null;
-
+                if (db.Users.Where(user => user.Email == emailAddress) != null)
+                {
+                    return "Email already exists";
+                }  
+                else
+                {
+                    return null;
+                }
+                    
             }
             catch (FormatException)
             {
