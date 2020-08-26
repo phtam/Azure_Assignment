@@ -51,9 +51,49 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Username,FirtName,LastName,Password,Gender,Birthday,Phone,Email,Address,Picture,Role,Status,ImageFile")] Users users)
         {
+            
             if (ModelState.IsValid)
             {
+                if (db.Users.Find(users.Username) != null)
+                {
+                    ViewBag.Error = "Username already exists";
+                    return View("Create");
+                }
+
+                bool isExist = db.Users.ToList().Exists(model => model.Email.Equals(users.Email, StringComparison.OrdinalIgnoreCase));
+                if (isExist)
+                {
+                    ViewBag.Error = "Email already exists";
+                    return View("Create");
+                }
+
+                //bool isAgeValid = true;
+                //if (!((DateTime.Now.Year - users.Birthday.Value.Year) > 16))
+                //{
+                //    if (!((DateTime.Now.Month - users.Birthday.Value.Month) > 0))
+                //    {
+                //        if ((DateTime.Now.Day - users.Birthday.Value.Day) < 0)
+                //        {
+                //            isAgeValid = false;
+                //        }
+                //        else
+                //        {
+                //            isAgeValid = true;
+                //        }
+                //    }
+                //    else
+                //    {
+                //        isAgeValid = true;
+                //    }
+                //}
+
+                //if (!isAgeValid)
+                //{
+                //    ViewBag.Error = "Age must greater than 16 years old";
+                //    return View("Create");
+                //}
                 
+
                 string fileName = Path.GetFileNameWithoutExtension(users.ImageFile.FileName);
                 string extension = Path.GetExtension(users.ImageFile.FileName);
                 if ((extension == ".png" || extension == ".jpg" || extension == ".jpeg") == false)
@@ -118,7 +158,38 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+
+                //bool isAgeValid = true;
+                //if ((DateTime.Now.Year - users.Birthday.Value.Year) >= 16)
+                //{
+                //    if (!((DateTime.Now.Month - users.Birthday.Value.Month) >= 0))
+                //    {
+                //        if ((DateTime.Now.Day - users.Birthday.Value.Day) > 0)
+                //        {
+                //            isAgeValid = false;
+                //        }
+                //        else
+                //        {
+                //            isAgeValid = true;
+                //        }
+                //    }
+                //    else
+                //    {
+                //        isAgeValid = true;
+                //    }
+                    
+                //}
+                //else
+                //{
+                //    isAgeValid = false;
+                //}
+
+                //if (!isAgeValid)
+                //{
+                //    ViewBag.Error = "Age must greater than 16 years old";
+                //    return View("Edit");
+                //}
+
                 string uploadFolderPath = Server.MapPath("~/public/uploadedFiles/userPictures/");
                 if (users.ImageFile == null)
                 {
