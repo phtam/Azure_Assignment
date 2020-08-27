@@ -67,32 +67,37 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                     return View("Create");
                 }
 
-                //bool isAgeValid = true;
-                //if (!((DateTime.Now.Year - users.Birthday.Value.Year) > 16))
-                //{
-                //    if (!((DateTime.Now.Month - users.Birthday.Value.Month) > 0))
-                //    {
-                //        if ((DateTime.Now.Day - users.Birthday.Value.Day) < 0)
-                //        {
-                //            isAgeValid = false;
-                //        }
-                //        else
-                //        {
-                //            isAgeValid = true;
-                //        }
-                //    }
-                //    else
-                //    {
-                //        isAgeValid = true;
-                //    }
-                //}
+                bool isAgeValid = true;
+                if ((DateTime.Now.Year - users.Birthday.Value.Year) == 16)
+                {
+                    if ((DateTime.Now.Month - users.Birthday.Value.Month) == 0)
+                    {
+                        if ((DateTime.Now.Day - users.Birthday.Value.Day) > 0)
+                        {
+                            isAgeValid = false;
+                        }
+                    }
+                    else if ((DateTime.Now.Month - users.Birthday.Value.Month) > 0)
+                    {
+                        isAgeValid = false;
+                    }
+                }
+                else if ((DateTime.Now.Year - users.Birthday.Value.Year) < 16)
+                {
+                    isAgeValid = false;
+                }
 
-                //if (!isAgeValid)
-                //{
-                //    ViewBag.Error = "Age must greater than 16 years old";
-                //    return View("Create");
-                //}
-                
+                if (!isAgeValid)
+                {
+                    ViewBag.Error = "Age must greater than 16 years old";
+                    return View("Create");
+                }
+
+                if (users.Password.Length < 8 || users.Password.Length > 50)
+                {
+                    ViewBag.Error = "Password must be between 8 to 50 characters";
+                    return View("Create");
+                }
 
                 string fileName = Path.GetFileNameWithoutExtension(users.ImageFile.FileName);
                 string extension = Path.GetExtension(users.ImageFile.FileName);
@@ -158,37 +163,31 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-
-                //bool isAgeValid = true;
-                //if ((DateTime.Now.Year - users.Birthday.Value.Year) >= 16)
-                //{
-                //    if (!((DateTime.Now.Month - users.Birthday.Value.Month) >= 0))
-                //    {
-                //        if ((DateTime.Now.Day - users.Birthday.Value.Day) > 0)
-                //        {
-                //            isAgeValid = false;
-                //        }
-                //        else
-                //        {
-                //            isAgeValid = true;
-                //        }
-                //    }
-                //    else
-                //    {
-                //        isAgeValid = true;
-                //    }
-                    
-                //}
-                //else
-                //{
-                //    isAgeValid = false;
-                //}
-
-                //if (!isAgeValid)
-                //{
-                //    ViewBag.Error = "Age must greater than 16 years old";
-                //    return View("Edit");
-                //}
+                bool isAgeValid = true;
+                if ((DateTime.Now.Year - users.Birthday.Value.Year) == 16)
+                {
+                    if ((DateTime.Now.Month - users.Birthday.Value.Month) == 0)
+                    {
+                        if ((DateTime.Now.Day - users.Birthday.Value.Day) > 0)
+                        {
+                            isAgeValid = false;
+                        }
+                    }
+                    else if ((DateTime.Now.Month - users.Birthday.Value.Month) > 0)
+                    {
+                        isAgeValid = false;
+                    }
+                }
+                else if ((DateTime.Now.Year - users.Birthday.Value.Year) < 16)
+                {
+                    isAgeValid = false;
+                }
+                
+                if (!isAgeValid)
+                {
+                    ViewBag.Error = "Age must greater than 16 years old";
+                    return View("Edit");
+                }
 
                 string uploadFolderPath = Server.MapPath("~/public/uploadedFiles/userPictures/");
                 if (users.ImageFile == null)
@@ -232,8 +231,6 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                     users.ImageFile.SaveAs(fileName);
                 }
 
-                //db.Users.Attach(users);
-                
                 db.Entry(users).State = EntityState.Modified;
                 db.Entry(users).Property(x => x.Password).IsModified = false;
 

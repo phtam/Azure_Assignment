@@ -206,7 +206,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="pages/mailbox/mailbox.html" class="nav-link">
+                                    <a href="~/Admin/Products" class="nav-link">
                                         <img src="~/public/icons/icons8-product-30.png" />
                                         <p>Products</p>
                                     </a>
@@ -467,6 +467,7 @@
         $(function () {
             // Summernote
             $('#summernote').summernote()
+            $('#summernote_Specification').summernote()
 
             // CodeMirror
             CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
@@ -486,14 +487,14 @@
     <script src="~/Scripts/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
     @*<script src="~/Scripts/plugins/dropzone/min/dropzone.min.js"></script>*@
     <script src="~/Scripts/plugins/summernote/summernote-bs4.min.js"></script>
-    
+
     <script type="text/javascript">
 
         $(document).ready(function () {
             $("#txtUsername_In_Manage").keyup(function () {
                 $.ajax({
                     type: "POST",
-                    url: '/Values/CheckUsername', 
+                    url: '/Values/CheckUsername',
                     data: {
                         username: $(this).val()
                     },
@@ -512,7 +513,7 @@
                     type: "POST",
                     url: '/Values/CheckPassword',
                     data: {
-                        password: $(this).val() 
+                        password: $(this).val()
                     },
                     cache: false,
                     datatype: "json",
@@ -522,7 +523,7 @@
                 });
             });
         });
-        
+
         $(document).ready(function () {
             $("#txtEmail_In_Manage").keyup(function () {
                 $.ajax({
@@ -540,5 +541,13 @@
             });
         });
     </script>
+    <script>
+        $('#txa_display_Specification').summernote('disable');
+        $('#txa_display_Description').summernote('disable');
+    </script>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 </body>
 </html>

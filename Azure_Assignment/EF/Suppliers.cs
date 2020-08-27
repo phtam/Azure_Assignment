@@ -24,11 +24,9 @@ namespace Azure_Assignment.EF
         [DisplayName("Supplier ID")]
         public int SupplierID { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter supplier name")]
-        [StringLength(maximumLength: 50, MinimumLength = 5, ErrorMessage = "Supplier name must be between 5 to 50")]
         [DisplayName("Supplier name")]
         public string CompanyName { get; set; }
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter contect name")]
-        [StringLength(maximumLength: 50, MinimumLength = 5, ErrorMessage = "Contact name must be between 5 to 50")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter contact name")]
         [DisplayName("Contact name")]
         public string ContactName { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter address")]
@@ -36,12 +34,12 @@ namespace Azure_Assignment.EF
         public string Address { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter phone")]
         [StringLength(maximumLength: 15, MinimumLength = 5, ErrorMessage = "Phone must be between 5 to 15")]
-        [RegularExpression(@"((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}", ErrorMessage = "Invalid Phone Number. Format 000-000-0000")]
+        [RegularExpression(@"\(?\d{3}\)?-? *\d{3}-? *-?\d{4}", ErrorMessage = "Incorrect Phone Number Format")]
         public string Phone { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter email")]
         [StringLength(maximumLength: 30, MinimumLength = 5, ErrorMessage = "Email must be between 5 to 30")]
         [DataType(DataType.EmailAddress)]
-        [RegularExpression(@"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}", ErrorMessage = "Incorrect Email Format")]
+        [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", ErrorMessage = "Incorrect Email Format")]
         public string Email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
