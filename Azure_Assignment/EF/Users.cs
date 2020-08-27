@@ -25,7 +25,7 @@ namespace Azure_Assignment.EF
             this.Orders = new HashSet<Orders>();
         }
 
-        [StringLength(maximumLength: 50, MinimumLength = 6, ErrorMessage = "Username must be between 6 to 50 characters")]
+       
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter username")]
         public string Username { get; set; }
 
@@ -59,7 +59,7 @@ namespace Azure_Assignment.EF
         public string Picture { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please select role")]
-        //[Range(minimum:0, maximum:2, ErrorMessage = "Please select role")]
+        [Range(minimum:0, maximum:2, ErrorMessage = "Please select role")]
         public Nullable<int> Role { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter status")]

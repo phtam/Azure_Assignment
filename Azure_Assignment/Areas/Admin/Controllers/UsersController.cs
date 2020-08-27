@@ -60,6 +60,12 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                     return View("Create");
                 }
 
+                if (users.Username.Length < 6 || users.Username.Length > 50)
+                {
+                    ViewBag.Error = "Username must be between 6 to 50 characters.";
+                    return View("Create");
+                }
+
                 bool isExist = db.Users.ToList().Exists(model => model.Email.Equals(users.Email, StringComparison.OrdinalIgnoreCase));
                 if (isExist)
                 {
@@ -262,6 +268,10 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(string id)
         {
             Users users = db.Users.Find(id);
+            if (!users.Picture.IsEmpty())
+            {
+                System.IO.File.Delete(Server.MapPath(users.Picture));
+            }
             db.Users.Remove(users);
             db.SaveChanges();
             return RedirectToAction("Index");
