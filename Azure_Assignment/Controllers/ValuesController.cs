@@ -63,14 +63,11 @@ namespace Azure_Assignment.Controllers
             {
                 return "Email is invalid";
             }
-
-
-
-
-
         }
 
         
+
+
 
     }
 }

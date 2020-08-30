@@ -11,7 +11,8 @@ namespace Azure_Assignment.EF
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Products
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -25,20 +26,39 @@ namespace Azure_Assignment.EF
         }
     
         public int ProductID { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter product name")]
         public string ProductName { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter unit price")]
         public Nullable<decimal> UnitPrice { get; set; }
+
         public Nullable<decimal> OldUnitPrice { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter short description")]
+        [StringLength(maximumLength: 250, MinimumLength = 1, ErrorMessage = "Short description must be less than 250 characters")]
         public string ShortDescription { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter description")]
         public string Description { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter specification")]
         public string Specification { get; set; }
+
         public Nullable<int> UnitsInStock { get; set; }
+
         public Nullable<int> UnitsOnOrder { get; set; }
+
         public Nullable<int> SupplierID { get; set; }
+
         public Nullable<int> CategoryID { get; set; }
+
         public Nullable<int> SaleID { get; set; }
+
         public Nullable<bool> Discontinued { get; set; }
     
         public virtual Categories Categories { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Exportation> Exportation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
