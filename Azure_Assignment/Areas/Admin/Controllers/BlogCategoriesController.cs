@@ -52,6 +52,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             {
                 db.BlogCategories.Add(blogCategories);
                 db.SaveChanges();
+                TempData["Notice_Create_Success"] = true;
                 return RedirectToAction("Index");
             }
 
@@ -84,6 +85,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             {
                 db.Entry(blogCategories).State = EntityState.Modified;
                 db.SaveChanges();
+                TempData["Notice_Save_Success"] = true;
                 return RedirectToAction("Index");
             }
             return View(blogCategories);
@@ -109,9 +111,17 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            BlogCategories blogCategories = db.BlogCategories.Find(id);
-            db.BlogCategories.Remove(blogCategories);
-            db.SaveChanges();
+            try
+            {
+                BlogCategories blogCategories = db.BlogCategories.Find(id);
+                db.BlogCategories.Remove(blogCategories);
+                db.SaveChanges();
+                TempData["Notice_Delete_Success"] = true;
+            }
+            catch (Exception)
+            {
+                TempData["Notice_Delete_Fail"] = true;
+            }
             return RedirectToAction("Index");
         }
 

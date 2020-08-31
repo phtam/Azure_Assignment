@@ -87,6 +87,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
 
                 db.Sale.Add(sale);
                 db.SaveChanges();
+                TempData["Notice_Create_Success"] = true;
                 return RedirectToAction("Index");
             }
 
@@ -167,6 +168,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 db.Entry(sale).State = EntityState.Modified;
                 db.SaveChanges();
                 Session.Remove("OldImage");
+                TempData["Notice_Save_Success"] = true;
                 return RedirectToAction("Index");
 
             }
@@ -193,13 +195,21 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Sale sale = db.Sale.Find(id);
-            if (!sale.Picture.IsEmpty())
+            try
             {
-                System.IO.File.Delete(Server.MapPath(sale.Picture));
+                Sale sale = db.Sale.Find(id);
+                if (!sale.Picture.IsEmpty())
+                {
+                    System.IO.File.Delete(Server.MapPath(sale.Picture));
+                }
+                db.Sale.Remove(sale);
+                db.SaveChanges();
+                TempData["Notice_Delete_Success"] = true;
             }
-            db.Sale.Remove(sale);
-            db.SaveChanges();
+            catch (Exception)
+            {
+                TempData["Notice_Delete_Fail"] = true;
+            }
             return RedirectToAction("Index");
         }
 

@@ -60,6 +60,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 {
                     db.Blogs.Add(blogs);
                     db.SaveChanges();
+                    TempData["Notice_Create_Success"] = true;
                     return RedirectToAction("Index");
                 }
                 else
@@ -104,6 +105,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             {
                 db.Entry(blogs).State = EntityState.Modified;
                 db.SaveChanges();
+                TempData["Notice_Save_Success"] = true;
                 return RedirectToAction("Index");
             }
             ViewBag.BlogCategoryID = new SelectList(db.BlogCategories, "BlogCategoryID", "BlogCategoryName", blogs.BlogCategoryID);
@@ -132,9 +134,18 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Blogs blogs = db.Blogs.Find(id);
-            db.Blogs.Remove(blogs);
-            db.SaveChanges();
+            try
+            {
+                Blogs blogs = db.Blogs.Find(id);
+                db.Blogs.Remove(blogs);
+                db.SaveChanges();
+                TempData["Notice_Delete_Success"] = true;
+            }
+            catch (Exception)
+            {
+                TempData["Notice_Delete_Fail"] = true;
+            }
+
             return RedirectToAction("Index");
         }
 
