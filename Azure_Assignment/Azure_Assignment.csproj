@@ -133,6 +133,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BlogCategoriesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BlogCommentsController.cs" />
     <Compile Include="Areas\Admin\Controllers\BlogsController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
@@ -312,6 +313,11 @@
     <Content Include="Areas\Admin\Views\Blogs\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Blogs\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Blogs\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\BlogComments\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\BlogComments\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\BlogComments\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\BlogComments\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\BlogComments\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\dist\css\adminlte.css" />
     <Content Include="Scripts\dist\css\adminlte.min.css" />

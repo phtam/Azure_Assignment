@@ -11,14 +11,18 @@ namespace Azure_Assignment.EF
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class BlogComments
     {
+        [DisplayName("Blog comment ID")]
         public int BlogCommentID { get; set; }
+        [DisplayName("Full name")]
         public string FullName { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
         public string Comment { get; set; }
+        [DisplayName("Commenting date")]
         public Nullable<System.DateTime> CommentingDate { get; set; }
         public Nullable<int> BlogID { get; set; }
     
