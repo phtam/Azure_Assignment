@@ -56,7 +56,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var check = db.Users.SingleOrDefault(u => u.Username == blogs.Username);
-                if (check == null)
+                if (check != null)
                 {
                     db.Blogs.Add(blogs);
                     db.SaveChanges();
@@ -65,6 +65,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 else
                 {
                     ViewBag.NotifyUser = "User does not exist, please try again.";
+                    ViewBag.BlogCategoryID = new SelectList(db.BlogCategories, "BlogCategoryID", "BlogCategoryName");
                     return View("Create");
                 }
                 
