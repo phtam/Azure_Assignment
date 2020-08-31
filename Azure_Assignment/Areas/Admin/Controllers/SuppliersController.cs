@@ -52,6 +52,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             {
                 db.Suppliers.Add(suppliers);
                 db.SaveChanges();
+                TempData["Notice_Create_Success"] = true;
                 return RedirectToAction("Index");
             }
 
@@ -84,6 +85,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             {
                 db.Entry(suppliers).State = EntityState.Modified;
                 db.SaveChanges();
+                TempData["Notice_Save_Success"] = true;
                 return RedirectToAction("Index");
             }
             return View(suppliers);
@@ -109,9 +111,17 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Suppliers suppliers = db.Suppliers.Find(id);
-            db.Suppliers.Remove(suppliers);
-            db.SaveChanges();
+            try
+            {
+                Suppliers suppliers = db.Suppliers.Find(id);
+                db.Suppliers.Remove(suppliers);
+                db.SaveChanges();
+                TempData["Notice_Delete_Success"] = true;
+            }
+            catch (Exception)
+            {
+                TempData["Notice_Delete_Fail"] = true;
+            }
             return RedirectToAction("Index");
         }
 
