@@ -1,0 +1,34 @@
+﻿@model Azure_Assignment.EF.ProductImage
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ProductImage</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ImgFileName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImgFileName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Products.ProductName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Products.ProductName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ImgID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

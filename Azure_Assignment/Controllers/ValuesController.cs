@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Mail;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -46,21 +46,28 @@ namespace Azure_Assignment.Controllers
 
         public String CheckEmail(String emailAddress)
         {
-            db.Users.Where(user => user.Email == emailAddress);
-            try
+            bool isEmail = Regex.IsMatch(emailAddress, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", RegexOptions.IgnoreCase);
+            if (isEmail)
             {
-                MailAddress m = new MailAddress(emailAddress);
-                
-                return null;
-
+                bool isExist = db.Users.ToList().Exists(model => model.Email.Equals(emailAddress, StringComparison.OrdinalIgnoreCase));
+                if (isExist)
+                {
+                    return "Email already exists";
+                }
+                else
+                {
+                    return null;
+                }
             }
-            catch (FormatException)
+            else
             {
                 return "Email is invalid";
             }
         }
 
         
+
+
 
     }
 }

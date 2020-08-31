@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -51,9 +52,60 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Username,FirtName,LastName,Password,Gender,Birthday,Phone,Email,Address,Picture,Role,Status,ImageFile")] Users users)
         {
+            
             if (ModelState.IsValid)
             {
-                
+                if (db.Users.Find(users.Username) != null)
+                {
+                    ViewBag.Error = "Username already exists";
+                    return View("Create");
+                }
+
+                if (users.Username.Length < 6 || users.Username.Length > 50)
+                {
+                    ViewBag.Error = "Username must be between 6 to 50 characters.";
+                    return View("Create");
+                }
+
+                bool isExist = db.Users.ToList().Exists(model => model.Email.Equals(users.Email, StringComparison.OrdinalIgnoreCase));
+                if (isExist)
+                {
+                    ViewBag.Error = "Email already exists";
+                    return View("Create");
+                }
+
+                bool isAgeValid = true;
+                if ((DateTime.Now.Year - users.Birthday.Value.Year) == 16)
+                {
+                    if ((DateTime.Now.Month - users.Birthday.Value.Month) == 0)
+                    {
+                        if ((DateTime.Now.Day - users.Birthday.Value.Day) > 0)
+                        {
+                            isAgeValid = false;
+                        }
+                    }
+                    else if ((DateTime.Now.Month - users.Birthday.Value.Month) > 0)
+                    {
+                        isAgeValid = false;
+                    }
+                }
+                else if ((DateTime.Now.Year - users.Birthday.Value.Year) < 16)
+                {
+                    isAgeValid = false;
+                }
+
+                if (!isAgeValid)
+                {
+                    ViewBag.Error = "Age must greater than 16 years old";
+                    return View("Create");
+                }
+
+                if (users.Password.Length < 8 || users.Password.Length > 50)
+                {
+                    ViewBag.Error = "Password must be between 8 to 50 characters";
+                    return View("Create");
+                }
+
                 string fileName = Path.GetFileNameWithoutExtension(users.ImageFile.FileName);
                 string extension = Path.GetExtension(users.ImageFile.FileName);
                 if ((extension == ".png" || extension == ".jpg" || extension == ".jpeg") == false)
@@ -87,6 +139,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
 
                 db.Users.Add(users);
                 db.SaveChanges();
+                TempData["Notice_Create_Success"] = true;
                 return RedirectToAction("Index");
             }
 
@@ -118,7 +171,32 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                bool isAgeValid = true;
+                if ((DateTime.Now.Year - users.Birthday.Value.Year) == 16)
+                {
+                    if ((DateTime.Now.Month - users.Birthday.Value.Month) == 0)
+                    {
+                        if ((DateTime.Now.Day - users.Birthday.Value.Day) > 0)
+                        {
+                            isAgeValid = false;
+                        }
+                    }
+                    else if ((DateTime.Now.Month - users.Birthday.Value.Month) > 0)
+                    {
+                        isAgeValid = false;
+                    }
+                }
+                else if ((DateTime.Now.Year - users.Birthday.Value.Year) < 16)
+                {
+                    isAgeValid = false;
+                }
                 
+                if (!isAgeValid)
+                {
+                    ViewBag.Error = "Age must greater than 16 years old";
+                    return View("Edit");
+                }
+
                 string uploadFolderPath = Server.MapPath("~/public/uploadedFiles/userPictures/");
                 if (users.ImageFile == null)
                 {
@@ -161,13 +239,12 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                     users.ImageFile.SaveAs(fileName);
                 }
 
-                //db.Users.Attach(users);
-                
                 db.Entry(users).State = EntityState.Modified;
                 db.Entry(users).Property(x => x.Password).IsModified = false;
 
                 db.SaveChanges();
                 Session.Remove("OldImage_User");
+                TempData["Notice_Save_Success"] = true;
                 return RedirectToAction("Index");
             }
             return View(users);
@@ -193,9 +270,22 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            Users users = db.Users.Find(id);
-            db.Users.Remove(users);
-            db.SaveChanges();
+            try
+            {
+                Users users = db.Users.Find(id);
+                if (!users.Picture.IsEmpty())
+                {
+                    System.IO.File.Delete(Server.MapPath(users.Picture));
+                }
+                db.Users.Remove(users);
+                db.SaveChanges();
+                TempData["Notice_Delete_Success"] = true;
+            }
+            catch (Exception)
+            {
+                TempData["Notice_Delete_Fail"] = true;
+            }
+            
             return RedirectToAction("Index");
         }
 

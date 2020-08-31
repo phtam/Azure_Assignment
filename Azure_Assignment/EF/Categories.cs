@@ -26,7 +26,7 @@ namespace Azure_Assignment.EF
         [DisplayName("Category ID")]
         public int CategoryID { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter category name")]
-        [StringLength(maximumLength: 50, MinimumLength = 5, ErrorMessage = "Category name must be between 5 to 50")]
+        [StringLength(maximumLength: 50, MinimumLength = 3, ErrorMessage = "Category name must be between 3 to 50")]
         [DisplayName("Category Name")]
         public string CategoryName { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter description of category")]
