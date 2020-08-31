@@ -59,13 +59,13 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             {
                 db.Products.Add(products);
                 db.SaveChanges();
+                TempData["Notice_Create_Success"] = true;
                 return RedirectToAction("Index");
             }
-
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", products.CategoryID);
             ViewBag.SaleID = new SelectList(db.Sale, "SaleID", "SaleName", products.SaleID);
             ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "CompanyName", products.SupplierID);
-            TempData["Notice_Save_Success"] = true;
+            
             return View(products);
         }
 
@@ -101,6 +101,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 db.Entry(products).Property(x => x.UnitsInStock).IsModified = false;
                 db.Entry(products).Property(x => x.UnitsOnOrder).IsModified = false;
                 db.SaveChanges();
+                TempData["Notice_Save_Success"] = true;
                 return RedirectToAction("Index");
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", products.CategoryID);

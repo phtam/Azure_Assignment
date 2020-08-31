@@ -572,38 +572,7 @@
         $('#txa_display_Description').summernote('disable');
 
 
-        $(function () {
-            var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
 
-
-
-
-            $('.swalDefaultError').click(function () {
-                Toast.fire({
-                    icon: 'error',
-                    title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.swalDefaultWarning').click(function () {
-                Toast.fire({
-                    icon: 'warning',
-                    title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.swalDefaultQuestion').click(function () {
-                Toast.fire({
-                    icon: 'question',
-                    title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-
-
-        });
 
     </script>
     @{
@@ -630,10 +599,7 @@
                 })
             </script>
         }
-    }
 
-
-    @{
         if (TempData["Notice_Save_Success"] != null)
         {
             <script>
@@ -646,9 +612,20 @@
                 });
             </script>
         }
-    }
 
-    @{
+        if (TempData["Notice_Create_Success"] != null)
+        {
+            <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Created successfully!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            </script>
+        }
+
         if (TempData["Notice_Login_Success"] != null)
         {
             <script>
@@ -670,7 +647,10 @@
                 })
             </script>
         }
+
+        
     }
+
 
 
     @section Scripts {

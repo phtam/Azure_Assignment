@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -138,6 +139,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
 
                 db.Users.Add(users);
                 db.SaveChanges();
+                TempData["Notice_Create_Success"] = true;
                 return RedirectToAction("Index");
             }
 
@@ -242,6 +244,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
 
                 db.SaveChanges();
                 Session.Remove("OldImage_User");
+                TempData["Notice_Save_Success"] = true;
                 return RedirectToAction("Index");
             }
             return View(users);
@@ -267,13 +270,22 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            Users users = db.Users.Find(id);
-            if (!users.Picture.IsEmpty())
+            try
             {
-                System.IO.File.Delete(Server.MapPath(users.Picture));
+                Users users = db.Users.Find(id);
+                if (!users.Picture.IsEmpty())
+                {
+                    System.IO.File.Delete(Server.MapPath(users.Picture));
+                }
+                db.Users.Remove(users);
+                db.SaveChanges();
+                TempData["Notice_Delete_Success"] = true;
             }
-            db.Users.Remove(users);
-            db.SaveChanges();
+            catch (Exception)
+            {
+                TempData["Notice_Delete_Fail"] = true;
+            }
+            
             return RedirectToAction("Index");
         }
 
