@@ -60,9 +60,17 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            BlogComments blogComments = db.BlogComments.Find(id);
-            db.BlogComments.Remove(blogComments);
-            db.SaveChanges();
+            try
+            {
+                BlogComments blogComments = db.BlogComments.Find(id);
+                db.BlogComments.Remove(blogComments);
+                db.SaveChanges();
+                TempData["Notice_Delete_Success"] = true;
+            }
+            catch (Exception)
+            {
+                TempData["Notice_Delete_Fail"] = true;
+            }
             return RedirectToAction("Index");
         }
 

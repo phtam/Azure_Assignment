@@ -52,6 +52,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             {
                 db.Payments.Add(payments);
                 db.SaveChanges();
+                TempData["Notice_Create_Success"] = true;
                 return RedirectToAction("Index");
             }
 
@@ -84,6 +85,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             {
                 db.Entry(payments).State = EntityState.Modified;
                 db.SaveChanges();
+                TempData["Notice_Save_Success"] = true;
                 return RedirectToAction("Index");
             }
             return View(payments);
@@ -109,9 +111,17 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Payments payments = db.Payments.Find(id);
-            db.Payments.Remove(payments);
-            db.SaveChanges();
+            try
+            {
+                Payments payments = db.Payments.Find(id);
+                db.Payments.Remove(payments);
+                db.SaveChanges();
+                TempData["Notice_Delete_Success"] = true;
+            }
+            catch (Exception)
+            {
+                TempData["Notice_Delete_Fail"] = true;
+            }
             return RedirectToAction("Index");
         }
 

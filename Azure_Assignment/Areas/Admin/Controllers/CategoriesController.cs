@@ -85,6 +85,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 
                 db.Categories.Add(categories);
                 db.SaveChanges();
+                TempData["Notice_Create_Success"] = true;
                 ModelState.Clear();
                 return RedirectToAction("Index");
                 
@@ -162,6 +163,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 db.Entry(categories).State = EntityState.Modified;
                 db.SaveChanges();
                 Session.Remove("OldImage");
+                TempData["Notice_Save_Success"] = true;
                 return RedirectToAction("Index");
                 
             }
@@ -188,13 +190,21 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Categories categories = db.Categories.Find(id);
-            if (!categories.Picture.IsEmpty())
+            try
             {
-                System.IO.File.Delete(Server.MapPath(categories.Picture));
+                Categories categories = db.Categories.Find(id);
+                if (!categories.Picture.IsEmpty())
+                {
+                    System.IO.File.Delete(Server.MapPath(categories.Picture));
+                }
+                db.Categories.Remove(categories);
+                db.SaveChanges();
+                TempData["Notice_Delete_Success"] = true;
             }
-            db.Categories.Remove(categories);
-            db.SaveChanges();
+            catch (Exception)
+            {
+                TempData["Notice_Delete_Fail"] = true;
+            }
             return RedirectToAction("Index");
         }
 
