@@ -316,6 +316,12 @@
     <Content Include="Areas\Admin\Views\Blogs\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Blogs\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Blogs\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\ProductImage.cshtml" />
     <Content Include="Areas\Admin\Views\BlogComments\Create.cshtml" />
     <Content Include="Areas\Admin\Views\BlogComments\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\BlogComments\Details.cshtml" />
@@ -383,6 +389,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\palkia-js\Palkia-ajax.js" />
+    <Content Include="Scripts\palkia-js\Palkia-config.js" />
+    <Content Include="Scripts\palkia-js\Palkia-datatables-config.js" />
     <Content Include="Scripts\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css" />
     <Content Include="Scripts\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.min.css" />
     <Content Include="Scripts\plugins\bootstrap-colorpicker\js\bootstrap-colorpicker.js" />

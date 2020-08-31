@@ -261,7 +261,9 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+
                                     <a href="~/Admin/BlogComments" class="nav-link">
+
                                         <img src="~/public/icons/icons8-comments-30.png" />
                                         <p>Blog Comments</p>
                                     </a>
@@ -343,238 +345,26 @@
     <script src="~/Scripts/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
     <script src="~/Scripts/dist/js/adminlte.js"></script>
-    <!-- PAGE PLUGINS -->
-    <!-- jQuery Mapael -->
     <script src="~/Scripts/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
     <script src="~/Scripts/plugins/raphael/raphael.min.js"></script>
     <script src="~/Scripts/plugins/jquery-mapael/jquery.mapael.min.js"></script>
     <script src="~/Scripts/plugins/jquery-mapael/maps/usa_states.min.js"></script>
-    <!-- ChartJS -->
     <script src="~/Scripts/plugins/chart.js/Chart.min.js"></script>
-
-    <!-- AdminLTE for demo purposes -->
     <script src="~/Scripts/dist/js/demo.js"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="~/Scripts/dist/js/pages/dashboard2.js"></script>
     <script src="~/Scripts/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="~/Scripts/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="~/Scripts/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
     <script src="~/Scripts/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-    <script>
-        $(function () {
-            $("#tbl_Categories").DataTable({
-                "responsive": true,
-                "autoWidth": false,
-                "aoColumns": [
-                    null,
-                    null,
-                    { sWidth: '100px' },
-                    { sWidth: '180px' }
-                ]
-            });
-            $("#tbl_Sales").DataTable({
-                "responsive": true,
-                "autoWidth": false,
-                "aoColumns": [
-                    null,
-                    null,
-                    null,
-                    null,
-                    { sWidth: '100px' },
-                    null,
-                    null,
-                    { sWidth: '180px' }
-                ]
-            });
-            $("#tbl_Suppliers").DataTable({
-                "responsive": true,
-                "autoWidth": false,
-                "aoColumns": [
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    { sWidth: '180px' }
-                ]
-            });
-            $("#tbl_BlogCategories").DataTable({
-                "responsive": true,
-                "autoWidth": false,
-                "aoColumns": [
-                    null,
-                    null,
-                    { sWidth: '180px' }
-                ]
-            });
-            $("#tbl_Payments").DataTable({
-                "responsive": true,
-                "autoWidth": false,
-                "aoColumns": [
-
-                    null,
-                    { sWidth: '180px' }
-                ]
-            });
-            $("#tbl_Users").DataTable({
-                "responsive": true,
-                "autoWidth": false,
-                "aoColumns": [
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    { sWidth: '180px' }
-                ]
-            });
-            $("#tbl_Products").DataTable({
-                "responsive": true,
-                "autoWidth": false,
-                "aoColumns": [
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    { sWidth: '255px' }
-                ]
-            });
-
-            $("#tbl_ProImage").DataTable({
-                "responsive": true,
-                "autoWidth": false,
-                "aoColumns": [
-                    null,
-                    null,
-                    { sWidth: '180px' }
-                ]
-            });
-
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
-        });
-    </script>
     <script src="~/Scripts/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-
-    <script>
-        $(function () {
-            bsCustomFileInput.init();
-        });
-
-        $(function () {
-            var href = window.location.href;
-            $('nav ul li a').each(function (e, i) {
-                if (href.indexOf($(this).attr('href')) >= 0) {
-                    $(this).addClass('active');
-                }
-            });
-        });
-    </script>
-    <script>
-        $(function () {
-            // Summernote
-            $('#summernote').summernote()
-            $('#summernote_Specification').summernote()
-
-
-            //// CodeMirror
-            //CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
-            //    mode: "htmlmixed",
-            //    theme: "monokai"
-            //});
-        })
-        $("input[data-bootstrap-switch]").each(function () {
-            $(this).bootstrapSwitch('state', $(this).prop('checked'));
-        });
-    </script>
-    @*<script src="~/Scripts/plugins/inputmask/jquery.inputmask.min.js"></script>*@
     <script src="~/Scripts/plugins/daterangepicker/daterangepicker.js"></script>
-    @*<script src="~/Scripts/plugins/select2/js/select2.full.min.js"></script>*@
     <script src="~/Scripts/plugins/moment/moment.min.js"></script>
-    @*<script src="~/Scripts/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>*@
     <script src="~/Scripts/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-    @*<script src="~/Scripts/plugins/dropzone/min/dropzone.min.js"></script>*@
     <script src="~/Scripts/plugins/summernote/summernote-bs4.min.js"></script>
     <script src="~/Scripts/plugins/sweetalert2/sweetalert2.min.js"></script>
-
-    <script type="text/javascript">
-
-        $(document).ready(function () {
-            $("#txtUsername_In_Manage").keyup(function () {
-                $.ajax({
-                    type: "POST",
-                    url: '/Values/CheckUsername',
-                    data: {
-                        username: $(this).val()
-                    },
-                    cache: false,
-                    datatype: "json",
-                }).done(function (data) {
-                    $("#notice_is_valid_username").empty();
-                    $("#notice_is_valid_username").append(data);
-                });
-            });
-        });
-
-        $(document).ready(function () {
-            $("#txtPassword_In_Manage").keyup(function () {
-                $.ajax({
-                    type: "POST",
-                    url: '/Values/CheckPassword',
-                    data: {
-                        password: $(this).val()
-                    },
-                    cache: false,
-                    datatype: "json",
-                }).done(function (data) {
-                    $("#notice_is_valid_password").empty();
-                    $("#notice_is_valid_password").append(data);
-                });
-            });
-        });
-
-        $(document).ready(function () {
-            $("#txtEmail_In_Manage").keyup(function () {
-                $.ajax({
-                    type: "POST",
-                    url: '/Values/CheckEmail',
-                    data: {
-                        emailAddress: $(this).val()
-                    },
-                    cache: false,
-                    datatype: "json",
-                }).done(function (data) {
-                    $("#notice_is_valid_email").empty();
-                    $("#notice_is_valid_email").append(data);
-                });
-            });
-        });
-
-        $('#txa_display_Specification').summernote('disable');
-        $('#txa_display_Description').summernote('disable');
-
-
-
-
-    </script>
+    <script src="~/Scripts/palkia-js/Palkia-datatables-config.js"></script>
+    <script src="~/Scripts/palkia-js/Palkia-ajax.js"></script>
+    <script src="~/Scripts/palkia-js/Palkia-config.js"></script>
     @{
         if (TempData["Notice_Delete_Success"] != null)
         {
@@ -648,10 +438,7 @@
             </script>
         }
 
-        
     }
-
-
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
