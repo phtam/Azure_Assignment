@@ -76,6 +76,45 @@ $(function () {
         ]
     });
 
+    $("#tbl_Blogs").DataTable({
+        "responsive": true,
+        "autoWidth": false,
+        "aoColumns": [
+            null,
+            null,
+            null,
+            null,
+            { sWidth: '180px' }
+        ]
+    });
+
+    $("#tbl_BlogComments").DataTable({
+        "responsive": true,
+        "autoWidth": false,
+        "aoColumns": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            { sWidth: '180px' }
+        ]
+    });
+
+    $("#tbl_Feedbacksss").DataTable({
+        "responsive": true,
+        "autoWidth": false,
+        "aoColumns": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            { sWidth: '180px' }
+        ]
+    });
+
     $("#tbl_Products").DataTable({
         "responsive": true,
         "autoWidth": false,

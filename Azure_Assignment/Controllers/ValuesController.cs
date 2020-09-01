@@ -36,6 +36,18 @@ namespace Azure_Assignment.Controllers
             
         }
 
+        public String CheckUsernameOfBlogs(String username)
+        { 
+            if (db.Users.Find(username) == null)
+            {
+                return "Username no exist";
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public String CheckPassword(String password)
         {
             if (password.Trim().Length < 8 || password.Trim().Length > 50)
