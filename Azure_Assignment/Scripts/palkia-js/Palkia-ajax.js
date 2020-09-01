@@ -15,6 +15,25 @@ $(document).ready(function () {
         });
     });
 });
+
+// validation username of Blogs
+$(document).ready(function () {
+    $("#txtUsername_In_Blogs").keyup(function () {
+        $.ajax({
+            type: "POST",
+            url: '/Values/CheckUsernameOfBlogs',
+            data: {
+                username: $(this).val()
+            },
+            cache: false,
+            datatype: "json",
+        }).done(function (data) {
+            $("#notice_is_valid_username").empty();
+            $("#notice_is_valid_username").append(data);
+        });
+    });
+});
+
 // validation password
 $(document).ready(function () {
     $("#txtPassword_In_Manage").keyup(function () {

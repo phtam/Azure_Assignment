@@ -11,13 +11,18 @@ namespace Azure_Assignment.EF
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Feedbacks
     {
+        [DisplayName("Feedback ID")]
         public int FeedbackID { get; set; }
+        [DisplayName("Feedback name")]
         public string FeedbackName { get; set; }
         public string Email { get; set; }
         public string Content { get; set; }
+        [DisplayName("Feedback date")]
         public Nullable<System.DateTime> FeedBackDate { get; set; }
         public Nullable<int> ProductID { get; set; }
     
