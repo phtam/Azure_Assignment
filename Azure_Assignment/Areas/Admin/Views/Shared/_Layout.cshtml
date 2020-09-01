@@ -170,6 +170,10 @@
                     <div class="info">
                         <a href="#" class="d-block">Pham Hoang Tam</a>
                     </div>
+                    @using (Html.BeginForm("LogOut", "Home", FormMethod.Post))
+                    {
+                        <input type="submit" class="btn btn-sm btn-primary" value="Sign out" />
+                    }
                 </div>
 
                 <!-- SidebarSearch Form -->
@@ -335,15 +339,11 @@
             </div>
         </footer>
     </div>
-    <!-- ./wrapper -->
+   
     <!-- REQUIRED SCRIPTS -->
-    <!-- jQuery -->
     <script src="~/Scripts/plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap -->
     <script src="~/Scripts/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- overlayScrollbars -->
     <script src="~/Scripts/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-    <!-- AdminLTE App -->
     <script src="~/Scripts/dist/js/adminlte.js"></script>
     <script src="~/Scripts/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
     <script src="~/Scripts/plugins/raphael/raphael.min.js"></script>
