@@ -45,7 +45,7 @@
                                     <div class="form-group row">
                                         @Html.LabelFor(model => model.UnitPrice, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-10">
-                                            @Html.EditorFor(model => model.UnitPrice, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Unit Price" } })
+                                            @Html.EditorFor(model => model.UnitPrice, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Unit Price", @type = "number", @min = 1 } })
                                             @Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -53,7 +53,7 @@
                                     <div class="form-group row">
                                         @Html.LabelFor(model => model.OldUnitPrice, htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-10">
-                                            @Html.EditorFor(model => model.OldUnitPrice, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Old Unit Price" } })
+                                            @Html.EditorFor(model => model.OldUnitPrice, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Old Unit Price", @type = "number", @min = 1 } })
                                             @Html.ValidationMessageFor(model => model.OldUnitPrice, "", new { @class = "text-danger" })
                                         </div>
                                     </div>

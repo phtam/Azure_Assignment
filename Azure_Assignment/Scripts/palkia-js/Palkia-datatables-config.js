@@ -143,8 +143,31 @@ $(function () {
         ]
     });
 
-            
+    $("#tbl_Products_Import").DataTable({
+        "responsive": true,
+        "autoWidth": false,
+        "aoColumns": [
+            null,
+            null,
+            null,
+            { sWidth: '160px' }
+        ]
+    });
 
+    $("#tbl_Import").DataTable({
+        "responsive": true,
+        "autoWidth": false,
+        "aoColumns": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            { sWidth: '80px' }
+        ]
+    });
+    
+    
        
 
 });

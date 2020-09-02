@@ -136,8 +136,10 @@
     <Compile Include="Areas\Admin\Controllers\BlogCommentsController.cs" />
     <Compile Include="Areas\Admin\Controllers\BlogsController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ExportationsController.cs" />
     <Compile Include="Areas\Admin\Controllers\FeedbacksController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ImportationsController.cs" />
     <Compile Include="Areas\Admin\Controllers\PaymentsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Admin\Controllers\SalesController.cs" />
@@ -335,6 +337,10 @@
     <Content Include="Areas\Admin\Views\Feedbacks\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Feedbacks\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Feedbacks\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Importations\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Importations\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Exportations\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Exportations\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\dist\css\adminlte.css" />
     <Content Include="Scripts\dist\css\adminlte.min.css" />

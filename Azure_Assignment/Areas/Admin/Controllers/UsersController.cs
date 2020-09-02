@@ -18,7 +18,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
     {
         private DataPalkia db = new DataPalkia();
 
-        // GET: Admin/Users
+        [Authorize(Roles = "0")]
         public ActionResult Index()
         {
             return View(db.Users.ToList());

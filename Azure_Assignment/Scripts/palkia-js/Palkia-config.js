@@ -25,6 +25,7 @@ $('#txa_display_Specification').summernote('disable');
 $('#txa_display_Description').summernote('disable');
 $('#txa_display_Blog_Content').summernote('disable');
 $('#txa_display_Blog_Comment').summernote('disable');
+$('#xyz').summernote('disable');
 
 function CallPrint(strid) {
     var prtContent = document.getElementById(strid);
@@ -36,3 +37,4 @@ function CallPrint(strid) {
     WinPrint.close();
     prtContent.innerHTML = strOldOne;
 }
+
