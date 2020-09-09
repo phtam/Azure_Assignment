@@ -116,3 +116,13 @@
     </section>
 </div>
 
+@section ScriptConfig
+{
+    <script src="~/Scripts/plugins/summernote/summernote-bs4.min.js"></script>
+    <link href="~/Scripts/plugins/summernote/summernote-bs4.min.css" rel="stylesheet" />
+    <script>
+        $(function () {
+            $('#txa_display_Blog_Content').summernote('disable');
+        })
+    </script>
+}

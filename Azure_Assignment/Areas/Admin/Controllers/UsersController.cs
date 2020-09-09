@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
@@ -18,13 +19,13 @@ namespace Azure_Assignment.Areas.Admin.Controllers
     {
         private DataPalkia db = new DataPalkia();
 
-        [Authorize(Roles = "0")]
+        //[Authorize(Roles = "0")]
         public ActionResult Index()
         {
             return View(db.Users.ToList());
         }
 
-        // GET: Admin/Users/Details/5
+
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -39,15 +40,12 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View(users);
         }
 
-        // GET: Admin/Users/Create
+
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/Users/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Username,FirtName,LastName,Password,Gender,Birthday,Phone,Email,Address,Picture,Role,Status,ImageFile")] Users users)
@@ -55,6 +53,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             
             if (ModelState.IsValid)
             {
+                
                 if (db.Users.Find(users.Username) != null)
                 {
                     ViewBag.Error = "Username already exists";
@@ -121,7 +120,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                     return View("Create");
                 }
 
-                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension; 
                 users.Picture = "~/public/uploadedFiles/userPictures/" + fileName;
                 string uploadFolderPath = Server.MapPath("~/public/uploadedFiles/userPictures/");
 
@@ -133,6 +132,39 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 fileName = Path.Combine(uploadFolderPath, fileName);
 
                 users.ImageFile.SaveAs(fileName);
+
+                /**
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://156.67.222.163:21/NhomHoangTam/" + fileName);
+                request.Method = WebRequestMethods.Ftp.UploadFile;
+                // This example assumes the FTP site uses anonymous logon.
+                request.Credentials = new NetworkCredential("u657022003.ftpuser", "123456789-Aa");
+                // Copy the contents of the file to the request stream.
+                byte[] fileContents;
+                using (Stream inputStream = users.ImageFile.InputStream)
+                {
+                    MemoryStream memoryStream = inputStream as MemoryStream;
+                    if (memoryStream == null)
+                    {
+                        memoryStream = new MemoryStream();
+                        inputStream.CopyTo(memoryStream);
+                    }
+                    fileContents = memoryStream.ToArray();
+                }
+                //using (StreamReader sourceStream = new StreamReader(fileName))
+                //{
+                //    fileContents = Encoding.UTF8.GetBytes(sourceStream.ReadToEnd());
+                //}
+                request.ContentLength = fileContents.Length;
+                using (Stream requestStream = request.GetRequestStream())
+                {
+                    requestStream.Write(fileContents, 0, fileContents.Length);
+                }
+                using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+                {
+                    Console.WriteLine($"Upload File Complete, status {response.StatusDescription}");
+                }
+                
+                **/
 
                 ScryptEncoder encoder = new ScryptEncoder();
                 users.Password = encoder.Encode(users.Password);
@@ -146,7 +178,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View(users);
         }
 
-        // GET: Admin/Users/Edit/5
+
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -162,9 +194,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View(users);
         }
 
-        // POST: Admin/Users/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Username,Password,FirtName,LastName,Gender,Birthday,Phone,Email,Address,Picture,Role,Status,ImageFile")] Users users, String imageOldFile_User)
@@ -250,7 +280,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View(users);
         }
 
-        // GET: Admin/Users/Delete/5
+
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -265,7 +295,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View(users);
         }
 
-        // POST: Admin/Users/Delete/5
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)

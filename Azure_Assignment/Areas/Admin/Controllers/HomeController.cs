@@ -1,4 +1,5 @@
 ﻿using Azure_Assignment.EF;
+using Scrypt;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,8 +27,17 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Login(string username, string pass)
         {
-            var user = db.Users.SingleOrDefault(model => model.Username == username && model.Password == pass);
-            if (user != null)
+            ScryptEncoder encoder = new ScryptEncoder();
+            var user = db.Users.SingleOrDefault(model => model.Username == username);
+            if (user == null)
+            {
+                ViewBag.ErrorLogin = "Username or password incorrect";
+                return View();
+            }
+
+            bool isValidPass = encoder.Compare(pass, user.Password);
+
+            if(isValidPass)
             {
                 FormsAuthentication.SetAuthCookie(user.Username, false);
                 return RedirectToAction("Index");

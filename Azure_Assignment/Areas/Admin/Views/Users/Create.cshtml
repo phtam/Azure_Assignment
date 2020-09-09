@@ -39,7 +39,7 @@
                                         <div class="col-md-10">
                                             @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Username", @id = "txtUsername_In_Manage" } })
                                             @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
-                                            <div style ="color:red"; id="notice_is_valid_username"></div>
+                                            <div style="color:red" id="notice_is_valid_username"></div>
                                         </div>
                                     </div>
 
@@ -64,7 +64,7 @@
                                         <div class="col-md-10">
                                             @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @type = "password", @placeholder = "Enter Password", @id = "txtPassword_In_Manage" } })
                                             @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                                            <div style ="color:red"; id="notice_is_valid_password"></div>
+                                            <div style="color:red" ; id="notice_is_valid_password"></div>
                                         </div>
                                     </div>
 
@@ -100,7 +100,7 @@
                                         <div class="col-md-10">
                                             @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Email", @id = "txtEmail_In_Manage" } })
                                             @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                                            <div style ="color:red"; id="notice_is_valid_email"></div>
+                                            <div style="color:red" ; id="notice_is_valid_email"></div>
                                         </div>
                                     </div>
 
@@ -133,7 +133,7 @@
                                                             new SelectListItem {Text = "Customer", Value = "2"},
                                                             new SelectListItem {Text = "Employee", Value = "1"},
                                                             new SelectListItem {Text = "Administrator", Value = "0"},
-                                                    }, "Value", "Text");
+}, "Value", "Text");
                                             }
                                             @Html.DropDownListFor(model => model.Role, selectListRole, "Select Role", htmlAttributes: new { @class = "form-control" })
                                             @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
@@ -150,7 +150,7 @@
                                                         {
                                                             new SelectListItem {Text = "Active", Value = "true"},
                                                             new SelectListItem {Text = "Disable", Value = "false"},
-                                                        }, "Value", "Text");
+}, "Value", "Text");
                                                 }
                                                 @Html.DropDownListFor(model => model.Status, selectListStatus, htmlAttributes: new { @class = "form-control" })
                                                 @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
@@ -171,3 +171,66 @@
         </div>
     </section>
 </div>
+
+@section ScriptConfig
+{
+
+    <link href="~/Scripts/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" />
+    <script src="~/Scripts/plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="~/Scripts/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+
+    <script>
+        //validation username
+        $(document).ready(function () {
+            $("#txtUsername_In_Manage").keyup(function () {
+                $.ajax({
+                    type: "POST",
+                    url: '/Values/CheckUsername',
+                    data: {
+                        username: $(this).val()
+                    },
+                    cache: false,
+                    datatype: "json",
+                }).done(function (data) {
+                    $("#notice_is_valid_username").empty();
+                    $("#notice_is_valid_username").append(data);
+                });
+            });
+        });
+        // validation password
+        $(document).ready(function () {
+            $("#txtPassword_In_Manage").keyup(function () {
+                $.ajax({
+                    type: "POST",
+                    url: '/Values/CheckPassword',
+                    data: {
+                        password: $(this).val()
+                    },
+                    cache: false,
+                    datatype: "json",
+                }).done(function (data) {
+                    $("#notice_is_valid_password").empty();
+                    $("#notice_is_valid_password").append(data);
+                });
+            });
+        });
+        // validation email
+        $(document).ready(function () {
+            $("#txtEmail_In_Manage").keyup(function () {
+                $.ajax({
+                    type: "POST",
+                    url: '/Values/CheckEmail',
+                    data: {
+                        emailAddress: $(this).val()
+                    },
+                    cache: false,
+                    datatype: "json",
+                }).done(function (data) {
+                    $("#notice_is_valid_email").empty();
+                    $("#notice_is_valid_email").append(data);
+                });
+            });
+        });
+    </script>
+
+}

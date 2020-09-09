@@ -118,7 +118,7 @@
                                                         {
                                                             new SelectListItem {Text = "Being sold", Value = "false"},
                                                             new SelectListItem {Text = "Stop selling", Value = "true"},
-                                                        }, "Value", "Text");
+}, "Value", "Text");
                                                 }
                                                 @Html.DropDownListFor(model => model.Discontinued, selectListDiscontinued, htmlAttributes: new { @class = "form-control" })
                                                 @Html.ValidationMessageFor(model => model.Discontinued, "", new { @class = "text-danger" })
@@ -140,3 +140,17 @@
         </div>
     </section>
 </div>
+
+@section ScriptConfig
+{
+    <script src="~/Scripts/plugins/summernote/summernote-bs4.min.js"></script>
+    <link href="~/Scripts/plugins/summernote/summernote-bs4.min.css" rel="stylesheet" />
+    <script>
+        // Summernote
+        $(function () {
+            $('#summernote').summernote()
+            $('#summernote_Specification').summernote()
+        })
+
+    </script>
+}

@@ -40,8 +40,8 @@
                                     <div class="form-group row">
                                         <label class="control-label col-md-2">Product Name</label>
                                         <div class="col-md-10">
-                                            <input type="hidden" name="ProductID" value="@ViewBag.ProductID">
-                                            <input type="text" name="ProductName" value="@ViewBag.ProductName" class="form-control" readonly>
+                                            <input type="hidden" name="ProductID" value="@ViewBag.Product.ProductID">
+                                            <input type="text" name="ProductName" value="@ViewBag.Product.ProductName" class="form-control" readonly>
                                             @Html.ValidationMessageFor(model => model.ProductID, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -82,7 +82,7 @@
 
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-success">Import</button>
-                                    <button type="reset" class="btn btn-default float-right" onclick="window.location = './'">Cancel</button>
+                                    <a class="btn btn-default float-right" href="@Url.Action("Index", "Importations")">Cancel</a>
                                 </div>
                             </div>
                         }
