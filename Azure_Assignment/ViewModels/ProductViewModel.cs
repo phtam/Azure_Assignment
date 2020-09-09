@@ -11,6 +11,8 @@ namespace Azure_Assignment.ViewModels
         public string ProductName { get; set; }
         public Nullable<decimal> UnitPrice { get; set; }
         public Nullable<decimal> OldUnitPrice { get; set; }
+        public int CategoryID { get; set; }
+        public string CategoryName { get; set; }
         public string ImgFileName { get; set; }
     }
 }

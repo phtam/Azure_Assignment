@@ -29,6 +29,7 @@ namespace Azure_Assignment.Controllers
         private List<ProductViewModel> getProduct()
         {
             var product = from pro in db.Products
+                          join cate in db.Categories on pro.CategoryID equals cate.CategoryID
                           from img in pro.ProductImage
                           select new ProductViewModel()
                           {
@@ -36,12 +37,25 @@ namespace Azure_Assignment.Controllers
                               ProductName = pro.ProductName,
                               UnitPrice = pro.UnitPrice,
                               OldUnitPrice = pro.OldUnitPrice,
+                              CategoryID = cate.CategoryID,
+                              CategoryName = cate.CategoryName,
                               ImgFileName = img.ImgFileName
                           };
             
             return product.ToList();
         }
         
+
+
+
+
+
+
+
+        public ActionResult DetailProduct()
+        {
+            return View();
+        }
 
         public ActionResult About()
         {

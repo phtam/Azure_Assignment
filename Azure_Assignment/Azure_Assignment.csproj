@@ -2797,6 +2797,7 @@
     <Content Include="Scripts\log-in-plugin\vendor\bootstrap\css\bootstrap.css.map" />
     <Content Include="Scripts\log-in-plugin\vendor\bootstrap\css\bootstrap.min.css.map" />
     <Content Include="Views\Home\demo.cshtml" />
+    <Content Include="Views\Home\DetailProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
