@@ -77,7 +77,20 @@ namespace Azure_Assignment.Controllers
             }
         }
 
+        public String CheckSaleCode(String code)
+        {
+            if (db.Sale.FirstOrDefault(s => s.Code == code) != null)
+            {
+                return "Code has been exist";
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         
+
 
 
 

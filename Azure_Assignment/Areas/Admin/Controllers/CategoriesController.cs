@@ -59,6 +59,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 if((extension == ".png" || extension == ".jpg" || extension == ".jpeg") == false)
                 {
                     ViewBag.Error = String.Format("The File, which extension is {0}, hasn't accepted. Please try again!", extension);
+                    ViewBag.ImageFileCategory = categories.ImageFile;
                     return View("Create");
                 }
 
@@ -66,23 +67,83 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 if (fileSize > 5120)
                 {
                     ViewBag.Error = "The File, which size greater than 5MB, hasn't accepted. Please try again!";
+                    ViewBag.ImageFileCategory = categories.ImageFile;
                     return View("Create");
                 }
 
-                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                categories.Picture = "~/public/uploadedFiles/categoryPictures/" + fileName;
+                fileName = fileName+ DateTime.Now.ToString("yymmssfff")  + extension; 
+                categories.Picture = "~/public/uploadedFiles/categoryPictures/" + fileName;  //categories.ImageFile.FileName;
                 string uploadFolderPath = Server.MapPath("~/public/uploadedFiles/categoryPictures/");
 
-                if (Directory.Exists(uploadFolderPath) == false) 
-                {
-                    Directory.CreateDirectory(uploadFolderPath);
-                }
+                 if (Directory.Exists(uploadFolderPath) == false)
+                 {
+                     Directory.CreateDirectory(uploadFolderPath);
+                 }
 
-                fileName = Path.Combine(uploadFolderPath, fileName);
+                 fileName = Path.Combine(uploadFolderPath, fileName);
 
-                categories.ImageFile.SaveAs(fileName);
-    
+                 categories.ImageFile.SaveAs(fileName);
                 
+
+                /**
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://156.67.222.163:21/NhomHoangTam/" + fileName);
+                request.Method = WebRequestMethods.Ftp.UploadFile;
+                // This example assumes the FTP site uses anonymous logon.
+                request.Credentials = new NetworkCredential("u657022003.ftpuser", "123456789-Aa");
+
+
+
+                // Copy the contents of the file to the request stream.
+                
+                byte[] fileContents;
+                using (Stream inputStream = categories.ImageFile.InputStream)
+                {
+                    MemoryStream memoryStream = inputStream as MemoryStream;
+                    if (memoryStream == null)
+                    {
+                        memoryStream = new MemoryStream();
+                        inputStream.CopyTo(memoryStream);
+                    }
+                    fileContents = memoryStream.ToArray();
+                }
+                //using (StreamReader sourceStream = new StreamReader(fileName))
+                //{
+                //    fileContents = Encoding.UTF8.GetBytes(sourceStream.ReadToEnd());
+                //}
+
+
+                request.ContentLength = fileContents.Length;
+                using (Stream requestStream = request.GetRequestStream())
+                {
+                    requestStream.Write(fileContents, 0, fileContents.Length);
+                }
+                using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+                {
+                    Console.WriteLine($"Upload File Complete, status {response.StatusDescription}");
+                }
+                **/
+
+
+                //var uploadurl = "ftp://156.67.222.163:21/NhomHoangTam/" + categories.ImageFile.FileName;
+                //var uploadfilename = categories.ImageFile.FileName;
+                //var username = "u657022003.ftpuser";
+                //var password = "123456789-Aa";
+                //Stream streamObj = categories.ImageFile.InputStream;
+                //byte[] buffer = new byte[categories.ImageFile.ContentLength];
+                //streamObj.Read(buffer, 0, buffer.Length);
+                //streamObj.Close();
+                //streamObj = null;
+                //string ftpurl = String.Format("{0}/{1}", uploadurl, uploadfilename);
+                //var requestObj = FtpWebRequest.Create(ftpurl) as FtpWebRequest;
+                //requestObj.Method = WebRequestMethods.Ftp.UploadFile;
+                //requestObj.Credentials = new NetworkCredential(username, password);
+                //Stream requestStream = requestObj.GetRequestStream();
+                //requestStream.Write(buffer, 0, buffer.Length);
+                //requestStream.Flush();
+                //requestStream.Close();
+                //requestObj = null;
+
+
                 db.Categories.Add(categories);
                 db.SaveChanges();
                 TempData["Notice_Create_Success"] = true;

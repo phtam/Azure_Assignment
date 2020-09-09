@@ -55,6 +55,7 @@ namespace Azure_Assignment.EF
         public string Code { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter discount of sale")]
+        [Range(maximum:Int64.MaxValue, minimum:1, ErrorMessage = "Discount must be greater than 0")]
         public Nullable<decimal> Discount { get; set; }
 
         public HttpPostedFileBase ImageFile { get; set; }

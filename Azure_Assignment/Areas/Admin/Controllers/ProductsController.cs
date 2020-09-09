@@ -57,6 +57,8 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                products.UnitsInStock = 0;
+                products.UnitsOnOrder = 0;
                 db.Products.Add(products);
                 db.SaveChanges();
                 TempData["Notice_Create_Success"] = true;

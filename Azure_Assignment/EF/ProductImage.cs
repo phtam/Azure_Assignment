@@ -11,10 +11,12 @@ namespace Azure_Assignment.EF
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class ProductImage
     {
         public int ImgID { get; set; }
+        [DisplayName("Image")]
         public string ImgFileName { get; set; }
         public Nullable<int> ProductID { get; set; }
     

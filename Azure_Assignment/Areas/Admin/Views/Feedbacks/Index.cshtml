@@ -9,12 +9,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Manage Blog feedbacks</h1>
+                    <h1 class="m-0 text-dark">Manage feedbacks</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="~/Admin/">Admin</a></li>
-                        <li class="breadcrumb-item active">Blog feedbacks</li>
+                        <li class="breadcrumb-item active">Feedbacks</li>
                     </ol>
                 </div>
             </div>
@@ -24,10 +24,10 @@
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Data of Blog feedbacks</h3>
+                    <h3 class="card-title">Data of feedbacks</h3>
                 </div>
                 <div class="card-body">
-                    <table id="tbl_Feedbacksss" class="table table-bordered table-striped">
+                    <table id="tbl_Feedbacks" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>
@@ -51,36 +51,36 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.FeedbackName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Email)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Content)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.FeedBackDate)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Products.ProductName)
-                                </td>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FeedbackName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Content)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FeedBackDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Products.ProductName)
+                                    </td>
 
-                                <td class="project-actions text-right">
-                                    <a class="btn btn-primary btn-sm" href="~/Admin/Feedbacks/Details/@item.FeedbackID">
-                                        <i class="fas fa-folder">
-                                        </i>
-                                        View
-                                    </a>
-                                    <a class="btn btn-danger btn-sm" href="~/Admin/Feedbacks/Delete/@item.FeedbackID">
-                                        <i class="fas fa-trash">
-                                        </i>
-                                        Delete
-                                    </a>
-                                </td>
-                            </tr>
+                                    <td class="project-actions text-right">
+                                        <a class="btn btn-primary btn-sm" href="~/Admin/Feedbacks/Details/@item.FeedbackID">
+                                            <i class="fas fa-folder">
+                                            </i>
+                                            View
+                                        </a>
+                                        <a class="btn btn-danger btn-sm" href="~/Admin/Feedbacks/Delete/@item.FeedbackID">
+                                            <i class="fas fa-trash">
+                                            </i>
+                                            Delete
+                                        </a>
+                                    </td>
+                                </tr>
                             }
 
                         </tbody>
@@ -91,3 +91,30 @@
     </section>
 </div>
 
+@section ScriptConfig
+{
+    <link href="~/Scripts/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/Scripts/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+    <script src="~/Scripts/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Scripts/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/Scripts/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script>
+
+        $("#tbl_Feedbacks").DataTable({
+            "responsive": true,
+            "autoWidth": false,
+            "aoColumns": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                { sWidth: '180px' }
+            ]
+        });
+
+
+
+    </script>
+}

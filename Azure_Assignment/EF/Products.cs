@@ -11,6 +11,7 @@ namespace Azure_Assignment.EF
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
     public partial class Products
@@ -31,6 +32,8 @@ namespace Azure_Assignment.EF
         public string ProductName { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter unit price")]
+        [DisplayName("Unit price")]
+        [Range(maximum: Int64.MaxValue, minimum: 0, ErrorMessage = "Unit price must be a number")]
         public Nullable<decimal> UnitPrice { get; set; }
 
         public Nullable<decimal> OldUnitPrice { get; set; }

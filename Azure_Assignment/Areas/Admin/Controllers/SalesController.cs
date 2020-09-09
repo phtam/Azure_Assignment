@@ -16,13 +16,13 @@ namespace Azure_Assignment.Areas.Admin.Controllers
     {
         private DataPalkia db = new DataPalkia();
 
-        // GET: Admin/Sales
+
         public ActionResult Index()
         {
             return View(db.Sale.ToList());
         }
 
-        // GET: Admin/Sales/Details/5
+
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,39 +37,43 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View(sale);
         }
 
-        // GET: Admin/Sales/Create
+
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/Sales/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "SaleID,SaleName,Content,StartDate,EndDate,Picture,Code,Discount,ImageFile")] Sale sale)
         {
             if (ModelState.IsValid)
             {
-                if(sale.StartDate > sale.EndDate)
+                if (db.Sale.FirstOrDefault(s => s.Code == sale.Code) != null)
+                {
+                    ViewBag.Error = "Code has been exist";
+                    return View(sale);
+                }
+
+                if (sale.StartDate > sale.EndDate)
                 {
                     ViewBag.NotiDate = "The start date must be before the end date.";
-                    return View("Create");
+                    return View(sale);
                 }
                 string fileName = Path.GetFileNameWithoutExtension(sale.ImageFile.FileName);
                 string extension = Path.GetExtension(sale.ImageFile.FileName);
                 if ((extension == ".png" || extension == ".jpg" || extension == ".jpeg") == false)
                 {
                     ViewBag.Error = String.Format("The File, which extension is {0}, hasn't accepted. Please try again!", extension);
-                    return View("Create");
+                    return View(sale);
                 }
 
                 long fileSize = ((sale.ImageFile.ContentLength) / 1024);
                 if (fileSize > 5120)
                 {
                     ViewBag.Error = "The File, which size greater than 5MB, hasn't accepted. Please try again!";
-                    return View("Create");
+                    return View(sale);
                 }
 
                 fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
