@@ -34,9 +34,9 @@ namespace Azure_Assignment.Providers
                     return "data:image/png;base64," + base64String;
                 }
             }
-            catch (WebException ex)
+            catch (WebException)
             {
-                throw new Exception((ex.Response as FtpWebResponse).StatusDescription);
+                return null;
             }
         }
 

@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.WebPages;
 using Azure_Assignment.EF;
 using Azure_Assignment.Providers;
 
@@ -80,7 +79,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", products.CategoryID);
-            ViewBag.SaleID = new SelectList(db.Sale, "SaleID", "SaleName", products.SaleID);
+            ViewBag.SaleID = new SelectList(db.Sale, "SaleID", "SaleName");
             ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "CompanyName", products.SupplierID);
             
             return View(products);
@@ -100,7 +99,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 return HttpNotFound();
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", products.CategoryID);
-            ViewBag.SaleID = new SelectList(db.Sale, "SaleID", "SaleName", products.SaleID);
+            ViewBag.SaleID = new SelectList(db.Sale, "SaleID", "SaleName");
             ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "CompanyName", products.SupplierID);
             return View(products);
         }
@@ -142,7 +141,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", products.CategoryID);
-            ViewBag.SaleID = new SelectList(db.Sale, "SaleID", "SaleName", products.SaleID);
+            ViewBag.SaleID = new SelectList(db.Sale, "SaleID", "SaleName");
             ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "CompanyName", products.SupplierID);
             return View(products);
         }

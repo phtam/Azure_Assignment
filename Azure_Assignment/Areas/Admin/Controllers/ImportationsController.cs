@@ -28,7 +28,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         {
             var product = db.Products.FirstOrDefault(p => p.ProductID == id);
             ViewBag.Product = product;
-            ViewBag.Username = "admin";
+            ViewBag.Username = "phtam342";
             return View();
         }
 

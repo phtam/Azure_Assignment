@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-<!-- Categories Section Begin -->
+
 <section class="categories">
     <div class="container-fluid">
         <div class="row">
@@ -10,7 +10,7 @@
                     foreach (var item in ViewBag.One_New_Category)
                     {
                         <div class="categories__item categories__large__item set-bg"
-                             data-setbg="@Url.Content(item.Picture)">
+                             data-setbg="@item.Picture">
                             <div class="categories__text">
                                 <h1>@item.CategoryName</h1>
                                 <p>
@@ -29,7 +29,7 @@
                         foreach (var item in ViewBag.Four_Categories)
                         {
                             <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                                <div class="categories__item set-bg" data-setbg="@Url.Content(item.Picture)">
+                                <div class="categories__item set-bg" data-setbg="@item.Picture">
                                     <div class="categories__text">
                                         <h3 style="font-weight:bold">@item.CategoryName</h3>
                                         <p>358 items</p>
@@ -44,8 +44,7 @@
         </div>
     </div>
 </section>
-<!-- Categories Section End -->
-<!-- Product Section Begin -->
+
 <section class="product spad">
     <div class="container">
         <div class="row">
@@ -73,10 +72,10 @@
                 {
                     <div class="col-lg-3 col-md-4 col-sm-6 mix @item.CategoryName">
                         <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="@Url.Content(item.ImgFileName)">
+                            <div class="product__item__pic set-bg" data-setbg="@item.Thumbnail">
                                 <div class="label new">New</div>
                                 <ul class="product__hover">
-                                    <li><a href="@Url.Content(item.ImgFileName)" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                    <li><a href="@item.Thumbnail" class="image-popup"><span class="arrow_expand"></span></a></li>
                                     <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                     <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                 </ul>
@@ -112,6 +111,7 @@
                     @{
                         foreach (var item in ViewBag.Sale)
                         {
+                            if (item.SaleName == "No Sale") { continue; }
                             <div class="banner__item"  >
                                 <div class="banner__text">
                                     <span>@item.Code</span>
@@ -128,8 +128,7 @@
         </div>
     </div>
 </section>
-<!-- Banner Section End -->
-<!-- Trend Section Begin -->
+
 <section class="trend spad">
     <div class="container">
         <div class="row">
@@ -143,7 +142,7 @@
                         {
                             <div class="trend__item">
                                 <div class="trend__item__pic">
-                                    <img src="@Url.Content(item.ImgFileName)" alt="" style="max-width:100px">
+                                    <img src="@item.Thumbnail" alt="" style="max-width:100px">
                                 </div>
                                 <div class="trend__item__text">
                                     <h6><a href="#" style="color:black">@item.ProductName</a></h6>
@@ -174,7 +173,7 @@
                         {
                             <div class="trend__item">
                                 <div class="trend__item__pic">
-                                    <img src="@Url.Content(item.ImgFileName)" alt="" style="max-width:100px">
+                                    <img src="@item.Thumbnail" alt="" style="max-width:100px">
                                 </div>
                                 <div class="trend__item__text">
                                     <h6><a href="#" style="color:black">@item.ProductName</a></h6>
