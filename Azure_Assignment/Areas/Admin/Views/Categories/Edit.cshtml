@@ -54,7 +54,7 @@
                                         @Html.LabelFor(model => model.Picture, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
                                         <div class="col-sm-10">
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input" name="ImageFile" id="ImageFile" > @*//customFile*@
+                                                <input type="file" class="custom-file-input" name="ImageFile" id="ImageFile"> @*//customFile*@
                                                 <label class="custom-file-label" for="customFile">Choose file</label>
                                             </div>
                                         </div>
@@ -76,3 +76,6 @@
     </section>
 </div>
 
+@section ScriptConfig{
+    <script src="~/Scripts/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+}

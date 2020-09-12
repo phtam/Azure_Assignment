@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
@@ -20,9 +21,24 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         // GET: Admin/Categories
         public ActionResult Index()
         {
-            
+
+            //System.Net.FtpWebRequest tmpReq = (System.Net.FtpWebRequest)System.Net.FtpWebRequest.Create("ftp://domain.com/file.txt");
+            //tmpReq.Credentials = new System.Net.NetworkCredential("userName", "Password");
+
+            //using (System.Net.WebResponse tmpRes = tmpReq.GetResponse())
+            //{
+            //    using (System.IO.Stream tmpStream = tmpRes.GetResponseStream())
+            //    {
+            //        using (System.IO.TextReader tmpReader = new System.IO.StreamReader(tmpStream))
+            //        {
+            //            string fileContents = tmpReader.ReadToEnd();
+            //        }
+            //    }
+            //}
             return View(db.Categories.ToList());
         }
+
+        
 
         // GET: Admin/Categories/Details/5
         public ActionResult Details(int? id)
@@ -70,7 +86,8 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                     ViewBag.ImageFileCategory = categories.ImageFile;
                     return View("Create");
                 }
-
+                categories.Picture = categories.ImageFile.FileName;  //categories.ImageFile.FileName;
+                /**
                 fileName = fileName+ DateTime.Now.ToString("yymmssfff")  + extension; 
                 categories.Picture = "~/public/uploadedFiles/categoryPictures/" + fileName;  //categories.ImageFile.FileName;
                 string uploadFolderPath = Server.MapPath("~/public/uploadedFiles/categoryPictures/");
@@ -82,19 +99,13 @@ namespace Azure_Assignment.Areas.Admin.Controllers
 
                  fileName = Path.Combine(uploadFolderPath, fileName);
 
-                 categories.ImageFile.SaveAs(fileName);
-                
+                 categories.ImageFile.SaveAs(fileName);**/
 
-                /**
-                FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://156.67.222.163:21/NhomHoangTam/" + fileName);
+
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://156.67.222.163:21/NhomHoangTam/imgCategories" + categories.ImageFile.FileName);
                 request.Method = WebRequestMethods.Ftp.UploadFile;
-                // This example assumes the FTP site uses anonymous logon.
                 request.Credentials = new NetworkCredential("u657022003.ftpuser", "123456789-Aa");
 
-
-
-                // Copy the contents of the file to the request stream.
-                
                 byte[] fileContents;
                 using (Stream inputStream = categories.ImageFile.InputStream)
                 {
@@ -106,11 +117,11 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                     }
                     fileContents = memoryStream.ToArray();
                 }
+
                 //using (StreamReader sourceStream = new StreamReader(fileName))
                 //{
                 //    fileContents = Encoding.UTF8.GetBytes(sourceStream.ReadToEnd());
                 //}
-
 
                 request.ContentLength = fileContents.Length;
                 using (Stream requestStream = request.GetRequestStream())
@@ -121,28 +132,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 {
                     Console.WriteLine($"Upload File Complete, status {response.StatusDescription}");
                 }
-                **/
-
-
-                //var uploadurl = "ftp://156.67.222.163:21/NhomHoangTam/" + categories.ImageFile.FileName;
-                //var uploadfilename = categories.ImageFile.FileName;
-                //var username = "u657022003.ftpuser";
-                //var password = "123456789-Aa";
-                //Stream streamObj = categories.ImageFile.InputStream;
-                //byte[] buffer = new byte[categories.ImageFile.ContentLength];
-                //streamObj.Read(buffer, 0, buffer.Length);
-                //streamObj.Close();
-                //streamObj = null;
-                //string ftpurl = String.Format("{0}/{1}", uploadurl, uploadfilename);
-                //var requestObj = FtpWebRequest.Create(ftpurl) as FtpWebRequest;
-                //requestObj.Method = WebRequestMethods.Ftp.UploadFile;
-                //requestObj.Credentials = new NetworkCredential(username, password);
-                //Stream requestStream = requestObj.GetRequestStream();
-                //requestStream.Write(buffer, 0, buffer.Length);
-                //requestStream.Flush();
-                //requestStream.Close();
-                //requestObj = null;
-
+                
 
                 db.Categories.Add(categories);
                 db.SaveChanges();
@@ -254,15 +244,26 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             try
             {
                 Categories categories = db.Categories.Find(id);
+                /**
                 if (!categories.Picture.IsEmpty())
                 {
                     System.IO.File.Delete(Server.MapPath(categories.Picture));
                 }
+                **/
+
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://156.67.222.163:21/NhomHoangTam/imgCategories" + categories.Picture);
+                request.Credentials = new NetworkCredential("u657022003.ftpuser", "123456789-Aa");
+                request.Method = WebRequestMethods.Ftp.DeleteFile;
+                
+                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+                //Console.WriteLine("Delete status: {0}", response.StatusDescription);
+                response.Close();
+
                 db.Categories.Remove(categories);
                 db.SaveChanges();
                 TempData["Notice_Delete_Success"] = true;
             }
-            catch (Exception)
+            catch (ArgumentException)
             {
                 TempData["Notice_Delete_Fail"] = true;
             }

@@ -14,5 +14,7 @@ namespace Azure_Assignment.ViewModels
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }
         public string ImgFileName { get; set; }
+        public int SaleID { get; set; }
+        public string SaleName { get; set; }
     }
 }
