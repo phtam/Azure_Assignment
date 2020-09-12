@@ -12,7 +12,6 @@ namespace Azure_Assignment.EF
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
 
     public partial class Feedbacks
     {
@@ -25,7 +24,7 @@ namespace Azure_Assignment.EF
         [DisplayName("Feedback date")]
         public Nullable<System.DateTime> FeedBackDate { get; set; }
         public Nullable<int> ProductID { get; set; }
-    
+
         public virtual Products Products { get; set; }
     }
 }

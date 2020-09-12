@@ -29,12 +29,12 @@ namespace Azure_Assignment.EF
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter unit price")]
         [DisplayName("Unit price")]
         [Range(maximum: Int64.MaxValue, minimum: 1, ErrorMessage = "Unit price must be a number")]
-        public Nullable<decimal> UnitPrice { get; set; }
+        public Nullable<int> UnitPrice { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter quantity")]
         [Range(maximum: Int64.MaxValue, minimum: 1, ErrorMessage = "Quantity must be a number")]
         public Nullable<int> Quantity { get; set; }
-    
+
         public virtual Products Products { get; set; }
         public virtual Users Users { get; set; }
     }

@@ -2,11 +2,7 @@
 @{
     Layout = null;
 }
+    <img src="@ViewBag.tmp" />
 
-    <img runat="server" id="image" />
 
-    <script>
-        image.src = "data:image/jpg;base64," + Convert.ToBase64String(@TempData["Image"]); 
-
-    </script>
 

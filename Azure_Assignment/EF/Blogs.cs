@@ -41,7 +41,7 @@ namespace Azure_Assignment.EF
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-ddTHH:mm:ss}")]
         [DisplayName("Writing date")]
         public Nullable<System.DateTime> WritingDate { get; set; }
-    
+
         public virtual BlogCategories BlogCategories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BlogComments> BlogComments { get; set; }

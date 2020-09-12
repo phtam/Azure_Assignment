@@ -13,6 +13,7 @@ namespace Azure_Assignment.EF
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+    using System.Web;
 
     public partial class Products
     {
@@ -29,39 +30,40 @@ namespace Azure_Assignment.EF
         public int ProductID { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter product name")]
+        [DisplayName("Product Name")]
         public string ProductName { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter unit price")]
         [DisplayName("Unit price")]
         [Range(maximum: Int64.MaxValue, minimum: 0, ErrorMessage = "Unit price must be a number")]
-        public Nullable<decimal> UnitPrice { get; set; }
+        public Nullable<int> UnitPrice { get; set; }
 
-        public Nullable<decimal> OldUnitPrice { get; set; }
+        [DisplayName("Old unit price")]
+        [Range(maximum: Int64.MaxValue, minimum: 0, ErrorMessage = "Unit price must be a number")]
+        public Nullable<int> OldUnitPrice { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter short description")]
-        [StringLength(maximumLength: 250, MinimumLength = 1, ErrorMessage = "Short description must be less than 250 characters")]
+        [StringLength(maximumLength: 1000, MinimumLength = 1, ErrorMessage = "Short description must be less than 1000 characters")]
+        [DisplayName("Short description")]
         public string ShortDescription { get; set; }
+
+        public string Thumbnail { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter description")]
         public string Description { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter specification")]
         public string Specification { get; set; }
-
         public Nullable<int> UnitsInStock { get; set; }
-
         public Nullable<int> UnitsOnOrder { get; set; }
-
         public Nullable<int> SupplierID { get; set; }
-
         public Nullable<int> CategoryID { get; set; }
-
         public Nullable<int> SaleID { get; set; }
-
         public Nullable<bool> Discontinued { get; set; }
-    
-        public virtual Categories Categories { get; set; }
 
+        public HttpPostedFileBase ImageFile { get; set; }
+
+        public virtual Categories Categories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Exportation> Exportation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

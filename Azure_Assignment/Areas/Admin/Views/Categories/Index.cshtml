@@ -57,14 +57,7 @@
                                         @Html.DisplayFor(modelItem => item.Description)
                                     </td>
                                     <td>
-                                        @if (!item.Picture.IsEmpty())
-                                        {
-                                            <img src="@Url.Content(item.Picture)" width="200" height="100" />
-                                        }
-                                        else
-                                        {
-                                            <p>@item.Picture</p>
-                                        }
+                                         <img src="@item.Picture" width="200" height="100" alt="" />
                                     </td>
                                     <td class="project-actions text-right">
                                         <a class="btn btn-primary btn-sm" href="~/Admin/Categories/Details/@item.CategoryID">

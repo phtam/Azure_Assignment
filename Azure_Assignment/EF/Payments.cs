@@ -28,7 +28,7 @@ namespace Azure_Assignment.EF
         [StringLength(maximumLength: 50, MinimumLength = 5, ErrorMessage = "Payment name must be between 5 to 50")]
         [DisplayName("Payment name")]
         public string PaymentName { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Orders> Orders { get; set; }
     }

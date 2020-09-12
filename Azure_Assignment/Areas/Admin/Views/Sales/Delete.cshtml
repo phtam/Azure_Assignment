@@ -122,7 +122,7 @@
                                     </div>
                                     @if (!Model.Picture.IsEmpty())
                                     {
-                                        <img class="col-sm-10" id="imageDetail" src="@Url.Content(Model.Picture)" />
+                                        <img class="col-sm-10" id="imageDetail" src="@Model.Picture" style="max-width:300px" />
                                     }
                                     else
                                     {

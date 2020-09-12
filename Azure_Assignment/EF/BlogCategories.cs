@@ -28,7 +28,7 @@ namespace Azure_Assignment.EF
         [StringLength(maximumLength: 50, MinimumLength = 5, ErrorMessage = "BlogCategory name must be between 5 to 50")]
         [DisplayName("BlogCategory name")]
         public string BlogCategoryName { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Blogs> Blogs { get; set; }
     }

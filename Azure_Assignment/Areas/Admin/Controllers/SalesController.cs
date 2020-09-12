@@ -1,25 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
 using Azure_Assignment.EF;
+using Azure_Assignment.Providers;
 
 namespace Azure_Assignment.Areas.Admin.Controllers
 {
     public class SalesController : Controller
     {
         private DataPalkia db = new DataPalkia();
-
+        private FTPServerProvider ftp = new FTPServerProvider();
+        private ImageProvider imgProvider = new ImageProvider();
+        private string ftpChild = "imgSales";
 
         public ActionResult Index()
         {
-            return View(db.Sale.ToList());
+            var list = db.Sale.ToList();
+            foreach (var item in list)
+            {
+                item.Picture = ftp.Get(item.Picture, ftpChild);
+            }
+            return View(list);
         }
 
 
@@ -30,6 +35,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Sale sale = db.Sale.Find(id);
+            sale.Picture = ftp.Get(sale.Picture, ftpChild);
             if (sale == null)
             {
                 return HttpNotFound();
@@ -63,31 +69,16 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 }
                 string fileName = Path.GetFileNameWithoutExtension(sale.ImageFile.FileName);
                 string extension = Path.GetExtension(sale.ImageFile.FileName);
-                if ((extension == ".png" || extension == ".jpg" || extension == ".jpeg") == false)
+
+                if (imgProvider.Validate(sale.ImageFile) != null)
                 {
-                    ViewBag.Error = String.Format("The File, which extension is {0}, hasn't accepted. Please try again!", extension);
+                    ViewBag.Error = imgProvider.Validate(sale.ImageFile);
                     return View(sale);
                 }
 
-                long fileSize = ((sale.ImageFile.ContentLength) / 1024);
-                if (fileSize > 5120)
-                {
-                    ViewBag.Error = "The File, which size greater than 5MB, hasn't accepted. Please try again!";
-                    return View(sale);
-                }
+                sale.Picture = fileName + DateTime.Now.ToString("yymmssfff") + extension;
 
-                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                sale.Picture = "~/public/uploadedFiles/salePictures/" + fileName;
-                string uploadFolderPath = Server.MapPath("~/public/uploadedFiles/salePictures/");
-
-                if (Directory.Exists(uploadFolderPath) == false)
-                {
-                    Directory.CreateDirectory(uploadFolderPath);
-                }
-
-                fileName = Path.Combine(uploadFolderPath, fileName);
-
-                sale.ImageFile.SaveAs(fileName);
+                ftp.Add( sale.Picture, ftpChild, sale.ImageFile );
 
                 db.Sale.Add(sale);
                 db.SaveChanges();
@@ -98,7 +89,6 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View(sale);
         }
 
-        // GET: Admin/Sales/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -114,9 +104,8 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View(sale);
         }
 
-        // POST: Admin/Sales/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "SaleID,SaleName,Content,StartDate,EndDate,Picture,Code,Discount,ImageFile")] Sale sale, String imageOldFile)
@@ -128,47 +117,26 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                     ViewBag.NotiDate = "The start date must be before the end date.";
                     return View("Edit");
                 }
-                string uploadFolderPath = Server.MapPath("~/public/uploadedFiles/salePictures/");
-                if (sale.ImageFile == null)
+                
+                if (sale.ImageFile != null)
                 {
-                    sale.Picture = imageOldFile;
+                    string fileName = Path.GetFileNameWithoutExtension(sale.ImageFile.FileName);
+                    string extension = Path.GetExtension(sale.ImageFile.FileName);
+
+                    if (imgProvider.Validate(sale.ImageFile) != null)
+                    {
+                        ViewBag.Error = imgProvider.Validate(sale.ImageFile);
+                        return View("Edit");
+                    }
+
+                    sale.Picture = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    ftp.Update(sale.Picture, ftpChild, sale.ImageFile, imageOldFile); 
                 }
                 else
                 {
-                    if (!imageOldFile.IsEmpty())
-                    {
-                        System.IO.File.Delete(Server.MapPath(imageOldFile));
-                    }
-
-                    string fileName = Path.GetFileNameWithoutExtension(sale.ImageFile.FileName);
-
-                    string extension = Path.GetExtension(sale.ImageFile.FileName);
-                    if ((extension == ".png" || extension == ".jpg" || extension == ".jpeg") == false)
-                    {
-                        ViewBag.Error = String.Format("The File, which extension is {0}, hasn't accepted. Please try again!", extension);
-                        return View("Edit");
-                    }
-
-                    long fileSize = ((sale.ImageFile.ContentLength) / 1024);
-                    if (fileSize > 5120)
-                    {
-                        ViewBag.Error = "The File, which size greater than 5MB, hasn't accepted. Please try again!";
-                        return View("Edit");
-                    }
-
-                    fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                    sale.Picture = "~/public/uploadedFiles/salePictures/" + fileName;
-
-
-                    if (Directory.Exists(uploadFolderPath) == false)
-                    {
-                        Directory.CreateDirectory(uploadFolderPath);
-                    }
-
-                    fileName = Path.Combine(uploadFolderPath, fileName);
-
-                    sale.ImageFile.SaveAs(fileName);
+                    sale.Picture = imageOldFile;
                 }
+
                 db.Entry(sale).State = EntityState.Modified;
                 db.SaveChanges();
                 Session.Remove("OldImage");
@@ -179,7 +147,6 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View(sale);
         } 
 
-        // GET: Admin/Sales/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -187,6 +154,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Sale sale = db.Sale.Find(id);
+            sale.Picture = ftp.Get(sale.Picture, ftpChild);
             if (sale == null)
             {
                 return HttpNotFound();
@@ -194,7 +162,6 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View(sale);
         }
 
-        // POST: Admin/Sales/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -202,10 +169,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             try
             {
                 Sale sale = db.Sale.Find(id);
-                if (!sale.Picture.IsEmpty())
-                {
-                    System.IO.File.Delete(Server.MapPath(sale.Picture));
-                }
+                ftp.Delete(sale.Picture, ftpChild);
                 db.Sale.Remove(sale);
                 db.SaveChanges();
                 TempData["Notice_Delete_Success"] = true;

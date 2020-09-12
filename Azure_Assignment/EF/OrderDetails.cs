@@ -16,7 +16,7 @@ namespace Azure_Assignment.EF
     {
         public int OrderID { get; set; }
         public int ProductID { get; set; }
-        public Nullable<decimal> UnitPrice { get; set; }
+        public Nullable<int> UnitPrice { get; set; }
         public Nullable<int> Quantity { get; set; }
     
         public virtual Orders Orders { get; set; }

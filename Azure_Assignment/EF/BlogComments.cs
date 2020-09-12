@@ -25,7 +25,7 @@ namespace Azure_Assignment.EF
         [DisplayName("Commenting date")]
         public Nullable<System.DateTime> CommentingDate { get; set; }
         public Nullable<int> BlogID { get; set; }
-    
+
         public virtual Blogs Blogs { get; set; }
     }
 }

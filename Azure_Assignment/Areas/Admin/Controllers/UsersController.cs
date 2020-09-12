@@ -1,28 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
-using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
 using Azure_Assignment.EF;
 using Scrypt;
+using Azure_Assignment.Providers;
 
 namespace Azure_Assignment.Areas.Admin.Controllers
 {
     public class UsersController : Controller
     {
         private DataPalkia db = new DataPalkia();
+        private FTPServerProvider ftp = new FTPServerProvider();
+        private ImageProvider imgProvider = new ImageProvider();
+        private string ftpChild = "imgUsers";
 
-        //[Authorize(Roles = "0")]
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+            var list = db.Users.ToList();
+            foreach (var item in list)
+            {
+                item.Picture = ftp.Get(item.Picture, ftpChild);
+            }
+            return View(list);
         }
 
 
@@ -33,6 +36,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Users users = db.Users.Find(id);
+            users.Picture = ftp.Get(users.Picture, ftpChild);
             if (users == null)
             {
                 return HttpNotFound();
@@ -107,64 +111,14 @@ namespace Azure_Assignment.Areas.Admin.Controllers
 
                 string fileName = Path.GetFileNameWithoutExtension(users.ImageFile.FileName);
                 string extension = Path.GetExtension(users.ImageFile.FileName);
-                if ((extension == ".png" || extension == ".jpg" || extension == ".jpeg") == false)
+                if (imgProvider.Validate(users.ImageFile) != null)
                 {
-                    ViewBag.Error = String.Format("The File, which extension is {0}, hasn't accepted. Please try again!", extension);
+                    ViewBag.Error = imgProvider.Validate(users.ImageFile);
                     return View("Create");
                 }
 
-                long fileSize = ((users.ImageFile.ContentLength) / 1024);
-                if (fileSize > 5120)
-                {
-                    ViewBag.Error = "The File, which size greater than 5MB, hasn't accepted. Please try again!";
-                    return View("Create");
-                }
-
-                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension; 
-                users.Picture = "~/public/uploadedFiles/userPictures/" + fileName;
-                string uploadFolderPath = Server.MapPath("~/public/uploadedFiles/userPictures/");
-
-                if (Directory.Exists(uploadFolderPath) == false)
-                {
-                    Directory.CreateDirectory(uploadFolderPath);
-                }
-
-                fileName = Path.Combine(uploadFolderPath, fileName);
-
-                users.ImageFile.SaveAs(fileName);
-
-                /**
-                FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://156.67.222.163:21/NhomHoangTam/" + fileName);
-                request.Method = WebRequestMethods.Ftp.UploadFile;
-                // This example assumes the FTP site uses anonymous logon.
-                request.Credentials = new NetworkCredential("u657022003.ftpuser", "123456789-Aa");
-                // Copy the contents of the file to the request stream.
-                byte[] fileContents;
-                using (Stream inputStream = users.ImageFile.InputStream)
-                {
-                    MemoryStream memoryStream = inputStream as MemoryStream;
-                    if (memoryStream == null)
-                    {
-                        memoryStream = new MemoryStream();
-                        inputStream.CopyTo(memoryStream);
-                    }
-                    fileContents = memoryStream.ToArray();
-                }
-                //using (StreamReader sourceStream = new StreamReader(fileName))
-                //{
-                //    fileContents = Encoding.UTF8.GetBytes(sourceStream.ReadToEnd());
-                //}
-                request.ContentLength = fileContents.Length;
-                using (Stream requestStream = request.GetRequestStream())
-                {
-                    requestStream.Write(fileContents, 0, fileContents.Length);
-                }
-                using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
-                {
-                    Console.WriteLine($"Upload File Complete, status {response.StatusDescription}");
-                }
-                
-                **/
+                users.Picture = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                ftp.Add(users.Picture, ftpChild, users.ImageFile);
 
                 ScryptEncoder encoder = new ScryptEncoder();
                 users.Password = encoder.Encode(users.Password);
@@ -234,39 +188,16 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 }
                 else
                 {
-                    if (!imageOldFile_User.IsEmpty())
-                    {
-                        System.IO.File.Delete(Server.MapPath(imageOldFile_User));
-                    }
-
                     string fileName = Path.GetFileNameWithoutExtension(users.ImageFile.FileName);
-
                     string extension = Path.GetExtension(users.ImageFile.FileName);
-                    if ((extension == ".png" || extension == ".jpg" || extension == ".jpeg") == false)
+                    if (imgProvider.Validate(users.ImageFile) != null)
                     {
-                        ViewBag.Error = String.Format("The File, which extension is {0}, hasn't accepted. Please try again!", extension);
-                        return View("Edit");
+                        ViewBag.Error = imgProvider.Validate(users.ImageFile);
+                        return View("Create");
                     }
 
-                    long fileSize = ((users.ImageFile.ContentLength) / 1024);
-                    if (fileSize > 5120)
-                    {
-                        ViewBag.Error = "The File, which size greater than 5MB, hasn't accepted. Please try again!";
-                        return View("Edit");
-                    }
-
-                    fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                    users.Picture = "~/public/uploadedFiles/userPictures/" + fileName;
-
-
-                    if (Directory.Exists(uploadFolderPath) == false)
-                    {
-                        Directory.CreateDirectory(uploadFolderPath);
-                    }
-
-                    fileName = Path.Combine(uploadFolderPath, fileName);
-
-                    users.ImageFile.SaveAs(fileName);
+                    users.Picture = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    ftp.Update(users.Picture, ftpChild, users.ImageFile, imageOldFile_User);
                 }
 
                 db.Entry(users).State = EntityState.Modified;
@@ -288,6 +219,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Users users = db.Users.Find(id);
+            users.Picture = ftp.Get(users.Picture, ftpChild);
             if (users == null)
             {
                 return HttpNotFound();
@@ -303,10 +235,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             try
             {
                 Users users = db.Users.Find(id);
-                if (!users.Picture.IsEmpty())
-                {
-                    System.IO.File.Delete(Server.MapPath(users.Picture));
-                }
+                ftp.Delete(users.Picture, ftpChild);
                 db.Users.Remove(users);
                 db.SaveChanges();
                 TempData["Notice_Delete_Success"] = true;

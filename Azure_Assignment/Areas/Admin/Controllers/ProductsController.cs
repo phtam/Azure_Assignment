@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.IO;
@@ -9,21 +8,28 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
 using Azure_Assignment.EF;
+using Azure_Assignment.Providers;
 
 namespace Azure_Assignment.Areas.Admin.Controllers
 {
     public class ProductsController : Controller
     {
         private DataPalkia db = new DataPalkia();
+        private FTPServerProvider ftp = new FTPServerProvider();
+        private ImageProvider imgProvider = new ImageProvider();
+        private string ftpChild = "imgThumbnailProducts";
 
-        // GET: Admin/Products
         public ActionResult Index()
         {
             var products = db.Products.Include(p => p.Categories).Include(p => p.Sale).Include(p => p.Suppliers);
+            
+            foreach (var item in products)
+            {
+                item.Thumbnail = ftp.Get(item.Thumbnail, ftpChild);
+            }
             return View(products.ToList());
         }
 
-        // GET: Admin/Products/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -31,6 +37,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Products products = db.Products.Find(id);
+            products.Thumbnail = ftp.Get(products.Thumbnail, ftpChild);
             if (products == null)
             {
                 return HttpNotFound();
@@ -38,7 +45,6 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View(products);
         }
 
-        // GET: Admin/Products/Create
         public ActionResult Create()
         {
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
@@ -47,16 +53,25 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View();
         }
 
-        // POST: Admin/Products/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create([Bind(Include = "ProductID,ProductName,UnitPrice,OldUnitPrice,ShortDescription,Description,Specification,UnitsInStock,UnitsOnOrder,SupplierID,CategoryID,SaleID,Discontinued")] Products products)
+        public ActionResult Create([Bind(Include = "ProductID,ProductName,UnitPrice,OldUnitPrice,Thumbnail,ShortDescription,Description,Specification,UnitsInStock,UnitsOnOrder,SupplierID,CategoryID,SaleID,Discontinued,ImageFile")] Products products)
         {
             if (ModelState.IsValid)
             {
+                string fileName = Path.GetFileNameWithoutExtension(products.ImageFile.FileName);
+                string extension = Path.GetExtension(products.ImageFile.FileName);
+
+                if (imgProvider.Validate(products.ImageFile) != null)
+                {
+                    ViewBag.Error = imgProvider.Validate(products.ImageFile);
+                    return View("Create");
+                }
+                products.Thumbnail = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+
+                ftp.Add(products.Thumbnail, ftpChild, products.ImageFile);
+
                 products.UnitsInStock = 0;
                 products.UnitsOnOrder = 0;
                 db.Products.Add(products);
@@ -79,6 +94,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Products products = db.Products.Find(id);
+            Session["old_Thumbnail"] = products.Thumbnail;
             if (products == null)
             {
                 return HttpNotFound();
@@ -89,21 +105,40 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View(products);
         }
 
-        // POST: Admin/Products/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit([Bind(Include = "ProductID,ProductName,UnitPrice,OldUnitPrice,ShortDescription,Description,Specification,UnitsInStock,UnitsOnOrder,SupplierID,CategoryID,SaleID,Discontinued")] Products products)
+        public ActionResult Edit([Bind(Include = "ProductID,ProductName,UnitPrice,OldUnitPrice,Thumbnail,ShortDescription,Description,Specification,UnitsInStock,UnitsOnOrder,SupplierID,CategoryID,SaleID,Discontinued,ImageFile")] Products products, String old_Thumbnail)
         {
             if (ModelState.IsValid)
             {
+                if (products.ImageFile != null)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(products.ImageFile.FileName);
+                    string extension = Path.GetExtension(products.ImageFile.FileName);
+
+                    if (imgProvider.Validate(products.ImageFile) != null)
+                    {
+                        ViewBag.Error = imgProvider.Validate(products.ImageFile);
+                        return View("Edit");
+                    }
+
+                    products.Thumbnail = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    
+                    ftp.Update(products.Thumbnail, ftpChild, products.ImageFile, old_Thumbnail);
+                }
+                else
+                {
+                    products.Thumbnail = old_Thumbnail;
+                }                
+
                 db.Entry(products).State = EntityState.Modified;
                 db.Entry(products).Property(x => x.UnitsInStock).IsModified = false;
                 db.Entry(products).Property(x => x.UnitsOnOrder).IsModified = false;
                 db.SaveChanges();
                 TempData["Notice_Save_Success"] = true;
+                Session.Remove("old_Thumbnail");
                 return RedirectToAction("Index");
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", products.CategoryID);
@@ -112,7 +147,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View(products);
         }
 
-        // GET: Admin/Products/Delete/5
+
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -120,6 +155,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Products products = db.Products.Find(id);
+            products.Thumbnail = ftp.Get(products.Thumbnail, ftpChild);
             if (products == null)
             {
                 return HttpNotFound();
@@ -127,7 +163,6 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View(products);
         }
 
-        // POST: Admin/Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -135,6 +170,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             try
             {
                 Products products = db.Products.Find(id);
+                ftp.Delete(products.Thumbnail, ftpChild);
                 db.Products.Remove(products);
                 db.SaveChanges();
                 TempData["Notice_Delete_Success"] = true;
@@ -158,8 +194,12 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
+
             var productImage = db.ProductImage.Include(p => p.Products).Where(m => m.ProductID == id);
+            foreach (var item in productImage)
+            {
+                item.ImgFileName = ftp.Get(item.ImgFileName, "imgProducts");
+            }
             string[] proinfo = new string[] { id.ToString() , db.Products.Find(id).ProductName.ToString() };
             ViewBag.ProInfo = proinfo;
 
@@ -169,37 +209,22 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult AddImage(int ProductID, HttpPostedFileBase ImageFile)
         {
-            
             ProductImage proImage = new EF.ProductImage();
             proImage.ProductID = ProductID;
 
             string fileName = Path.GetFileNameWithoutExtension(ImageFile.FileName);
             string extension = Path.GetExtension(ImageFile.FileName);
-            if ((extension == ".png" || extension == ".jpg" || extension == ".jpeg") == false)
+            string ftpChild = "imgProducts";
+            
+            if (imgProvider.Validate(ImageFile) != null)
             {
-                TempData["Error"] = String.Format("The File, which extension is {0}, hasn't accepted. Please try again!", extension);
+                TempData["Error"] = imgProvider.Validate(ImageFile);
                 return RedirectToAction("ProductImage", "Products", new { @id = proImage.ProductID });
             }
 
-            long fileSize = ((ImageFile.ContentLength) / 1024);
-            if (fileSize > 5120)
-            {
-                TempData["Error"] = "The File, which size greater than 5MB, hasn't accepted. Please try again!";
-                return RedirectToAction("ProductImage", "Products", new { @id = proImage.ProductID });
-            }
+            proImage.ImgFileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
 
-            fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-            proImage.ImgFileName = "~/public/uploadedFiles/productPictures/" + fileName;
-            string uploadFolderPath = Server.MapPath("~/public/uploadedFiles/productPictures/");
-
-            if (Directory.Exists(uploadFolderPath) == false)
-            {
-                Directory.CreateDirectory(uploadFolderPath);
-            }
-
-            fileName = Path.Combine(uploadFolderPath, fileName);
-
-            ImageFile.SaveAs(fileName);
+            ftp.Add(proImage.ImgFileName, ftpChild, ImageFile);
 
             db.ProductImage.Add(proImage);
             db.SaveChanges();
@@ -211,10 +236,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         public ActionResult DeleteImage(int proImage, int proID)
         {
             ProductImage productImage = db.ProductImage.Find(proImage);
-            if (!productImage.ImgFileName.IsEmpty())
-            {
-                System.IO.File.Delete(Server.MapPath(productImage.ImgFileName));
-            }
+            ftp.Delete(productImage.ImgFileName, "imgProducts");
 
             db.ProductImage.Remove(productImage);
             db.SaveChanges();

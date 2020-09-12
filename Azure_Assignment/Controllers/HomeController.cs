@@ -1,5 +1,4 @@
 ﻿using Azure_Assignment.EF;
-using Azure_Assignment.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Azure_Assignment.DAO;
+using System.Data;
 
 namespace Azure_Assignment.Controllers
 {
@@ -28,38 +28,8 @@ namespace Azure_Assignment.Controllers
             ViewBag.Best_Seller = productDAO.getBestSellerProduct().Take(3);
             ViewBag.Sale_Product = productDAO.getSaleProduct().Take(3);
 
-
-
             return View();
         }
-
-        
-
-
-        //public ActionResult demo()
-        //{
-        //    String fileName = "tivi_led_samsung.jpg";
-        //    FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://156.67.222.163:21/NhomHoangTam/" + fileName);
-        //    request.Method = WebRequestMethods.Ftp.DownloadFile;
-        //    request.Credentials = new NetworkCredential("u657022003.ftpuser", "123456789-Aa");
-
-        //    FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-
-        //    Stream responseStream = response.GetResponseStream();
-        //    StreamReader reader = new StreamReader(responseStream);
-
-
-        //    TempData["Image"] = reader.ReadToEnd().ToArray();
-        //    TempData["status"] = response.StatusDescription;
-
-        //    reader.Close();
-        //    response.Close();
-        //    return View();
-
-        //}
-
-
-
 
 
         public ActionResult DetailProduct()
