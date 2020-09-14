@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 
 namespace Azure_Assignment.Controllers
 {
@@ -52,9 +53,42 @@ namespace Azure_Assignment.Controllers
 
 
 
-        public ActionResult DetailProduct()
+        public ActionResult DetailProduct(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var product = db.Products.Find(id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                ViewBag.CategoryName = db.Categories.Find(product.CategoryID).CategoryName;
+                ViewData.Model = new Products();
+                ViewBag.ImageBig = getProductImage(id).Take(4);
+                ViewBag.ImageSmall = getProductImage(id).Take(4);
+
+            }       
+                
+            return View(product);
+        }
+
+        private List<ProductViewModel> getProductImage(int? id)
+        {
+            var product = from pro in db.Products
+                          join cate in db.Categories on pro.CategoryID equals cate.CategoryID
+                          from img in pro.ProductImage
+                          where pro.ProductID == id
+                          select new ProductViewModel()
+                          {
+                              ImgID = img.ImgID,
+                              ImgFileName = img.ImgFileName
+                          };
+
+            return product.ToList();
         }
 
         public ActionResult About()

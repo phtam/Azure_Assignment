@@ -212,6 +212,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\MyRoleProvider.cs" />
+    <Compile Include="ViewModels\ProductDetail.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
