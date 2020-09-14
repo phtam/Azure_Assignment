@@ -1,5 +1,4 @@
 ﻿using Azure_Assignment.EF;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -19,6 +18,7 @@ namespace Azure_Assignment.Controllers
             ProductDAO productDAO = new ProductDAO();
             CategoryDAO categoryDAO = new CategoryDAO();
             SaleDAO saleDAO = new SaleDAO();
+            SupplierDAO supplierDAO = new SupplierDAO();
 
             ViewBag.One_New_Category = categoryDAO.GetNewCategories().Take(1);
             ViewBag.Four_Categories = categoryDAO.Get().Take(4);
@@ -27,6 +27,12 @@ namespace Azure_Assignment.Controllers
             ViewBag.Sale = saleDAO.Get().Take(3);
             ViewBag.Best_Seller = productDAO.GetBestSellerProduct().Take(3);
             ViewBag.Sale_Product = productDAO.GetSaleProduct().Take(3);
+            ViewBag.Highlight_Product = productDAO.GetHighlightProducts().Take(3);
+            ViewBag.Discount = saleDAO.Get().Take(1);
+            ViewBag.Layout_Menu = categoryDAO.Get().Take(2);
+            ViewBag.Categories_List = categoryDAO.Get();
+            ViewBag.Suppliers_List = supplierDAO.Get();
+            ViewBag.Act_Home = "active";
 
             return View();
         }

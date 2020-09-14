@@ -73,9 +73,11 @@ namespace Azure_Assignment.Areas.Admin.Controllers
 
                 products.UnitsInStock = 0;
                 products.UnitsOnOrder = 0;
-                db.Products.Add(products);
-                db.SaveChanges();
-                TempData["Notice_Create_Success"] = true;
+                if (db.SaveChanges() > 0)
+                {
+                    db.Products.Add(products);
+                    TempData["Notice_Create_Success"] = true;
+                }
                 return RedirectToAction("Index");
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", products.CategoryID);
@@ -85,7 +87,6 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View(products);
         }
 
-        // GET: Admin/Products/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -104,7 +105,6 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View(products);
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
@@ -122,9 +122,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                         ViewBag.Error = imgProvider.Validate(products.ImageFile);
                         return View("Edit");
                     }
-
                     products.Thumbnail = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                    
                     ftp.Update(products.Thumbnail, ftpChild, products.ImageFile, old_Thumbnail);
                 }
                 else
@@ -135,9 +133,12 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 db.Entry(products).State = EntityState.Modified;
                 db.Entry(products).Property(x => x.UnitsInStock).IsModified = false;
                 db.Entry(products).Property(x => x.UnitsOnOrder).IsModified = false;
-                db.SaveChanges();
-                TempData["Notice_Save_Success"] = true;
-                Session.Remove("old_Thumbnail");
+                
+                if (db.SaveChanges() > 0)
+                {
+                    TempData["Notice_Save_Success"] = true;
+                    Session.Remove("old_Thumbnail");
+                }
                 return RedirectToAction("Index");
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", products.CategoryID);
@@ -169,10 +170,12 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             try
             {
                 Products products = db.Products.Find(id);
-                ftp.Delete(products.Thumbnail, ftpChild);
                 db.Products.Remove(products);
-                db.SaveChanges();
-                TempData["Notice_Delete_Success"] = true;
+                if (db.SaveChanges() > 0)
+                {
+                    ftp.Delete(products.Thumbnail, ftpChild);
+                    TempData["Notice_Delete_Success"] = true;
+                }                
             }
             catch (System.Data.SqlClient.SqlException )
             {
@@ -186,7 +189,6 @@ namespace Azure_Assignment.Areas.Admin.Controllers
 
         }
 
-        // GET: Admin/Products/Edit/5
         public ActionResult ProductImage(int? id)
         {
             if (id == null || db.Products.Find(id) == null)
@@ -220,26 +222,34 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 TempData["Error"] = imgProvider.Validate(ImageFile);
                 return RedirectToAction("ProductImage", "Products", new { @id = proImage.ProductID });
             }
-
             proImage.ImgFileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-
-            ftp.Add(proImage.ImgFileName, ftpChild, ImageFile);
-
             db.ProductImage.Add(proImage);
-            db.SaveChanges();
-            TempData["Notice_Save_Success"] = true;
+            if (db.SaveChanges() > 0)
+            {
+                ftp.Add(proImage.ImgFileName, ftpChild, ImageFile);
+                TempData["Notice_Save_Success"] = true;
+            }
             return RedirectToAction("ProductImage", "Products", new { @id = proImage.ProductID });
         }
 
         [HttpPost, ActionName("DeleteImage")]
         public ActionResult DeleteImage(int proImage, int proID)
         {
-            ProductImage productImage = db.ProductImage.Find(proImage);
-            ftp.Delete(productImage.ImgFileName, "imgProducts");
+            try
+            {
+                ProductImage productImage = db.ProductImage.Find(proImage);
+                db.ProductImage.Remove(productImage);
+                if (db.SaveChanges() > 0)
+                {
+                    ftp.Delete(productImage.ImgFileName, "imgProducts");
+                    TempData["Notice_Delete_Success"] = true;
+                }
+            }
+            catch (Exception)
+            {
+                TempData["Notice_Delete_Fail"] = true;
+            }
 
-            db.ProductImage.Remove(productImage);
-            db.SaveChanges();
-            TempData["Notice_Delete_Success"] = true; 
             return RedirectToAction("ProductImage", "Products", new { @id = proID });
         }
 

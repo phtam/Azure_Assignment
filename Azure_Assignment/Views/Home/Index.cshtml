@@ -21,7 +21,6 @@
                         </div>
                     }
                 }
-
             </div>
             <div class="col-lg-6">
                 <div class="row">
@@ -62,7 +61,6 @@
                             <li data-filter=".@item.CategoryName">@item.CategoryName</li>
                         }
                     }
-
                 </ul>
             </div>
         </div>
@@ -97,12 +95,10 @@
                     </div>
                 }
             }
-            
         </div>
     </div>
 </section>
-<!-- Product Section End -->
-<!-- Banner Section Begin -->
+
 <section class="banner set-bg" data-setbg="@Url.Content("~/public/img/hotdeal.png")">
     <div class="container">
         <div class="row">
@@ -111,7 +107,6 @@
                     @{
                         foreach (var item in ViewBag.Sale)
                         {
-                            if (item.SaleName == "No Sale") { continue; }
                             <div class="banner__item"  >
                                 <div class="banner__text">
                                     <span>@item.Code</span>
@@ -121,8 +116,6 @@
                             </div>
                         }
                     }
-
-                    
                 </div>
             </div>
         </div>
@@ -159,8 +152,6 @@
                             </div>
                         }
                     }
-
-                    
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-6">
@@ -190,21 +181,19 @@
                             </div>
                         }
                     }
-
-                    
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="trend__content">
                     <div class="section-title">
-                        <h4>Cheap Accessories</h4>
+                        <h4>Highlight</h4>
                     </div>
                     @{
-                        @*foreach (var item in ViewBag.Cheap_Accessories)
+                        foreach (var item in ViewBag.Highlight_Product)
                         {
                             <div class="trend__item">
                                 <div class="trend__item__pic">
-                                    <img src="@Url.Content(item.ImgFileName)" alt="" style="max-width:100px">
+                                    <img src="@item.Thumbnail" alt="" style="max-width:100px">
                                 </div>
                                 <div class="trend__item__text">
                                     <h6><a href="#" style="color:black">@item.ProductName</a></h6>
@@ -220,88 +209,62 @@
                                     <script>document.write((@item.OldUnitPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));</script> VND</div>
                                 </div>
                             </div>
-                        }*@
+                        }
                     }
-                    <div class="trend__item">
-                        <div class="trend__item__pic">
-                            <img src="img/trend/f-2.jpg" alt="">
-                        </div>
-                        <div class="trend__item__text">
-                            <h6>Metallic earrings</h6>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="product__price">$ 59.0</div>
-                        </div>
-                    </div>
-                    <div class="trend__item">
-                        <div class="trend__item__pic">
-                            <img src="img/trend/f-3.jpg" alt="">
-                        </div>
-                        <div class="trend__item__text">
-                            <h6>Flap cross-body bag</h6>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="product__price">$ 59.0</div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- Trend Section End -->
-<!-- Discount Section Begin -->
+
 <section class="discount">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6 p-0">
-                <div class="discount__pic">
-                    <img src="img/discount.jpg" alt="">
-                </div>
-            </div>
-            <div class="col-lg-6 p-0">
-                <div class="discount__text">
-                    <div class="discount__text__title">
-                        <span>Discount</span>
-                        <h2>Summer 2019</h2>
-                        <h5><span>Sale</span> 50%</h5>
-                    </div>
-                    <div class="discount__countdown" id="countdown-time">
-                        <div class="countdown__item">
-                            <span>22</span>
-                            <p>Days</p>
-                        </div>
-                        <div class="countdown__item">
-                            <span>18</span>
-                            <p>Hour</p>
-                        </div>
-                        <div class="countdown__item">
-                            <span>46</span>
-                            <p>Min</p>
-                        </div>
-                        <div class="countdown__item">
-                            <span>05</span>
-                            <p>Sec</p>
+            @{
+                foreach (var item in ViewBag.Discount)
+                {
+                    <div class="col-lg-6 p-0">
+                        <div class="discount__pic">
+                            <img src="@item.Picture" alt="" width="585" height="390" >
                         </div>
                     </div>
-                    <a href="#">Shop now</a>
-                </div>
-            </div>
+                    <div class="col-lg-6 p-0">
+                        <div class="discount__text">
+                            <div class="discount__text__title">
+                                <span>Promotion</span>
+                                <h2>@item.SaleName</h2>
+                                <h5>
+                                    <span>DISCOUNT</span>
+                                    <script>document.write((@item.Discount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').slice(0, -3));</script> VND
+                                </h5>
+                            </div>
+                            <div class="discount__countdown" id="countdown-time">
+                                <div class="countdown__item">
+                                    <span>22</span>
+                                    <p>Days</p>
+                                </div>
+                                <div class="countdown__item">
+                                    <span>18</span>
+                                    <p>Hour</p>
+                                </div>
+                                <div class="countdown__item">
+                                    <span>46</span>
+                                    <p>Min</p>
+                                </div>
+                                <div class="countdown__item">
+                                    <span>05</span>
+                                    <p>Sec</p>
+                                </div>
+                            </div>
+                            <a href="#">Shop now</a>
+                        </div>
+                    </div>
+                }
+            }
+
         </div>
     </div>
 </section>
-<!-- Discount Section End -->
-<!-- Services Section Begin -->
 <section class="services spad">
     <div class="container">
         <div class="row">

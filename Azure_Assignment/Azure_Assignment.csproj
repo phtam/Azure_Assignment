@@ -151,6 +151,7 @@
     <Compile Include="DAO\CategoryDAO.cs" />
     <Compile Include="DAO\ProductDAO.cs" />
     <Compile Include="DAO\SaleDAO.cs" />
+    <Compile Include="DAO\SupplierDAO.cs" />
     <Compile Include="EF\BlogCategories.cs">
       <DependentUpon>PalkiaModel.tt</DependentUpon>
     </Compile>
@@ -221,6 +222,7 @@
     <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\SaleViewModel.cs" />
+    <Compile Include="ViewModels\SupplierViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />

@@ -62,15 +62,15 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                     ViewBag.Error = imgProvider.Validate(categories.ImageFile);
                     return View("Create");
                 }
-
                 fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
                 categories.Picture = fileName;
-
-                ftp.Add(fileName, ftpChild, categories.ImageFile);
-
                 db.Categories.Add(categories);
-                db.SaveChanges();
-                TempData["Notice_Create_Success"] = true;
+                
+                if (db.SaveChanges() > 0)
+                {
+                    ftp.Add(fileName, ftpChild, categories.ImageFile);
+                    TempData["Notice_Create_Success"] = true;
+                }
                 ModelState.Clear();
                 return RedirectToAction("Index");
                 
@@ -111,11 +111,8 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                         ViewBag.Error = imgProvider.Validate(categories.ImageFile);
                         return View("Edit");
                     }
-
-                    fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                    categories.Picture = fileName;
-
-                    ftp.Update(fileName, ftpChild, categories.ImageFile, imageOldFile);
+                    categories.Picture = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    ftp.Update(categories.Picture, ftpChild, categories.ImageFile, imageOldFile);
                 }
                 else
                 {
@@ -123,9 +120,11 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 }
 
                 db.Entry(categories).State = EntityState.Modified;
-                db.SaveChanges();
-                Session.Remove("OldImage");
-                TempData["Notice_Save_Success"] = true;
+                if (db.SaveChanges() > 0)
+                {
+                    Session.Remove("OldImage");
+                    TempData["Notice_Save_Success"] = true;
+                }
                 return RedirectToAction("Index");
                 
             }
@@ -147,7 +146,6 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View(categories);
         }
 
-        // POST: Admin/Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -155,14 +153,15 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             try
             {
                 Categories categories = db.Categories.Find(id);
-
-                ftp.Delete(categories.Picture, ftpChild);
-
                 db.Categories.Remove(categories);
-                db.SaveChanges();
-                TempData["Notice_Delete_Success"] = true;
+                
+                if (db.SaveChanges() > 0)
+                {
+                    ftp.Delete(categories.Picture, ftpChild);
+                    TempData["Notice_Delete_Success"] = true;
+                }
             }
-            catch (ArgumentException)
+            catch (Exception)
             {
                 TempData["Notice_Delete_Fail"] = true;
             }

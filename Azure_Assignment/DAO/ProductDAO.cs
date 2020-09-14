@@ -16,7 +16,7 @@ namespace Azure_Assignment.DAO
         {
             var list = (from pro in db.Products
                           join cate in db.Categories on pro.CategoryID equals cate.CategoryID
-                          where pro.UnitsInStock > 0
+                          where pro.UnitsInStock > 0 
                           select new ProductViewModel()
                           {
                               ProductID = pro.ProductID,
@@ -41,7 +41,7 @@ namespace Azure_Assignment.DAO
             var list = (from pro in db.Products
                           join sale in db.Sale on pro.SaleID equals sale.SaleID
                           join cate in db.Categories on pro.CategoryID equals cate.CategoryID
-                          where pro.UnitsInStock > 0 && sale.SaleID > 1
+                          where pro.UnitsInStock > 0 && sale.SaleName != "No Sale"
                           orderby sale.SaleID descending
                           select new ProductViewModel()
                           {
@@ -94,8 +94,8 @@ namespace Azure_Assignment.DAO
             var list = (from pro in db.Products
                           join sale in db.Sale on pro.SaleID equals sale.SaleID
                           join cate in db.Categories on pro.CategoryID equals cate.CategoryID
-                          where pro.UnitsInStock > 0
-                          orderby pro.UnitsOnOrder descending
+                          where pro.UnitsInStock > 0 && sale.SaleName != "No Sale" 
+                          orderby pro.UnitsOnOrder, pro.UnitPrice descending
                           select new ProductViewModel()
                           {
                               ProductID = pro.ProductID,

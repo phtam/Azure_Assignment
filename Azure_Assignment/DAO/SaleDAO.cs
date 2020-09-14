@@ -17,6 +17,7 @@ namespace Azure_Assignment.DAO
         {
             var list = (from sale in db.Sale
                         orderby sale.SaleID descending
+                        where sale.SaleName != "No Sale"
                         select new SaleViewModel
                         {
                             SaleID = sale.SaleID,

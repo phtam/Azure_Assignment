@@ -49,7 +49,6 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View();
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "SaleID,SaleName,Content,StartDate,EndDate,Picture,Code,Discount,ImageFile")] Sale sale)
@@ -77,12 +76,13 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 }
 
                 sale.Picture = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-
-                ftp.Add( sale.Picture, ftpChild, sale.ImageFile );
-
                 db.Sale.Add(sale);
-                db.SaveChanges();
-                TempData["Notice_Create_Success"] = true;
+                
+                if (db.SaveChanges() > 0)
+                {
+                    ftp.Add(sale.Picture, ftpChild, sale.ImageFile);
+                    TempData["Notice_Create_Success"] = true;
+                }
                 return RedirectToAction("Index");
             }
 
@@ -128,21 +128,20 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                         ViewBag.Error = imgProvider.Validate(sale.ImageFile);
                         return View("Edit");
                     }
-
                     sale.Picture = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                    ftp.Update(sale.Picture, ftpChild, sale.ImageFile, imageOldFile); 
+                    ftp.Update(sale.Picture, ftpChild, sale.ImageFile, imageOldFile);
                 }
                 else
                 {
                     sale.Picture = imageOldFile;
                 }
-
                 db.Entry(sale).State = EntityState.Modified;
-                db.SaveChanges();
-                Session.Remove("OldImage");
-                TempData["Notice_Save_Success"] = true;
+                if (db.SaveChanges() > 0)
+                {
+                    Session.Remove("OldImage");
+                    TempData["Notice_Save_Success"] = true;
+                }
                 return RedirectToAction("Index");
-
             }
             return View(sale);
         } 
@@ -169,10 +168,12 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             try
             {
                 Sale sale = db.Sale.Find(id);
-                ftp.Delete(sale.Picture, ftpChild);
                 db.Sale.Remove(sale);
-                db.SaveChanges();
-                TempData["Notice_Delete_Success"] = true;
+                if (db.SaveChanges() > 0 )
+                {
+                    ftp.Delete(sale.Picture, ftpChild);
+                    TempData["Notice_Delete_Success"] = true;
+                }
             }
             catch (Exception)
             {

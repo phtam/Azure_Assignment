@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using System.Web.WebPages;
 using Azure_Assignment.EF;
 using Scrypt;
 using Azure_Assignment.Providers;
@@ -118,14 +117,17 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 }
 
                 users.Picture = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                ftp.Add(users.Picture, ftpChild, users.ImageFile);
 
                 ScryptEncoder encoder = new ScryptEncoder();
                 users.Password = encoder.Encode(users.Password);
 
                 db.Users.Add(users);
-                db.SaveChanges();
-                TempData["Notice_Create_Success"] = true;
+                
+                if (db.SaveChanges() > 0)
+                {
+                    ftp.Add(users.Picture, ftpChild, users.ImageFile);
+                    TempData["Notice_Create_Success"] = true;
+                }
                 return RedirectToAction("Index");
             }
 
@@ -195,17 +197,18 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                         ViewBag.Error = imgProvider.Validate(users.ImageFile);
                         return View("Create");
                     }
-
                     users.Picture = fileName + DateTime.Now.ToString("yymmssfff") + extension;
                     ftp.Update(users.Picture, ftpChild, users.ImageFile, imageOldFile_User);
-                }
 
+                }
                 db.Entry(users).State = EntityState.Modified;
                 db.Entry(users).Property(x => x.Password).IsModified = false;
-
-                db.SaveChanges();
-                Session.Remove("OldImage_User");
-                TempData["Notice_Save_Success"] = true;
+                
+                if (db.SaveChanges() > 0)
+                {
+                    Session.Remove("OldImage_User");
+                    TempData["Notice_Save_Success"] = true;
+                }
                 return RedirectToAction("Index");
             }
             return View(users);
@@ -235,10 +238,12 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             try
             {
                 Users users = db.Users.Find(id);
-                ftp.Delete(users.Picture, ftpChild);
                 db.Users.Remove(users);
-                db.SaveChanges();
-                TempData["Notice_Delete_Success"] = true;
+                if (db.SaveChanges() > 0)
+                {
+                    ftp.Delete(users.Picture, ftpChild);
+                    TempData["Notice_Delete_Success"] = true;
+                }
             }
             catch (Exception)
             {
