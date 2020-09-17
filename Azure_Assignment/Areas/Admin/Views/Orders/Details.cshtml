@@ -1,0 +1,75 @@
+﻿@model Azure_Assignment.EF.Orders
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Orders</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShippedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShippedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShippedAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShippedAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Payments.PaymentName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Payments.PaymentName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Users.FirtName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Users.FirtName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OrderID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -147,6 +147,7 @@
     <Compile Include="Areas\Admin\Controllers\FeedbacksController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ImportationsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrdersController.cs" />
     <Compile Include="Areas\Admin\Controllers\PaymentsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Admin\Controllers\SalesController.cs" />
@@ -158,6 +159,8 @@
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DAO\CategoryDAO.cs" />
     <Compile Include="DAO\OrderDAO.cs" />
+    <Compile Include="DAO\OrderDetailDAO.cs" />
+    <Compile Include="DAO\PaymentDAO.cs" />
     <Compile Include="DAO\ProductDAO.cs" />
     <Compile Include="DAO\SaleDAO.cs" />
     <Compile Include="DAO\SupplierDAO.cs" />
@@ -424,6 +427,11 @@
     <Content Include="Content\sass\_shop-cart.scss" />
     <Content Include="Content\sass\_shop.scss" />
     <Content Include="Content\sass\_variable.scss" />
+    <Content Include="Areas\Admin\Views\Orders\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\dist\css\adminlte.css" />
     <Content Include="Scripts\dist\css\adminlte.min.css" />
