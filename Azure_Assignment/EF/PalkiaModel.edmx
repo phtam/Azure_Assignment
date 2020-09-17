@@ -20,7 +20,7 @@
           <Property Name="FullName" Type="varchar" MaxLength="50" />
           <Property Name="Email" Type="varchar" MaxLength="30" />
           <Property Name="Phone" Type="varchar" MaxLength="15" />
-          <Property Name="Comment" Type="varchar" MaxLength="1000" />
+          <Property Name="Comment" Type="text" />
           <Property Name="CommentingDate" Type="datetime" />
           <Property Name="BlogID" Type="int" />
         </EntityType>
@@ -34,6 +34,7 @@
           <Property Name="Content" Type="text" />
           <Property Name="BlogCategoryID" Type="int" />
           <Property Name="WritingDate" Type="datetime" />
+          <Property Name="Thumbnail" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Categories">
           <Key>
@@ -134,6 +135,28 @@
           <Property Name="SaleID" Type="int" />
           <Property Name="Discontinued" Type="bit" />
         </EntityType>
+        <EntityType Name="ReplyBlogComments">
+          <Key>
+            <PropertyRef Name="ReplyID" />
+          </Key>
+          <Property Name="ReplyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReplyName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="30" />
+          <Property Name="Content" Type="text" />
+          <Property Name="ReplyDate" Type="datetime" />
+          <Property Name="BlogCommentID" Type="int" />
+        </EntityType>
+        <EntityType Name="ReplyFeedbacks">
+          <Key>
+            <PropertyRef Name="ReplyID" />
+          </Key>
+          <Property Name="ReplyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReplyName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="30" />
+          <Property Name="Content" Type="text" />
+          <Property Name="ReplyDate" Type="datetime" />
+          <Property Name="FeedbackID" Type="int" />
+        </EntityType>
         <EntityType Name="Sale">
           <Key>
             <PropertyRef Name="SaleID" />
@@ -175,7 +198,7 @@
           <Property Name="Role" Type="int" />
           <Property Name="Status" Type="bit" />
         </EntityType>
-        <Association Name="FK__BlogComme__BlogI__5070F446">
+        <Association Name="FK__BlogComme__BlogI__534D60F1">
           <End Role="Blogs" Type="Self.Blogs" Multiplicity="0..1" />
           <End Role="BlogComments" Type="Self.BlogComments" Multiplicity="*" />
           <ReferentialConstraint>
@@ -187,7 +210,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Blogs__BlogCateg__4D94879B">
+        <Association Name="FK__Blogs__BlogCateg__5070F446">
           <End Role="BlogCategories" Type="Self.BlogCategories" Multiplicity="0..1" />
           <End Role="Blogs" Type="Self.Blogs" Multiplicity="*" />
           <ReferentialConstraint>
@@ -199,7 +222,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Blogs__Username__4CA06362">
+        <Association Name="FK__Blogs__Username__4F7CD00D">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="Blogs" Type="Self.Blogs" Multiplicity="*" />
           <ReferentialConstraint>
@@ -367,6 +390,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ReplyBlog__BlogC__5629CD9C">
+          <End Role="BlogComments" Type="Self.BlogComments" Multiplicity="0..1" />
+          <End Role="ReplyBlogComments" Type="Self.ReplyBlogComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlogComments">
+              <PropertyRef Name="BlogCommentID" />
+            </Principal>
+            <Dependent Role="ReplyBlogComments">
+              <PropertyRef Name="BlogCommentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReplyFeed__Feedb__4AB81AF0">
+          <End Role="Feedbacks" Type="Self.Feedbacks" Multiplicity="0..1" />
+          <End Role="ReplyFeedbacks" Type="Self.ReplyFeedbacks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Feedbacks">
+              <PropertyRef Name="FeedbackID" />
+            </Principal>
+            <Dependent Role="ReplyFeedbacks">
+              <PropertyRef Name="FeedbackID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="PalkiaDBModelStoreContainer">
           <EntitySet Name="BlogCategories" EntityType="Self.BlogCategories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BlogComments" EntityType="Self.BlogComments" Schema="dbo" store:Type="Tables" />
@@ -380,18 +427,20 @@
           <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductImage" EntityType="Self.ProductImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReplyBlogComments" EntityType="Self.ReplyBlogComments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReplyFeedbacks" EntityType="Self.ReplyFeedbacks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sale" EntityType="Self.Sale" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Suppliers" EntityType="Self.Suppliers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__BlogComme__BlogI__5070F446" Association="Self.FK__BlogComme__BlogI__5070F446">
+          <AssociationSet Name="FK__BlogComme__BlogI__534D60F1" Association="Self.FK__BlogComme__BlogI__534D60F1">
             <End Role="Blogs" EntitySet="Blogs" />
             <End Role="BlogComments" EntitySet="BlogComments" />
           </AssociationSet>
-          <AssociationSet Name="FK__Blogs__BlogCateg__4D94879B" Association="Self.FK__Blogs__BlogCateg__4D94879B">
+          <AssociationSet Name="FK__Blogs__BlogCateg__5070F446" Association="Self.FK__Blogs__BlogCateg__5070F446">
             <End Role="BlogCategories" EntitySet="BlogCategories" />
             <End Role="Blogs" EntitySet="Blogs" />
           </AssociationSet>
-          <AssociationSet Name="FK__Blogs__Username__4CA06362" Association="Self.FK__Blogs__Username__4CA06362">
+          <AssociationSet Name="FK__Blogs__Username__4F7CD00D" Association="Self.FK__Blogs__Username__4F7CD00D">
             <End Role="Users" EntitySet="Users" />
             <End Role="Blogs" EntitySet="Blogs" />
           </AssociationSet>
@@ -447,6 +496,14 @@
             <End Role="Suppliers" EntitySet="Suppliers" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
+          <AssociationSet Name="FK__ReplyBlog__BlogC__5629CD9C" Association="Self.FK__ReplyBlog__BlogC__5629CD9C">
+            <End Role="BlogComments" EntitySet="BlogComments" />
+            <End Role="ReplyBlogComments" EntitySet="ReplyBlogComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReplyFeed__Feedb__4AB81AF0" Association="Self.FK__ReplyFeed__Feedb__4AB81AF0">
+            <End Role="Feedbacks" EntitySet="Feedbacks" />
+            <End Role="ReplyFeedbacks" EntitySet="ReplyFeedbacks" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -465,18 +522,24 @@
           <EntitySet Name="Payments" EntityType="PalkiaDBModel.Payments" />
           <EntitySet Name="ProductImage" EntityType="PalkiaDBModel.ProductImage" />
           <EntitySet Name="Products" EntityType="PalkiaDBModel.Products" />
+          <EntitySet Name="ReplyBlogComments" EntityType="PalkiaDBModel.ReplyBlogComments" />
+          <EntitySet Name="ReplyFeedbacks" EntityType="PalkiaDBModel.ReplyFeedbacks" />
           <EntitySet Name="Sale" EntityType="PalkiaDBModel.Sale" />
           <EntitySet Name="Suppliers" EntityType="PalkiaDBModel.Suppliers" />
           <EntitySet Name="Users" EntityType="PalkiaDBModel.Users" />
-          <AssociationSet Name="FK__Blogs__BlogCateg__4D94879B" Association="PalkiaDBModel.FK__Blogs__BlogCateg__4D94879B">
+          <AssociationSet Name="FK__Blogs__BlogCateg__5070F446" Association="PalkiaDBModel.FK__Blogs__BlogCateg__5070F446">
             <End Role="BlogCategories" EntitySet="BlogCategories" />
             <End Role="Blogs" EntitySet="Blogs" />
           </AssociationSet>
-          <AssociationSet Name="FK__BlogComme__BlogI__5070F446" Association="PalkiaDBModel.FK__BlogComme__BlogI__5070F446">
+          <AssociationSet Name="FK__BlogComme__BlogI__534D60F1" Association="PalkiaDBModel.FK__BlogComme__BlogI__534D60F1">
             <End Role="Blogs" EntitySet="Blogs" />
             <End Role="BlogComments" EntitySet="BlogComments" />
           </AssociationSet>
-          <AssociationSet Name="FK__Blogs__Username__4CA06362" Association="PalkiaDBModel.FK__Blogs__Username__4CA06362">
+          <AssociationSet Name="FK__ReplyBlog__BlogC__5629CD9C" Association="PalkiaDBModel.FK__ReplyBlog__BlogC__5629CD9C">
+            <End Role="BlogComments" EntitySet="BlogComments" />
+            <End Role="ReplyBlogComments" EntitySet="ReplyBlogComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Blogs__Username__4F7CD00D" Association="PalkiaDBModel.FK__Blogs__Username__4F7CD00D">
             <End Role="Users" EntitySet="Users" />
             <End Role="Blogs" EntitySet="Blogs" />
           </AssociationSet>
@@ -495,6 +558,10 @@
           <AssociationSet Name="FK__Feedbacks__Produ__47DBAE45" Association="PalkiaDBModel.FK__Feedbacks__Produ__47DBAE45">
             <End Role="Products" EntitySet="Products" />
             <End Role="Feedbacks" EntitySet="Feedbacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReplyFeed__Feedb__4AB81AF0" Association="PalkiaDBModel.FK__ReplyFeed__Feedb__4AB81AF0">
+            <End Role="Feedbacks" EntitySet="Feedbacks" />
+            <End Role="ReplyFeedbacks" EntitySet="ReplyFeedbacks" />
           </AssociationSet>
           <AssociationSet Name="FK__Importati__Produ__403A8C7D" Association="PalkiaDBModel.FK__Importati__Produ__403A8C7D">
             <End Role="Products" EntitySet="Products" />
@@ -539,7 +606,7 @@
           </Key>
           <Property Name="BlogCategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BlogCategoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Blogs" Relationship="PalkiaDBModel.FK__Blogs__BlogCateg__4D94879B" FromRole="BlogCategories" ToRole="Blogs" />
+          <NavigationProperty Name="Blogs" Relationship="PalkiaDBModel.FK__Blogs__BlogCateg__5070F446" FromRole="BlogCategories" ToRole="Blogs" />
         </EntityType>
         <EntityType Name="BlogComments">
           <Key>
@@ -549,10 +616,11 @@
           <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="Comment" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="CommentingDate" Type="DateTime" Precision="3" />
           <Property Name="BlogID" Type="Int32" />
-          <NavigationProperty Name="Blogs" Relationship="PalkiaDBModel.FK__BlogComme__BlogI__5070F446" FromRole="BlogComments" ToRole="Blogs" />
+          <NavigationProperty Name="Blogs" Relationship="PalkiaDBModel.FK__BlogComme__BlogI__534D60F1" FromRole="BlogComments" ToRole="Blogs" />
+          <NavigationProperty Name="ReplyBlogComments" Relationship="PalkiaDBModel.FK__ReplyBlog__BlogC__5629CD9C" FromRole="BlogComments" ToRole="ReplyBlogComments" />
         </EntityType>
         <EntityType Name="Blogs">
           <Key>
@@ -564,9 +632,10 @@
           <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="BlogCategoryID" Type="Int32" />
           <Property Name="WritingDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="BlogCategories" Relationship="PalkiaDBModel.FK__Blogs__BlogCateg__4D94879B" FromRole="Blogs" ToRole="BlogCategories" />
-          <NavigationProperty Name="BlogComments" Relationship="PalkiaDBModel.FK__BlogComme__BlogI__5070F446" FromRole="Blogs" ToRole="BlogComments" />
-          <NavigationProperty Name="Users" Relationship="PalkiaDBModel.FK__Blogs__Username__4CA06362" FromRole="Blogs" ToRole="Users" />
+          <Property Name="Thumbnail" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BlogCategories" Relationship="PalkiaDBModel.FK__Blogs__BlogCateg__5070F446" FromRole="Blogs" ToRole="BlogCategories" />
+          <NavigationProperty Name="BlogComments" Relationship="PalkiaDBModel.FK__BlogComme__BlogI__534D60F1" FromRole="Blogs" ToRole="BlogComments" />
+          <NavigationProperty Name="Users" Relationship="PalkiaDBModel.FK__Blogs__Username__4F7CD00D" FromRole="Blogs" ToRole="Users" />
         </EntityType>
         <EntityType Name="Categories">
           <Key>
@@ -602,6 +671,7 @@
           <Property Name="FeedBackDate" Type="DateTime" Precision="3" />
           <Property Name="ProductID" Type="Int32" />
           <NavigationProperty Name="Products" Relationship="PalkiaDBModel.FK__Feedbacks__Produ__47DBAE45" FromRole="Feedbacks" ToRole="Products" />
+          <NavigationProperty Name="ReplyFeedbacks" Relationship="PalkiaDBModel.FK__ReplyFeed__Feedb__4AB81AF0" FromRole="Feedbacks" ToRole="ReplyFeedbacks" />
         </EntityType>
         <EntityType Name="Importation">
           <Key>
@@ -688,6 +758,30 @@
           <NavigationProperty Name="Sale" Relationship="PalkiaDBModel.FK__Products__SaleID__2C3393D0" FromRole="Products" ToRole="Sale" />
           <NavigationProperty Name="Suppliers" Relationship="PalkiaDBModel.FK__Products__Suppli__2A4B4B5E" FromRole="Products" ToRole="Suppliers" />
         </EntityType>
+        <EntityType Name="ReplyBlogComments">
+          <Key>
+            <PropertyRef Name="ReplyID" />
+          </Key>
+          <Property Name="ReplyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReplyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ReplyDate" Type="DateTime" Precision="3" />
+          <Property Name="BlogCommentID" Type="Int32" />
+          <NavigationProperty Name="BlogComments" Relationship="PalkiaDBModel.FK__ReplyBlog__BlogC__5629CD9C" FromRole="ReplyBlogComments" ToRole="BlogComments" />
+        </EntityType>
+        <EntityType Name="ReplyFeedbacks">
+          <Key>
+            <PropertyRef Name="ReplyID" />
+          </Key>
+          <Property Name="ReplyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReplyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ReplyDate" Type="DateTime" Precision="3" />
+          <Property Name="FeedbackID" Type="Int32" />
+          <NavigationProperty Name="Feedbacks" Relationship="PalkiaDBModel.FK__ReplyFeed__Feedb__4AB81AF0" FromRole="ReplyFeedbacks" ToRole="Feedbacks" />
+        </EntityType>
         <EntityType Name="Sale">
           <Key>
             <PropertyRef Name="SaleID" />
@@ -730,12 +824,12 @@
           <Property Name="Picture" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Role" Type="Int32" />
           <Property Name="Status" Type="Boolean" />
-          <NavigationProperty Name="Blogs" Relationship="PalkiaDBModel.FK__Blogs__Username__4CA06362" FromRole="Users" ToRole="Blogs" />
+          <NavigationProperty Name="Blogs" Relationship="PalkiaDBModel.FK__Blogs__Username__4F7CD00D" FromRole="Users" ToRole="Blogs" />
           <NavigationProperty Name="Exportation" Relationship="PalkiaDBModel.FK__Exportati__Usern__44FF419A" FromRole="Users" ToRole="Exportation" />
           <NavigationProperty Name="Importation" Relationship="PalkiaDBModel.FK__Importati__Usern__412EB0B6" FromRole="Users" ToRole="Importation" />
           <NavigationProperty Name="Orders" Relationship="PalkiaDBModel.FK__Orders__Username__35BCFE0A" FromRole="Users" ToRole="Orders" />
         </EntityType>
-        <Association Name="FK__Blogs__BlogCateg__4D94879B">
+        <Association Name="FK__Blogs__BlogCateg__5070F446">
           <End Type="PalkiaDBModel.BlogCategories" Role="BlogCategories" Multiplicity="0..1" />
           <End Type="PalkiaDBModel.Blogs" Role="Blogs" Multiplicity="*" />
           <ReferentialConstraint>
@@ -747,7 +841,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BlogComme__BlogI__5070F446">
+        <Association Name="FK__BlogComme__BlogI__534D60F1">
           <End Type="PalkiaDBModel.Blogs" Role="Blogs" Multiplicity="0..1" />
           <End Type="PalkiaDBModel.BlogComments" Role="BlogComments" Multiplicity="*" />
           <ReferentialConstraint>
@@ -759,7 +853,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Blogs__Username__4CA06362">
+        <Association Name="FK__ReplyBlog__BlogC__5629CD9C">
+          <End Type="PalkiaDBModel.BlogComments" Role="BlogComments" Multiplicity="0..1" />
+          <End Type="PalkiaDBModel.ReplyBlogComments" Role="ReplyBlogComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlogComments">
+              <PropertyRef Name="BlogCommentID" />
+            </Principal>
+            <Dependent Role="ReplyBlogComments">
+              <PropertyRef Name="BlogCommentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Blogs__Username__4F7CD00D">
           <End Type="PalkiaDBModel.Users" Role="Users" Multiplicity="0..1" />
           <End Type="PalkiaDBModel.Blogs" Role="Blogs" Multiplicity="*" />
           <ReferentialConstraint>
@@ -816,6 +922,18 @@
             </Principal>
             <Dependent Role="Feedbacks">
               <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReplyFeed__Feedb__4AB81AF0">
+          <End Type="PalkiaDBModel.Feedbacks" Role="Feedbacks" Multiplicity="0..1" />
+          <End Type="PalkiaDBModel.ReplyFeedbacks" Role="ReplyFeedbacks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Feedbacks">
+              <PropertyRef Name="FeedbackID" />
+            </Principal>
+            <Dependent Role="ReplyFeedbacks">
+              <PropertyRef Name="FeedbackID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -927,7 +1045,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -957,6 +1075,7 @@
           <EntitySetMapping Name="Blogs">
             <EntityTypeMapping TypeName="PalkiaDBModel.Blogs">
               <MappingFragment StoreEntitySet="Blogs">
+                <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
                 <ScalarProperty Name="WritingDate" ColumnName="WritingDate" />
                 <ScalarProperty Name="BlogCategoryID" ColumnName="BlogCategoryID" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
@@ -1070,6 +1189,30 @@
                 <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReplyBlogComments">
+            <EntityTypeMapping TypeName="PalkiaDBModel.ReplyBlogComments">
+              <MappingFragment StoreEntitySet="ReplyBlogComments">
+                <ScalarProperty Name="BlogCommentID" ColumnName="BlogCommentID" />
+                <ScalarProperty Name="ReplyDate" ColumnName="ReplyDate" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ReplyName" ColumnName="ReplyName" />
+                <ScalarProperty Name="ReplyID" ColumnName="ReplyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReplyFeedbacks">
+            <EntityTypeMapping TypeName="PalkiaDBModel.ReplyFeedbacks">
+              <MappingFragment StoreEntitySet="ReplyFeedbacks">
+                <ScalarProperty Name="FeedbackID" ColumnName="FeedbackID" />
+                <ScalarProperty Name="ReplyDate" ColumnName="ReplyDate" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ReplyName" ColumnName="ReplyName" />
+                <ScalarProperty Name="ReplyID" ColumnName="ReplyID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

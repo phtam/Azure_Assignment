@@ -15,6 +15,12 @@ namespace Azure_Assignment.EF
 
     public partial class Feedbacks
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Feedbacks()
+        {
+            this.ReplyFeedbacks = new HashSet<ReplyFeedbacks>();
+        }
+
         [DisplayName("Feedback ID")]
         public int FeedbackID { get; set; }
         [DisplayName("Feedback name")]
@@ -26,5 +32,7 @@ namespace Azure_Assignment.EF
         public Nullable<int> ProductID { get; set; }
 
         public virtual Products Products { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ReplyFeedbacks> ReplyFeedbacks { get; set; }
     }
 }

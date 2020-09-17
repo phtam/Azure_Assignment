@@ -11,15 +11,16 @@ namespace Azure_Assignment.EF
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-
-    public partial class ProductImage
+    
+    public partial class ReplyBlogComments
     {
-        public int ImgID { get; set; }
-        [DisplayName("Image")]
-        public string ImgFileName { get; set; }
-        public Nullable<int> ProductID { get; set; }
-
-        public virtual Products Products { get; set; }
+        public int ReplyID { get; set; }
+        public string ReplyName { get; set; }
+        public string Email { get; set; }
+        public string Content { get; set; }
+        public Nullable<System.DateTime> ReplyDate { get; set; }
+        public Nullable<int> BlogCommentID { get; set; }
+    
+        public virtual BlogComments BlogComments { get; set; }
     }
 }

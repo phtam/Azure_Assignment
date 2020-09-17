@@ -212,6 +212,12 @@
     <Compile Include="EF\Products.cs">
       <DependentUpon>PalkiaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\ReplyBlogComments.cs">
+      <DependentUpon>PalkiaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\ReplyFeedbacks.cs">
+      <DependentUpon>PalkiaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EF\Sale.cs">
       <DependentUpon>PalkiaModel.tt</DependentUpon>
     </Compile>

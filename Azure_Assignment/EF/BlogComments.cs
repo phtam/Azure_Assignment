@@ -15,17 +15,25 @@ namespace Azure_Assignment.EF
 
     public partial class BlogComments
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public BlogComments()
+        {
+            this.ReplyBlogComments = new HashSet<ReplyBlogComments>();
+        }
+
         [DisplayName("Blog comment ID")]
         public int BlogCommentID { get; set; }
         [DisplayName("Full name")]
         public string FullName { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
+        [DisplayName("Comment date")]
         public string Comment { get; set; }
-        [DisplayName("Commenting date")]
         public Nullable<System.DateTime> CommentingDate { get; set; }
         public Nullable<int> BlogID { get; set; }
-
+    
         public virtual Blogs Blogs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ReplyBlogComments> ReplyBlogComments { get; set; }
     }
 }

@@ -37,6 +37,8 @@ namespace Azure_Assignment.EF
         public virtual DbSet<Payments> Payments { get; set; }
         public virtual DbSet<ProductImage> ProductImage { get; set; }
         public virtual DbSet<Products> Products { get; set; }
+        public virtual DbSet<ReplyBlogComments> ReplyBlogComments { get; set; }
+        public virtual DbSet<ReplyFeedbacks> ReplyFeedbacks { get; set; }
         public virtual DbSet<Sale> Sale { get; set; }
         public virtual DbSet<Suppliers> Suppliers { get; set; }
         public virtual DbSet<Users> Users { get; set; }

@@ -18,7 +18,6 @@ namespace Azure_Assignment.Controllers
         SaleDAO saleDAO = new SaleDAO();
         SupplierDAO supplierDAO = new SupplierDAO();
 
-        [OutputCache(Duration = 3600*24)]
         public ActionResult Index()
         {
             ViewBag.One_New_Category = categoryDAO.GetNewCategories().Take(1);
@@ -60,7 +59,6 @@ namespace Azure_Assignment.Controllers
 
 
         [ChildActionOnly]
-        [OutputCache(Duration = 3600*24)]
         public ActionResult Header()
         {
             ViewBag.Layout_Menu = categoryDAO.Get().Take(2);
@@ -71,7 +69,6 @@ namespace Azure_Assignment.Controllers
         }
 
         [ChildActionOnly]
-        [OutputCache(Duration = 3600 * 24)]
         public ActionResult Footer()
         {
             return PartialView();

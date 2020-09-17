@@ -26,7 +26,7 @@ namespace Azure_Assignment.EF
             this.OrderDetails = new HashSet<OrderDetails>();
             this.ProductImage = new HashSet<ProductImage>();
         }
-    
+
         public int ProductID { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter product name")]
