@@ -16,7 +16,7 @@
                                 <p>
                                     @item.Description
                                 </p>
-                                <a href="#">Shop now</a>
+                                <a href="category-@item.CategoryID">Shop now</a>
                             </div>
                         </div>
                     }
@@ -32,7 +32,7 @@
                                     <div class="categories__text">
                                         <h3 style="font-weight:bold">@item.CategoryName</h3>
                                         <p>358 items</p>
-                                        <a href="#">Shop now</a>
+                                        <a href="category-@item.CategoryID">Shop now</a>
                                     </div>
                                 </div>
                             </div>
@@ -75,7 +75,7 @@
                                 <ul class="product__hover">
                                     <li><a href="@item.Thumbnail" class="image-popup"><span class="arrow_expand"></span></a></li>
                                     <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                    <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                                    <li><a href="~/add-to-cart?productID=@item.ProductID&quantity=1"><span class="icon_bag_alt"></span></a></li>
                                 </ul>
                             </div>
                             <div class="product__item__text">
@@ -87,9 +87,9 @@
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                 </div>
-                                <div class="product__price"><script>document.write((@item.UnitPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));</script> VND</div>
+                                <div class="product__price"><script>document.write((@item.UnitPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').slice(0, -3));</script> VND</div>
                                 <div style="text-decoration: line-through; font-size:small">
-                                <script>document.write((@item.OldUnitPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));</script></div>
+                                <script>document.write((@item.OldUnitPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').slice(0, -3));</script></div>
                             </div>
                         </div>
                     </div>
@@ -147,7 +147,7 @@
                                         <i class="fa fa-star"></i>
                                     </div>
                                     <h6><a href="#" style="color:black;">@item.CategoryName</a></h6>
-                                    <div class="product__price"><script>document.write((@item.OldUnitPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));</script> VND</div>
+                                    <div class="product__price"><script>document.write((@item.OldUnitPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').slice(0, -3));</script> VND</div>
                                 </div>
                             </div>
                         }
@@ -176,7 +176,7 @@
                                         <i class="fa fa-star"></i>
                                     </div>
                                     <h6><a href="#" style="color:black;">@item.CategoryName</a></h6>
-                                    <div class="product__price"><script>document.write((@item.OldUnitPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));</script> VND</div>
+                                    <div class="product__price"><script>document.write((@item.OldUnitPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').slice(0, -3));</script> VND</div>
                                 </div>
                             </div>
                         }
@@ -206,7 +206,7 @@
                                     </div>
                                     <h6><a href="#" style="color:black;">@item.CategoryName</a></h6>
                                     <div class="product__price">
-                                    <script>document.write((@item.OldUnitPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));</script> VND</div>
+                                    <script>document.write((@item.OldUnitPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').slice(0, -3));</script> VND</div>
                                 </div>
                             </div>
                         }

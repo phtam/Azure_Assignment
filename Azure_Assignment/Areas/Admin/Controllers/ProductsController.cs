@@ -69,13 +69,13 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 }
                 products.Thumbnail = fileName + DateTime.Now.ToString("yymmssfff") + extension;
 
-                ftp.Add(products.Thumbnail, ftpChild, products.ImageFile);
-
+                
+                db.Products.Add(products);
                 products.UnitsInStock = 0;
                 products.UnitsOnOrder = 0;
                 if (db.SaveChanges() > 0)
                 {
-                    db.Products.Add(products);
+                    ftp.Add(products.Thumbnail, ftpChild, products.ImageFile);
                     TempData["Notice_Create_Success"] = true;
                 }
                 return RedirectToAction("Index");

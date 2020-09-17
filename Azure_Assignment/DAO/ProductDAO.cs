@@ -114,5 +114,64 @@ namespace Azure_Assignment.DAO
             }
             return list;
         }
+
+        public List<ProductViewModel> GetProductsByCategory(int? CateID)
+        {
+            var list = (from pro in db.Products
+                        join cate in db.Categories on pro.CategoryID equals cate.CategoryID
+                        join sale in db.Sale on pro.SaleID equals sale.SaleID
+                        where pro.UnitsInStock > 0 && cate.CategoryID == CateID
+                        select new ProductViewModel
+                        {
+                            ProductID = pro.ProductID,
+                            ProductName = pro.ProductName,
+                            UnitPrice = pro.UnitPrice,
+                            OldUnitPrice = pro.OldUnitPrice,
+                            SaleID = sale.SaleID,
+                            SaleName = sale.SaleName,
+                            CategoryID = cate.CategoryID,
+                            CategoryName = cate.CategoryName,
+                            Thumbnail = pro.Thumbnail
+                        }).ToList();
+            foreach (var item in list)
+            {
+                item.Thumbnail = ftp.Get(item.Thumbnail, ftpChild);
+            }
+            return list;
+        }
+
+        public List<ProductViewModel> GetProductsByCategory_Price(int? CateID,int? min, int? max)
+        {
+            var list = (from pro in db.Products
+                        join cate in db.Categories on pro.CategoryID equals cate.CategoryID
+                        join sale in db.Sale on pro.SaleID equals sale.SaleID
+                        where pro.UnitsInStock > 0 && cate.CategoryID == CateID && pro.UnitPrice > min && pro.UnitPrice < max
+                        select new ProductViewModel
+                        {
+                            ProductID = pro.ProductID,
+                            ProductName = pro.ProductName,
+                            UnitPrice = pro.UnitPrice,
+                            OldUnitPrice = pro.OldUnitPrice,
+                            SaleID = sale.SaleID,
+                            SaleName = sale.SaleName,
+                            CategoryID = cate.CategoryID,
+                            CategoryName = cate.CategoryName,
+                            Thumbnail = pro.Thumbnail
+                        }).ToList();
+            foreach (var item in list)
+            {
+                item.Thumbnail = ftp.Get(item.Thumbnail, ftpChild);
+            }
+            return list;
+        }
+
+        public Products ViewDetail(int id)
+        {
+            var product = db.Products.SingleOrDefault(p => p.ProductID == id);
+
+            product.Thumbnail = ftp.Get(product.Thumbnail, ftpChild);
+
+            return product;
+        }
     }
 }
