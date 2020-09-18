@@ -3,60 +3,45 @@
     ViewBag.Title = "Index";
 }
 
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Đây là trang index của Admin - Hello world</h1>
-                </div><!-- /.col -->
+                    <h1 class="m-0 text-dark">Dashboard</h1>
+                </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item active">Dashboard v2</li>
                     </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- /.content-header -->
-    <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            <!-- Info boxes -->
             <div class="row">
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box">
-                        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+                        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-home"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">CPU Traffic</span>
-                            <span class="info-box-number">
-                                10
-                                <small>%</small>
-                            </span>
+                            <span class="info-box-text">In Stock</span>
+                            <span class="info-box-number">@ViewBag.BaseInfo[0]</span>
                         </div>
-                        <!-- /.info-box-content -->
                     </div>
-                    <!-- /.info-box -->
                 </div>
-                <!-- /.col -->
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box mb-3">
-                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-envelope"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">Likes</span>
-                            <span class="info-box-number">41,410</span>
+                            <span class="info-box-text">Interactive</span>
+                            <span class="info-box-number">@ViewBag.BaseInfo[1]</span>
                         </div>
-                        <!-- /.info-box-content -->
                     </div>
-                    <!-- /.info-box -->
                 </div>
-                <!-- /.col -->
-                <!-- fix for small devices only -->
                 <div class="clearfix hidden-md-up"></div>
 
                 <div class="col-12 col-sm-6 col-md-3">
@@ -64,29 +49,22 @@
                         <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">Sales</span>
-                            <span class="info-box-number">760</span>
+                            <span class="info-box-text">Orders</span>
+                            <span class="info-box-number">@ViewBag.BaseInfo[2]</span>
                         </div>
-                        <!-- /.info-box-content -->
                     </div>
-                    <!-- /.info-box -->
                 </div>
-                <!-- /.col -->
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box mb-3">
                         <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">New Members</span>
-                            <span class="info-box-number">2,000</span>
+                            <span class="info-box-text">Members</span>
+                            <span class="info-box-number">@ViewBag.BaseInfo[3]</span>
                         </div>
-                        <!-- /.info-box-content -->
                     </div>
-                    <!-- /.info-box -->
                 </div>
-                <!-- /.col -->
             </div>
-            <!-- /.row -->
 
             <div class="row">
                 <div class="col-md-12">
@@ -181,8 +159,8 @@
                                 <div class="col-sm-3 col-6">
                                     <div class="description-block border-right">
                                         <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 17%</span>
-                                        <h5 class="description-header">$35,210.43</h5>
-                                        <span class="description-text">TOTAL REVENUE</span>
+                                        <h5 class="description-header">@ViewBag.Total[0] item(s)</h5>
+                                        <span class="description-text">TOTAL PRODUCT ON ORDERS</span>
                                     </div>
                                     <!-- /.description-block -->
                                 </div>
@@ -190,8 +168,9 @@
                                 <div class="col-sm-3 col-6">
                                     <div class="description-block border-right">
                                         <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> 0%</span>
-                                        <h5 class="description-header">$10,390.90</h5>
-                                        <span class="description-text">TOTAL COST</span>
+                                        <h5 class="description-header">
+                                        <script>document.write((@ViewBag.Total[1]).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').slice(0, -3));</script> VND</h5>
+                                        <span class="description-text">TOTAL</span>
                                     </div>
                                     <!-- /.description-block -->
                                 </div>
@@ -199,8 +178,9 @@
                                 <div class="col-sm-3 col-6">
                                     <div class="description-block border-right">
                                         <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 20%</span>
-                                        <h5 class="description-header">$24,813.53</h5>
-                                        <span class="description-text">TOTAL PROFIT</span>
+                                        <h5 class="description-header">
+                                        <script>document.write((@ViewBag.Total[2]).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').slice(0, -3));</script> VND</h5>
+                                        <span class="description-text">TOTAL IMPORTATION COST</span>
                                     </div>
                                     <!-- /.description-block -->
                                 </div>
@@ -208,8 +188,9 @@
                                 <div class="col-sm-3 col-6">
                                     <div class="description-block">
                                         <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> 18%</span>
-                                        <h5 class="description-header">1200</h5>
-                                        <span class="description-text">GOAL COMPLETIONS</span>
+                                        <h5 class="description-header">
+                                        <script>document.write((@ViewBag.Total[3]).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').slice(0, -3));</script> VND</h5>
+                                        <span class="description-text">TOTAL EXPORTATION COST</span>
                                     </div>
                                     <!-- /.description-block -->
                                 </div>
@@ -228,9 +209,9 @@
                 <!-- Left col -->
                 <div class="col-md-8">
                     <!-- MAP & BOX PANE -->
-                    <div class="card">
+                    <div class="card card-success">
                         <div class="card-header">
-                            <h3 class="card-title">US-Visitors Report</h3>
+                            <h3 class="card-title">Bar Chart</h3>
 
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -241,40 +222,13 @@
                                 </button>
                             </div>
                         </div>
-                        <!-- /.card-header -->
-                        <div class="card-body p-0">
-                            <div class="d-md-flex">
-                                <div class="p-1 flex-fill" style="overflow: hidden">
-                                    <!-- Map will be created here -->
-                                    <div id="world-map-markers" style="height: 325px; overflow: hidden">
-                                        <div class="map"></div>
-                                    </div>
-                                </div>
-                                <div class="card-pane-right bg-success pt-2 pb-2 pl-4 pr-4">
-                                    <div class="description-block mb-4">
-                                        <div class="sparkbar pad" data-color="#fff">90,70,90,70,75,80,70</div>
-                                        <h5 class="description-header">8390</h5>
-                                        <span class="description-text">Visits</span>
-                                    </div>
-                                    <!-- /.description-block -->
-                                    <div class="description-block mb-4">
-                                        <div class="sparkbar pad" data-color="#fff">90,50,90,70,61,83,63</div>
-                                        <h5 class="description-header">30%</h5>
-                                        <span class="description-text">Referrals</span>
-                                    </div>
-                                    <!-- /.description-block -->
-                                    <div class="description-block">
-                                        <div class="sparkbar pad" data-color="#fff">90,50,90,70,61,83,63</div>
-                                        <h5 class="description-header">70%</h5>
-                                        <span class="description-text">Organic</span>
-                                    </div>
-                                    <!-- /.description-block -->
-                                </div><!-- /.card-pane-right -->
-                            </div><!-- /.d-md-flex -->
+                        <div class="card-body">
+                            <div class="chart">
+                                <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                            </div>
                         </div>
                         <!-- /.card-body -->
                     </div>
-                    <!-- /.card -->
                     <div class="row">
                         <div class="col-md-6">
                             <!-- DIRECT CHAT -->
@@ -808,7 +762,6 @@
                                         </span>
                                     </div>
                                 </li>
-                                <!-- /.item -->
                                 <li class="item">
                                     <div class="product-img">
                                         <img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
@@ -824,7 +777,6 @@
                                         </span>
                                     </div>
                                 </li>
-                                <!-- /.item -->
                                 <li class="item">
                                     <div class="product-img">
                                         <img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
@@ -842,19 +794,160 @@
                                 <!-- /.item -->
                             </ul>
                         </div>
-                        <!-- /.card-body -->
                         <div class="card-footer text-center">
                             <a href="javascript:void(0)" class="uppercase">View All Products</a>
                         </div>
-                        <!-- /.card-footer -->
                     </div>
-                    <!-- /.card -->
                 </div>
-                <!-- /.col -->
             </div>
-            <!-- /.row -->
-        </div><!--/. container-fluid -->
+        </div>
     </section>
-    <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
+
+
+
+@section ScriptConfig{
+    <script src="~/Scripts/plugins/chart.js/Chart.min.js"></script>
+    <script>
+        $(function () {
+            'use strict'
+
+            
+            var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+            var pieData = {
+                labels: [
+                    'Chrome',
+                    'IE',
+                    'FireFox',
+                    'Safari',
+                    'Opera',
+                    'Navigator'
+                ],
+                datasets: [
+                    {
+                        data: [700, 500, 400, 600, 300, 100],
+                        backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de']
+                    }
+                ]
+            }
+            var pieOptions = {
+                legend: {
+                    display: false
+                }
+            }
+            // Create pie or douhnut chart
+            // You can switch between pie and douhnut using the method below.
+            // eslint-disable-next-line no-unused-vars
+            var pieChart = new Chart(pieChartCanvas, {
+                type: 'doughnut',
+                data: pieData,
+                options: pieOptions
+            })
+
+            //-----------------
+            // - END PIE CHART -
+            //-----------------
+
+            /* jVector Maps
+             * ------------
+             * Create a world map with markers
+             */
+            $('#world-map-markers').mapael({
+                map: {
+                    name: 'usa_states',
+                    zoom: {
+                        enabled: true,
+                        maxLevel: 10
+                    }
+                }
+            })
+
+        })
+
+        $(function () {
+
+            var areaChartCanvas = $('#salesChart').get(0).getContext('2d')
+            var areaChartData = {
+                labels:
+                    ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [
+                    {
+                    label: 'Digital Goods',
+                        backgroundColor: 'rgba(60,141,188,0.9)',
+                        borderColor: 'rgba(60,141,188,0.8)',
+                        pointRadius: false,
+                        pointColor: '#3b8bba',
+                        pointStrokeColor: 'rgba(60,141,188,1)',
+                        pointHighlightFill: '#fff',
+                        pointHighlightStroke: 'rgba(60,141,188,1)',
+                        data: [28, 48, 40, 19, 86, 27, 0]
+                    },
+                    {
+                    label: 'Electronics',
+                        backgroundColor: 'rgba(210, 214, 222, 1)',
+                        borderColor: 'rgba(210, 214, 222, 1)',
+                        pointRadius: false,
+                        pointColor: 'rgba(210, 214, 222, 1)',
+                        pointStrokeColor: '#c1c7d1',
+                        pointHighlightFill: '#fff',
+                        pointHighlightStroke: 'rgba(220,220,220,1)',
+                        data: [65, 59, 80, 81, 56, 55, 0]
+                    },
+                ]
+            }
+
+            var areaChartOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+                legend: {
+                    display: false
+                },
+                scales: {
+                    xAxes: [{
+                        gridLines: {
+                            display: false,
+                        }
+                    }],
+                    yAxes: [{
+                        gridLines: {
+                            display: false,
+                        }
+                    }]
+                }
+            }
+
+            // This will get the first returned node in the jQuery collection.
+            var areaChart = new Chart(areaChartCanvas, {
+                type: 'line',
+                data: areaChartData,
+                options: areaChartOptions
+            })
+
+
+            //-------------
+            //- BAR CHART -
+            //-------------
+            var barChartCanvas = $('#barChart').get(0).getContext('2d')
+            var barChartData = $.extend(true, {}, areaChartData)
+            var temp0 = areaChartData.datasets[0]
+            var temp1 = areaChartData.datasets[1]
+            barChartData.datasets[0] = temp1
+            barChartData.datasets[1] = temp0
+
+            var barChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                datasetFill: false
+            }
+
+            var barChart = new Chart(barChartCanvas, {
+                type: 'bar',
+                data: barChartData,
+                options: barChartOptions
+            })
+
+
+        })
+    </script>
+
+}

@@ -110,6 +110,10 @@ namespace Azure_Assignment.Controllers
 
         public ActionResult Checkout()
         {
+            if (Session[Common.CommonConstants.CLIENT_SESSION] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             var cart = Session[CommonConstants.CartSession];
             
             var list = new List<CartItem>();
@@ -127,12 +131,12 @@ namespace Azure_Assignment.Controllers
         {
             if (address.Trim().Length == 0)
             {
-                ViewBag.Error = "Please enter your address";
+                TempData["ErrorMess"] = "Please enter your address";
                 return RedirectToAction("Checkout");
             }
             if (payment.ToString().Length == 0)
             {
-                ViewBag.Error = "Please choice payment";
+                TempData["ErrorMess"] = "Please choice payment";
                 return RedirectToAction("Checkout");
             }
             var order = new Orders();
@@ -165,7 +169,12 @@ namespace Azure_Assignment.Controllers
                 return Redirect("cart");
             }
             Session[CommonConstants.CartSession] = null;
-            return RedirectToAction("Index");
+            return RedirectToAction("Success");
+        }
+
+        public ActionResult Success()
+        {
+            return View();
         }
 
     }

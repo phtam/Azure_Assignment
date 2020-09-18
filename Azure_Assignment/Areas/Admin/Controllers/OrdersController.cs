@@ -10,18 +10,17 @@ using Azure_Assignment.EF;
 
 namespace Azure_Assignment.Areas.Admin.Controllers
 {
-    public class OrdersController : Controller
+    [Authorize]
+    public class OrdersController : BaseController
     {
         private DataPalkia db = new DataPalkia();
 
-        // GET: Admin/Orders
         public ActionResult Index()
         {
             var orders = db.Orders.Include(o => o.Payments).Include(o => o.Users);
             return View(orders.ToList());
         }
 
-        // GET: Admin/Orders/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -29,6 +28,12 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Orders orders = db.Orders.Find(id);
+            var _orderDetail = (from ord in db.OrderDetails
+                                join or in db.Orders on ord.OrderID equals or.OrderID
+                                join pro in db.Products on ord.ProductID equals pro.ProductID
+                                where ord.OrderID == orders.OrderID
+                                select ord).ToList();
+            ViewBag.OrderDetail = _orderDetail;
             if (orders == null)
             {
                 return HttpNotFound();
@@ -36,7 +41,23 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View(orders);
         }
 
-        // GET: Admin/Orders/Create
+        public ActionResult Ship (int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            else
+            {
+                var order = db.Orders.Find(id);
+                order.Status = 1;
+                order.ShippedDate = DateTime.Now;
+                db.SaveChanges();
+            }
+            
+            return RedirectToAction("Index");
+        }
+
         public ActionResult Create()
         {
             ViewBag.PaymentID = new SelectList(db.Payments, "PaymentID", "PaymentName");
@@ -44,9 +65,6 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View();
         }
 
-        // POST: Admin/Orders/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "OrderID,Username,PaymentID,CreationDate,ShippedDate,ShippedAddress,Note,Status")] Orders orders)
@@ -63,7 +81,6 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View(orders);
         }
 
-        // GET: Admin/Orders/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -80,16 +97,17 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View(orders);
         }
 
-        // POST: Admin/Orders/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "OrderID,Username,PaymentID,CreationDate,ShippedDate,ShippedAddress,Note,Status")] Orders orders)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(orders).State = EntityState.Modified;
+                var order = db.Orders.Find(orders.OrderID);
+                order.ShippedAddress = orders.ShippedAddress;
+                order.Note = orders.Note;
+                order.PaymentID = orders.PaymentID;
+                order.Status = orders.Status;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

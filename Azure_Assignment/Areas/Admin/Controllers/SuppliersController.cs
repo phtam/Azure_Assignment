@@ -10,7 +10,8 @@ using Azure_Assignment.EF;
 
 namespace Azure_Assignment.Areas.Admin.Controllers
 {
-    public class SuppliersController : Controller
+    [Authorize(Roles = "0")]
+    public class SuppliersController : BaseController
     {
         private DataPalkia db = new DataPalkia();
 

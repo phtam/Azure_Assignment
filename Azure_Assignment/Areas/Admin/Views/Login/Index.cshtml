@@ -39,11 +39,11 @@
             <div class="wrap-login100">
                 <div class="login100-form-title" style="background-image: url('../../../../Scripts/log-in-plugin/images/bg-01.jpg');">
                     <span class="login100-form-title-1">
-                        Sign In
+                        LogIn
                     </span>
                 </div>
 
-                @using (Html.BeginForm("Login", "Home", FormMethod.Post, htmlAttributes: new { @class = "login100-form validate-form" }))
+                @using (Html.BeginForm("Index", "Login", FormMethod.Post, htmlAttributes: new { @class = "login100-form validate-form" }))
                 {
                     <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
                         <span class="label-input100">Username</span>

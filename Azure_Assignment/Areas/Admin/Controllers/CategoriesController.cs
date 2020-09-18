@@ -9,7 +9,8 @@ using Azure_Assignment.Providers;
 
 namespace Azure_Assignment.Areas.Admin.Controllers
 {
-    public class CategoriesController : Controller
+    [Authorize(Roles = "0")]
+    public class CategoriesController : BaseController
     {
         private DataPalkia db = new DataPalkia();
         private FTPServerProvider ftp = new FTPServerProvider();

@@ -11,7 +11,8 @@ using Azure_Assignment.EF;
 
 namespace Azure_Assignment.Areas.Admin.Controllers
 {
-    public class ImportationsController : Controller
+    [Authorize]
+    public class ImportationsController : BaseController
     {
         private DataPalkia db = new DataPalkia();
 
@@ -28,7 +29,6 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         {
             var product = db.Products.FirstOrDefault(p => p.ProductID == id);
             ViewBag.Product = product;
-            ViewBag.Username = "phtam342";
             return View();
         }
 

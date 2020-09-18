@@ -12,7 +12,8 @@ using Azure_Assignment.Providers;
 
 namespace Azure_Assignment.Areas.Admin.Controllers
 {
-    public class BlogsController : Controller
+    [Authorize]
+    public class BlogsController : BaseController
     {
         private DataPalkia db = new DataPalkia();
         private FTPServerProvider ftp = new FTPServerProvider();
