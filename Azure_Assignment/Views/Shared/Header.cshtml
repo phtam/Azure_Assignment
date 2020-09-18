@@ -1,4 +1,7 @@
-﻿<header class="header">
+﻿@{ 
+    var client = (Azure_Assignment.Models.UserLogin)Session["CLIENT_SESSION"];
+}
+<header class="header">
     <div class="container-fluid">
         <div class="row">
             <div class="col-xl-3 col-lg-2">
@@ -47,21 +50,41 @@
             <div class="col-lg-3">
                 <div class="header__right">
                     <div class="header__right__auth">
-                        <a href="#">Login</a>
-                        <a href="#">Register</a>
+                        @if (Session["CLIENT_SESSION"] == null)
+                        {
+                            <a href="~/login">Login</a>
+                            <a href="~/register">Register</a>
+                        }
+                        else
+                        {
+                            <a href="~/profile">Hi, @client.FirtName @client.LastName</a>
+                            <a href="~/logout">Logout</a>
+                        }
+
                     </div>
                     <ul class="header__right__widget">
                         <li><span class="icon_search search-switch"></span></li>
                         <li>
-                            <a href="#">
-                                <span class="icon_heart_alt"></span>
-                                <div class="tip">2</div>
-                            </a>
+                            @if (Session["CLIENT_SESSION"] != null)
+                            {
+                                if (client.Role == 0)
+                                {
+                                    <a href="~/admin">Admin</a>
+                                }
+                                else
+                                {
+                                    <a href="~/cart">
+                                        <span class="icon_folder"></span>
+                                        <div class="tip">@ViewBag.QuantityInCart</div>
+                                    </a>
+                                }
+                            }
+
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="~/cart">
                                 <span class="icon_bag_alt"></span>
-                                <div class="tip">2</div>
+                                <div class="tip">@ViewBag.QuantityInCart</div>
                             </a>
                         </li>
                     </ul>

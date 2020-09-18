@@ -11,7 +11,8 @@ using Azure_Assignment.Providers;
 
 namespace Azure_Assignment.Areas.Admin.Controllers
 {
-    public class ProductsController : Controller
+    [Authorize]
+    public class ProductsController : BaseController
     {
         private DataPalkia db = new DataPalkia();
         private FTPServerProvider ftp = new FTPServerProvider();

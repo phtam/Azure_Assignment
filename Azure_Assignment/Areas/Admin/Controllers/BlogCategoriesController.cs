@@ -10,7 +10,8 @@ using Azure_Assignment.EF;
 
 namespace Azure_Assignment.Areas.Admin.Controllers
 {
-    public class BlogCategoriesController : Controller
+    [Authorize]
+    public class BlogCategoriesController : BaseController
     {
         private DataPalkia db = new DataPalkia();
 

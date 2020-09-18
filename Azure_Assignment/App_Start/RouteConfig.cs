@@ -21,6 +21,26 @@ namespace Azure_Assignment
             );
 
             routes.MapRoute(
+                name: "Login",
+                url: "login",
+                defaults: new { controller = "Login", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { "Azure_Assignment.Controllers" }
+            );
+            routes.MapRoute(
+                name: "Logout",
+                url: "logout",
+                defaults: new { controller = "Login", action = "Logout", id = UrlParameter.Optional },
+                namespaces: new[] { "Azure_Assignment.Controllers" }
+            );
+
+            routes.MapRoute(
+               name: "Register",
+               url: "register",
+               defaults: new { controller = "Register", action = "Index", id = UrlParameter.Optional },
+               namespaces: new[] { "Azure_Assignment.Controllers" }
+           );
+
+            routes.MapRoute(
                 name: "Cart",
                 url: "cart",
                 defaults: new { controller = "Cart", action = "Index", id = UrlParameter.Optional },

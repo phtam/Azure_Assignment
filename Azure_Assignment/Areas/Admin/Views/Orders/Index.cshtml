@@ -26,15 +26,7 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Data of Orders</h3>
-                    <p>
-                        <a class="btn btn-success btn-sm float-right" href="~/Admin/Orders/Create">
-                            <i class="fas fa-plus">
-                            </i>
-                            Create New
-                        </a>
-                    </p>
                 </div>
-                <!-- /.card-header -->
                 <div class="card-body">
                     <table id="tbl_Suppliers" class="table table-bordered table-striped">
                         <thead>
@@ -74,7 +66,7 @@
                                         @{
                                             if (item.ShippedDate == null)
                                             {
-                                                <a class="btn btn-warning btn-sm" href="~/Admin/Suppliers/Details/@item.OrderID">
+                                                <a class="btn btn-warning btn-sm" href="@Url.Action("Ship", "Orders", new { id = item.OrderID })">
                                                     <i class="fas fa-shipping-fast">
                                                     </i>
                                                     Ship
@@ -127,11 +119,6 @@
                                             </i>
                                             Edit
                                         </a>
-                                        <a class="btn btn-danger btn-sm" href="~/Admin/Orders/Delete/@item.OrderID">
-                                            <i class="fas fa-trash">
-                                            </i>
-                                            Delete
-                                        </a>
                                     </td>
                                 </tr>
                             }
@@ -143,6 +130,9 @@
         </div>
     </section>
 </div>
+
+
+
 
 @section ScriptConfig
 {

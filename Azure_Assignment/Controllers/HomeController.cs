@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using Azure_Assignment.DAO;
 using Azure_Assignment.Providers;
 using PagedList;
+using Azure_Assignment.Models;
+using System.Collections.Generic;
 
 namespace Azure_Assignment.Controllers
 {
@@ -65,6 +67,16 @@ namespace Azure_Assignment.Controllers
             ViewBag.Categories_List = categoryDAO.Get();
             ViewBag.Suppliers_List = supplierDAO.Get();
             ViewBag.Act_Home = "active";
+            var cart = (List<CartItem>)Session[Common.CommonConstants.CartSession];
+            var qty = 0;
+            if (cart != null)
+            {
+                foreach (var item in cart)
+                {
+                    qty += item.Quantity;
+                }
+            }
+            ViewBag.QuantityInCart = qty;
             return PartialView();
         }
 
@@ -74,6 +86,7 @@ namespace Azure_Assignment.Controllers
             return PartialView();
         }
 
+        
 
         public ActionResult DetailProduct()
         {
