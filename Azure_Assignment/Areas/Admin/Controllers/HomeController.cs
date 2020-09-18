@@ -16,7 +16,6 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         [Authorize(Roles = "0")]
         public ActionResult Index()
         {
-            ViewBag.
             return View();
         }
 
