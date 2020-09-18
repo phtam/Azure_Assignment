@@ -13,6 +13,7 @@ namespace Azure_Assignment.EF
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+    using System.Web;
 
     public partial class Blogs
     {
@@ -42,7 +43,8 @@ namespace Azure_Assignment.EF
         [DisplayName("Writing date")]
         public Nullable<System.DateTime> WritingDate { get; set; }
         public string Thumbnail { get; set; }
-    
+
+        public HttpPostedFileBase ImageFile { get; set; }
         public virtual BlogCategories BlogCategories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BlogComments> BlogComments { get; set; }
