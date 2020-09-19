@@ -23,6 +23,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             var export = 0;
             
             foreach(var item in db.Products.ToList())
+
             {
                 productInStock += item.UnitsInStock.GetValueOrDefault(0);
                 productOnOrder += item.UnitsOnOrder.GetValueOrDefault(0);

@@ -49,44 +49,58 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.BlogCategories.BlogCategoryName)
                                 </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Thumbnail)
+                                </th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.BlogName)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Users.Username)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.WritingDate)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.BlogCategories.BlogCategoryName)
-                                    </td>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.BlogName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Users.Username)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.WritingDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.BlogCategories.BlogCategoryName)
+                                </td>
+                                <td>
 
-                                    <td class="project-actions text-right">
-                                        <a class="btn btn-primary btn-sm" href="~/Admin/Blogs/Details/@item.BlogID">
-                                            <i class="fas fa-folder">
-                                            </i>
-                                            View
-                                        </a>
-                                        <a class="btn btn-info btn-sm" href="~/Admin/Blogs/Edit/@item.BlogID">
-                                            <i class="fas fa-pencil-alt">
-                                            </i>
-                                            Edit
-                                        </a>
-                                        <a class="btn btn-danger btn-sm" href="~/Admin/Blogs/Delete/@item.BlogID">
-                                            <i class="fas fa-trash">
-                                            </i>
-                                            Delete
-                                        </a>
-                                    </td>
-                                </tr>
+                                    @if (!item.Thumbnail.IsEmpty())
+                                    {
+                                        <img src="@item.Thumbnail" width="200" height="100" />
+                                    }
+                                    else
+                                    {
+                                        <p>No Image</p>
+                                    }
+                                </td>
+
+                                <td class="project-actions text-right">
+                                    <a class="btn btn-primary btn-sm" href="~/Admin/Blogs/Details/@item.BlogID">
+                                        <i class="fas fa-folder">
+                                        </i>
+                                        View
+                                    </a>
+                                    <a class="btn btn-info btn-sm" href="~/Admin/Blogs/Edit/@item.BlogID">
+                                        <i class="fas fa-pencil-alt">
+                                        </i>
+                                        Edit
+                                    </a>
+                                    <a class="btn btn-danger btn-sm" href="~/Admin/Blogs/Delete/@item.BlogID">
+                                        <i class="fas fa-trash">
+                                        </i>
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
                             }
 
                         </tbody>
