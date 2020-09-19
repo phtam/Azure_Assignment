@@ -556,7 +556,7 @@
     <Content Include="Scripts\plugins\chart.js\Chart.js" />
     <Content Include="Scripts\plugins\chart.js\Chart.min.css" />
     <Content Include="Scripts\plugins\chart.js\Chart.min.js" />
-    <Content Include="Scripts\plugins\ckeditor\adapters\jquery.js" />
+    <!--<Content Include="Scripts\plugins\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\plugins\ckeditor\build-config.js" />
     <Content Include="Scripts\plugins\ckeditor\ckeditor.js" />
     <Content Include="Scripts\plugins\ckeditor\config.js" />
@@ -1136,7 +1136,7 @@
     <Content Include="Scripts\plugins\codemirror\theme\xq-light.css" />
     <Content Include="Scripts\plugins\codemirror\theme\yeti.css" />
     <Content Include="Scripts\plugins\codemirror\theme\yonce.css" />
-    <Content Include="Scripts\plugins\codemirror\theme\zenburn.css" />
+    <Content Include="Scripts\plugins\codemirror\theme\zenburn.css" /> -->
     <Content Include="Scripts\plugins\datatables-autofill\css\autoFill.bootstrap4.css" />
     <Content Include="Scripts\plugins\datatables-autofill\css\autoFill.bootstrap4.min.css" />
     <Content Include="Scripts\plugins\datatables-autofill\js\autoFill.bootstrap4.js" />
