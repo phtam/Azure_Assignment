@@ -12,7 +12,7 @@ namespace Azure_Assignment.DAO
     {
         private DataPalkia db = new DataPalkia();
         private FTPServerProvider ftp = new FTPServerProvider();
-        private string ftpChild = "imgSales";
+        private string ftpChild = "imgBlogs";
 
 
         public List<BlogViewModel> getBlog()
