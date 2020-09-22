@@ -35,10 +35,10 @@ namespace Azure_Assignment.Controllers
             {
                 ViewBag.CategoryName = db.Categories.Find(product.CategoryID).CategoryName;
                 ViewBag.CompanyName = db.Suppliers.Find(product.SupplierID).CompanyName;
-                //ViewData.Model = new Products();
-                //ViewBag.a = "haha";
+
                 ViewBag.Product = db.Products.Find(id);
                 ViewBag.ImageBig = productDetail.geAllImagesOfProduct(id).Take(4);
+                
                 ViewBag.ImageSmall = productDetail.geAllImagesOfProduct(id).Take(4);
 
                 ViewBag.CommentCount = (int)feedback.geAllFeedbackOfProduct(id).Count;

@@ -12,7 +12,7 @@
             <div class="col-lg-12">
                 <div class="breadcrumb__links">
                     <a href="./index.html"><i class="fa fa-home"></i> Home</a>
-                    <span>Blog</span>
+                    <span>Blog categoies</span>
                 </div>
             </div>
         </div>
@@ -53,7 +53,7 @@
                             @{
                                 foreach (var item in blogCate)
                                 {
-                                    <li><a href="@Url.Action("BlogList", "Blog", new { id = item.BlogCategoryID})">@item.BlogCategoryName</a></li>
+                                    <li><a href="@Url.Action("BlogList", "Blog", new { id = item.BlogCategoryID})">@item.BlogCategoryName.ToUpper()</a></li>
                                 }
 
                             }

@@ -18,7 +18,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
         private DataPalkia db = new DataPalkia();
         private FTPServerProvider ftp = new FTPServerProvider();
         private ImageProvider imgProvider = new ImageProvider();
-        private string ftpChild = "imgSales";
+        private string ftpChild = "imgBlogs";
 
         // GET: Admin/Blogs
         public ActionResult Index()
@@ -56,9 +56,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View();
         }
 
-        // POST: Admin/Blogs/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
