@@ -113,7 +113,7 @@
                                     </div>
                                     @if (!Model.Thumbnail.IsEmpty())
                                     {
-                                        <img class="col-sm-10" id="imageDetail" src="@Model.Thumbnail" style="max-width:300px" />
+                                        <img class="col-sm-10" id="imageDetail" src="@Url.Content(Model.Thumbnail)" style="max-width:300px" />
                                     }
                                     else
                                     {

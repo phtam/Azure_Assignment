@@ -26,7 +26,8 @@ namespace Azure_Assignment.DAO
                                 }).ToList();
             foreach (var item in productImage)
             {
-                item.ImgFileName = ftp.Get(item.ImgFileName, ftpChild);
+                //item.ImgFileName = ftp.Get(item.ImgFileName, ftpChild);
+                item.ImgFileName = new ImageProvider().LoadImage(item.ImgFileName, ftpChild);
             }
             return productImage;
         }

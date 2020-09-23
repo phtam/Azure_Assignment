@@ -45,9 +45,10 @@ namespace Azure_Assignment.Controllers
                 userSession.Birthday = user.Birthday;
                 userSession.Phone = user.Phone;
                 userSession.Email = user.Email;
-                userSession.Address = user.Picture;
+                userSession.Address = user.Address;
                 userSession.Role = user.Role;
                 userSession.Status = user.Status;
+                userSession.Picture = user.Picture;
                 Session.Add(Common.CommonConstants.CLIENT_SESSION, userSession);
                 TempData["Notice_Login_Success"] = true;
                 return RedirectToAction("Index", "Home");
@@ -64,5 +65,6 @@ namespace Azure_Assignment.Controllers
             Session[Common.CommonConstants.CLIENT_SESSION] = null;
             return RedirectToAction("Index", "Home");
         }
+
     }
 }

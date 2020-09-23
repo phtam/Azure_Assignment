@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var feedContent = (List<Azure_Assignment.ViewModels.FeedbackViewModel>)ViewBag.FeedbackContent;
+    var feedback = (List<Azure_Assignment.ViewModels.FeedbackViewModel>)ViewBag.Feedback;
     var product = (Azure_Assignment.EF.Products)ViewBag.Product;
 }
 
@@ -11,8 +11,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb__links">
-                    <a href="./index.html"><i class="fa fa-home"></i> Home</a>
-                    <a href="#">@ViewBag.CategoryName</a>
+                    <a href="~/home"><i class="fa fa-home"></i> Home</a>
+                    <a href="~/categories-@product.Categories.CategoryID">@product.Categories.CategoryName</a>
                     <span>
                         @product.ProductName
                     </span>
@@ -21,8 +21,7 @@
         </div>
     </div>
 </div>
-<!-- Breadcrumb End -->
-<!-- Product Details Section Begin -->
+
 <section class="product-details spad">
     <div class="container">
         <div class="row">
@@ -30,7 +29,7 @@
                 <div class="product__details__pic">
                     <div class="product__details__pic__left product__thumb nice-scroll">
                         @{
-                            foreach (var item in ViewBag.ImageSmall)
+                            foreach (var item in ViewBag.Image)
                             {
                                 <a class="pt active" href="#product-@item.ImgID">
                                     <img src="@Url.Content(item.ImgFileName)" alt="">
@@ -42,11 +41,9 @@
                     <div class="product__details__slider__content">
                         <div class="product__details__pic__slider owl-carousel">
                             @{
-                                foreach (var item in ViewBag.ImageBig)
+                                foreach (var item in ViewBag.Image)
                                 {
-
                                     <img data-hash="product-@item.ImgID" class="product__big__img" src="@Url.Content(item.ImgFileName)" alt="">
-
                                 }
                             }
                         </div>
@@ -56,7 +53,7 @@
             </div>
             <div class="col-lg-6">
                 <div class="product__details__text">
-                    <h3>@product.ProductName <span>Brand: from @ViewBag.CompanyName</span></h3>
+                    <h3>@product.ProductName <span>Brand: from @product.Suppliers.CompanyName</span></h3>
                     <div class="rating">
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
@@ -64,14 +61,14 @@
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                         <span>
-                            @{if (@ViewBag.CommentCountF <= 1)
-                                {<span>( </span> @ViewBag.CommentCountF<span>review )</span>}
+                            @{if (feedback.Count <= 1)
+                                {<span>( </span> @feedback.Count<span>review )</span>}
                             else
-                            {<span>( </span>@ViewBag.CommentCountF<span>reviews )</span>}}
+                            {<span>( </span>@feedback.Count<span>reviews )</span>}}
                         </span>
                     </div>
                     <div class="product__details__price">
-                        <script>document.write((@product.OldUnitPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));</script> VND<span>$ 83.0</span>
+                        <script>document.write((@product.UnitPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));</script> VND<span><script>document.write((@product.OldUnitPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));</script></span>
                     </div>
 
                     <p>
@@ -106,10 +103,10 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">
-                                @{if (@ViewBag.CommentCount <= 1)
-                                    { <span>Review ( </span>@ViewBag.CommentCount<span> )</span>}
+                                @{if (feedback.Count <= 1)
+                                    { <span>Review ( </span>@feedback.Count<span> )</span>}
                                 else
-                                {<span>Reviews (</span>@ViewBag.CommentCount<span> )</span>}}
+                                {<span>Reviews (</span>@feedback.Count<span> )</span>}}
                         </a>
                     </li>
                 </ul>
@@ -134,7 +131,7 @@
                                         <div class="form-group row">
                                             <div class="col-sm-6">
                                                 <h4>Comments</h4><br />
-                                                @foreach (var item in feedContent)
+                                                @foreach (var item in feedback)
                                                 {
                                                     string[] tu = item.FeedbackName.Split(' ');
                                                     int len = tu.Length;

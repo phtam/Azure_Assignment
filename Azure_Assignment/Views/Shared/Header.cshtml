@@ -6,46 +6,12 @@
         <div class="row">
             <div class="col-xl-3 col-lg-2">
                 <div class="header__logo">
-                    <a href="~/Home"><img src="img/logo.png" alt=""></a>
+                    <a href="~/Home"><img src="" alt=""></a>
                 </div>
             </div>
             <div class="col-xl-6 col-lg-7">
-                <nav class="header__menu">
-                    <ul>
-                        <li class="@ViewBag.Act_Home"><a href="~/Home">Home</a></li>
-                        @{
-                            foreach (var item in ViewBag.Layout_Menu)
-                            {
-                                <li class="@ViewBag.Act_"><a href="~/category-@item.CategoryID">@item.CategoryName</a></li>
-                            }
-                        }
-                        <li class="@ViewBag.Act_Categories">
-                            <a href="#">Categories</a>
-                            <ul class="dropdown">
-                                @{
-                                    foreach (var item in ViewBag.Categories_List)
-                                    {
-                                        <li><a href="~/category-@item.CategoryID">@item.CategoryName</a></li>
-                                    }
-                                }
-                            </ul>
-                        </li>
-                        <li class="@ViewBag.Act_Brands">
-                            <a href="#">Brands</a>
-                            <ul class="dropdown">
-                                @{
-                                    foreach (var item in ViewBag.Suppliers_List)
-                                    {
-                                        <li><a href="~/Categories/@item.SupplierID">@item.CompanyName</a></li>
-                                    }
-                                }
-                            </ul>
-                        </li>
-                        <li class="@ViewBag.Act_Blogs"><a href="~/Home/Blogs">Blog</a></li>
-                        <li class="@ViewBag.Act_Contact"><a href="~/Home/Contact">Contact</a></li>
-                    </ul>
-
-                </nav>
+                @{ Html.RenderAction("Navigation", "Home"); }
+                
             </div>
             <div class="col-lg-3">
                 <div class="header__right">

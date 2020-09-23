@@ -90,7 +90,7 @@
                                                     @i
                                                 </td>
                                                 <td>
-                                                    <img src="@item.ImgFileName" style="max-height:200px; max-width:200px;" />
+                                                    <img src="@Url.Content(item.ImgFileName)" style="max-height:200px; max-width:200px;" />
                                                 </td>
 
                                                 <td class="project-actions text-right">
@@ -145,7 +145,7 @@
                     <div class="modal-body">
                         @if (!item.ImgFileName.IsEmpty())
                         {
-                            <img src="@item.ImgFileName" class="img-responsive" style="max-height:100%; max-width:100%;" />
+                            <img src="@Url.Content(item.ImgFileName)" class="img-responsive" style="max-height:100%; max-width:100%;" />
                         }
                         else
                         {
@@ -175,7 +175,7 @@
                         <p style="text-align: center;">You won't be able to revert this!</p>
                         @if (!item.ImgFileName.IsEmpty())
                         {
-                            <img src="@item.ImgFileName" class="img-responsive" style="max-height:50%; max-width:50%;" />
+                            <img src="@Url.Content(item.ImgFileName)" class="img-responsive" style="max-height:50%; max-width:50%;" />
                         }
                         else
                         {

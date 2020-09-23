@@ -20,6 +20,7 @@ namespace Azure_Assignment.Controllers
         FeedbackDAO feedback = new FeedbackDAO();
         CategoryDAO categoryDAO = new CategoryDAO();
         SupplierDAO supplierDAO = new SupplierDAO();
+
         public ActionResult Index(int? id)
         {
             if (id == null)
@@ -33,22 +34,9 @@ namespace Azure_Assignment.Controllers
             }
             else
             {
-                ViewBag.CategoryName = db.Categories.Find(product.CategoryID).CategoryName;
-                ViewBag.CompanyName = db.Suppliers.Find(product.SupplierID).CompanyName;
-                //ViewData.Model = new Products();
-                //ViewBag.a = "haha";
                 ViewBag.Product = db.Products.Find(id);
-                ViewBag.ImageBig = productDetail.geAllImagesOfProduct(id).Take(4);
-                ViewBag.ImageSmall = productDetail.geAllImagesOfProduct(id).Take(4);
-
-                ViewBag.CommentCount = (int)feedback.geAllFeedbackOfProduct(id).Count;
-                ViewBag.CommentCountF = (int)feedback.geAllFeedbackOfProduct(id).Count;
-                ViewBag.FeedbackContent = feedback.geAllFeedbackOfProduct(id);
-
-                //
-                ViewBag.Layout_Menu = categoryDAO.Get().Take(2);
-                ViewBag.Categories_List = categoryDAO.Get();
-                ViewBag.Suppliers_List = supplierDAO.Get();
+                ViewBag.Image = productDetail.geAllImagesOfProduct(id).Take(4);
+                ViewBag.Feedback = feedback.geAllFeedbackOfProduct(id);
             }
 
             return View();

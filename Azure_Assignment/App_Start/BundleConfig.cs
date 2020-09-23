@@ -25,6 +25,16 @@ namespace Azure_Assignment
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/bundles/core").Include(
+                      "~/Content/css/bootstrap.min.css",
+                      "~/Content/css/jquery-ui.min.css",
+                      "~/Content/css/magnific-popup.css",
+                      "~/Content/css/owl.carousel.min.css",
+                      "~/Content/css/slicknav.min.css",
+                      "~/Content/css/style.css"));
+
+            BundleTable.EnableOptimizations = true;
         }
     }
 }

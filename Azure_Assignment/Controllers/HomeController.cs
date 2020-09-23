@@ -8,6 +8,10 @@ using Azure_Assignment.Providers;
 using PagedList;
 using Azure_Assignment.Models;
 using System.Collections.Generic;
+using System.IO;
+using System;
+using Azure_Assignment.ViewModels;
+using Scrypt;
 
 namespace Azure_Assignment.Controllers
 {
@@ -31,42 +35,22 @@ namespace Azure_Assignment.Controllers
             ViewBag.Sale_Product = productDAO.GetSaleProduct().Take(3);
             ViewBag.Highlight_Product = productDAO.GetHighlightProducts().Take(3);
             ViewBag.Discount = saleDAO.Get().Take(1);
-            
+
             return View();
         }
 
-        public ActionResult Shop(int? id, int? page, int? min, int? max)
-        {
-            ViewBag.Categories_List = categoryDAO.Get();
-            ViewBag.Suppliers_List = supplierDAO.Get();
-            ViewBag.CurrentCategory = id;
-            
-
-            if (page == null) page = 1;
-            int pageSize = 9;
-            int pageNumber = (page ?? 1);
-
-            if (min != null || max != null)
-            {
-                var model = new ProductDAO().GetProductsByCategory_Price(id, min, max).ToPagedList(pageNumber, pageSize);
-                return PartialView(model);
-            }
-            else
-            {
-                var model = new ProductDAO().GetProductsByCategory(id).ToPagedList(pageNumber, pageSize);
-                return PartialView(model);
-            }
-
-        }
-
-
         [ChildActionOnly]
-        public ActionResult Header()
+        public ActionResult Navigation()
         {
             ViewBag.Layout_Menu = categoryDAO.Get().Take(2);
             ViewBag.Categories_List = categoryDAO.Get();
             ViewBag.Suppliers_List = supplierDAO.Get();
-            ViewBag.Act_Home = "active";
+            return PartialView();
+        }
+
+        [ChildActionOnly]
+        public ActionResult Header()
+        {
             var cart = (List<CartItem>)Session[Common.CommonConstants.CartSession];
             var qty = 0;
             if (cart != null)
@@ -87,25 +71,6 @@ namespace Azure_Assignment.Controllers
         }
 
         
-
-        public ActionResult DetailProduct()
-        {
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
 
         public ActionResult UploadTooBig()
         {

@@ -1,68 +1,69 @@
 ﻿@model Azure_Assignment.EF.BlogComments
 @{
     ViewBag.Title = "Index";
+    ViewBag.BlogsActive = "active";
+    ViewBag.Breadcrumb = "Blogs";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var blogCate = (List<Azure_Assignment.ViewModels.BlogCategoriesViewModel>)ViewBag.BlogCategoies;
+    var listBlog = (IEnumerable<Azure_Assignment.ViewModels.BlogViewModel>)ViewBag.Blog;
 }
 
-<!-- Breadcrumb Begin -->
-<div class="breadcrumb-option">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="breadcrumb__links">
-                    <a href="./index.html"><i class="fa fa-home"></i> Home</a>
-                    <span>Blog</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Breadcrumb End -->
-<!-- Blog Details Section Begin -->
-<section class="blog-details spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-8">
-                <div class="section-title">
-                    <h4>Top 3 newest blogs</h4>
-                </div>
-                @{foreach (var item in ViewBag.Blog)
-                    {
-                        <div class="blog__item">
-                            <div class="blog__item__pic large__item set-bg" data-setbg="@item.Thumbnail"></div>
-                            <div class="blog__details__item__title">
-                                <span class="tip"><a href="@Url.Action("BlogDetail", "Blog", new { id = item.BlogID})">Watch now</a></span>
-                                <h6><strong>@item.BlogName</strong></h6>
-                                <ul>
-                                    <li>by <span>@item.Username</span></li>
-                                    <li>@item.WritingDate</li>
-                                </ul>
-                            </div>
-                            </div>
-                    }
-                }
-            </div>
-            <div class="col-lg-4 col-md-4">
-                <div class="blog__sidebar">
-                    <div class="blog__sidebar__item">
-                        <div class="section-title">
-                            <h4>Blog categories</h4>
-                        </div>
-                        <ul>
-                            @{
-                                foreach (var item in blogCate)
-                                {
-                                    <li><a href="@Url.Action("BlogList", "Blog", new { id = item.BlogCategoryID})">@item.BlogCategoryName</a></li>
-                                }
 
-                            }
-                        </ul>
+@Html.Partial("Breadcrumb")
+
+@if (listBlog.Count() > 0)
+{
+    <section class="blog-details spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-8">
+                    <div class="section-title">
+                        <h4>Top 3 newest blogs</h4>
                     </div>
-           
+                    @{foreach (var item in listBlog)
+                        {
+                            <div class="blog__item">
+                                <div class="blog__item__pic large__item set-bg" data-setbg="@Url.Content(item.Thumbnail)"></div>
+                                <div class="blog__details__item__title">
+                                    <span class="tip"><a href="@Url.Action("BlogDetail", "Blog", new { id = item.BlogID })">Watch now</a></span>
+                                    <h6><strong>@item.BlogName</strong></h6>
+                                    <ul>
+                                        <li>by <span>@item.Username</span></li>
+                                        <li>@item.WritingDate</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <div class="blog__sidebar">
+                        <div class="blog__sidebar__item">
+                            <div class="section-title">
+                                <h4>Blog categories</h4>
+                            </div>
+                            <ul>
+                                @{
+                                    foreach (var item in blogCate)
+                                    {
+                                        <li><a href="@Url.Action("BlogList", "Blog", new { id = item.BlogCategoryID })">@item.BlogCategoryName</a></li>
+                                    }
+
+                                }
+                            </ul>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<!-- Blog Details Section End -->
+    </section>
+}
+else
+{
+    <section class="checkout spad">
+        <div class="container">
+            <div class="alert alert-success" style="font-size:large">Sorry! No results found!</div>
+        </div>
+    </section>
+}

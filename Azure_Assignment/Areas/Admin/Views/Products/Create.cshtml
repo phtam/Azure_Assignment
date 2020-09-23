@@ -125,8 +125,7 @@
                                                         new List<SelectListItem>
                                                         {
                                                             new SelectListItem {Text = "Being sold", Value = "false"},
-                                                            new SelectListItem {Text = "Stop selling", Value = "true"},
-}, "Value", "Text");
+                                                            new SelectListItem {Text = "Stop selling", Value = "true"},}, "Value", "Text");
                                                 }
                                                 @Html.DropDownListFor(model => model.Discontinued, selectListDiscontinued, htmlAttributes: new { @class = "form-control" })
                                                 @Html.ValidationMessageFor(model => model.Discontinued, "", new { @class = "text-danger" })

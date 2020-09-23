@@ -31,6 +31,9 @@
 @if (Session["CLIENT_SESSION"] == null)
 {
     <div class="container">
+        <div class="col-sm-12">
+            <h2 style="text-align:center; color:gray">LOGIN</h2>
+        </div>
 
         @using (Html.BeginForm("Index", "Login", FormMethod.Post, htmlAttributes: new { @class = "login100-form validate-form" }))
         {
@@ -90,4 +93,9 @@ else
     <script src="~/Scripts/log-in-plugin/vendor/countdowntime/countdowntime.js"></script>
     <!--===============================================================================================-->
     <script src="~/Scripts/log-in-plugin/js/main.js"></script>
+    <style>
+        .container{
+            padding: 5px 80px 80px 50px
+        }
+    </style>
 }
