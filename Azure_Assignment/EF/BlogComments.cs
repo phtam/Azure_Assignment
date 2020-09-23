@@ -12,6 +12,7 @@ namespace Azure_Assignment.EF
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class BlogComments
     {
@@ -24,10 +25,17 @@ namespace Azure_Assignment.EF
         [DisplayName("Blog comment ID")]
         public int BlogCommentID { get; set; }
         [DisplayName("Full name")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter fullname")]
+        [StringLength(maximumLength: 50, MinimumLength = 5, ErrorMessage = "Fullname must be between 5 to 50")]
         public string FullName { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter email")]
+        [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", ErrorMessage = "Incorrect Email Format")]
         public string Email { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter phone")]
+        [RegularExpression(@"\(?\d{3}\)?-? *\d{3}-? *-?\d{4}", ErrorMessage = "Incorrect Phone Number Format")]
         public string Phone { get; set; }
-        [DisplayName("Comment date")]
+        [DisplayName("Comment")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter content")]
         public string Comment { get; set; }
         public Nullable<System.DateTime> CommentingDate { get; set; }
         public Nullable<int> BlogID { get; set; }

@@ -57,9 +57,11 @@ namespace Azure_Assignment.Controllers
             ViewBag.BlogAboutName = blogDAO.getBlogdetail(id);
             ViewBag.BlogAboutID = blogDAO.getBlogdetail(id);
             ViewBag.Blog = db.Blogs.Find(id);
+            ViewBag.Comment = blogCommentDAO.getCommentList(id);
             return View();
         }
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddComment(BlogComments blogComments)
         {
             if (ModelState.IsValid)
@@ -67,6 +69,7 @@ namespace Azure_Assignment.Controllers
                 var blogComment = new BlogCommentDAO().Insert(blogComments);
                 if (blogComment == true)
                 {
+                    TempData["Notice_Submit_Success"] = true;
                     return RedirectToAction("BlogDetail", "Blog", new { id = blogComments.BlogID });
                 }
             }

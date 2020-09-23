@@ -22,5 +22,25 @@ namespace Azure_Assignment.DAO
             }
             return false;
         }
+
+        public List<BlogCommentViewModel> getCommentList(int? id)
+        {
+            var CommentOfBlog = (from blog in db.Blogs
+                                     join blogComm in db.BlogComments on blog.BlogID equals blogComm.BlogID
+                                     where blog.BlogID == id
+                                     orderby blogComm.CommentingDate descending
+                                     select new BlogCommentViewModel()
+                                     {
+                                         BlogCommentID = blogComm.BlogCommentID,
+                                         FullName = blogComm.FullName,
+                                         Email = blogComm.Email,
+                                         Phone = blogComm.Phone,
+                                         Comment = blogComm.Comment,
+                                         CommentingDate = blogComm.CommentingDate,
+                                         BlogID = blogComm.BlogID
+                                     }).ToList();
+            return CommentOfBlog;
+        }
+
     }
 }

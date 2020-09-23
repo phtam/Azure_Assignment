@@ -138,7 +138,30 @@
                                                     string word = tu[len - 1];
                                                     string character = word.Substring(0, 1);
                                                     <span class="avatar">@character</span>
-                                                    <b>@item.FeedbackName </b><span>- @item.FeedBackDate</span>
+                                                    @*<b>@item.FeedbackName </b><span>- @item.FeedBackDate</span>*@
+
+                                                    DateTime ngaymuon = Convert.ToDateTime(item.FeedBackDate);
+                                                    DateTime ngaytra = Convert.ToDateTime(DateTime.Now);
+                                                    TimeSpan Time = ngaytra - ngaymuon;
+                                                    int TongSoNgay = Time.Days;
+                                                    int TongSoGio = Time.Hours;
+                                                    int TongSoPhut = Time.Minutes;
+                                                    if (TongSoNgay < 1)
+                                                    {
+                                                        if (TongSoGio < 1)
+                                                        {
+                                                            <b>@item.FeedbackName </b><small style="color: darkgrey">- @TongSoPhut minute(s) before</small>
+                                                        }
+                                                        else
+                                                        {
+                                                            <b>@item.FeedbackName </b><small style="color: darkgrey">- @TongSoGio hour(s) before</small>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <b>@item.FeedbackName </b><small style="color: darkgrey">- @TongSoNgay day(s) before</small>
+                                                    };
+
                                                     <div>@item.Content</div>
                                                     <br />
                                                 }
@@ -166,7 +189,7 @@
 
                                                     @Html.Hidden("ProductID", product.ProductID)
                                                     <br />
-                                                    <button type="submit" class="float-right site-btn">Submit</button>
+                                                    <button type="submit" class="float-right site-btn">Send</button>
                                                 </div>
                                             </div>
                                         </div>

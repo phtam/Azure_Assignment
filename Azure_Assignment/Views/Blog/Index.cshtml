@@ -9,6 +9,7 @@
 }
 
 
+
 @Html.Partial("Breadcrumb")
 
 @if (listBlog.Count() > 0)
@@ -20,7 +21,8 @@
                     <div class="section-title">
                         <h4>Top 3 newest blogs</h4>
                     </div>
-                    @{foreach (var item in listBlog)
+                    @{
+                  foreach (var item in listBlog)
                         {
                             <div class="blog__item">
                                 <div class="blog__item__pic large__item set-bg" data-setbg="@Url.Content(item.Thumbnail)"></div>
@@ -35,6 +37,7 @@
                             </div>
                         }
                     }
+
                 </div>
                 <div class="col-lg-4 col-md-4">
                     <div class="blog__sidebar">
@@ -48,7 +51,6 @@
                                     {
                                         <li><a href="@Url.Action("BlogList", "Blog", new { id = item.BlogCategoryID })">@item.BlogCategoryName</a></li>
                                     }
-
                                 }
                             </ul>
                         </div>

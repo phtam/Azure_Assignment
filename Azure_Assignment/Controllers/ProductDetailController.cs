@@ -37,6 +37,7 @@ namespace Azure_Assignment.Controllers
                 ViewBag.Product = db.Products.Find(id);
                 ViewBag.Image = productDetail.geAllImagesOfProduct(id).Take(4);
                 ViewBag.Feedback = feedback.geAllFeedbackOfProduct(id);
+
             }
 
             return View();

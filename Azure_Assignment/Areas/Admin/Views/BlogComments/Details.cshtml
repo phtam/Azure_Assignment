@@ -77,7 +77,7 @@
                                         <strong>@Html.DisplayNameFor(model => model.Comment)</strong>:
                                     </div>
                                     <p class="col-sm-10">
-                                        @Html.TextAreaFor(model => model.Comment, new { @id = "txa_display_Blog_Comment" })
+                                        @Html.DisplayFor(model => model.Comment, new { @id = "txa_display_Blog_Comment" })
                                     </p>
                                 </div>
 
@@ -116,3 +116,4 @@
         })
     </script>
 }
+
