@@ -131,12 +131,12 @@ namespace Azure_Assignment.Controllers
         {
             if (address.Trim().Length == 0)
             {
-                TempData["ErrorMess"] = "Please enter your address";
+                TempData["ErrorMess"] = "Please enter your address.";
                 return RedirectToAction("Checkout");
             }
             if (payment.ToString().Length == 0)
             {
-                TempData["ErrorMess"] = "Please choice payment";
+                TempData["ErrorMess"] = "Please choose your form of payment!";
                 return RedirectToAction("Checkout");
             }
             var order = new Orders();

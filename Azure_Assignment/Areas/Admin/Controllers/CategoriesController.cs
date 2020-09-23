@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using Azure_Assignment.EF;
 using Azure_Assignment.Providers;
@@ -22,12 +23,12 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             var list = db.Categories.ToList();
             foreach (var item in list)
             {
-                item.Picture = ftp.Get(item.Picture, ftpChild);
+                //item.Picture = ftp.Get(item.Picture, ftpChild);
+                item.Picture = imgProvider.LoadImage(item.Picture, ftpChild);
             }
 
             return View(list);
         }
-
 
         public ActionResult Details(int? id)
         {
@@ -36,7 +37,8 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Categories categories = db.Categories.Find(id);
-            categories.Picture = ftp.Get(categories.Picture, ftpChild);
+            //categories.Picture = ftp.Get(categories.Picture, ftpChild);
+            categories.Picture = imgProvider.LoadImage(categories.Picture, ftpChild);
             if (categories == null)
             {
                 return HttpNotFound();
@@ -58,7 +60,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 string fileName = Path.GetFileNameWithoutExtension(categories.ImageFile.FileName);
                 string extension = Path.GetExtension(categories.ImageFile.FileName);
 
-                if(imgProvider.Validate(categories.ImageFile) != null)
+                if (imgProvider.Validate(categories.ImageFile) != null)
                 {
                     ViewBag.Error = imgProvider.Validate(categories.ImageFile);
                     return View("Create");
@@ -66,15 +68,16 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
                 categories.Picture = fileName;
                 db.Categories.Add(categories);
-                
+
                 if (db.SaveChanges() > 0)
                 {
+                    SaveImage(categories.ImageFile, fileName, ftpChild);
                     ftp.Add(fileName, ftpChild, categories.ImageFile);
                     TempData["Notice_Create_Success"] = true;
                 }
                 ModelState.Clear();
                 return RedirectToAction("Index");
-                
+
             }
 
             return View(categories);
@@ -95,10 +98,9 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View(categories);
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CategoryID,CategoryName,Description,Picture,ImageFile")] Categories categories, String imageOldFile)
+        public ActionResult Edit([Bind(Include = "CategoryID,CategoryName,Description,Picture,ImageFile")] Categories categories, string imageOldFile)
         {
             if (ModelState.IsValid)
             {
@@ -113,6 +115,8 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                         return View("Edit");
                     }
                     categories.Picture = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    DeleteImage(imgProvider.LoadImage(imageOldFile, ftpChild));
+                    SaveImage(categories.ImageFile, categories.Picture, ftpChild);
                     ftp.Update(categories.Picture, ftpChild, categories.ImageFile, imageOldFile);
                 }
                 else
@@ -139,7 +143,8 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Categories categories = db.Categories.Find(id);
-            categories.Picture = ftp.Get(categories.Picture, ftpChild);
+            //categories.Picture = ftp.Get(categories.Picture, ftpChild);
+            categories.Picture = imgProvider.LoadImage(categories.Picture, ftpChild);
             if (categories == null)
             {
                 return HttpNotFound();
@@ -159,6 +164,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 if (db.SaveChanges() > 0)
                 {
                     ftp.Delete(categories.Picture, ftpChild);
+                    DeleteImage(imgProvider.LoadImage(categories.Picture, ftpChild));
                     TempData["Notice_Delete_Success"] = true;
                 }
             }
@@ -177,5 +183,30 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public void SaveImage(HttpPostedFileBase imageFile, string fileName, string childNode)
+        {
+            string uploadFolderPath = Server.MapPath("~/public/uploadedFiles/" + childNode + "/");
+
+            if (Directory.Exists(uploadFolderPath) == false)
+            {
+                Directory.CreateDirectory(uploadFolderPath);
+            }
+
+            fileName = Path.Combine(uploadFolderPath, fileName);
+
+            imageFile.SaveAs(fileName);
+        }
+
+        public void DeleteImage(string path)
+        {
+            try
+            {
+                System.IO.File.Delete(Server.MapPath(path));
+            }
+            catch (Exception) { }
+            
+        }
+
     }
 }

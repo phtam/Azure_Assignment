@@ -1,5 +1,6 @@
 ﻿@{
     ViewBag.Title = "Home Page";
+    
 }
 
 <section class="categories">
@@ -10,7 +11,7 @@
                     foreach (var item in ViewBag.One_New_Category)
                     {
                         <div class="categories__item categories__large__item set-bg"
-                             data-setbg="@item.Picture">
+                             data-setbg="@Url.Content(@item.Picture)">
                             <div class="categories__text">
                                 <h1>@item.CategoryName</h1>
                                 <p>
@@ -28,7 +29,7 @@
                         foreach (var item in ViewBag.Four_Categories)
                         {
                             <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                                <div class="categories__item set-bg" data-setbg="@item.Picture">
+                                <div class="categories__item set-bg" data-setbg="@Url.Content(@item.Picture)">
                                     <div class="categories__text">
                                         <h3 style="font-weight:bold">@item.CategoryName</h3>
                                         <p>358 items</p>
@@ -65,16 +66,16 @@
             </div>
         </div>
         <div class="row property__gallery">
-            @{ 
+            @{
                 foreach (var item in ViewBag.Eight_New_Product)
                 {
                     <div class="col-lg-3 col-md-4 col-sm-6 mix @item.CategoryName">
                         <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="@item.Thumbnail">
+                            <div class="product__item__pic set-bg" data-setbg="@Url.Content(item.Thumbnail)">
                                 <div class="label new">New</div>
                                 <ul class="product__hover">
-                                    <li><a href="@item.Thumbnail" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                    
+                                    <li><a href="@Url.Content(item.Thumbnail)" class="image-popup"><span class="arrow_expand"></span></a></li>
+
                                     <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                     <li><a href="~/add-to-cart?productID=@item.ProductID&quantity=1"><span class="icon_bag_alt"></span></a></li>
                                 </ul>
@@ -88,9 +89,11 @@
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                 </div>
-                                <div class="product__price"><script>document.write((@item.UnitPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').slice(0, -3));</script> VND</div>
+                                <div class="product__price">
+                                <script>document.write((@item.UnitPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').slice(0, -3));</script> VND</div>
                                 <div style="text-decoration: line-through; font-size:small">
-                                <script>document.write((@item.OldUnitPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').slice(0, -3));</script></div>
+                                    <script>document.write((@item.OldUnitPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').slice(0, -3));</script>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -108,7 +111,7 @@
                     @{
                         foreach (var item in ViewBag.Sale)
                         {
-                            <div class="banner__item"  >
+                            <div class="banner__item">
                                 <div class="banner__text">
                                     <span>@item.Code</span>
                                     <h1>@item.SaleName</h1>
@@ -136,65 +139,7 @@
                         {
                             <div class="trend__item">
                                 <div class="trend__item__pic">
-                                    <img src="@item.Thumbnail" alt="" style="max-width:100px">
-                                </div>
-                                <div class="trend__item__text">
-                                    <h6><a href="#" style="color:black">@item.ProductName</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <h6><a href="#" style="color:black;">@item.CategoryName</a></h6>
-                                    <div class="product__price"><script>document.write((@item.OldUnitPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').slice(0, -3));</script> VND</div>
-                                </div>
-                            </div>
-                        }
-                    }
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="trend__content">
-                    <div class="section-title">
-                        <h4>Best seller</h4>
-                    </div>
-                    @{
-                        foreach (var item in ViewBag.Best_Seller)
-                        {
-                            <div class="trend__item">
-                                <div class="trend__item__pic">
-                                    <img src="@item.Thumbnail" alt="" style="max-width:100px">
-                                </div>
-                                <div class="trend__item__text">
-                                    <h6><a href="#" style="color:black">@item.ProductName</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <h6><a href="#" style="color:black;">@item.CategoryName</a></h6>
-                                    <div class="product__price"><script>document.write((@item.OldUnitPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').slice(0, -3));</script> VND</div>
-                                </div>
-                            </div>
-                        }
-                    }
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="trend__content">
-                    <div class="section-title">
-                        <h4>Highlight</h4>
-                    </div>
-                    @{
-                        foreach (var item in ViewBag.Highlight_Product)
-                        {
-                            <div class="trend__item">
-                                <div class="trend__item__pic">
-                                    <img src="@item.Thumbnail" alt="" style="max-width:100px">
+                                    <img src="@Url.Content(item.Thumbnail)" alt="" style="max-width:100px">
                                 </div>
                                 <div class="trend__item__text">
                                     <h6><a href="#" style="color:black">@item.ProductName</a></h6>
@@ -214,6 +159,67 @@
                     }
                 </div>
             </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="trend__content">
+                    <div class="section-title">
+                        <h4>Best seller</h4>
+                    </div>
+                    @{
+                        foreach (var item in ViewBag.Best_Seller)
+                        {
+                            <div class="trend__item">
+                                <div class="trend__item__pic">
+                                    <img src="@Url.Content(item.Thumbnail)" alt="" style="max-width:100px">
+                                </div>
+                                <div class="trend__item__text">
+                                    <h6><a href="#" style="color:black">@item.ProductName</a></h6>
+                                    <div class="rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <h6><a href="#" style="color:black;">@item.CategoryName</a></h6>
+                                    <div class="product__price">
+                                    <script>document.write((@item.OldUnitPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').slice(0, -3));</script> VND</div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="trend__content">
+                    <div class="section-title">
+                        <h4>Highlight</h4>
+                    </div>
+                    @{
+                        foreach (var item in ViewBag.Highlight_Product)
+                        {
+                            <div class="trend__item">
+                                <div class="trend__item__pic">
+                                    <img src="@Url.Content(item.Thumbnail)" alt="" style="max-width:100px">
+                                </div>
+                                <div class="trend__item__text">
+                                    <h6><a href="#" style="color:black">@item.ProductName</a></h6>
+                                    <div class="rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <h6><a href="#" style="color:black;">@item.CategoryName</a></h6>
+                                    <div class="product__price">
+                                        <script>document.write((@item.OldUnitPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').slice(0, -3));</script> VND
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -226,7 +232,7 @@
                 {
                     <div class="col-lg-6 p-0">
                         <div class="discount__pic">
-                            <img src="@item.Picture" alt="" width="585" height="390" >
+                            <img src="@Url.Content(item.Picture)" alt="" width="585" height="390">
                         </div>
                     </div>
                     <div class="col-lg-6 p-0">

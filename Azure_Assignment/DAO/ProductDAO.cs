@@ -30,7 +30,8 @@ namespace Azure_Assignment.DAO
 
             foreach (var item in list)
             {
-                item.Thumbnail = ftp.Get(item.Thumbnail, ftpChild);
+                //item.Thumbnail = ftp.Get(item.Thumbnail, ftpChild);
+                item.Thumbnail = new ImageProvider().LoadImage(item.Thumbnail, ftpChild);
             }
 
             return list;
@@ -58,7 +59,8 @@ namespace Azure_Assignment.DAO
 
             foreach (var item in list)
             {
-                item.Thumbnail = ftp.Get(item.Thumbnail, ftpChild);
+                //item.Thumbnail = ftp.Get(item.Thumbnail, ftpChild);
+                item.Thumbnail = new ImageProvider().LoadImage(item.Thumbnail, ftpChild);
             }
             return list;
         }
@@ -84,7 +86,8 @@ namespace Azure_Assignment.DAO
                           }).ToList();
             foreach (var item in list)
             {
-                item.Thumbnail = ftp.Get(item.Thumbnail, ftpChild);
+                //item.Thumbnail = ftp.Get(item.Thumbnail, ftpChild);
+                item.Thumbnail = new ImageProvider().LoadImage(item.Thumbnail, ftpChild);
             }
             return list;
         }
@@ -110,7 +113,8 @@ namespace Azure_Assignment.DAO
                           }).ToList();
             foreach (var item in list)
             {
-                item.Thumbnail = ftp.Get(item.Thumbnail, ftpChild);
+                //item.Thumbnail = ftp.Get(item.Thumbnail, ftpChild);
+                item.Thumbnail = new ImageProvider().LoadImage(item.Thumbnail, ftpChild);
             }
             return list;
         }
@@ -135,7 +139,8 @@ namespace Azure_Assignment.DAO
                         }).ToList();
             foreach (var item in list)
             {
-                item.Thumbnail = ftp.Get(item.Thumbnail, ftpChild);
+                // item.Thumbnail = ftp.Get(item.Thumbnail, ftpChild);
+                item.Thumbnail = new ImageProvider().LoadImage(item.Thumbnail, ftpChild);
             }
             return list;
         }
@@ -160,7 +165,8 @@ namespace Azure_Assignment.DAO
                         }).ToList();
             foreach (var item in list)
             {
-                item.Thumbnail = ftp.Get(item.Thumbnail, ftpChild);
+                //item.Thumbnail = ftp.Get(item.Thumbnail, ftpChild);
+                item.Thumbnail = new ImageProvider().LoadImage(item.Thumbnail, ftpChild);
             }
             return list;
         }
@@ -169,7 +175,8 @@ namespace Azure_Assignment.DAO
         {
             var product = db.Products.SingleOrDefault(p => p.ProductID == id);
 
-            product.Thumbnail = ftp.Get(product.Thumbnail, ftpChild);
+            //product.Thumbnail = ftp.Get(product.Thumbnail, ftpChild);
+            product.Thumbnail = new ImageProvider().LoadImage(product.Thumbnail, ftpChild);
 
             return product;
         }

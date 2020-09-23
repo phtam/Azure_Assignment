@@ -21,15 +21,12 @@ namespace Azure_Assignment.Controllers
         BlogCategoriesDAO blogCategoriesDAO = new BlogCategoriesDAO();
         BlogDAO blogDAO = new BlogDAO();
         BlogCommentDAO blogCommentDAO = new BlogCommentDAO();
+
         public ActionResult Index()
         {
             ViewBag.BlogCategoies = blogCategoriesDAO.getAllBlogCategories();
             ViewBag.Blog = blogDAO.getBlog().Take(3);
-            //
             ViewBag.Layout_Menu = categoryDAO.Get().Take(2);
-            ViewBag.Categories_List = categoryDAO.Get();
-            ViewBag.Suppliers_List = supplierDAO.Get();
-            ///
             return View();
         }
 

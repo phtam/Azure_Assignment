@@ -1,8 +1,11 @@
 ﻿using Azure_Assignment.EF;
 using Azure_Assignment.Providers;
 using Azure_Assignment.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 
 namespace Azure_Assignment.DAO
 {
@@ -10,6 +13,7 @@ namespace Azure_Assignment.DAO
     {
         DataPalkia db = new DataPalkia();
         FTPServerProvider ftp = new FTPServerProvider();
+        ImageProvider imageProvider = new ImageProvider();
         string ftpChild = "imgCategories";
 
         public List<CategoryViewModel> Get()
@@ -24,10 +28,12 @@ namespace Azure_Assignment.DAO
                              }).ToList();
             foreach (var item in list)
             {
-                item.Picture = ftp.Get(item.Picture, ftpChild);
+                item.Picture = imageProvider.LoadImage(item.Picture, ftpChild);
             }
             return list;
         }
+
+       
 
         public List<CategoryViewModel> GetNewCategories()
         {
@@ -40,9 +46,13 @@ namespace Azure_Assignment.DAO
                                  Description = cate.Description,
                                  Picture = cate.Picture
                              }).ToList();
+            
+            
+            
+
             foreach (var item in list)
             {
-                item.Picture = ftp.Get(item.Picture, ftpChild);
+                item.Picture = imageProvider.LoadImage(item.Picture, ftpChild);
             }
             return list;
         }

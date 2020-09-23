@@ -16,7 +16,21 @@ namespace Azure_Assignment
             routes.MapRoute(
                 name: "Product By Category",
                 url: "category-{id}",
-                defaults: new { controller = "Home", action = "Shop", id = UrlParameter.Optional},
+                defaults: new { controller = "Shop", action = "Index", id = UrlParameter.Optional},
+                namespaces: new[] { "Azure_Assignment.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "Blogs",
+                url: "blogs",
+                defaults: new { controller = "Blog", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { "Azure_Assignment.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "Product Detail",
+                url: "product-{id}",
+                defaults: new { controller = "ProductDetail", action = "Index", id = UrlParameter.Optional },
                 namespaces: new[] { "Azure_Assignment.Controllers" }
             );
 

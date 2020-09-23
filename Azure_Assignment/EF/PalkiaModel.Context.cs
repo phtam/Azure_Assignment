@@ -42,5 +42,7 @@ namespace Azure_Assignment.EF
         public virtual DbSet<Sale> Sale { get; set; }
         public virtual DbSet<Suppliers> Suppliers { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+
+        public System.Data.Entity.DbSet<Azure_Assignment.Models.UserRegister> UserRegisters { get; set; }
     }
 }

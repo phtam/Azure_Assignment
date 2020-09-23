@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Web;
 
+
 namespace Azure_Assignment.Providers
 {
-    public class FTPServerProvider
+    public class FTPServerProvider 
     {
         string ftp = "ftp://156.67.222.163:21/";
         string ftpParent = "NhomHoangTam/";
@@ -21,7 +21,7 @@ namespace Azure_Assignment.Providers
                 FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftp + ftpParent + ftpChild + "/" + fileName);
                 request.Method = WebRequestMethods.Ftp.DownloadFile;
 
-                request.Credentials = new NetworkCredential( username, password );
+                request.Credentials = new NetworkCredential(username, password);
                 request.UsePassive = true;
                 request.UseBinary = true;
                 request.EnableSsl = false;

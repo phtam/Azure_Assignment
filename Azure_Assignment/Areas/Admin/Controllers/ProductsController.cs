@@ -25,7 +25,8 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             
             foreach (var item in products)
             {
-                item.Thumbnail = ftp.Get(item.Thumbnail, ftpChild);
+                //item.Thumbnail = ftp.Get(item.Thumbnail, ftpChild);
+                item.Thumbnail = imgProvider.LoadImage(item.Thumbnail, ftpChild);
             }
             return View(products.ToList());
         }
@@ -37,7 +38,8 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Products products = db.Products.Find(id);
-            products.Thumbnail = ftp.Get(products.Thumbnail, ftpChild);
+            //products.Thumbnail = ftp.Get(products.Thumbnail, ftpChild);
+            products.Thumbnail = imgProvider.LoadImage(products.Thumbnail, ftpChild);
             if (products == null)
             {
                 return HttpNotFound();
@@ -76,6 +78,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 products.UnitsOnOrder = 0;
                 if (db.SaveChanges() > 0)
                 {
+                    SaveImage(products.ImageFile, products.Thumbnail, ftpChild);
                     ftp.Add(products.Thumbnail, ftpChild, products.ImageFile);
                     TempData["Notice_Create_Success"] = true;
                 }
@@ -124,6 +127,8 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                         return View("Edit");
                     }
                     products.Thumbnail = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    DeleteImage(imgProvider.LoadImage(old_Thumbnail, ftpChild));
+                    SaveImage(products.ImageFile, products.Thumbnail, ftpChild);
                     ftp.Update(products.Thumbnail, ftpChild, products.ImageFile, old_Thumbnail);
                 }
                 else
@@ -156,7 +161,8 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Products products = db.Products.Find(id);
-            products.Thumbnail = ftp.Get(products.Thumbnail, ftpChild);
+            //products.Thumbnail = ftp.Get(products.Thumbnail, ftpChild);
+            products.Thumbnail = imgProvider.LoadImage(products.Thumbnail, ftpChild);
             if (products == null)
             {
                 return HttpNotFound();
@@ -174,6 +180,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 db.Products.Remove(products);
                 if (db.SaveChanges() > 0)
                 {
+                    DeleteImage(imgProvider.LoadImage(products.Thumbnail, ftpChild));
                     ftp.Delete(products.Thumbnail, ftpChild);
                     TempData["Notice_Delete_Success"] = true;
                 }                
@@ -200,7 +207,8 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             var productImage = db.ProductImage.Include(p => p.Products).Where(m => m.ProductID == id);
             foreach (var item in productImage)
             {
-                item.ImgFileName = ftp.Get(item.ImgFileName, "imgProducts");
+                //item.ImgFileName = ftp.Get(item.ImgFileName, "imgProducts");
+                item.ImgFileName = imgProvider.LoadImage(item.ImgFileName, "imgProducts");
             }
             string[] proinfo = new string[] { id.ToString() , db.Products.Find(id).ProductName.ToString() };
             ViewBag.ProInfo = proinfo;
@@ -227,6 +235,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             db.ProductImage.Add(proImage);
             if (db.SaveChanges() > 0)
             {
+                SaveImage(ImageFile, proImage.ImgFileName, ftpChild);
                 ftp.Add(proImage.ImgFileName, ftpChild, ImageFile);
                 TempData["Notice_Save_Success"] = true;
             }
@@ -242,6 +251,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 db.ProductImage.Remove(productImage);
                 if (db.SaveChanges() > 0)
                 {
+                    DeleteImage(imgProvider.LoadImage(productImage.ImgFileName, "imgProducts"));
                     ftp.Delete(productImage.ImgFileName, "imgProducts");
                     TempData["Notice_Delete_Success"] = true;
                 }
@@ -261,6 +271,30 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public void SaveImage(HttpPostedFileBase imageFile, string fileName, string childNode)
+        {
+            string uploadFolderPath = Server.MapPath("~/public/uploadedFiles/" + childNode + "/");
+
+            if (Directory.Exists(uploadFolderPath) == false)
+            {
+                Directory.CreateDirectory(uploadFolderPath);
+            }
+
+            fileName = Path.Combine(uploadFolderPath, fileName);
+
+            imageFile.SaveAs(fileName);
+        }
+
+        public void DeleteImage(string path)
+        {
+            try
+            {
+                System.IO.File.Delete(Server.MapPath(path));
+            }
+            catch (Exception) { }
+
         }
     }
 }

@@ -1,9 +1,11 @@
-﻿using System.IO;
+﻿using Azure_Assignment.Areas.Admin.Controllers;
+using System;
+using System.IO;
 using System.Web;
 
 namespace Azure_Assignment.Providers
 {
-    public class ImageProvider
+    public class ImageProvider : BaseController
     {
         public string Validate(HttpPostedFileBase file)
         {
@@ -21,6 +23,11 @@ namespace Azure_Assignment.Providers
             }
 
             return null;
+        }
+
+        public string LoadImage(string fileName, string childNode)
+        {
+            return "~/public/uploadedFiles/"+ childNode + "/" + fileName;
         }
     }
 }

@@ -106,7 +106,7 @@
                                         @Html.DisplayFor(modelItem => item.Suppliers.CompanyName)
                                     </td>
                                     <td>
-                                        <img src="@item.Thumbnail" style="max-height:200px; max-width:200px;" />
+                                        <img src="@Url.Content(item.Thumbnail)" style="max-height:200px; max-width:200px;" />
                                     </td>
                                     <td class="project-actions text-right">
                                         <a class="btn btn-success btn-sm" href="~/Admin/Products/ProductImage/@item.ProductID">
