@@ -22,11 +22,11 @@ namespace Azure_Assignment.EF
             this.Blogs = new HashSet<Blogs>();
         }
 
-        [DisplayName("BlogCategory ID")]
+        [DisplayName("Category ID")]
         public int BlogCategoryID { get; set; }
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter blogCategory name")]
-        [StringLength(maximumLength: 50, MinimumLength = 5, ErrorMessage = "BlogCategory name must be between 5 to 50")]
-        [DisplayName("BlogCategory name")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter Blog category name")]
+        [StringLength(maximumLength: 50, MinimumLength = 5, ErrorMessage = "Blog category name must be between 5 to 50")]
+        [DisplayName("Category Name")]
         public string BlogCategoryName { get; set; }
 
 

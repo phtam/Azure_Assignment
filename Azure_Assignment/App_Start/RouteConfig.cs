@@ -14,9 +14,30 @@ namespace Azure_Assignment
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Product By Category",
+                name: "Shop by category",
                 url: "category-{id}",
                 defaults: new { controller = "Shop", action = "Index", id = UrlParameter.Optional},
+                namespaces: new[] { "Azure_Assignment.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "Shop by brand",
+                url: "brand-{id}",
+                defaults: new { controller = "Shop", action = "ShopByBrand", id = UrlParameter.Optional },
+                namespaces: new[] { "Azure_Assignment.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "Blog Detail",
+                url: "blog-{id}",
+                defaults: new { controller = "Blog", action = "BlogDetail", id = UrlParameter.Optional },
+                namespaces: new[] { "Azure_Assignment.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "Blog Category",
+                url: "blogcategory-{id}",
+                defaults: new { controller = "Blog", action = "BlogList", id = UrlParameter.Optional },
                 namespaces: new[] { "Azure_Assignment.Controllers" }
             );
 
@@ -24,6 +45,13 @@ namespace Azure_Assignment
                 name: "Blogs",
                 url: "blogs",
                 defaults: new { controller = "Blog", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { "Azure_Assignment.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "User Profile",
+                url: "userprofile",
+                defaults: new { controller = "UserProfile", action = "Index", id = UrlParameter.Optional },
                 namespaces: new[] { "Azure_Assignment.Controllers" }
             );
 

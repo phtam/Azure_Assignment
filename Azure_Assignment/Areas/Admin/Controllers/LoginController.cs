@@ -36,12 +36,18 @@ namespace Azure_Assignment.Areas.Admin.Controllers
 
             if (isValidPass)
             {
-                FormsAuthentication.SetAuthCookie(user.Username, false);
                 if (user.Status == false)
                 {
                     ViewBag.ErrorLogin = "Your account has been locked";
                     return View();
                 }
+                if (user.Role == 2)
+                {
+                    ViewBag.ErrorLogin = "Username or password incorrect";
+                    return View();
+                }
+                FormsAuthentication.SetAuthCookie(user.Username, false);
+                
                 var userSession = new Models.UserLogin();
                 userSession.Username = user.Username;
                 userSession.FirtName = user.FirtName;

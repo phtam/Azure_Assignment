@@ -43,6 +43,7 @@ namespace Azure_Assignment.Providers
             int data = (int)db.Users.Where(model => model.Username == username).FirstOrDefault().Role;
             string[] result = { data.ToString() };
             return result;
+
         }
 
         public override string[] GetUsersInRole(string roleName)

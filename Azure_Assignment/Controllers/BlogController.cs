@@ -1,18 +1,16 @@
 ﻿using Azure_Assignment.DAO;
 using Azure_Assignment.EF;
 using Azure_Assignment.Providers;
+using PagedList;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Azure_Assignment.Controllers
 {
     public class BlogController : Controller
     {
-        // GET: Blog
         private DataPalkia db = new DataPalkia();
         private FTPServerProvider ftp = new FTPServerProvider();
 
@@ -22,15 +20,18 @@ namespace Azure_Assignment.Controllers
         BlogDAO blogDAO = new BlogDAO();
         BlogCommentDAO blogCommentDAO = new BlogCommentDAO();
 
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
+            if (page == null) page = 1;
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+
             ViewBag.BlogCategoies = blogCategoriesDAO.getAllBlogCategories();
-            ViewBag.Blog = blogDAO.getBlog().Take(3);
-            ViewBag.Layout_Menu = categoryDAO.Get().Take(2);
-            return View();
+            var model = blogDAO.getBlog().ToPagedList(pageNumber, pageSize);
+            return View(model);
         }
 
-        public ActionResult BlogList(int? id)
+        public ActionResult BlogList(int? id, int? page)
         {
             if (id == null)
             {
@@ -40,40 +41,76 @@ namespace Azure_Assignment.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.BlogList = blogDAO.getBlogOfBlogCategories(id);
+
+            if (page == null) page = 1;
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+
+            var model = blogDAO.getBlogOfBlogCategories(id).ToPagedList(pageNumber, pageSize);
             ViewBag.BlogCategoies = blogCategoriesDAO.getAllBlogCategories();
             ViewBag.BlogCategoryName = db.BlogCategories.Find(id).BlogCategoryName;
-            return View();
+            ViewBag.CurrentBlogCate = id;
+            return View(model);
         }
 
-        public ActionResult BlogDetail(int? id)
+        public ActionResult BlogDetail(int? id, int? page)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ViewBag.BlogDetail = blogDAO.getBlogdetail(id);
+            if (page == null) page = 1;
+            int pageSize = 8;
+            int pageNumber = (page ?? 1);
+            
             ViewBag.BlogCategoies = blogCategoriesDAO.getAllBlogCategories();
-            ViewBag.BlogAboutName = blogDAO.getBlogdetail(id);
-            ViewBag.BlogAboutID = blogDAO.getBlogdetail(id);
-            ViewBag.Blog = db.Blogs.Find(id);
-            ViewBag.Comment = blogCommentDAO.getCommentList(id);
-            return View();
+            var blogDetail = db.Blogs.Find(id);
+            blogDetail.Thumbnail = new ImageProvider().LoadImage(blogDetail.Thumbnail, "imgBlogs");
+            ViewBag.Blog = blogDetail;
+
+            var model = blogCommentDAO.getCommentList(id).ToPagedList(pageNumber, pageSize);
+            return View(model);
         }
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AddComment(BlogComments blogComments)
+        public ActionResult AddComment(string txtFullName, string txtPhone, string txtEmail, string txaComment, int? BlogID)
         {
-            if (ModelState.IsValid)
+            if (BlogID == null)
             {
-                var blogComment = new BlogCommentDAO().Insert(blogComments);
-                if (blogComment == true)
-                {
-                    TempData["Notice_Submit_Success"] = true;
-                    return RedirectToAction("BlogDetail", "Blog", new { id = blogComments.BlogID });
-                }
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return RedirectToAction("BlogDetail", "Blog", new { id = blogComments.BlogID });
+
+            if (txtFullName == null || txtPhone == null || txtEmail == null || txaComment == null)
+            {
+                ViewBag.ErrorMessage = "Please complete the form before submitting";
+                return RedirectToAction("BlogDetail", "Blog", new { id = BlogID });
+            }
+            var cmt = new BlogComments();
+
+            cmt.FullName = txtFullName;
+            cmt.Phone = txtPhone;
+            cmt.Email = txtEmail;
+            cmt.Comment = txaComment;
+            cmt.BlogID = BlogID;
+            var blogComment = new BlogCommentDAO();
+            bool isValid = false;
+            try
+            {
+                isValid = blogComment.Insert(cmt);
+            }
+            catch (Exception)
+            {
+                ViewBag.ErrorMessage = "Please complete the form before submitting";
+                return RedirectToAction("BlogDetail", "Blog", new { id = BlogID });
+            }
+            
+            if (isValid == true)
+            {
+                TempData["Notice_Submit_Success"] = true;
+                return RedirectToAction("BlogDetail", "Blog", new { id = cmt.BlogID });
+            }
+
+            return RedirectToAction("BlogDetail", "Blog", new { id = cmt.BlogID });
         }
     }
 }

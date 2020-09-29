@@ -12,8 +12,8 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard v2</li>
+                        <li class="breadcrumb-item"><a href="~/admin">Home</a></li>
+                        <li class="breadcrumb-item active">Dashboard</li>
                     </ol>
                 </div>
             </div>
@@ -835,9 +835,7 @@
                     display: false
                 }
             }
-            // Create pie or douhnut chart
-            // You can switch between pie and douhnut using the method below.
-            // eslint-disable-next-line no-unused-vars
+            
             var pieChart = new Chart(pieChartCanvas, {
                 type: 'doughnut',
                 data: pieData,
@@ -848,10 +846,7 @@
             // - END PIE CHART -
             //-----------------
 
-            /* jVector Maps
-             * ------------
-             * Create a world map with markers
-             */
+           
             $('#world-map-markers').mapael({
                 map: {
                     name: 'usa_states',
@@ -891,7 +886,7 @@
                         pointStrokeColor: '#c1c7d1',
                         pointHighlightFill: '#fff',
                         pointHighlightStroke: 'rgba(220,220,220,1)',
-                        data: [65, 59, 80, 81, 56, 55, 0]
+                        data: [80, 59, 80, 81, 56, 55, 90]
                     },
                 ]
             }

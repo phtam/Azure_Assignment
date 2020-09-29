@@ -1,11 +1,6 @@
 ﻿using Azure_Assignment.DAO;
-using Azure_Assignment.EF;
-using Azure_Assignment.Providers;
 using PagedList;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Net;
 using System.Web.Mvc;
 
 namespace Azure_Assignment.Controllers
@@ -18,9 +13,10 @@ namespace Azure_Assignment.Controllers
         SaleDAO saleDAO = new SaleDAO();
         SupplierDAO supplierDAO = new SupplierDAO();
 
-        public ActionResult Index(int? id, int? page, int? min, int? max)
+        public ActionResult Index(int? id, int? page, int? brand)
         {
-            return MainView(id,page,min,max);
+            TempData["CurrentCategory"] = id;
+            return MainView(id, page, brand);
         }
 
         [ChildActionOnly]
@@ -31,23 +27,64 @@ namespace Azure_Assignment.Controllers
             return PartialView();
         }
 
-        public ActionResult MainView(int? id, int? page, int? min, int? max)
+        public ActionResult ShopByBrand(int? id, int? cate, int? page)
         {
-            ViewBag.CurrentCategory = id;
             if (page == null) page = 1;
             int pageSize = 9;
             int pageNumber = (page ?? 1);
 
-            if (min != null || max != null)
+            if (id != null && cate != null)
             {
-                var model = new ProductDAO().GetProductsByCategory_Price(id, min, max).ToPagedList(pageNumber, pageSize);
+                var model = new ProductDAO().GetProductsByBrand_Category(id, cate).ToPagedList(pageNumber, pageSize);
+                return View(model);
+            }
+            if (id != null)
+            {
+                var model = new ProductDAO().GetProductsByBrand(id).ToPagedList(pageNumber, pageSize);
+                TempData["CurrentBrand"] = id;
+                return View(model);
+            }
+
+            return View();
+        }
+
+        public ActionResult MainView(int? id, int? page, int? brand)
+        {
+            if (page == null) page = 1;
+            int pageSize = 9;
+            int pageNumber = (page ?? 1);
+
+            if (brand != null && id != null)
+            {
+                var model = new ProductDAO().GetProductsByCategory_Brand(id, brand).ToPagedList(pageNumber, pageSize);
                 return PartialView(model);
             }
-            else
+
+            if (id != null)
             {
                 var model = new ProductDAO().GetProductsByCategory(id).ToPagedList(pageNumber, pageSize);
                 return PartialView(model);
             }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Search(string txtSearch, int? page)
+        {
+            if (page == null) page = 1;
+            int pageSize = 9;
+            int pageNumber = (page ?? 1);
+
+            if (txtSearch != null)
+            {
+                var model = new ProductDAO().Search(txtSearch).ToPagedList(pageNumber, pageSize);
+                return View(model);
+            }
+
+            return View();
         }
     }
 }

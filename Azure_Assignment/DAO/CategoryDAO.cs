@@ -33,7 +33,21 @@ namespace Azure_Assignment.DAO
             return list;
         }
 
-       
+        public int Count(int? cateID)
+        {
+            var num = (from cate in db.Categories
+                        where cate.CategoryID == cateID
+                        select new CategoryViewModel
+                        {
+                            CategoryID = cate.CategoryID,
+                            CategoryName = cate.CategoryName,
+                            Description = cate.Description,
+                            Picture = cate.Picture
+                        }).Count();
+            
+            return num;
+        }
+
 
         public List<CategoryViewModel> GetNewCategories()
         {

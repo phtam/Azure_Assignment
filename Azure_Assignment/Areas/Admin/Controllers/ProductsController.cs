@@ -11,7 +11,7 @@ using Azure_Assignment.Providers;
 
 namespace Azure_Assignment.Areas.Admin.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "0,1")]
     public class ProductsController : BaseController
     {
         private DataPalkia db = new DataPalkia();

@@ -171,6 +171,110 @@ namespace Azure_Assignment.DAO
             return list;
         }
 
+        public List<ProductViewModel> GetProductsByCategory_Brand(int? CateID, int? BrandID)
+        {
+            var list = (from pro in db.Products
+                        join cate in db.Categories on pro.CategoryID equals cate.CategoryID
+                        join sale in db.Sale on pro.SaleID equals sale.SaleID
+                        where pro.UnitsInStock > 0 && cate.CategoryID == CateID && pro.SupplierID == BrandID
+                        select new ProductViewModel
+                        {
+                            ProductID = pro.ProductID,
+                            ProductName = pro.ProductName,
+                            UnitPrice = pro.UnitPrice,
+                            OldUnitPrice = pro.OldUnitPrice,
+                            SaleID = sale.SaleID,
+                            SaleName = sale.SaleName,
+                            CategoryID = cate.CategoryID,
+                            CategoryName = cate.CategoryName,
+                            Thumbnail = pro.Thumbnail
+                        }).ToList();
+            foreach (var item in list)
+            {
+                //item.Thumbnail = ftp.Get(item.Thumbnail, ftpChild);
+                item.Thumbnail = new ImageProvider().LoadImage(item.Thumbnail, ftpChild);
+            }
+            return list;
+        }
+
+        public List<ProductViewModel> GetProductsByBrand(int? brand)
+        {
+            var list = (from pro in db.Products
+                        join cate in db.Categories on pro.CategoryID equals cate.CategoryID
+                        join sale in db.Sale on pro.SaleID equals sale.SaleID
+                        where pro.UnitsInStock > 0 && pro.SupplierID == brand
+                        select new ProductViewModel
+                        {
+                            ProductID = pro.ProductID,
+                            ProductName = pro.ProductName,
+                            UnitPrice = pro.UnitPrice,
+                            OldUnitPrice = pro.OldUnitPrice,
+                            SaleID = sale.SaleID,
+                            SaleName = sale.SaleName,
+                            CategoryID = cate.CategoryID,
+                            CategoryName = cate.CategoryName,
+                            Thumbnail = pro.Thumbnail
+                        }).ToList();
+            foreach (var item in list)
+            {
+                //item.Thumbnail = ftp.Get(item.Thumbnail, ftpChild);
+                item.Thumbnail = new ImageProvider().LoadImage(item.Thumbnail, ftpChild);
+            }
+            return list;
+        }
+
+        public List<ProductViewModel> Search(string key)
+        {
+            var list = (from pro in db.Products
+                        join cate in db.Categories on pro.CategoryID equals cate.CategoryID
+                        join sale in db.Sale on pro.SaleID equals sale.SaleID
+                        where pro.UnitsInStock > 0 && pro.ProductName.Contains(key)
+                        select new ProductViewModel
+                        {
+                            ProductID = pro.ProductID,
+                            ProductName = pro.ProductName,
+                            UnitPrice = pro.UnitPrice,
+                            OldUnitPrice = pro.OldUnitPrice,
+                            SaleID = sale.SaleID,
+                            SaleName = sale.SaleName,
+                            CategoryID = cate.CategoryID,
+                            CategoryName = cate.CategoryName,
+                            Thumbnail = pro.Thumbnail
+                        }).ToList();
+            foreach (var item in list)
+            {
+                //item.Thumbnail = ftp.Get(item.Thumbnail, ftpChild);
+                item.Thumbnail = new ImageProvider().LoadImage(item.Thumbnail, ftpChild);
+            }
+            return list;
+        }
+
+        public List<ProductViewModel> GetProductsByBrand_Category(int? supID, int? cateID)
+        {
+            var list = (from pro in db.Products
+                        join cate in db.Categories on pro.CategoryID equals cate.CategoryID
+                        join sale in db.Sale on pro.SaleID equals sale.SaleID
+                        where pro.UnitsInStock > 0 && pro.SupplierID == supID && cate.CategoryID == cateID
+                        select new ProductViewModel
+                        {
+                            ProductID = pro.ProductID,
+                            ProductName = pro.ProductName,
+                            UnitPrice = pro.UnitPrice,
+                            OldUnitPrice = pro.OldUnitPrice,
+                            SaleID = sale.SaleID,
+                            SaleName = sale.SaleName,
+                            CategoryID = cate.CategoryID,
+                            CategoryName = cate.CategoryName,
+                            Thumbnail = pro.Thumbnail
+                        }).ToList();
+            foreach (var item in list)
+            {
+                //item.Thumbnail = ftp.Get(item.Thumbnail, ftpChild);
+                item.Thumbnail = new ImageProvider().LoadImage(item.Thumbnail, ftpChild);
+            }
+            return list;
+        }
+
         public Products ViewDetail(int id)
         {
             var product = db.Products.SingleOrDefault(p => p.ProductID == id);

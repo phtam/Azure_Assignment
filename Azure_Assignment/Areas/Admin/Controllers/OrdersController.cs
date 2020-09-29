@@ -7,10 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Azure_Assignment.EF;
+using Azure_Assignment.Providers;
 
 namespace Azure_Assignment.Areas.Admin.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "0,1")]
     public class OrdersController : BaseController
     {
         private DataPalkia db = new DataPalkia();
@@ -28,6 +29,7 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Orders orders = db.Orders.Find(id);
+            orders.Users.Picture = new FTPServerProvider().Get(orders.Users.Picture, "imgUsers");
             var _orderDetail = (from ord in db.OrderDetails
                                 join or in db.Orders on ord.OrderID equals or.OrderID
                                 join pro in db.Products on ord.ProductID equals pro.ProductID

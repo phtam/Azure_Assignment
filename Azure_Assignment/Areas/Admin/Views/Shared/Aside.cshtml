@@ -14,7 +14,7 @@
                 <img src="@user.Picture" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="~/profile" class="d-block">@user.FirtName @user.LastName</a>
+                <a href="~/admin/profile" class="d-block">@user.FirtName @user.LastName</a>
             </div>
         </div>
 
@@ -74,12 +74,18 @@
                     </ul>
                 </li>
 
-                <li class="nav-item">
-                    <a href="~/Admin/Users/" class="nav-link">
-                        <img src="~/public/icons/icons8-management-30.png" />
-                        <p>Manage Users</p>
-                    </a>
-                </li>
+                @{
+                    if (user.Role == 0)
+                    {
+                        <li class="nav-item">
+                            <a href="~/Admin/Users/" class="nav-link">
+                                <img src="~/public/icons/icons8-management-30.png" />
+                                <p>Manage Users</p>
+                            </a>
+                        </li>
+                    }
+                }
+
 
                 <li class="nav-item">
                     <a href="~/Admin/Orders/" class="nav-link">
@@ -119,34 +125,46 @@
                         </li>
                     </ul>
                 </li>
+                @{
+                    if (user.Role == 0)
+                    {
+                        <li class="nav-item">
+                            <a href="~/Admin/Categories/" class="nav-link">
+                                <img src="~/public/icons/icons8-commodity-30.png" />
+                                <p>Manage Categories</p>
+                            </a>
+                        </li>
 
-                <li class="nav-item">
-                    <a href="~/Admin/Categories/" class="nav-link">
-                        <img src="~/public/icons/icons8-commodity-30.png" />
-                        <p>Manage Categories</p>
-                    </a>
-                </li>
+                        <li class="nav-item">
+                            <a href="~/Admin/Suppliers/" class="nav-link">
+                                <img src="~/public/icons/icons8-supplier-30.png" />
+                                <p>Manage Suppliers</p>
+                            </a>
+                        </li>
 
-                <li class="nav-item">
-                    <a href="~/Admin/Suppliers/" class="nav-link">
-                        <img src="~/public/icons/icons8-supplier-30.png" />
-                        <p>Manage Suppliers</p>
-                    </a>
-                </li>
+                        <li class="nav-item">
+                            <a href="~/Admin/Sales/" class="nav-link">
+                                <img src="~/public/icons/icons8-sale-30.png" />
+                                <p>Manage Sales</p>
+                            </a>
+                        </li>
+                    }
+                }
 
-                <li class="nav-item">
-                    <a href="~/Admin/Sales/" class="nav-link">
-                        <img src="~/public/icons/icons8-sale-30.png" />
-                        <p>Manage Sales</p>
-                    </a>
-                </li>
 
-                <li class="nav-item">
-                    <a href="~/Admin/Payments/" class="nav-link">
-                        <img src="~/public/icons/icons8-visa-30.png" />
-                        <p>Manage Payments</p>
-                    </a>
-                </li>
+
+
+                @{
+                    if (user.Role == 0)
+                    {
+                        <li class="nav-item">
+                            <a href="~/Admin/Payments/" class="nav-link">
+                                <img src="~/public/icons/icons8-visa-30.png" />
+                                <p>Manage Payments</p>
+                            </a>
+                        </li>
+                    }
+                }
 
                 <li class="nav-item">
                     <a href="@Url.Action("LogOut", "Login")" class="nav-link">

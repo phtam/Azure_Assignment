@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "Home Page";
-    
+    TempData["HomeActive"] = "active";
 }
 
 <section class="categories">
@@ -32,7 +32,7 @@
                                 <div class="categories__item set-bg" data-setbg="@Url.Content(@item.Picture)">
                                     <div class="categories__text">
                                         <h3 style="font-weight:bold">@item.CategoryName</h3>
-                                        <p>358 items</p>
+                                        <br />
                                         <a href="category-@item.CategoryID">Shop now</a>
                                     </div>
                                 </div>
@@ -81,7 +81,7 @@
                                 </ul>
                             </div>
                             <div class="product__item__text">
-                                <h5><a href="#">@item.ProductName</a></h5>
+                                <h5><a href="~/product-@item.ProductID">@item.ProductName</a></h5>
                                 <div class="rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -142,7 +142,7 @@
                                     <img src="@Url.Content(item.Thumbnail)" alt="" style="max-width:100px">
                                 </div>
                                 <div class="trend__item__text">
-                                    <h6><a href="#" style="color:black">@item.ProductName</a></h6>
+                                    <h6><a href="~/product-@item.ProductID" style="color:black">@item.ProductName</a></h6>
                                     <div class="rating">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -172,7 +172,7 @@
                                     <img src="@Url.Content(item.Thumbnail)" alt="" style="max-width:100px">
                                 </div>
                                 <div class="trend__item__text">
-                                    <h6><a href="#" style="color:black">@item.ProductName</a></h6>
+                                    <h6><a href="~/product-@item.ProductID" style="color:black">@item.ProductName</a></h6>
                                     <div class="rating">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -202,7 +202,7 @@
                                     <img src="@Url.Content(item.Thumbnail)" alt="" style="max-width:100px">
                                 </div>
                                 <div class="trend__item__text">
-                                    <h6><a href="#" style="color:black">@item.ProductName</a></h6>
+                                    <h6><a href="~/product-@item.ProductID" style="color:black">@item.ProductName</a></h6>
                                     <div class="rating">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -247,19 +247,19 @@
                             </div>
                             <div class="discount__countdown" id="countdown-time">
                                 <div class="countdown__item">
-                                    <span>22</span>
+                                    <span id="Day"></span>
                                     <p>Days</p>
                                 </div>
                                 <div class="countdown__item">
-                                    <span>18</span>
+                                    <span id="Hour"></span>
                                     <p>Hour</p>
                                 </div>
                                 <div class="countdown__item">
-                                    <span>46</span>
+                                    <span id="Minute"></span>
                                     <p>Min</p>
                                 </div>
                                 <div class="countdown__item">
-                                    <span>05</span>
+                                    <span id="Seconds"></span>
                                     <p>Sec</p>
                                 </div>
                             </div>
@@ -269,40 +269,6 @@
                 }
             }
 
-        </div>
-    </div>
-</section>
-<section class="services spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="services__item">
-                    <i class="fa fa-car"></i>
-                    <h6>Free Shipping</h6>
-                    <p>For all oder over $99</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="services__item">
-                    <i class="fa fa-money"></i>
-                    <h6>Money Back Guarantee</h6>
-                    <p>If good have Problems</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="services__item">
-                    <i class="fa fa-support"></i>
-                    <h6>Online Support 24/7</h6>
-                    <p>Dedicated support</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="services__item">
-                    <i class="fa fa-headphones"></i>
-                    <h6>Payment Secure</h6>
-                    <p>100% secure payment</p>
-                </div>
-            </div>
         </div>
     </div>
 </section>

@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var client = (Azure_Assignment.Models.UserLogin)Session["CLIENT_SESSION"];
+}
+<!DOCTYPE html>
 <html lang="zxx">
 
 <head>
@@ -33,29 +36,50 @@
 
         <ul class="offcanvas__widget">
             <li><span class="icon_search search-switch"></span></li>
-            <li>
-                <a href="~/admin/">
-                    <span class="icon_folder"></span>
-                </a>
-            </li>
-            <li>
-                <a href="~/cart">
-                    <span class="icon_bag_alt"></span>
-                    <div class="tip">@ViewBag.QuantityInCart</div>
-                </a>
-            </li>
-        </ul>
-
-
+            @if (Session["CLIENT_SESSION"] != null)
+            {
+                if (client.Role == 0)
+                {
+                    <li><a href="~/admin">Admin</a></li>
+                }
+            }
+                <li>
+                    <a href="~/cart">
+                        <span class="icon_bag_alt"></span>
+                        <div class="tip">@ViewBag.QuantityInCart</div>
+                    </a>
+                </li>
+            </ul>
         <div class="offcanvas__logo">
-            <a href="~/Home"><img src="#" alt=""></a>
+            <a href="~/Home">
+                <img src="~/public/img/logo.jpg" />
+            </a>
         </div>
         <div id="mobile-menu-wrap"></div>
-        <div class="offcanvas__auth">
-            <a href="~/login">Login</a>
-            <a href="~/register">Register</a>
-        </div>
+
+        @{
+            if (Session["CLIENT_SESSION"] == null)
+            {
+                <div class="offcanvas__auth">
+                    <a href="~/login">Login</a>
+                    <a href="~/register">Register</a>
+                </div>
+            }
+            else
+            {
+                <div class="dropdown">
+                    <a onclick="smallDropdown()" class="dropbtn">Hi, @client.FirtName @client.LastName</a>
+                    <div id="myDropdown-2" class="dropdown-content">
+                        <a href="~/userprofile"><span class="icon_profile"></span>&nbsp; Profile</a>
+                        <a href="#"><span class="icon_cart"></span>&nbsp; My Order</a>
+                        <a href="@Url.Action("ChangePassword", "UserProfile")"><span class="icon_lock"></span>&nbsp; Password</a>
+                        <a href="~/logout"><span class="icon_stop_alt"></span>&nbsp; Logout</a>
+                    </div>
+                </div>
+            }
+        }
     </div>
+
 
 
     @{Html.RenderAction("Header", "Home");}
@@ -77,6 +101,23 @@
     <script src="~/Content/js/main.js"></script>
 
     @RenderSection("ClientScript", false)
+    <script>
+        function smallDropdown() {
+            document.getElementById("myDropdown-2").classList.toggle("show");
+        }
+        window.onclick = function (event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
 
 
 

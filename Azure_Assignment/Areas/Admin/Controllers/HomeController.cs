@@ -9,7 +9,7 @@ using System.Web.Security;
 
 namespace Azure_Assignment.Areas.Admin.Controllers
 {
-    
+    [Authorize(Roles = "0,1")]
     public class HomeController : BaseController
     {
         private DataPalkia db = new DataPalkia();
@@ -52,6 +52,17 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                             orderby cate.CategoryID descending
                             select pro).Take(7);
             ViewBag.Categories = db.Categories.OrderByDescending(i=>i.CategoryID).ToList().Take(5);
+            // chart.js
+            //var labelChart = db.Categories.Select(x => x.CategoryName).Distinct();
+
+            //List<int> data = new List<int>();
+            //foreach (var item in db.Products.Where(x => x.CategoryID == )) ;
+            //{
+
+            //}
+            //data = ;
+            //TempData["lbCategories"] = 
+
 
             return View();
         }

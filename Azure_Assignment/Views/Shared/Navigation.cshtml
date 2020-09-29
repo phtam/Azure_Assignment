@@ -1,13 +1,13 @@
 ﻿<nav class="header__menu">
     <ul>
-        <li><a href="~/home">Home</a></li>
+        <li class="@TempData["HomeActive"]"><a href="~/home">Home</a></li>
         @{
             foreach (var item in ViewBag.Layout_Menu)
             {
                 <li class="@ViewBag.HomeActive"><a href="~/category-@item.CategoryID">@item.CategoryName</a></li>
             }
         }
-        <li class="@ViewBag.CategoriesActive">
+        <li class="@TempData["CateActive"]">
             <a href="#">Categories</a>
             <ul class="dropdown">
                 @{
@@ -18,18 +18,18 @@
                 }
             </ul>
         </li>
-        <li class="@ViewBag.BrandsActive">
+        <li class="@TempData["BrandActive"]">
             <a href="#">Brands</a>
             <ul class="dropdown">
                 @{
                     foreach (var item in ViewBag.Suppliers_List)
                     {
-                        <li><a href="~/brands/@item.SupplierID">@item.CompanyName</a></li>
+                        <li><a href="~/brand-@item.SupplierID">@item.CompanyName</a></li>
                     }
                 }
             </ul>
         </li>
-        <li class="@ViewBag.BlogsActive"><a href="~/blogs">Blogs</a></li>
+        <li class="@TempData["BlogsActive"]"><a href="~/blogs">Blogs</a></li>
         <li class="@ViewBag.ContactActive"><a href="~/contact">Contact</a></li>
     </ul>
 

@@ -35,9 +35,6 @@
                         <thead>
                             <tr>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.BlogCategoryID)
-                                </th>
-                                <th>
                                     @Html.DisplayNameFor(model => model.BlogCategoryName)
                                 </th>
                                 <th></th>
@@ -47,9 +44,6 @@
                             @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.BlogCategoryID)
-                                    </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.BlogCategoryName)
                                     </td>
@@ -93,7 +87,6 @@
             "responsive": true,
             "autoWidth": false,
             "aoColumns": [
-                null,
                 null,
                 { sWidth: '180px' }
             ]

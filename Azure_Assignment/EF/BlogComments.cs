@@ -22,7 +22,7 @@ namespace Azure_Assignment.EF
             this.ReplyBlogComments = new HashSet<ReplyBlogComments>();
         }
 
-        [DisplayName("Blog comment ID")]
+        [DisplayName("CommentID")]
         public int BlogCommentID { get; set; }
         [DisplayName("Full name")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter fullname")]
@@ -34,7 +34,7 @@ namespace Azure_Assignment.EF
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter phone")]
         [RegularExpression(@"\(?\d{3}\)?-? *\d{3}-? *-?\d{4}", ErrorMessage = "Incorrect Phone Number Format")]
         public string Phone { get; set; }
-        [DisplayName("Comment")]
+        [DisplayName("Content")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter content")]
         public string Comment { get; set; }
         public Nullable<System.DateTime> CommentingDate { get; set; }

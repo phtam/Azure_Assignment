@@ -6,9 +6,6 @@
         $('#btnContinue').off('click').on('click', function () {
             window.location.href = "~/home";
         });
-        $('#btnPayment').off('click').on('click', function () {
-            window.location.href = "/thanh-toan";
-        });
         $('#btnUpdate-cart').off('click').on('click', function () {
             var listProduct = $('.txtQuantity');
             var cartList = [];

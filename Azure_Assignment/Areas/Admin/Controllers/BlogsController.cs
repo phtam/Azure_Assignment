@@ -7,12 +7,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Azure_Assignment.Areas.Admin.Models;
 using Azure_Assignment.EF;
 using Azure_Assignment.Providers;
 
 namespace Azure_Assignment.Areas.Admin.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "0,1")]
     public class BlogsController : BaseController
     {
         private DataPalkia db = new DataPalkia();
@@ -75,6 +76,8 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                         return View(blogs);
                     }
                     blogs.Thumbnail = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    var user = (UserLogin)Session[Common.CommonConstants.USER_SESSION];
+                    blogs.Username = user.Username;
                     db.Blogs.Add(blogs);
                     if (db.SaveChanges() > 0)
                     {
@@ -110,7 +113,6 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             }
             Session["OldImage"] = blogs.Thumbnail;
             ViewBag.BlogCategoryID = new SelectList(db.BlogCategories, "BlogCategoryID", "BlogCategoryName", blogs.BlogCategoryID);
-            //ViewBag.Username = new SelectList(db.Users, "Username", "FirtName", blogs.Username);
             return View(blogs);
         }
 
@@ -140,6 +142,9 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 {
                     blogs.Thumbnail = imageOldFile;
                 }
+
+                var user = (UserLogin)Session[Common.CommonConstants.USER_SESSION];
+                blogs.Username = user.Username;
                 db.Entry(blogs).State = EntityState.Modified;
                 if (db.SaveChanges() > 0)
                 {

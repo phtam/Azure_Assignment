@@ -10,19 +10,17 @@ using Azure_Assignment.EF;
 
 namespace Azure_Assignment.Areas.Admin.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "0,1")]
     public class FeedbacksController : BaseController
     {
         private DataPalkia db = new DataPalkia();
 
-        // GET: Admin/Feedbacks
         public ActionResult Index()
         {
             var feedbacks = db.Feedbacks.Include(f => f.Products);
             return View(feedbacks.ToList());
         }
 
-        // GET: Admin/Feedbacks/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)

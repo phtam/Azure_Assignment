@@ -1,57 +1,48 @@
-﻿@model Azure_Assignment.EF.BlogComments
+﻿@model PagedList.IPagedList<Azure_Assignment.ViewModels.BlogCommentViewModel>
+@using PagedList.Mvc;
 @{
-    ViewBag.Title = "Index";
-    ViewBag.BlogsActive = "active";
+
+    TempData["BlogsActive"] = "active";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var blogCate = (List<Azure_Assignment.ViewModels.BlogCategoriesViewModel>)ViewBag.BlogCategoies;
     var blog = (Azure_Assignment.EF.Blogs)ViewBag.Blog;
-    //var comment = (List<Azure_Assignment.ViewModels.BlogCommentViewModel>)ViewBag.Comment
+    ViewBag.Title = blog.BlogName;
+
 }
 
-<!-- Breadcrumb Begin -->
 <div class="breadcrumb-option">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb__links">
-                    <a href="./index.html"><i class="fa fa-home"></i> Home</a>
+                    <a href="~/home"><i class="fa fa-home"></i> Home</a>
                     <a href="@Url.Action("Index", "Blog", new { })">Blog categoies</a>
-                    @{foreach (var item in ViewBag.BlogAboutName)
-                        {
-                            <span>Blog: @item.BlogName</span>
-                        }
-                    }
+                        <span>Blog: @blog.BlogName</span>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- Breadcrumb End -->
-<!-- Blog Details Section Begin -->
+
 <section class="blog-details spad">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-8">
-                @{foreach (var item in ViewBag.BlogDetail)
-                    {
-                        <div class="blog__item">
-                            <div class="blog__item__pic large__item set-bg" data-setbg="@item.Thumbnail"></div>
-                            <div class="blog__details__item__title">
-                                @*<span class="tip"><a href="#">Watch now</a></span>*@
-                                <h6><strong>@item.BlogName</strong></h6>
-                                <ul>
-                                    <li>by <span>@item.Username</span></li>
-                                    <li>@item.WritingDate</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="blog__details__desc">
-                            <p>
-                                @Html.Raw(item.Content)
-                            </p>
-                        </div>
-                    }
-                }
+                <div class="blog__item">
+                    <div class="blog__item__pic large__item set-bg" data-setbg="@Url.Content(blog.Thumbnail)"></div>
+                    <div class="blog__details__item__title">
+                        <h6><strong>@blog.BlogName</strong></h6>
+                        <ul>
+                            <li>by <span>@blog.Users.FirtName @blog.Users.LastName</span></li>
+                            <li>@blog.WritingDate</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="blog__details__desc">
+                    <p>
+                        @Html.Raw(blog.Content)
+                    </p>
+                </div>
             </div>
             <div class="col-lg-4 col-md-4">
                 <div class="blog__sidebar">
@@ -73,32 +64,22 @@
                         <div class="section-title">
                             <h4>Comment</h4>
                         </div>
-                        @using (Html.BeginForm("AddComment", "Blog", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        @using (Html.BeginForm("AddComment", "Blog", FormMethod.Post))
                         {
-                            @Html.AntiForgeryToken()
                             <div class="form-group">
-                                @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Your full name" } })
-                                @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                                @Html.Editor("txtFullName", new { htmlAttributes = new { @class = "form-control", @placeholder = "Your full name", @required = "required" } })
+                                <div style="color:red">@ViewBag.ErrorMessage</div>
                             </div>
 
                             <div class="form-group">
-                                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Your phone" } })
-                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                                @Html.Editor("txtPhone", new { htmlAttributes = new { @class = "form-control", @placeholder = "Your phone", @required = "required" } })
                             </div>
 
                             <div class="form-group">
-                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Your email" } })
-                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                @Html.Editor("txtEmail", new { htmlAttributes = new { @class = "form-control", @placeholder = "Your email", @required = "required" } })
                             </div>
-
                             <div class="form-group">
-                                <textarea class="form-control" name="Comment" rows="8" placeholder="Enter your review or question."></textarea>
-                                @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
-
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                @Html.HiddenFor(model => model.CommentingDate)
-
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <textarea class="form-control" name="txaComment" rows="8" placeholder="Enter your review or question." required></textarea>
                                 @Html.Hidden("BlogID", blog.BlogID)
                                 <br />
                                 <button type="submit" class="float-right site-btn">Send</button>
@@ -110,14 +91,13 @@
                         <div class="section-title">
                             <h4>Blog comments</h4>
                         </div>
-                        @foreach (var item in ViewBag.Comment)
+                        @foreach (var item in Model)
                         {
                             string[] tu = item.FullName.Split(' ');
                             int len = tu.Length;
                             string word = tu[len - 1];
                             string character = word.Substring(0, 1);
                             <span class="avatar">@character</span>
-                            @*<b>@item.FullName </b><span>- @item.CommentingDate</span>*@
 
                             DateTime ngaymuon = Convert.ToDateTime(item.CommentingDate);
                             DateTime ngaytra = Convert.ToDateTime(DateTime.Now);
@@ -143,6 +123,13 @@
                             <div>@item.Comment</div>
                             <br />
                         }
+                        <br />
+                        <div class="col-lg-12 text-center">
+                            <div class="pagination__option" style="display:inline-block; vertical-align:middle;">
+                                @Html.PagedListPager(Model, page => Url.Action("BlogDetail",
+                                new { id = blog.BlogID, page }))
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -151,10 +138,7 @@
 </section>
 @section ClientScript{
 
-
-}
-@{
-    if (TempData["Notice_Submit_Success"] != null)
+    @if (TempData["Notice_Submit_Success"] != null)
     {
         <script>
             Swal.fire({
@@ -165,9 +149,9 @@
                 timer: 20000
             });
         </script>
-        }
-    }
+     }
 
+}
 <style>
     .avatar {
         float: left;

@@ -1,9 +1,10 @@
 ﻿    @model Azure_Assignment.EF.Feedbacks
 @{
-    ViewBag.Title = "Index";
+
     Layout = "~/Views/Shared/_Layout.cshtml";
     var feedback = (List<Azure_Assignment.ViewModels.FeedbackViewModel>)ViewBag.Feedback;
     var product = (Azure_Assignment.EF.Products)ViewBag.Product;
+    ViewBag.Title = product.ProductName;
 }
 
 <div class="breadcrumb-option">
@@ -78,10 +79,10 @@
                         <div class="quantity">
                             <span>Quantity:</span>
                             <div class="pro-qty">
-                                <input type="text" value="1">
+                                <input type="text" value="1" id="txtQty">
                             </div>
                         </div>
-                        <a href="#" class="cart-btn"><span class="icon_bag_alt"></span> Add to cart</a>
+                        <a style="cursor:pointer" class="cart-btn"><span class="icon_bag_alt"></span> Add to cart</a>
                         <ul>
                             <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                             <li><a href="#"><span class="icon_adjust-horiz"></span></a></li>
@@ -138,7 +139,6 @@
                                                     string word = tu[len - 1];
                                                     string character = word.Substring(0, 1);
                                                     <span class="avatar">@character</span>
-                                                    @*<b>@item.FeedbackName </b><span>- @item.FeedBackDate</span>*@
 
                                                     DateTime ngaymuon = Convert.ToDateTime(item.FeedBackDate);
                                                     DateTime ngaytra = Convert.ToDateTime(DateTime.Now);
@@ -249,7 +249,13 @@
             $('#txaFeedback').summernote()
         })
 
-    </script>
+        $(document).ready(function () {
+            $(".cart-btn").click(function () {
+                var qty = $("#txtQty").val();
+                window.location = "/add-to-cart?productID=@product.ProductID&quantity=" + qty;
+            });
+        });
 
+    </script>
 
 }
