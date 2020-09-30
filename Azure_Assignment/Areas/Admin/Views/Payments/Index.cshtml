@@ -28,6 +28,7 @@
                             </i>
                             Create New
                         </a>
+                        <a style="cursor:pointer; color:white" id="print" class="btn btn-primary btn-sm float-right"><i class="fas fa-print"></i> Print</a>
                     </p>
                 </div>
                 <div class="card-body">
@@ -94,6 +95,10 @@
             ]
         });
 
+        $('#print').click(function () {
+            window.print();
+            return false;
+        });
 
     </script>
 }

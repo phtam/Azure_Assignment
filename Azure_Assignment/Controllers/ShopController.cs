@@ -32,6 +32,7 @@ namespace Azure_Assignment.Controllers
             if (page == null) page = 1;
             int pageSize = 9;
             int pageNumber = (page ?? 1);
+            TempData["CurrentBrand"] = id;
 
             if (id != null && cate != null)
             {
@@ -41,7 +42,7 @@ namespace Azure_Assignment.Controllers
             if (id != null)
             {
                 var model = new ProductDAO().GetProductsByBrand(id).ToPagedList(pageNumber, pageSize);
-                TempData["CurrentBrand"] = id;
+                
                 return View(model);
             }
 

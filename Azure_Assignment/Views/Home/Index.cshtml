@@ -75,13 +75,11 @@
                                 <div class="label new">New</div>
                                 <ul class="product__hover">
                                     <li><a href="@Url.Content(item.Thumbnail)" class="image-popup"><span class="arrow_expand"></span></a></li>
-
-                                    <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                     <li><a href="~/add-to-cart?productID=@item.ProductID&quantity=1"><span class="icon_bag_alt"></span></a></li>
                                 </ul>
                             </div>
                             <div class="product__item__text">
-                                <h5><a href="~/product-@item.ProductID">@item.ProductName</a></h5>
+                                <h5><a href="~/product-@item.ProductID" style="color:black">@item.ProductName</a></h5>
                                 <div class="rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -132,7 +130,7 @@
             <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="trend__content">
                     <div class="section-title">
-                        <h4>Sale</h4>
+                        <h4 id="saleForYou">Sale</h4>
                     </div>
                     @{
                         foreach (var item in ViewBag.Sale_Product)
@@ -263,7 +261,7 @@
                                     <p>Sec</p>
                                 </div>
                             </div>
-                            <a href="#">Shop now</a>
+                            <a href="#saleForYou">Shop now</a>
                         </div>
                     </div>
                 }

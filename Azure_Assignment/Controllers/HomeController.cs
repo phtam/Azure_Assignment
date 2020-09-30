@@ -36,8 +36,11 @@ namespace Azure_Assignment.Controllers
             ViewBag.Highlight_Product = productDAO.GetHighlightProducts().Take(3);
             ViewBag.Discount = saleDAO.Get().Take(1);
 
+            return View();
+        }
 
-
+        public ActionResult Contact()
+        {
             return View();
         }
 
@@ -72,7 +75,10 @@ namespace Azure_Assignment.Controllers
             return PartialView();
         }
 
-        
+        public ActionResult Error()
+        {
+            return View();
+        }
 
         public ActionResult UploadTooBig()
         {

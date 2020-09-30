@@ -27,7 +27,7 @@
                             </i>
                             Create New
                         </a>
-                        <a href="#" class="btn btn-primary btn-sm float-right"><i class="fas fa-print"></i> Print</a>
+                        <a style="cursor:pointer; color:white" id="print" class="btn btn-primary btn-sm float-right"><i class="fas fa-print"></i> Print</a>
                     </p>
                 </div>
                 <!-- /.card-header -->
@@ -106,25 +106,25 @@
                                     <td>
                                         @if (item.Role == 0)
                                         {
-                                            <div>Admin</div>
+                                            <span class="badge badge-primary">Admin</span>
                                         }
                                         else if (item.Role == 1)
                                         {
-                                            <div>Employee</div>
+                                            <span class="badge badge-warning">Employee</span>
                                         }
                                         else if (item.Role == 2)
                                         {
-                                            <div>Customer</div>
+                                            <span class="badge badge-success">Customer</span>
                                         }
                                     </td>
                                     <td>
                                         @if (item.Status == true)
                                         {
-                                            <div style="color:green">Active</div>
+                                            <span class="badge badge-success">Active</span>
                                         }
                                         else
                                         {
-                                            <div style="color:red">Disable</div>
+                                            <span class="badge badge-danger">Disable</span>
                                         }
                                     </td>
 
@@ -184,6 +184,11 @@
                     null
                 ]
             });
+        });
+
+        $('#print').click(function () {
+            window.print();
+            return false;
         });
 
     </script>

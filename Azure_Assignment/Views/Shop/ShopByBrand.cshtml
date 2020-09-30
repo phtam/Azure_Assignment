@@ -8,9 +8,7 @@
 
 }
 
-
 @Html.Partial("Breadcrumb")
-
 
 <section class="shop spad">
     <div class="container">
@@ -31,7 +29,6 @@
                                             <div class="label new">New</div>
                                             <ul class="product__hover">
                                                 <li><a href="@Url.Content(item.Thumbnail)" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                                 <li><a href="~/add-to-cart?productID=@item.ProductID&quantity=1"><span class="icon_bag_alt"></span></a></li>
                                             </ul>
                                         </div>
@@ -74,7 +71,6 @@
                     </div>
                 </div>
             }
-
 
         </div>
     </div>

@@ -83,14 +83,32 @@
                                     <b>Note</b> <a class="float-right">@Model.Note</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Status</b> <a class="float-right">@Model.Status</a>
+                                    <b>Status</b>
+                                    <a class="float-right">
+                                        @if (Model.Status == 0)
+                                        {
+                                            <span class="badge badge-primary">Processing</span>
+                                        }
+                                        else if (Model.Status == 1)
+                                        {
+                                            <span class="badge badge-warning">Shipping</span>
+                                        }
+                                        else if (Model.Status == 2)
+                                        {
+                                            <span class="badge badge-success">Delivered</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-danger">Canceled</span>
+                                        }
+                                    </a>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Payment</b> <a class="float-right">@Model.Payments.PaymentName</a>
                                 </li>
 
                             </ul>
-
+                            <a id="print" style="cursor:pointer; color:white" class="btn btn-primary btn-block"><b>Print</b></a>
                         </div>
                     </div>
                 </div>
@@ -178,6 +196,9 @@
             ]
         });
 
-
+        $('#print').click(function () {
+            window.print();
+            return false;
+        });
     </script>
 }

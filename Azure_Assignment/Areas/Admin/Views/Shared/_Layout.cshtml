@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Palkia | Admin </title>
-
+    <link rel="icon" href="~/public/img/logo-in-title.png" type="image/x-icon">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
@@ -21,7 +21,7 @@
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
-        @Html.Partial("NavBar");
+        @Html.Partial("NavBar")
 
         @Html.Partial("Aside")
 
@@ -31,7 +31,7 @@
         <aside class="control-sidebar control-sidebar-dark">
         </aside>
 
-        @Html.Partial("Footer");
+        @Html.Partial("Footer")
     </div>
 
     <!-- REQUIRED SCRIPTS -->
@@ -152,7 +152,7 @@
 
     }
 
-    @RenderSection("ScriptConfig", false);
+    @RenderSection("ScriptConfig", false)
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")

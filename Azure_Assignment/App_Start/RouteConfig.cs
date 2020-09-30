@@ -28,6 +28,13 @@ namespace Azure_Assignment
             );
 
             routes.MapRoute(
+                name: "Contact",
+                url: "contact",
+                defaults: new { controller = "Home", action = "Contact", id = UrlParameter.Optional },
+                namespaces: new[] { "Azure_Assignment.Controllers" }
+            );
+
+            routes.MapRoute(
                 name: "Blog Detail",
                 url: "blog-{id}",
                 defaults: new { controller = "Blog", action = "BlogDetail", id = UrlParameter.Optional },

@@ -26,7 +26,11 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Data of Orders</h3>
+                    <p>
+                        <a style="cursor:pointer; color:white" id="print" class="btn btn-primary btn-sm float-right"><i class="fas fa-print"></i> Print</a>
+                    </p>
                 </div>
+                
                 <div class="card-body">
                     <table id="tbl_Suppliers" class="table table-bordered table-striped">
                         <thead>
@@ -87,19 +91,19 @@
                                     <td>
                                         @if (item.Status == 0)
                                         {
-                                            <div style="color:green">Processing...</div>
+                                            <span class="badge badge-primary">Processing</span>
                                         }
                                         else if (item.Status == 1)
                                         {
-                                            <div style="color:blue">Shipping...</div>
+                                            <span class="badge badge-warning">Shipping</span>
                                         }
                                         else if (item.Status == 2)
                                         {
-                                            <div>COMPLETED</div>
+                                            <span class="badge badge-success">Delivered</span>
                                         }
                                         else
                                         {
-                                            <div style="color:red">Canceled</div>
+                                            <span class="badge badge-danger">Canceled</span>
                                         }
                                     </td>
                                     <td>
@@ -159,6 +163,11 @@
                     { sWidth: '180px' }
                 ]
             });
+        });
+
+        $('#print').click(function () {
+            window.print();
+            return false;
         });
 
     </script>

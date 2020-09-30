@@ -35,11 +35,11 @@ namespace Azure_Assignment.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Error", "Home");
             }
             if (db.BlogCategories.Find(id) == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Error", "Home");
             }
 
             if (page == null) page = 1;
@@ -57,7 +57,7 @@ namespace Azure_Assignment.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Error", "Home");
             }
             if (page == null) page = 1;
             int pageSize = 8;
@@ -77,7 +77,7 @@ namespace Azure_Assignment.Controllers
         {
             if (BlogID == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Error", "Home");
             }
 
             if (txtFullName == null || txtPhone == null || txtEmail == null || txaComment == null)

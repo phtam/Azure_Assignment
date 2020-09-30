@@ -284,5 +284,59 @@ namespace Azure_Assignment.DAO
 
             return product;
         }
+
+        public bool UpdateUnitOnOder(int productID, int quantity)
+        {
+            var product = db.Products.Find(productID);
+            product.UnitsOnOrder += quantity;
+            if (db.SaveChanges() > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public int CountProductByCategoryInStock(int cateID)
+        {
+            int num = 0;
+            foreach(var item in db.Products.Where(pro => pro.CategoryID == cateID))
+            {
+                num += item.UnitsInStock.GetValueOrDefault(0);
+            }
+            return num;
+        }
+
+        public int CountProductByCategoryOnOrder(int cateID)
+        {
+            int num = 0;
+            foreach (var item in db.Products.Where(pro => pro.CategoryID == cateID))
+            {
+                num += item.UnitsOnOrder.GetValueOrDefault(0);
+            }
+            return num;
+        }
+
+        public int GetImportationQuantity(int cateID)
+        {
+            int num = 0;
+            foreach (var item in db.Importation.Where(pro => pro.Products.CategoryID == cateID))
+            {
+                num += item.Quantity.GetValueOrDefault(0);
+            }
+            return num;
+        }
+
+        public int GetExportationQuantity(int cateID)
+        {
+            int num = 0;
+            foreach (var item in db.Exportation.Where(pro => pro.Products.CategoryID == cateID))
+            {
+                num += item.Quantity.GetValueOrDefault(0);
+            }
+            return num;
+        }
     }
 }

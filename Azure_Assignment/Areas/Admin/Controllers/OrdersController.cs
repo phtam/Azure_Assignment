@@ -118,7 +118,6 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View(orders);
         }
 
-        // GET: Admin/Orders/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -133,7 +132,6 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View(orders);
         }
 
-        // POST: Admin/Orders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
