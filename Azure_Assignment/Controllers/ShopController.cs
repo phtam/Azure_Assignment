@@ -29,6 +29,17 @@ namespace Azure_Assignment.Controllers
 
         public ActionResult ShopByBrand(int? id, int? cate, int? page)
         {
+            ViewBag.Cate = null;
+            if (cate != null)
+            {
+                ViewBag.Cate = productDAO.GetCategoryName(cate);
+            }
+
+            ViewBag.Brand = null;
+            if (id != null)
+            {
+                ViewBag.Brand = productDAO.GetBrandName(id);
+            }
             if (page == null) page = 1;
             int pageSize = 9;
             int pageNumber = (page ?? 1);
@@ -50,6 +61,17 @@ namespace Azure_Assignment.Controllers
 
         public ActionResult MainView(int? id, int? page, int? brand)
         {
+            ViewBag.Cate = null;
+            if (id != null)
+            {
+                ViewBag.Cate = productDAO.GetCategoryName(id);
+            }
+            
+            ViewBag.Brand = null;
+            if (brand != null)
+            {
+                ViewBag.Brand = productDAO.GetBrandName(brand);
+            }
             if (page == null) page = 1;
             int pageSize = 9;
             int pageNumber = (page ?? 1);
