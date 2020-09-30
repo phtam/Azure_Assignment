@@ -145,6 +145,18 @@ namespace Azure_Assignment.DAO
             return list;
         }
 
+        public string GetCategoryName(int? id)
+        {
+            var name = (db.Categories.Find(id).CategoryName).ToString();
+            return name;
+        }
+
+        public string GetBrandName(int? id)
+        {
+            var name = (db.Suppliers.Find(id).CompanyName).ToString();
+            return name;
+        }
+
         public List<ProductViewModel> GetProductsByCategory_Price(int? CateID,int? min, int? max)
         {
             var list = (from pro in db.Products

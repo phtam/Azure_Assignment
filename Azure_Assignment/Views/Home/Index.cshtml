@@ -243,24 +243,56 @@
                                     <script>document.write((@item.Discount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').slice(0, -3));</script> VND
                                 </h5>
                             </div>
-                            <div class="discount__countdown" id="countdown-time">
-                                <div class="countdown__item">
-                                    <span id="Day"></span>
-                                    <p>Days</p>
-                                </div>
-                                <div class="countdown__item">
-                                    <span id="Hour"></span>
-                                    <p>Hour</p>
-                                </div>
-                                <div class="countdown__item">
-                                    <span id="Minute"></span>
-                                    <p>Min</p>
-                                </div>
-                                <div class="countdown__item">
-                                    <span id="Seconds"></span>
-                                    <p>Sec</p>
-                                </div>
+                            <div class="course-countdown">
+                                <ul id="countdown">
+                                   
+                                </ul>
+                               
                             </div>
+                            <script>
+                                var end = new Date('@item.EndDate');
+                                var _second = 1000;
+                                var _minute = _second * 60;
+                                var _hour = _minute * 60;
+                                var _day = _hour * 24;
+                                var timer;
+
+                                function showRemaining() {
+                                    var now = new Date();
+                                    var distance = end - now;
+                                    if (distance < 0) {
+
+                                        clearInterval(timer);
+                                        document.getElementById('countdown').innerHTML = '<li>EXPIRED!</li>';
+
+                                        return;
+                                    }
+                                    var days = Math.floor(distance / _day);
+                                    var hours = Math.floor((distance % _day) / _hour);
+                                    var minutes = Math.floor((distance % _hour) / _minute);
+                                    var seconds = Math.floor((distance % _minute) / _second);
+
+                                    document.getElementById('countdown').innerHTML = '<li> <h3 style="font-weight: bold">' + days + '</h3>Day </li> ';
+                                    document.getElementById('countdown').innerHTML += '<li> <h3 style="font-weight: bold">' + hours + '</h3>Hour </li>';
+                                    document.getElementById('countdown').innerHTML += '<li> <h3 style="font-weight: bold">' + minutes + '</h3>Min </li>';
+                                    document.getElementById('countdown').innerHTML += '<li> <h3 style="font-weight: bold">' + seconds + '</h3>Sec </li>';
+                                }
+
+                                timer = setInterval(showRemaining, 1000);
+                            </script>
+
+                            <style>
+                                .course-countdown {
+                                    position: relative;
+                                }
+
+                                    .course-countdown ul {
+                                        list-style-type: none;
+                                        display: flex;
+                                        justify-content: space-between;
+                                        margin: 20px 35px;
+                                    }
+                            </style> 
                             <a href="#saleForYou">Shop now</a>
                         </div>
                     </div>

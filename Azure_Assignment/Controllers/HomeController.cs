@@ -35,6 +35,7 @@ namespace Azure_Assignment.Controllers
             ViewBag.Sale_Product = productDAO.GetSaleProduct().Take(3);
             ViewBag.Highlight_Product = productDAO.GetHighlightProducts().Take(3);
             ViewBag.Discount = saleDAO.Get().Take(1);
+            ViewBag.StartEndDate = saleDAO.Get().Take(1);
 
             return View();
         }

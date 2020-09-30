@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Azure_Assignment.EF;
+using Rotativa;
 
 namespace Azure_Assignment.Areas.Admin.Controllers
 {
@@ -124,6 +125,12 @@ namespace Azure_Assignment.Areas.Admin.Controllers
                 TempData["Notice_Delete_Fail"] = true;
             }
             return RedirectToAction("Index");
+        }
+
+        public ActionResult PrintAll()
+        {
+            var q = new ActionAsPdf("Index");
+            return q;
         }
 
         protected override void Dispose(bool disposing)
