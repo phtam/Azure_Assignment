@@ -162,6 +162,11 @@ namespace Azure_Assignment.Controllers
                     orderDetail.Quantity = item.Quantity;
 
                     orderDetailDAO.Insert(orderDetail);
+                    var isSuccess = new ProductDAO().UpdateUnitOnOder(orderDetail.ProductID, orderDetail.Quantity.GetValueOrDefault(0));
+                    if (!isSuccess)
+                    {
+                        return RedirectToAction("Error");
+                    }
                 }
             }
             catch (Exception)

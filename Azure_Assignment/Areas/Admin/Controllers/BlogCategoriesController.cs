@@ -15,13 +15,11 @@ namespace Azure_Assignment.Areas.Admin.Controllers
     {
         private DataPalkia db = new DataPalkia();
 
-        // GET: Admin/BlogCategories
         public ActionResult Index()
         {
             return View(db.BlogCategories.ToList());
         }
 
-        // GET: Admin/BlogCategories/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,15 +34,11 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View(blogCategories);
         }
 
-        // GET: Admin/BlogCategories/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/BlogCategories/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "BlogCategoryID,BlogCategoryName")] BlogCategories blogCategories)
@@ -60,7 +54,6 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View(blogCategories);
         }
 
-        // GET: Admin/BlogCategories/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -75,9 +68,6 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View(blogCategories);
         }
 
-        // POST: Admin/BlogCategories/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "BlogCategoryID,BlogCategoryName")] BlogCategories blogCategories)
@@ -92,7 +82,6 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View(blogCategories);
         }
 
-        // GET: Admin/BlogCategories/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -107,7 +96,6 @@ namespace Azure_Assignment.Areas.Admin.Controllers
             return View(blogCategories);
         }
 
-        // POST: Admin/BlogCategories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

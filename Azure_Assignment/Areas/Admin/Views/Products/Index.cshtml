@@ -27,6 +27,7 @@
                             </i>
                             Create New
                         </a>
+                        <a style="cursor:pointer; color:white" id="print" class="btn btn-primary btn-sm float-right"><i class="fas fa-print"></i> Print</a>
                     </p>
                 </div>
                 <!-- /.card-header -->
@@ -89,11 +90,11 @@
                                     <td>
                                         @if (item.Discontinued == true)
                                         {
-                                            <img src="~/public/icons/icons8-stop-sign-50.png" />
+                                            <span class="badge badge-danger">Stop selling</span>
                                         }
                                         else
                                         {
-                                            <img src="~/public/icons/icons8-checkmark-50.png" />
+                                            <span class="badge badge-success">Being sold</span>
                                         }
                                     </td>
                                     <td>
@@ -166,6 +167,11 @@
                 null,
                 { sWidth: '255px' }
             ]
+        });
+
+        $('#print').click(function () {
+            window.print();
+            return false;
         });
     </script>
 }

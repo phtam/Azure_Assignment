@@ -31,7 +31,7 @@
                             <a onclick="largeDropdown()" class="dropbtn">Hi, @client.FirtName @client.LastName</a>
                             <div id="myDropdown" class="dropdown-content">
                                 <a href="~/userprofile"><span class="icon_profile"></span>&nbsp; Profile</a>
-                                <a href="#"><span class="icon_cart"></span>&nbsp; My Order</a>
+                                <a href="~/userprofile/MyOrder"><span class="icon_cart"></span>&nbsp; My Order</a>
                                 <a href="@Url.Action("ChangePassword", "UserProfile")"><span class="icon_lock"></span>&nbsp; Password</a>
                                 <a href="~/logout"><span class="icon_stop_alt"></span>&nbsp; Logout</a>
                             </div>
@@ -46,13 +46,6 @@
                                 if (client.Role == 0)
                                 {
                                     <a href="~/admin">Admin</a>
-                                }
-                                else
-                                {
-                                    <a href="~/cart">
-                                        <span class="icon_folder"></span>
-                                        <div class="tip">@ViewBag.QuantityInCart</div>
-                                    </a>
                                 }
                             }
 

@@ -27,9 +27,9 @@
                             </i>
                             Create New
                         </a>
+                        <a style="cursor:pointer; color:white" id="print" class="btn btn-primary btn-sm float-right"><i class="fas fa-print"></i> Print</a>
                     </p>
                 </div>
-                <!-- /.card-header -->
                 <div class="card-body">
                     <table id="tbl_Categories" class="table table-bordered table-striped">
                         <thead>
@@ -104,6 +104,10 @@
                 { sWidth: '100px' },
                 { sWidth: '180px' }
             ]
+        });
+        $('#print').click(function () {
+            window.print();
+            return false;
         });
     </script>
 }

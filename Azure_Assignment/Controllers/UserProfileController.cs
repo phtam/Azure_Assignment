@@ -171,5 +171,28 @@ namespace Azure_Assignment.Controllers
                 return View(model);
             }
         }
+
+        public ActionResult OrderDetail(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            else
+            {
+                Orders orders = db.Orders.Find(id);
+                var _orderDetail = (from ord in db.OrderDetails
+                                    join or in db.Orders on ord.OrderID equals or.OrderID
+                                    join pro in db.Products on ord.ProductID equals pro.ProductID
+                                    where ord.OrderID == orders.OrderID
+                                    select ord).ToList();
+                ViewBag.OrderDetail = _orderDetail;
+                if (orders == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(orders);
+            }
+        }
     }
 }

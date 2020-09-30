@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Palkia | @ViewBag.Title</title>
-
+    <link rel="icon" href="~/public/img/logo-in-title.png" type="image/x-icon">
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -71,7 +71,7 @@
                     <a onclick="smallDropdown()" class="dropbtn">Hi, @client.FirtName @client.LastName</a>
                     <div id="myDropdown-2" class="dropdown-content">
                         <a href="~/userprofile"><span class="icon_profile"></span>&nbsp; Profile</a>
-                        <a href="#"><span class="icon_cart"></span>&nbsp; My Order</a>
+                        <a href="~/userprofile/MyOrder"><span class="icon_cart"></span>&nbsp; My Order</a>
                         <a href="@Url.Action("ChangePassword", "UserProfile")"><span class="icon_lock"></span>&nbsp; Password</a>
                         <a href="~/logout"><span class="icon_stop_alt"></span>&nbsp; Logout</a>
                     </div>
