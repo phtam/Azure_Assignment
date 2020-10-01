@@ -22,6 +22,15 @@ namespace Azure_Assignment.Controllers
             {
                 list = (List<CartItem>)cart;
             }
+            long price = 0;
+            long old_price = 0;
+            foreach (var item in list)
+            {
+                price += (long)(item.Product.UnitPrice * item.Quantity);
+                old_price += (long)(item.Product.OldUnitPrice * item.Quantity);
+            }
+            ViewBag.Price = price;
+            ViewBag.OldPrice = old_price;
             return View(list);
         }
 
@@ -60,6 +69,7 @@ namespace Azure_Assignment.Controllers
                 list.Add(item);
                 Session[CommonConstants.CartSession] = list;
             }
+
             return RedirectToAction("Index");
 
         }
@@ -139,6 +149,7 @@ namespace Azure_Assignment.Controllers
                 TempData["ErrorMess"] = "Please choose your form of payment!";
                 return RedirectToAction("Checkout");
             }
+            
             var order = new Orders();
             order.Username = username;
             order.ShippedAddress = address;
@@ -148,6 +159,7 @@ namespace Azure_Assignment.Controllers
             order.Status = 0;
 
             var orderDAO = new OrderDAO();
+            var productDAO = new ProductDAO();
             var orderDetailDAO = new OrderDetailDAO();
             try
             {
@@ -160,6 +172,12 @@ namespace Azure_Assignment.Controllers
                     orderDetail.ProductID = item.Product.ProductID;
                     orderDetail.UnitPrice = item.Product.UnitPrice;
                     orderDetail.Quantity = item.Quantity;
+
+                    if (!productDAO.ValidateCheckOut(orderDetail.ProductID, orderDetail.Quantity.GetValueOrDefault(0)))
+                    {
+                        TempData["ErrorMess"] = orderDetail.Products.ProductName + "is in stock less than the quantity you ordered. Please reduce the quantity!";
+                        return RedirectToAction("Checkout");
+                    }
 
                     orderDetailDAO.Insert(orderDetail);
                     var isSuccess = new ProductDAO().UpdateUnitOnOder(orderDetail.ProductID, orderDetail.Quantity.GetValueOrDefault(0));

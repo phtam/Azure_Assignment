@@ -27,10 +27,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @{
-                                    int old_price = 0;
-                                    int total = 0;
-                                }
                                 @foreach (var item in Model)
                                 {
                                     <tr>
@@ -59,10 +55,6 @@
                                             <script>document.write((@item.Product.UnitPrice * @item.Quantity).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').slice(0, -3));</script>
                                         </td>
                                         <td class="cart__close"><a data-id="@item.Product.ProductID" class="btnDelete-item"><span class="icon_close"></span></a></td>
-                                        @{
-                                            total += (item.Product.UnitPrice.GetValueOrDefault(0) * item.Quantity);
-                                            old_price += (item.Product.OldUnitPrice.GetValueOrDefault(0) * item.Quantity);
-                                        }
                                     </tr>
                                 }
 
@@ -100,9 +92,10 @@
                         <h6>Cart total</h6>
                         <ul>
                             <li>Old price <span style="text-decoration:line-through">
-                            <script>document.write((@old_price).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').slice(0, -3));</script> VND</span></li>
+                                
+                            <script>document.write((@ViewBag.OldPrice).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').slice(0, -3));</script> VND</span></li>
                             <li>Total <span>
-                            <script>document.write((@total).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').slice(0, -3));</script> VND</span></li>
+                            <script>document.write((@ViewBag.Price).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').slice(0, -3));</script>  VND</span></li>
                         </ul>
                         <a href="~/cart/checkout" class="primary-btn">Proceed to checkout</a>
                     </div>

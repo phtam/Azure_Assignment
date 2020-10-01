@@ -350,5 +350,18 @@ namespace Azure_Assignment.DAO
             }
             return num;
         }
+
+        public bool ValidateCheckOut(int productID, int quantity)
+        {
+            var inStock = db.Products.Find(productID).UnitsInStock;
+            if (inStock >= quantity)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
